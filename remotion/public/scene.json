@@ -1,0 +1,257 @@
+{
+  "meta": {
+    "title": "복리의 마법",
+    "fps": 30,
+    "width": 1920,
+    "height": 1080,
+    "audioSrc": "audio/tts_output.wav"
+  },
+  "subtitles": {
+    "src": "subtitles/words.json",
+    "style": {
+      "fontSize": 48,
+      "color": "#FFFFFF",
+      "position": "bottom",
+      "highlightColor": "#FFD700"
+    }
+  },
+  "scenes": [
+    {
+      "id": "scene_intro",
+      "startMs": 0,
+      "endMs": 4000,
+      "background": "#1a1a2e",
+      "transition": {
+        "in": "fadeIn",
+        "out": "fadeOut",
+        "durationMs": 300
+      },
+      "objects": [
+        {
+          "id": "stickman_intro",
+          "type": "stickman",
+          "position": { "x": 960, "y": 600 },
+          "scale": 1.2,
+          "layer": 2,
+          "props": {
+            "pose": "standing",
+            "expression": "happy",
+            "color": "#FFFFFF",
+            "lineWidth": 3
+          },
+          "animation": {
+            "enter": { "type": "fadeIn", "durationMs": 500 },
+            "during": { "type": "breathing" }
+          }
+        }
+      ]
+    },
+    {
+      "id": "scene_concept",
+      "startMs": 4000,
+      "endMs": 12000,
+      "background": "#1a1a2e",
+      "transition": {
+        "in": "fadeIn",
+        "out": "fadeOut",
+        "durationMs": 300
+      },
+      "objects": [
+        {
+          "id": "stickman_concept",
+          "type": "stickman",
+          "position": { "x": 350, "y": 600 },
+          "scale": 1,
+          "layer": 2,
+          "props": {
+            "pose": "explaining",
+            "expression": "neutral",
+            "color": "#FFFFFF",
+            "lineWidth": 3
+          },
+          "animation": {
+            "enter": { "type": "slideLeft", "durationMs": 500 }
+          }
+        },
+        {
+          "id": "text_concept",
+          "type": "text",
+          "position": { "x": 1100, "y": 300 },
+          "scale": 1,
+          "layer": 3,
+          "props": {
+            "content": "단리 vs 복리",
+            "fontSize": 72,
+            "fontWeight": "bold",
+            "color": "#FFD700",
+            "align": "center"
+          },
+          "animation": {
+            "enter": { "type": "fadeInUp", "durationMs": 600, "delayMs": 300 }
+          }
+        },
+        {
+          "id": "text_desc",
+          "type": "text",
+          "position": { "x": 1100, "y": 500 },
+          "scale": 1,
+          "layer": 3,
+          "props": {
+            "content": "복리는 원금에 이자를 더한 금액에\n다시 이자가 붙습니다",
+            "fontSize": 36,
+            "fontWeight": "normal",
+            "color": "#FFFFFF",
+            "align": "center",
+            "maxWidth": 600
+          },
+          "animation": {
+            "enter": { "type": "fadeIn", "durationMs": 800, "delayMs": 600 }
+          }
+        }
+      ]
+    },
+    {
+      "id": "scene_formula",
+      "startMs": 12000,
+      "endMs": 20000,
+      "background": "#1a1a2e",
+      "transition": {
+        "in": "fadeIn",
+        "out": "fadeOut",
+        "durationMs": 300
+      },
+      "objects": [
+        {
+          "id": "stickman_formula",
+          "type": "stickman",
+          "position": { "x": 300, "y": 600 },
+          "scale": 1,
+          "layer": 2,
+          "props": {
+            "pose": "pointing_right",
+            "expression": "neutral",
+            "color": "#FFFFFF",
+            "lineWidth": 3
+          },
+          "animation": {
+            "enter": { "type": "fadeIn", "durationMs": 400 }
+          }
+        },
+        {
+          "id": "text_formula",
+          "type": "text",
+          "position": { "x": 960, "y": 250 },
+          "scale": 1,
+          "layer": 3,
+          "props": {
+            "content": "복리 = 원금 × (1+r)ⁿ",
+            "fontSize": 56,
+            "fontWeight": "bold",
+            "color": "#4ECDC4",
+            "align": "center"
+          },
+          "animation": {
+            "enter": { "type": "typewriter", "durationMs": 1500, "delayMs": 200 }
+          }
+        },
+        {
+          "id": "counter_result",
+          "type": "counter",
+          "position": { "x": 960, "y": 450 },
+          "scale": 1,
+          "layer": 3,
+          "props": {
+            "from": 1000000,
+            "to": 7612255,
+            "format": "currency_krw",
+            "fontSize": 72,
+            "color": "#FFFFFF"
+          },
+          "animation": {
+            "enter": { "type": "popIn", "durationMs": 400, "delayMs": 1000 }
+          }
+        },
+        {
+          "id": "shape_arrow",
+          "type": "shape",
+          "position": { "x": 960, "y": 550 },
+          "scale": 1,
+          "layer": 1,
+          "props": {
+            "shape": "arrow",
+            "from": { "x": 0, "y": 0 },
+            "to": { "x": 200, "y": 0 },
+            "color": "#FF6B6B",
+            "strokeWidth": 4
+          },
+          "animation": {
+            "enter": { "type": "drawLine", "durationMs": 800, "delayMs": 2000 }
+          }
+        }
+      ]
+    },
+    {
+      "id": "scene_conclusion",
+      "startMs": 20000,
+      "endMs": 26000,
+      "background": "#1a1a2e",
+      "transition": {
+        "in": "fadeIn",
+        "out": "fadeOut",
+        "durationMs": 500
+      },
+      "objects": [
+        {
+          "id": "stickman_conclusion",
+          "type": "stickman",
+          "position": { "x": 300, "y": 600 },
+          "scale": 1.1,
+          "layer": 2,
+          "props": {
+            "pose": "celebrating",
+            "expression": "happy",
+            "color": "#FFFFFF",
+            "lineWidth": 3
+          },
+          "animation": {
+            "enter": { "type": "popIn", "durationMs": 500 },
+            "during": { "type": "floating" }
+          }
+        },
+        {
+          "id": "icon_chart",
+          "type": "icon",
+          "position": { "x": 960, "y": 300 },
+          "scale": 1.5,
+          "layer": 3,
+          "props": {
+            "name": "chart-up",
+            "size": 120,
+            "color": "#4ECDC4"
+          },
+          "animation": {
+            "enter": { "type": "popIn", "durationMs": 400, "delayMs": 300 },
+            "during": { "type": "pulse" }
+          }
+        },
+        {
+          "id": "text_final",
+          "type": "text",
+          "position": { "x": 960, "y": 500 },
+          "scale": 1,
+          "layer": 3,
+          "props": {
+            "content": "오늘부터 시작하세요!",
+            "fontSize": 56,
+            "fontWeight": "bold",
+            "color": "#FFD700",
+            "align": "center"
+          },
+          "animation": {
+            "enter": { "type": "fadeInUp", "durationMs": 600, "delayMs": 500 }
+          }
+        }
+      ]
+    }
+  ]
+}
