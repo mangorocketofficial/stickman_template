@@ -31,7 +31,6 @@ build/output/
 .DS_Store
 Thumbs.db
 
-# Generated files
-remotion/public/scene.json
-remotion/public/audio/
-remotion/public/subtitles/
+# Generated files (will be created by Python pipeline at runtime)
+# NOTE: Mock files in public/ are tracked for testing purposes
+# Real generated files should be in build/output/
