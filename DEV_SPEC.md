@@ -14,7 +14,7 @@ Build an automated pipeline that converts a written script into a fully rendered
 ### 1.3 Target Output
 - **Input**: A markdown script file with narration text and scene directives
 - **Output**: `final.mp4` (1080p, H.264) + `captions.srt`
-- **Duration**: 3–10 minute videos
+- **Duration**: 3–5 minute videos
 - **Style**: Dark-themed infographic with white stickman, colored text/icons
 
 ---
