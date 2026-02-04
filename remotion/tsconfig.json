@@ -19,6 +19,6 @@
       "@/*": ["src/*"]
     }
   },
-  "include": ["src/**/*"],
+  "include": ["src/**/*", "public/**/*.json"],
   "exclude": ["node_modules", "dist", "out"]
 }

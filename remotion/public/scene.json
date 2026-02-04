@@ -4,7 +4,7 @@
     "fps": 30,
     "width": 1920,
     "height": 1080,
-    "audioSrc": "audio/tts_output.wav"
+    "audioSrc": "audio/tts_output.mp3"
   },
   "subtitles": {
     "src": "subtitles/words.json",
@@ -17,9 +17,9 @@
   },
   "scenes": [
     {
-      "id": "scene_intro",
-      "startMs": 0,
-      "endMs": 4000,
+      "id": "scene_01_intro",
+      "startMs": 200,
+      "endMs": 5300,
       "background": "#1a1a2e",
       "transition": {
         "in": "fadeIn",
@@ -28,11 +28,12 @@
       },
       "objects": [
         {
-          "id": "stickman_intro",
+          "id": "scene_01_intro_stickman_1",
           "type": "stickman",
-          "position": { "x": 960, "y": 600 },
-          "scale": 1.2,
-          "layer": 2,
+          "position": {
+            "x": 960,
+            "y": 600
+          },
           "props": {
             "pose": "standing",
             "expression": "happy",
@@ -40,16 +41,22 @@
             "lineWidth": 3
           },
           "animation": {
-            "enter": { "type": "fadeIn", "durationMs": 500 },
-            "during": { "type": "breathing" }
+            "enter": {
+              "type": "fadeIn",
+              "durationMs": 500
+            },
+            "during": {
+              "type": "breathing",
+              "loop": true
+            }
           }
         }
       ]
     },
     {
-      "id": "scene_concept",
-      "startMs": 4000,
-      "endMs": 12000,
+      "id": "scene_02_concept",
+      "startMs": 5840,
+      "endMs": 17460,
       "background": "#1a1a2e",
       "transition": {
         "in": "fadeIn",
@@ -58,11 +65,12 @@
       },
       "objects": [
         {
-          "id": "stickman_concept",
+          "id": "scene_02_concept_stickman_1",
           "type": "stickman",
-          "position": { "x": 350, "y": 600 },
-          "scale": 1,
-          "layer": 2,
+          "position": {
+            "x": 350,
+            "y": 600
+          },
           "props": {
             "pose": "explaining",
             "expression": "neutral",
@@ -70,50 +78,44 @@
             "lineWidth": 3
           },
           "animation": {
-            "enter": { "type": "slideLeft", "durationMs": 500 }
+            "enter": {
+              "type": "fadeIn",
+              "durationMs": 500
+            },
+            "during": {
+              "type": "breathing",
+              "loop": true
+            }
           }
         },
         {
-          "id": "text_concept",
+          "id": "scene_02_concept_text_1",
           "type": "text",
-          "position": { "x": 1100, "y": 300 },
-          "scale": 1,
-          "layer": 3,
+          "position": {
+            "x": 1100,
+            "y": 350
+          },
           "props": {
             "content": "단리 vs 복리",
-            "fontSize": 72,
+            "fontSize": 48,
             "fontWeight": "bold",
             "color": "#FFD700",
-            "align": "center"
-          },
-          "animation": {
-            "enter": { "type": "fadeInUp", "durationMs": 600, "delayMs": 300 }
-          }
-        },
-        {
-          "id": "text_desc",
-          "type": "text",
-          "position": { "x": 1100, "y": 500 },
-          "scale": 1,
-          "layer": 3,
-          "props": {
-            "content": "복리는 원금에 이자를 더한 금액에\n다시 이자가 붙습니다",
-            "fontSize": 36,
-            "fontWeight": "normal",
-            "color": "#FFFFFF",
             "align": "center",
-            "maxWidth": 600
+            "maxWidth": 800
           },
           "animation": {
-            "enter": { "type": "fadeIn", "durationMs": 800, "delayMs": 600 }
+            "enter": {
+              "type": "fadeInUp",
+              "durationMs": 400
+            }
           }
         }
       ]
     },
     {
-      "id": "scene_formula",
-      "startMs": 12000,
-      "endMs": 20000,
+      "id": "scene_03_formula",
+      "startMs": 17460,
+      "endMs": 24380,
       "background": "#1a1a2e",
       "transition": {
         "in": "fadeIn",
@@ -122,11 +124,12 @@
       },
       "objects": [
         {
-          "id": "stickman_formula",
+          "id": "scene_03_formula_stickman_1",
           "type": "stickman",
-          "position": { "x": 300, "y": 600 },
-          "scale": 1,
-          "layer": 2,
+          "position": {
+            "x": 300,
+            "y": 600
+          },
           "props": {
             "pose": "pointing_right",
             "expression": "neutral",
@@ -134,121 +137,113 @@
             "lineWidth": 3
           },
           "animation": {
-            "enter": { "type": "fadeIn", "durationMs": 400 }
+            "enter": {
+              "type": "fadeIn",
+              "durationMs": 500
+            },
+            "during": {
+              "type": "breathing",
+              "loop": true
+            }
           }
         },
         {
-          "id": "text_formula",
+          "id": "scene_03_formula_text_1",
           "type": "text",
-          "position": { "x": 960, "y": 250 },
-          "scale": 1,
-          "layer": 3,
+          "position": {
+            "x": 960,
+            "y": 250
+          },
           "props": {
             "content": "복리 = 원금 × (1+r)ⁿ",
-            "fontSize": 56,
+            "fontSize": 48,
             "fontWeight": "bold",
-            "color": "#4ECDC4",
-            "align": "center"
+            "color": "#FFD700",
+            "align": "center",
+            "maxWidth": 800
           },
           "animation": {
-            "enter": { "type": "typewriter", "durationMs": 1500, "delayMs": 200 }
+            "enter": {
+              "type": "fadeInUp",
+              "durationMs": 400
+            }
           }
         },
         {
-          "id": "counter_result",
+          "id": "scene_03_formula_counter_1",
           "type": "counter",
-          "position": { "x": 960, "y": 450 },
-          "scale": 1,
-          "layer": 3,
+          "position": {
+            "x": 960,
+            "y": 450
+          },
           "props": {
             "from": 1000000,
             "to": 7612255,
             "format": "currency_krw",
-            "fontSize": 72,
+            "fontSize": 64,
             "color": "#FFFFFF"
           },
           "animation": {
-            "enter": { "type": "popIn", "durationMs": 400, "delayMs": 1000 }
-          }
-        },
-        {
-          "id": "shape_arrow",
-          "type": "shape",
-          "position": { "x": 960, "y": 550 },
-          "scale": 1,
-          "layer": 1,
-          "props": {
-            "shape": "arrow",
-            "from": { "x": 0, "y": 0 },
-            "to": { "x": 200, "y": 0 },
-            "color": "#FF6B6B",
-            "strokeWidth": 4
-          },
-          "animation": {
-            "enter": { "type": "drawLine", "durationMs": 800, "delayMs": 2000 }
+            "enter": {
+              "type": "fadeIn",
+              "durationMs": 300
+            }
           }
         }
       ]
     },
     {
-      "id": "scene_conclusion",
-      "startMs": 20000,
-      "endMs": 26000,
+      "id": "scene_04_conclusion",
+      "startMs": 24380,
+      "endMs": 36260,
       "background": "#1a1a2e",
       "transition": {
         "in": "fadeIn",
         "out": "fadeOut",
-        "durationMs": 500
+        "durationMs": 300
       },
       "objects": [
         {
-          "id": "stickman_conclusion",
+          "id": "scene_04_conclusion_stickman_1",
           "type": "stickman",
-          "position": { "x": 300, "y": 600 },
-          "scale": 1.1,
-          "layer": 2,
+          "position": {
+            "x": 400,
+            "y": 600
+          },
           "props": {
             "pose": "celebrating",
-            "expression": "happy",
+            "expression": "neutral",
             "color": "#FFFFFF",
             "lineWidth": 3
           },
           "animation": {
-            "enter": { "type": "popIn", "durationMs": 500 },
-            "during": { "type": "floating" }
+            "enter": {
+              "type": "fadeIn",
+              "durationMs": 500
+            },
+            "during": {
+              "type": "breathing",
+              "loop": true
+            }
           }
         },
         {
-          "id": "icon_chart",
+          "id": "scene_04_conclusion_icon_1",
           "type": "icon",
-          "position": { "x": 960, "y": 300 },
-          "scale": 1.5,
-          "layer": 3,
+          "position": {
+            "x": 1100,
+            "y": 400
+          },
           "props": {
             "name": "chart-up",
-            "size": 120,
-            "color": "#4ECDC4"
+            "size": 80,
+            "color": "#FFFFFF"
           },
           "animation": {
-            "enter": { "type": "popIn", "durationMs": 400, "delayMs": 300 },
-            "during": { "type": "pulse" }
-          }
-        },
-        {
-          "id": "text_final",
-          "type": "text",
-          "position": { "x": 960, "y": 500 },
-          "scale": 1,
-          "layer": 3,
-          "props": {
-            "content": "오늘부터 시작하세요!",
-            "fontSize": 56,
-            "fontWeight": "bold",
-            "color": "#FFD700",
-            "align": "center"
-          },
-          "animation": {
-            "enter": { "type": "fadeInUp", "durationMs": 600, "delayMs": 500 }
+            "enter": {
+              "type": "popIn",
+              "durationMs": 400
+            }
           }
         }
       ]
