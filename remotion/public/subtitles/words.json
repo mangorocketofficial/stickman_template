@@ -1,0 +1,264 @@
+{
+  "words": [
+    {
+      "word": "안녕하세요.",
+      "startMs": 200,
+      "endMs": 1120
+    },
+    {
+      "word": "오늘은",
+      "startMs": 1120,
+      "endMs": 2120
+    },
+    {
+      "word": "복리의",
+      "startMs": 2120,
+      "endMs": 2840
+    },
+    {
+      "word": "놀라운",
+      "startMs": 2840,
+      "endMs": 3340
+    },
+    {
+      "word": "힘에",
+      "startMs": 3340,
+      "endMs": 3660
+    },
+    {
+      "word": "대해",
+      "startMs": 3660,
+      "endMs": 3860
+    },
+    {
+      "word": "알아보겠습니다.",
+      "startMs": 3860,
+      "endMs": 5300
+    },
+    {
+      "word": "달리는",
+      "startMs": 5840,
+      "endMs": 6260
+    },
+    {
+      "word": "원금에만",
+      "startMs": 6260,
+      "endMs": 7160
+    },
+    {
+      "word": "이자가",
+      "startMs": 7160,
+      "endMs": 7680
+    },
+    {
+      "word": "붙습니다.",
+      "startMs": 7680,
+      "endMs": 8660
+    },
+    {
+      "word": "하지만",
+      "startMs": 9280,
+      "endMs": 9600
+    },
+    {
+      "word": "복리는",
+      "startMs": 9600,
+      "endMs": 10140
+    },
+    {
+      "word": "원금에",
+      "startMs": 10140,
+      "endMs": 11000
+    },
+    {
+      "word": "이자를",
+      "startMs": 11000,
+      "endMs": 11380
+    },
+    {
+      "word": "더한",
+      "startMs": 11380,
+      "endMs": 11680
+    },
+    {
+      "word": "금액에",
+      "startMs": 11680,
+      "endMs": 12200
+    },
+    {
+      "word": "다시",
+      "startMs": 12200,
+      "endMs": 12820
+    },
+    {
+      "word": "이자가",
+      "startMs": 12820,
+      "endMs": 13360
+    },
+    {
+      "word": "붙습니다.",
+      "startMs": 13360,
+      "endMs": 13800
+    },
+    {
+      "word": "이",
+      "startMs": 14800,
+      "endMs": 15000
+    },
+    {
+      "word": "차이가",
+      "startMs": 15000,
+      "endMs": 15400
+    },
+    {
+      "word": "시간이",
+      "startMs": 15400,
+      "endMs": 15860
+    },
+    {
+      "word": "지날수록",
+      "startMs": 15860,
+      "endMs": 16620
+    },
+    {
+      "word": "엄청나게",
+      "startMs": 16620,
+      "endMs": 17460
+    },
+    {
+      "word": "벌어집니다.",
+      "startMs": 17460,
+      "endMs": 18620
+    },
+    {
+      "word": "100만",
+      "startMs": 19040,
+      "endMs": 19380
+    },
+    {
+      "word": "원을",
+      "startMs": 19380,
+      "endMs": 19700
+    },
+    {
+      "word": "연",
+      "startMs": 19700,
+      "endMs": 20000
+    },
+    {
+      "word": "7%로",
+      "startMs": 20000,
+      "endMs": 20780
+    },
+    {
+      "word": "30년",
+      "startMs": 20780,
+      "endMs": 21420
+    },
+    {
+      "word": "동안",
+      "startMs": 21420,
+      "endMs": 21640
+    },
+    {
+      "word": "투자하면",
+      "startMs": 21640,
+      "endMs": 22100
+    },
+    {
+      "word": "약",
+      "startMs": 22100,
+      "endMs": 23060
+    },
+    {
+      "word": "761만",
+      "startMs": 23060,
+      "endMs": 24140
+    },
+    {
+      "word": "원이",
+      "startMs": 24140,
+      "endMs": 24380
+    },
+    {
+      "word": "됩니다.",
+      "startMs": 24380,
+      "endMs": 24580
+    },
+    {
+      "word": "원금의",
+      "startMs": 25600,
+      "endMs": 26220
+    },
+    {
+      "word": "7.6배입니다.",
+      "startMs": 26220,
+      "endMs": 27540
+    },
+    {
+      "word": "시간은",
+      "startMs": 28600,
+      "endMs": 29040
+    },
+    {
+      "word": "보구리의",
+      "startMs": 29040,
+      "endMs": 29740
+    },
+    {
+      "word": "가장",
+      "startMs": 29740,
+      "endMs": 30120
+    },
+    {
+      "word": "강력한",
+      "startMs": 30120,
+      "endMs": 30840
+    },
+    {
+      "word": "무기입니다.",
+      "startMs": 30840,
+      "endMs": 31980
+    },
+    {
+      "word": "일찍",
+      "startMs": 32439,
+      "endMs": 32820
+    },
+    {
+      "word": "시작할수록",
+      "startMs": 32820,
+      "endMs": 33620
+    },
+    {
+      "word": "보구리의",
+      "startMs": 33620,
+      "endMs": 34300
+    },
+    {
+      "word": "마법은",
+      "startMs": 34300,
+      "endMs": 34740
+    },
+    {
+      "word": "더",
+      "startMs": 34740,
+      "endMs": 35060
+    },
+    {
+      "word": "강력해집니다.",
+      "startMs": 35060,
+      "endMs": 36260
+    },
+    {
+      "word": "오늘부터",
+      "startMs": 36960,
+      "endMs": 37540
+    },
+    {
+      "word": "시작하세요.",
+      "startMs": 37540,
+      "endMs": 38400
+    }
+  ]
+}
