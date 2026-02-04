@@ -15,7 +15,8 @@ import AnimatedText from './components/AnimatedText';
 import Counter from './components/Counter';
 import Shape from './components/Shape';
 import IconElement from './components/IconElement';
-import StickManPlaceholder from './components/StickMan/StickManPlaceholder';
+import { StickMan } from './components/StickMan';
+import { useVideoConfig } from 'remotion';
 
 interface ObjectRendererProps {
   object: SceneObject;
@@ -28,6 +29,7 @@ export const ObjectRenderer: React.FC<ObjectRendererProps> = ({
   sceneStartFrame,
   sceneDurationFrames,
 }) => {
+  const { fps } = useVideoConfig();
   const { type, position, scale, animation, props } = object;
 
   const commonProps = {
@@ -39,13 +41,26 @@ export const ObjectRenderer: React.FC<ObjectRendererProps> = ({
   };
 
   switch (type) {
-    case 'stickman':
+    case 'stickman': {
+      const stickmanProps = props as StickmanProps;
+      // Convert sceneStartFrame to startTimeMs for motion sync
+      const startTimeMs = (sceneStartFrame / fps) * 1000;
+      // Get motion from during animation if specified
+      const motion = animation?.during?.type;
+
       return (
-        <StickManPlaceholder
-          {...commonProps}
-          props={props as StickmanProps}
+        <StickMan
+          pose={stickmanProps.pose}
+          expression={stickmanProps.expression}
+          position={position}
+          scale={scale}
+          color={stickmanProps.color}
+          lineWidth={stickmanProps.lineWidth}
+          motion={motion}
+          startTimeMs={startTimeMs}
         />
       );
+    }
 
     case 'text':
       return (
