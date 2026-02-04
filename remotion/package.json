@@ -4,8 +4,8 @@
   "description": "Remotion video renderer for stickman infographic videos",
   "scripts": {
     "start": "remotion studio",
-    "build": "remotion render src/index.ts MainVideo --output=./out/final.mp4",
-    "render": "remotion render src/index.ts MainVideo",
+    "build": "remotion render src/index.tsx MainVideo --output=./out/final.mp4",
+    "render": "remotion render src/index.tsx MainVideo",
     "preview": "remotion preview"
   },
   "dependencies": {
