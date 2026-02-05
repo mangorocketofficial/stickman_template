@@ -78,7 +78,7 @@ export interface IconProps {
 }
 
 export interface ShapeProps {
-  shape: "arrow" | "line" | "circle" | "rectangle";
+  shape: "arrow" | "line" | "circle" | "rectangle" | "curved_arrow" | "bracket" | "divider" | "highlight_box";
   from?: { x: number; y: number };
   to?: { x: number; y: number };
   width?: number;
@@ -86,6 +86,9 @@ export interface ShapeProps {
   color?: string;                // default: "#FFFFFF"
   strokeWidth?: number;          // default: 3
   fill?: boolean;                // default: false
+  // L1 V3 추가 속성
+  direction?: "left" | "right" | "up" | "down";  // for bracket, curved_arrow
+  style?: "solid" | "dashed" | "dotted";         // for divider
 }
 
 export interface CounterProps {

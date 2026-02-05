@@ -79,6 +79,72 @@ const Eye: React.FC<{
         />
       );
 
+    case 'squint':
+      return (
+        <path
+          d={`M ${x - size * 1.2} ${EYE_Y} L ${x} ${EYE_Y - size * 0.3} L ${x + size * 1.2} ${EYE_Y}`}
+          fill="none"
+          stroke={color}
+          strokeWidth={lineWidth * 0.5}
+          strokeLinecap="round"
+        />
+      );
+
+    case 'wide':
+      return (
+        <>
+          <circle
+            cx={x}
+            cy={EYE_Y}
+            r={size * 1.8}
+            fill="none"
+            stroke={color}
+            strokeWidth={lineWidth * 0.5}
+          />
+          <circle cx={x} cy={EYE_Y} r={size * 0.8} fill={color} />
+        </>
+      );
+
+    case 'tear':
+      return (
+        <>
+          <circle cx={x} cy={EYE_Y} r={size} fill={color} />
+          <path
+            d={`M ${x + size * 0.3} ${EYE_Y + size} Q ${x + size * 0.5} ${EYE_Y + size * 3} ${x} ${EYE_Y + size * 3.5}`}
+            fill="none"
+            stroke={color}
+            strokeWidth={lineWidth * 0.4}
+            strokeLinecap="round"
+          />
+        </>
+      );
+
+    case 'angry':
+      return (
+        <>
+          <circle cx={x} cy={EYE_Y} r={size} fill={color} />
+          <line
+            x1={x - size * 1.5}
+            y1={x < 0 ? EYE_Y - size * 1.2 : EYE_Y - size * 0.5}
+            x2={x + size * 1.5}
+            y2={x < 0 ? EYE_Y - size * 0.5 : EYE_Y - size * 1.2}
+            stroke={color}
+            strokeWidth={lineWidth * 0.6}
+            strokeLinecap="round"
+          />
+        </>
+      );
+
+    case 'heart':
+      return (
+        <path
+          d={`M ${x} ${EYE_Y + size * 0.5}
+             C ${x - size * 1.5} ${EYE_Y - size} ${x - size * 1.5} ${EYE_Y - size * 1.5} ${x} ${EYE_Y - size * 0.5}
+             C ${x + size * 1.5} ${EYE_Y - size * 1.5} ${x + size * 1.5} ${EYE_Y - size} ${x} ${EYE_Y + size * 0.5}`}
+          fill={color}
+        />
+      );
+
     default:
       return <circle cx={x} cy={EYE_Y} r={size} fill={color} />;
   }
@@ -154,6 +220,83 @@ const Mouth: React.FC<{
           strokeWidth={lineWidth * 0.5}
           strokeLinecap="round"
         />
+      );
+
+    case 'grin':
+      return (
+        <>
+          <path
+            d={`M ${-halfWidth} ${MOUTH_Y - 5} Q 0 ${MOUTH_Y + 15} ${halfWidth} ${MOUTH_Y - 5}`}
+            fill="none"
+            stroke={color}
+            strokeWidth={lineWidth * 0.5}
+            strokeLinecap="round"
+          />
+          <line
+            x1={-halfWidth * 0.7}
+            y1={MOUTH_Y}
+            x2={halfWidth * 0.7}
+            y2={MOUTH_Y}
+            stroke={color}
+            strokeWidth={lineWidth * 0.3}
+          />
+        </>
+      );
+
+    case 'open':
+      return (
+        <ellipse
+          cx={0}
+          cy={MOUTH_Y + 2}
+          rx={halfWidth * 0.6}
+          ry={halfWidth * 0.5}
+          fill={color}
+          fillOpacity="0.3"
+          stroke={color}
+          strokeWidth={lineWidth * 0.5}
+        />
+      );
+
+    case 'teeth':
+      return (
+        <>
+          <path
+            d={`M ${-halfWidth} ${MOUTH_Y - 3} Q 0 ${MOUTH_Y + 10} ${halfWidth} ${MOUTH_Y - 3}`}
+            fill="none"
+            stroke={color}
+            strokeWidth={lineWidth * 0.5}
+            strokeLinecap="round"
+          />
+          <line
+            x1={-halfWidth * 0.6}
+            y1={MOUTH_Y + 2}
+            x2={halfWidth * 0.6}
+            y2={MOUTH_Y + 2}
+            stroke={color}
+            strokeWidth={lineWidth * 0.4}
+          />
+        </>
+      );
+
+    case 'tongue':
+      return (
+        <>
+          <path
+            d={`M ${-halfWidth} ${MOUTH_Y - 3} Q 0 ${MOUTH_Y + 10} ${halfWidth} ${MOUTH_Y - 3}`}
+            fill="none"
+            stroke={color}
+            strokeWidth={lineWidth * 0.5}
+            strokeLinecap="round"
+          />
+          <ellipse
+            cx={0}
+            cy={MOUTH_Y + 8}
+            rx={halfWidth * 0.3}
+            ry={halfWidth * 0.25}
+            fill={color}
+            fillOpacity="0.5"
+          />
+        </>
       );
 
     default:
