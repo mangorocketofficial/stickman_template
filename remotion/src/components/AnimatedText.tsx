@@ -1,13 +1,17 @@
 /**
  * AnimatedText - Text component with enter/during/exit animation support
  *
- * Refactored to use useAnimationPhases hook for cleaner code
+ * Updated for Track B-4: Typography
+ * - Supports text roles (title, body, number, highlight_box, caption)
+ * - Supports text decorations (underline_animated, highlight_marker)
+ * - Supports background boxes
  */
 
 import React from 'react';
-import { TextProps, AnimationDef } from '../types/schema';
+import { TextProps, AnimationDef, TextRole } from '../types/schema';
 import { useAnimationPhases } from '../hooks/useAnimationPhases';
 import { TEXT } from '../constants';
+import { TEXT_STYLES, getDecorationStyle } from '../styles/textStyles';
 
 interface AnimatedTextProps {
   props: TextProps;
@@ -30,13 +34,20 @@ export const AnimatedText: React.FC<AnimatedTextProps> = ({
   sceneStartFrame,
   sceneDurationFrames,
 }) => {
+  // Get role-based default style
+  const role = props.role || 'body';
+  const roleStyle = TEXT_STYLES[role] || TEXT_STYLES.body;
+
+  // Extract props with role-based defaults
   const {
     content,
-    fontSize = TEXT.DEFAULT_FONT_SIZE,
-    fontWeight = TEXT.DEFAULT_FONT_WEIGHT,
-    color = TEXT.DEFAULT_COLOR,
+    fontSize = roleStyle.fontSize,
+    fontWeight = roleStyle.fontWeight as 'normal' | 'bold',
+    color = roleStyle.color,
     maxWidth = TEXT.DEFAULT_MAX_WIDTH,
     align = TEXT.DEFAULT_ALIGN,
+    decoration = roleStyle.decoration,
+    background = roleStyle.background,
   } = props;
 
   // Use centralized animation hook
@@ -59,6 +70,21 @@ export const AnimatedText: React.FC<AnimatedTextProps> = ({
     : content.length;
   const displayText = isTypewriter ? content.slice(0, visibleChars) : content;
 
+  // Get decoration styles
+  const decorationStyles = getDecorationStyle(decoration, color);
+
+  // Build background box styles
+  const backgroundStyles: React.CSSProperties = background
+    ? {
+        backgroundColor: background.color || 'rgba(255, 255, 255, 0.15)',
+        padding: background.padding || 20,
+        borderRadius: background.borderRadius || 12,
+      }
+    : {};
+
+  // Use monospace for number role
+  const fontFamily = role === 'number' ? 'monospace' : TEXT.FONT_FAMILY;
+
   return (
     <div
       style={{
@@ -69,13 +95,15 @@ export const AnimatedText: React.FC<AnimatedTextProps> = ({
         opacity: finalOpacity,
         maxWidth,
         textAlign: align,
-        fontFamily: TEXT.FONT_FAMILY,
+        fontFamily,
         fontSize,
         fontWeight,
         color,
         whiteSpace: 'pre-wrap',
         wordBreak: 'keep-all',
         lineHeight: TEXT.LINE_HEIGHT,
+        ...backgroundStyles,
+        ...decorationStyles,
       }}
     >
       {displayText}

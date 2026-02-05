@@ -1,12 +1,15 @@
 /**
  * SceneRenderer - Renders a single scene with background, transitions, and objects
+ *
+ * Updated for Track B-1: Now supports gradient and pattern backgrounds
  */
 
 import React from 'react';
-import { useCurrentFrame, useVideoConfig, interpolate, Sequence } from 'remotion';
-import { Scene, getBackgroundColor } from './types/schema';
+import { useCurrentFrame, useVideoConfig, interpolate } from 'remotion';
+import { Scene } from './types/schema';
 import ObjectRenderer from './ObjectRenderer';
-import { msToFrames, getDurationInFrames } from './utils/timing';
+import BackgroundRenderer from './components/BackgroundRenderer';
+import { msToFrames } from './utils/timing';
 
 interface SceneRendererProps {
   scene: Scene;
@@ -29,9 +32,6 @@ export const SceneRenderer: React.FC<SceneRendererProps> = ({
     objects,
   } = scene;
 
-  // Get background color (handles both string and BackgroundDef)
-  const backgroundColor = getBackgroundColor(background);
-
   // Calculate scene timing
   const sceneStartFrame = msToFrames(startMs, fps);
   const sceneEndFrame = msToFrames(endMs, fps);
@@ -45,7 +45,6 @@ export const SceneRenderer: React.FC<SceneRendererProps> = ({
 
   // Calculate transition opacity
   // Note: Inside Sequence, useCurrentFrame() already returns frame relative to Sequence start (0-based)
-  // So we use 'frame' directly as the relative frame
   const relativeFrame = frame;
 
   let transitionOpacity = 1;
@@ -86,10 +85,17 @@ export const SceneRenderer: React.FC<SceneRendererProps> = ({
         position: 'absolute',
         width,
         height,
-        backgroundColor,
         opacity: transitionOpacity,
+        overflow: 'hidden',
       }}
     >
+      {/* Background layer (supports gradients, patterns, animations) */}
+      <BackgroundRenderer
+        background={background}
+        width={width}
+        height={height}
+      />
+
       {/* Render objects sorted by layer */}
       {/* sceneStartFrame=0 because frame is already relative to Sequence start */}
       {sortedObjects.map((obj) => (
