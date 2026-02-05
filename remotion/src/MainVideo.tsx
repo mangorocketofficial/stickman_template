@@ -1,5 +1,7 @@
 /**
  * MainVideo - Top-level composition reading scene.json
+ *
+ * Updated for Track B-6: Added BGM support with auto-ducking
  */
 
 import React from 'react';
@@ -13,6 +15,7 @@ import {
 import { VideoProject, SubtitleData, getBackgroundColor } from './types/schema';
 import SceneRenderer from './SceneRenderer';
 import SubtitleOverlay from './components/SubtitleOverlay';
+import BGMPlayer from './components/BGMPlayer';
 import { msToFrames, getDurationInFrames } from './utils/timing';
 
 interface MainVideoProps {
@@ -25,7 +28,7 @@ export const MainVideo: React.FC<MainVideoProps> = ({
   subtitleData,
 }) => {
   const frame = useCurrentFrame();
-  const { fps, width, height } = useVideoConfig();
+  const { fps, width, height, durationInFrames } = useVideoConfig();
 
   const { meta, subtitles, scenes } = sceneData;
 
@@ -45,6 +48,11 @@ export const MainVideo: React.FC<MainVideoProps> = ({
     ? getBackgroundColor(currentScene.background)
     : defaultBackground;
 
+  // Calculate total duration from scenes (for BGM fade out)
+  const totalDurationFrames = scenes.length > 0
+    ? msToFrames(scenes[scenes.length - 1].endMs, fps)
+    : durationInFrames;
+
   return (
     <div
       style={{
@@ -55,9 +63,18 @@ export const MainVideo: React.FC<MainVideoProps> = ({
         overflow: 'hidden',
       }}
     >
-      {/* Audio track - spans entire video */}
+      {/* TTS Audio track - spans entire video */}
       {meta.audioSrc && (
         <Audio src={staticFile(meta.audioSrc)} volume={1} />
+      )}
+
+      {/* BGM track with auto-ducking */}
+      {meta.bgm && (
+        <BGMPlayer
+          config={meta.bgm}
+          subtitleData={subtitleData}
+          totalDurationFrames={totalDurationFrames}
+        />
       )}
 
       {/* Render all scenes as sequences */}
