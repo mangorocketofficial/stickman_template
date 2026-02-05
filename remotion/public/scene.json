@@ -1,0 +1,2508 @@
+{
+  "meta": {
+    "title": "복리의 마법",
+    "fps": 30,
+    "width": 1920,
+    "height": 1080,
+    "audioSrc": "audio/tts_output.mp3"
+  },
+  "subtitles": {
+    "src": "subtitles/words.json",
+    "style": {
+      "fontSize": 48,
+      "color": "#FFFFFF",
+      "position": "bottom",
+      "highlightColor": "#FFD700"
+    }
+  },
+  "scenes": [
+    {
+      "id": "scene_01_intro_greeting",
+      "startMs": 180,
+      "endMs": 2520,
+      "background": "#1a1a2e",
+      "transition": {
+        "in": "fadeIn",
+        "out": "fadeOut",
+        "durationMs": 300
+      },
+      "objects": [
+        {
+          "id": "scene_01_intro_greeting_stickman_1",
+          "type": "stickman",
+          "position": {
+            "x": 300,
+            "y": 600
+          },
+          "props": {
+            "color": "#FFFFFF",
+            "lineWidth": 3,
+            "expression": "happy",
+            "pose": "standing",
+            "targetPose": "waving",
+            "motion": "breathing"
+          },
+          "animation": {
+            "enter": {
+              "type": "poseTransition",
+              "durationMs": 400
+            },
+            "exit": {
+              "type": "poseTransition",
+              "durationMs": 300
+            }
+          }
+        },
+        {
+          "id": "scene_01_intro_greeting_text_1",
+          "type": "text",
+          "position": {
+            "x": 960,
+            "y": 500
+          },
+          "props": {
+            "content": "복리의 마법",
+            "fontSize": 48,
+            "fontWeight": "bold",
+            "color": "#FFD700",
+            "align": "center",
+            "maxWidth": 800
+          },
+          "animation": {
+            "enter": {
+              "type": "fadeInUp",
+              "durationMs": 400
+            }
+          }
+        },
+        {
+          "id": "scene_01_intro_greeting_icon_1",
+          "type": "icon",
+          "position": {
+            "x": 960,
+            "y": 300
+          },
+          "props": {
+            "name": "lightbulb",
+            "size": 80,
+            "color": "#FFFFFF"
+          },
+          "animation": {
+            "enter": {
+              "type": "popIn",
+              "durationMs": 400
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "scene_02_hook_question",
+      "startMs": 2520,
+      "endMs": 4059,
+      "background": "#1a1a2e",
+      "transition": {
+        "in": "fadeIn",
+        "out": "fadeOut",
+        "durationMs": 300
+      },
+      "objects": [
+        {
+          "id": "scene_02_hook_question_stickman_1",
+          "type": "stickman",
+          "position": {
+            "x": 350,
+            "y": 600
+          },
+          "props": {
+            "color": "#FFFFFF",
+            "lineWidth": 3,
+            "expression": "thinking",
+            "pose": "thinking",
+            "motion": "breathing"
+          },
+          "animation": {
+            "enter": {
+              "type": "fadeIn",
+              "durationMs": 500
+            },
+            "during": {
+              "type": "breathing",
+              "loop": true
+            }
+          }
+        },
+        {
+          "id": "scene_02_hook_question_text_1",
+          "type": "text",
+          "position": {
+            "x": 1100,
+            "y": 350
+          },
+          "props": {
+            "content": "💰 1억 vs 매일 2배 1원",
+            "fontSize": 48,
+            "fontWeight": "bold",
+            "color": "#FFD700",
+            "align": "center",
+            "maxWidth": 800
+          },
+          "animation": {
+            "enter": {
+              "type": "fadeInUp",
+              "durationMs": 400
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "scene_03_hook_answer",
+      "startMs": 4059,
+      "endMs": 4640,
+      "background": "#1a1a2e",
+      "transition": {
+        "in": "fadeIn",
+        "out": "fadeOut",
+        "durationMs": 300
+      },
+      "objects": [
+        {
+          "id": "scene_03_hook_answer_stickman_1",
+          "type": "stickman",
+          "position": {
+            "x": 300,
+            "y": 600
+          },
+          "props": {
+            "color": "#FFFFFF",
+            "lineWidth": 3,
+            "expression": "surprised",
+            "pose": "standing",
+            "targetPose": "celebrating",
+            "motion": "breathing"
+          },
+          "animation": {
+            "enter": {
+              "type": "poseTransition",
+              "durationMs": 400
+            },
+            "exit": {
+              "type": "poseTransition",
+              "durationMs": 300
+            }
+          }
+        },
+        {
+          "id": "scene_03_hook_answer_text_1",
+          "type": "text",
+          "position": {
+            "x": 960,
+            "y": 250
+          },
+          "props": {
+            "content": "30일 후: 약 5억 3천만 원!",
+            "fontSize": 48,
+            "fontWeight": "bold",
+            "color": "#FFD700",
+            "align": "center",
+            "maxWidth": 800
+          },
+          "animation": {
+            "enter": {
+              "type": "fadeInUp",
+              "durationMs": 400
+            }
+          }
+        },
+        {
+          "id": "scene_03_hook_answer_counter_1",
+          "type": "counter",
+          "position": {
+            "x": 960,
+            "y": 450
+          },
+          "props": {
+            "from": 1,
+            "to": 536870912,
+            "format": "currency_krw",
+            "fontSize": 64,
+            "color": "#FFFFFF"
+          },
+          "animation": {
+            "enter": {
+              "type": "fadeIn",
+              "durationMs": 300
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "scene_04_hook_explain",
+      "startMs": 4640,
+      "endMs": 4860,
+      "background": "#1a1a2e",
+      "transition": {
+        "in": "fadeIn",
+        "out": "fadeOut",
+        "durationMs": 300
+      },
+      "objects": [
+        {
+          "id": "scene_04_hook_explain_stickman_1",
+          "type": "stickman",
+          "position": {
+            "x": 350,
+            "y": 600
+          },
+          "props": {
+            "color": "#FFFFFF",
+            "lineWidth": 3,
+            "expression": "happy",
+            "pose": "standing",
+            "targetPose": "pointing_right",
+            "motion": "breathing"
+          },
+          "animation": {
+            "enter": {
+              "type": "poseTransition",
+              "durationMs": 400
+            },
+            "exit": {
+              "type": "poseTransition",
+              "durationMs": 300
+            }
+          }
+        },
+        {
+          "id": "scene_04_hook_explain_text_1",
+          "type": "text",
+          "position": {
+            "x": 1100,
+            "y": 350
+          },
+          "props": {
+            "content": "이것이 바로 복리의 힘",
+            "fontSize": 48,
+            "fontWeight": "bold",
+            "color": "#FFD700",
+            "align": "center",
+            "maxWidth": 800
+          },
+          "animation": {
+            "enter": {
+              "type": "fadeInUp",
+              "durationMs": 400
+            }
+          }
+        },
+        {
+          "id": "scene_04_hook_explain_shape_1",
+          "type": "shape",
+          "position": {
+            "x": 960,
+            "y": 540
+          },
+          "props": {
+            "shape": "arrow",
+            "color": "#FFD700",
+            "strokeWidth": 3,
+            "fill": false
+          },
+          "animation": {
+            "enter": {
+              "type": "drawLine",
+              "durationMs": 500
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "scene_05_simple_interest_intro",
+      "startMs": 4860,
+      "endMs": 6080,
+      "background": "#1a1a2e",
+      "transition": {
+        "in": "fadeIn",
+        "out": "fadeOut",
+        "durationMs": 300
+      },
+      "objects": [
+        {
+          "id": "scene_05_simple_interest_intro_stickman_1",
+          "type": "stickman",
+          "position": {
+            "x": 300,
+            "y": 600
+          },
+          "props": {
+            "color": "#FFFFFF",
+            "lineWidth": 3,
+            "expression": "neutral",
+            "pose": "explaining",
+            "motion": "breathing"
+          },
+          "animation": {
+            "enter": {
+              "type": "fadeIn",
+              "durationMs": 500
+            },
+            "during": {
+              "type": "breathing",
+              "loop": true
+            }
+          }
+        },
+        {
+          "id": "scene_05_simple_interest_intro_text_1",
+          "type": "text",
+          "position": {
+            "x": 960,
+            "y": 500
+          },
+          "props": {
+            "content": "단리란?",
+            "fontSize": 48,
+            "fontWeight": "bold",
+            "color": "#FFD700",
+            "align": "center",
+            "maxWidth": 800
+          },
+          "animation": {
+            "enter": {
+              "type": "fadeInUp",
+              "durationMs": 400
+            }
+          }
+        },
+        {
+          "id": "scene_05_simple_interest_intro_icon_1",
+          "type": "icon",
+          "position": {
+            "x": 960,
+            "y": 300
+          },
+          "props": {
+            "name": "money-bag",
+            "size": 80,
+            "color": "#FFFFFF"
+          },
+          "animation": {
+            "enter": {
+              "type": "popIn",
+              "durationMs": 400
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "scene_06_simple_interest_explain",
+      "startMs": 6780,
+      "endMs": 7060,
+      "background": "#1a1a2e",
+      "transition": {
+        "in": "fadeIn",
+        "out": "fadeOut",
+        "durationMs": 300
+      },
+      "objects": [
+        {
+          "id": "scene_06_simple_interest_explain_stickman_1",
+          "type": "stickman",
+          "position": {
+            "x": 350,
+            "y": 600
+          },
+          "props": {
+            "color": "#FFFFFF",
+            "lineWidth": 3,
+            "expression": "neutral",
+            "pose": "standing",
+            "motion": "nodding"
+          },
+          "animation": {
+            "enter": {
+              "type": "fadeIn",
+              "durationMs": 500
+            },
+            "during": {
+              "type": "nodding",
+              "loop": true
+            }
+          }
+        },
+        {
+          "id": "scene_06_simple_interest_explain_text_1",
+          "type": "text",
+          "position": {
+            "x": 1100,
+            "y": 350
+          },
+          "props": {
+            "content": "단리 = 원금 × 이자율 × 기간",
+            "fontSize": 48,
+            "fontWeight": "bold",
+            "color": "#FFD700",
+            "align": "center",
+            "maxWidth": 800
+          },
+          "animation": {
+            "enter": {
+              "type": "fadeInUp",
+              "durationMs": 400
+            }
+          }
+        },
+        {
+          "id": "scene_06_simple_interest_explain_shape_1",
+          "type": "shape",
+          "position": {
+            "x": 960,
+            "y": 540
+          },
+          "props": {
+            "shape": "line",
+            "color": "#4FC3F7",
+            "strokeWidth": 3,
+            "fill": false
+          },
+          "animation": {
+            "enter": {
+              "type": "drawLine",
+              "durationMs": 500
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "scene_07_simple_interest_example",
+      "startMs": 7060,
+      "endMs": 7420,
+      "background": "#1a1a2e",
+      "transition": {
+        "in": "fadeIn",
+        "out": "fadeOut",
+        "durationMs": 300
+      },
+      "objects": [
+        {
+          "id": "scene_07_simple_interest_example_stickman_1",
+          "type": "stickman",
+          "position": {
+            "x": 300,
+            "y": 600
+          },
+          "props": {
+            "color": "#FFFFFF",
+            "lineWidth": 3,
+            "expression": "neutral",
+            "pose": "standing",
+            "motion": "typing"
+          },
+          "animation": {
+            "enter": {
+              "type": "fadeIn",
+              "durationMs": 500
+            },
+            "during": {
+              "type": "typing",
+              "loop": true
+            }
+          }
+        },
+        {
+          "id": "scene_07_simple_interest_example_text_1",
+          "type": "text",
+          "position": {
+            "x": 960,
+            "y": 250
+          },
+          "props": {
+            "content": "100만원 × 5% × 10년",
+            "fontSize": 48,
+            "fontWeight": "bold",
+            "color": "#FFD700",
+            "align": "center",
+            "maxWidth": 800
+          },
+          "animation": {
+            "enter": {
+              "type": "fadeInUp",
+              "durationMs": 400
+            }
+          }
+        },
+        {
+          "id": "scene_07_simple_interest_example_counter_1",
+          "type": "counter",
+          "position": {
+            "x": 960,
+            "y": 450
+          },
+          "props": {
+            "from": 1000000,
+            "to": 1500000,
+            "format": "currency_krw",
+            "fontSize": 64,
+            "color": "#FFFFFF"
+          },
+          "animation": {
+            "enter": {
+              "type": "fadeIn",
+              "durationMs": 300
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "scene_08_compound_intro",
+      "startMs": 7420,
+      "endMs": 7920,
+      "background": "#1a1a2e",
+      "transition": {
+        "in": "fadeIn",
+        "out": "fadeOut",
+        "durationMs": 300
+      },
+      "objects": [
+        {
+          "id": "scene_08_compound_intro_stickman_1",
+          "type": "stickman",
+          "position": {
+            "x": 300,
+            "y": 600
+          },
+          "props": {
+            "color": "#FFFFFF",
+            "lineWidth": 3,
+            "expression": "happy",
+            "pose": "standing",
+            "targetPose": "beckoning",
+            "motion": "breathing"
+          },
+          "animation": {
+            "enter": {
+              "type": "poseTransition",
+              "durationMs": 400
+            },
+            "exit": {
+              "type": "poseTransition",
+              "durationMs": 300
+            }
+          }
+        },
+        {
+          "id": "scene_08_compound_intro_text_1",
+          "type": "text",
+          "position": {
+            "x": 960,
+            "y": 500
+          },
+          "props": {
+            "content": "복리란?",
+            "fontSize": 48,
+            "fontWeight": "bold",
+            "color": "#FFD700",
+            "align": "center",
+            "maxWidth": 800
+          },
+          "animation": {
+            "enter": {
+              "type": "fadeInUp",
+              "durationMs": 400
+            }
+          }
+        },
+        {
+          "id": "scene_08_compound_intro_icon_1",
+          "type": "icon",
+          "position": {
+            "x": 960,
+            "y": 300
+          },
+          "props": {
+            "name": "chart-up",
+            "size": 80,
+            "color": "#FFFFFF"
+          },
+          "animation": {
+            "enter": {
+              "type": "popIn",
+              "durationMs": 400
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "scene_09_compound_explain",
+      "startMs": 7920,
+      "endMs": 8440,
+      "background": "#1a1a2e",
+      "transition": {
+        "in": "fadeIn",
+        "out": "fadeOut",
+        "durationMs": 300
+      },
+      "objects": [
+        {
+          "id": "scene_09_compound_explain_stickman_1",
+          "type": "stickman",
+          "position": {
+            "x": 350,
+            "y": 600
+          },
+          "props": {
+            "color": "#FFFFFF",
+            "lineWidth": 3,
+            "expression": "happy",
+            "pose": "explaining",
+            "motion": "breathing"
+          },
+          "animation": {
+            "enter": {
+              "type": "fadeIn",
+              "durationMs": 500
+            },
+            "during": {
+              "type": "breathing",
+              "loop": true
+            }
+          }
+        },
+        {
+          "id": "scene_09_compound_explain_text_1",
+          "type": "text",
+          "position": {
+            "x": 1100,
+            "y": 350
+          },
+          "props": {
+            "content": "원금 + 이자 → 새로운 원금",
+            "fontSize": 48,
+            "fontWeight": "bold",
+            "color": "#FFD700",
+            "align": "center",
+            "maxWidth": 800
+          },
+          "animation": {
+            "enter": {
+              "type": "fadeInUp",
+              "durationMs": 400
+            }
+          }
+        },
+        {
+          "id": "scene_09_compound_explain_shape_1",
+          "type": "shape",
+          "position": {
+            "x": 960,
+            "y": 540
+          },
+          "props": {
+            "shape": "circle",
+            "color": "#FF9800",
+            "strokeWidth": 3,
+            "fill": false
+          },
+          "animation": {
+            "enter": {
+              "type": "drawLine",
+              "durationMs": 500
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "scene_10_compound_formula",
+      "startMs": 8440,
+      "endMs": 8680,
+      "background": "#1a1a2e",
+      "transition": {
+        "in": "fadeIn",
+        "out": "fadeOut",
+        "durationMs": 300
+      },
+      "objects": [
+        {
+          "id": "scene_10_compound_formula_stickman_1",
+          "type": "stickman",
+          "position": {
+            "x": 350,
+            "y": 600
+          },
+          "props": {
+            "color": "#FFFFFF",
+            "lineWidth": 3,
+            "expression": "neutral",
+            "pose": "standing",
+            "targetPose": "pointing_right",
+            "motion": "breathing"
+          },
+          "animation": {
+            "enter": {
+              "type": "poseTransition",
+              "durationMs": 400
+            },
+            "exit": {
+              "type": "poseTransition",
+              "durationMs": 300
+            }
+          }
+        },
+        {
+          "id": "scene_10_compound_formula_text_1",
+          "type": "text",
+          "position": {
+            "x": 1100,
+            "y": 350
+          },
+          "props": {
+            "content": "복리 = 원금 × (1 + r)ⁿ",
+            "fontSize": 48,
+            "fontWeight": "bold",
+            "color": "#FFD700",
+            "align": "center",
+            "maxWidth": 800
+          },
+          "animation": {
+            "enter": {
+              "type": "fadeInUp",
+              "durationMs": 400
+            }
+          }
+        },
+        {
+          "id": "scene_10_compound_formula_shape_1",
+          "type": "shape",
+          "position": {
+            "x": 960,
+            "y": 540
+          },
+          "props": {
+            "shape": "rectangle",
+            "color": "#7C4DFF",
+            "strokeWidth": 3,
+            "fill": false
+          },
+          "animation": {
+            "enter": {
+              "type": "drawLine",
+              "durationMs": 500
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "scene_11_compound_example",
+      "startMs": 8680,
+      "endMs": 9040,
+      "background": "#1a1a2e",
+      "transition": {
+        "in": "fadeIn",
+        "out": "fadeOut",
+        "durationMs": 300
+      },
+      "objects": [
+        {
+          "id": "scene_11_compound_example_stickman_1",
+          "type": "stickman",
+          "position": {
+            "x": 300,
+            "y": 600
+          },
+          "props": {
+            "color": "#FFFFFF",
+            "lineWidth": 3,
+            "expression": "happy",
+            "pose": "standing",
+            "targetPose": "thumbsUp",
+            "motion": "breathing"
+          },
+          "animation": {
+            "enter": {
+              "type": "poseTransition",
+              "durationMs": 400
+            },
+            "exit": {
+              "type": "poseTransition",
+              "durationMs": 300
+            }
+          }
+        },
+        {
+          "id": "scene_11_compound_example_text_1",
+          "type": "text",
+          "position": {
+            "x": 960,
+            "y": 250
+          },
+          "props": {
+            "content": "100만원 × 5% 복리 × 10년",
+            "fontSize": 48,
+            "fontWeight": "bold",
+            "color": "#FFD700",
+            "align": "center",
+            "maxWidth": 800
+          },
+          "animation": {
+            "enter": {
+              "type": "fadeInUp",
+              "durationMs": 400
+            }
+          }
+        },
+        {
+          "id": "scene_11_compound_example_counter_1",
+          "type": "counter",
+          "position": {
+            "x": 960,
+            "y": 450
+          },
+          "props": {
+            "from": 1000000,
+            "to": 1628895,
+            "format": "currency_krw",
+            "fontSize": 64,
+            "color": "#FFFFFF"
+          },
+          "animation": {
+            "enter": {
+              "type": "fadeIn",
+              "durationMs": 300
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "scene_12_difference_compare",
+      "startMs": 9040,
+      "endMs": 10100,
+      "background": "#1a1a2e",
+      "transition": {
+        "in": "fadeIn",
+        "out": "fadeOut",
+        "durationMs": 300
+      },
+      "objects": [
+        {
+          "id": "scene_12_difference_compare_stickman_1",
+          "type": "stickman",
+          "position": {
+            "x": 350,
+            "y": 600
+          },
+          "props": {
+            "color": "#FFFFFF",
+            "lineWidth": 3,
+            "expression": "surprised",
+            "pose": "explaining",
+            "motion": "breathing"
+          },
+          "animation": {
+            "enter": {
+              "type": "fadeIn",
+              "durationMs": 500
+            },
+            "during": {
+              "type": "breathing",
+              "loop": true
+            }
+          }
+        },
+        {
+          "id": "scene_12_difference_compare_text_1",
+          "type": "text",
+          "position": {
+            "x": 1100,
+            "y": 350
+          },
+          "props": {
+            "content": "단리 150만 vs 복리 163만",
+            "fontSize": 48,
+            "fontWeight": "bold",
+            "color": "#FFD700",
+            "align": "center",
+            "maxWidth": 800
+          },
+          "animation": {
+            "enter": {
+              "type": "fadeInUp",
+              "durationMs": 400
+            }
+          }
+        },
+        {
+          "id": "scene_12_difference_compare_shape_1",
+          "type": "shape",
+          "position": {
+            "x": 960,
+            "y": 540
+          },
+          "props": {
+            "shape": "arrow",
+            "color": "#FF5722",
+            "strokeWidth": 3,
+            "fill": false
+          },
+          "animation": {
+            "enter": {
+              "type": "drawLine",
+              "durationMs": 500
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "scene_13_time_power",
+      "startMs": 10100,
+      "endMs": 10760,
+      "background": "#1a1a2e",
+      "transition": {
+        "in": "fadeIn",
+        "out": "fadeOut",
+        "durationMs": 300
+      },
+      "objects": [
+        {
+          "id": "scene_13_time_power_stickman_1",
+          "type": "stickman",
+          "position": {
+            "x": 300,
+            "y": 600
+          },
+          "props": {
+            "color": "#FFFFFF",
+            "lineWidth": 3,
+            "expression": "surprised",
+            "pose": "standing",
+            "targetPose": "celebrating",
+            "motion": "breathing"
+          },
+          "animation": {
+            "enter": {
+              "type": "poseTransition",
+              "durationMs": 400
+            },
+            "exit": {
+              "type": "poseTransition",
+              "durationMs": 300
+            }
+          }
+        },
+        {
+          "id": "scene_13_time_power_text_1",
+          "type": "text",
+          "position": {
+            "x": 960,
+            "y": 500
+          },
+          "props": {
+            "content": "30년 후에는?",
+            "fontSize": 48,
+            "fontWeight": "bold",
+            "color": "#FFD700",
+            "align": "center",
+            "maxWidth": 800
+          },
+          "animation": {
+            "enter": {
+              "type": "fadeInUp",
+              "durationMs": 400
+            }
+          }
+        },
+        {
+          "id": "scene_13_time_power_icon_1",
+          "type": "icon",
+          "position": {
+            "x": 960,
+            "y": 300
+          },
+          "props": {
+            "name": "chart-up",
+            "size": 80,
+            "color": "#FFFFFF"
+          },
+          "animation": {
+            "enter": {
+              "type": "popIn",
+              "durationMs": 400
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "scene_14_time_example_simple",
+      "startMs": 10760,
+      "endMs": 11400,
+      "background": "#1a1a2e",
+      "transition": {
+        "in": "fadeIn",
+        "out": "fadeOut",
+        "durationMs": 300
+      },
+      "objects": [
+        {
+          "id": "scene_14_time_example_simple_stickman_1",
+          "type": "stickman",
+          "position": {
+            "x": 300,
+            "y": 600
+          },
+          "props": {
+            "color": "#FFFFFF",
+            "lineWidth": 3,
+            "expression": "sad",
+            "pose": "standing",
+            "motion": "headShake"
+          },
+          "animation": {
+            "enter": {
+              "type": "fadeIn",
+              "durationMs": 500
+            },
+            "during": {
+              "type": "headShake",
+              "loop": true
+            }
+          }
+        },
+        {
+          "id": "scene_14_time_example_simple_text_1",
+          "type": "text",
+          "position": {
+            "x": 960,
+            "y": 250
+          },
+          "props": {
+            "content": "단리 30년: 250만원",
+            "fontSize": 48,
+            "fontWeight": "bold",
+            "color": "#FFD700",
+            "align": "center",
+            "maxWidth": 800
+          },
+          "animation": {
+            "enter": {
+              "type": "fadeInUp",
+              "durationMs": 400
+            }
+          }
+        },
+        {
+          "id": "scene_14_time_example_simple_counter_1",
+          "type": "counter",
+          "position": {
+            "x": 960,
+            "y": 450
+          },
+          "props": {
+            "from": 1000000,
+            "to": 2500000,
+            "format": "currency_krw",
+            "fontSize": 64,
+            "color": "#FFFFFF"
+          },
+          "animation": {
+            "enter": {
+              "type": "fadeIn",
+              "durationMs": 300
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "scene_15_time_example_compound",
+      "startMs": 11400,
+      "endMs": 11840,
+      "background": "#1a1a2e",
+      "transition": {
+        "in": "fadeIn",
+        "out": "fadeOut",
+        "durationMs": 300
+      },
+      "objects": [
+        {
+          "id": "scene_15_time_example_compound_stickman_1",
+          "type": "stickman",
+          "position": {
+            "x": 300,
+            "y": 600
+          },
+          "props": {
+            "color": "#FFFFFF",
+            "lineWidth": 3,
+            "expression": "happy",
+            "pose": "standing",
+            "motion": "clapping"
+          },
+          "animation": {
+            "enter": {
+              "type": "fadeIn",
+              "durationMs": 500
+            },
+            "during": {
+              "type": "clapping",
+              "loop": true
+            }
+          }
+        },
+        {
+          "id": "scene_15_time_example_compound_text_1",
+          "type": "text",
+          "position": {
+            "x": 960,
+            "y": 250
+          },
+          "props": {
+            "content": "복리 30년: 432만원!",
+            "fontSize": 48,
+            "fontWeight": "bold",
+            "color": "#FFD700",
+            "align": "center",
+            "maxWidth": 800
+          },
+          "animation": {
+            "enter": {
+              "type": "fadeInUp",
+              "durationMs": 400
+            }
+          }
+        },
+        {
+          "id": "scene_15_time_example_compound_counter_1",
+          "type": "counter",
+          "position": {
+            "x": 960,
+            "y": 450
+          },
+          "props": {
+            "from": 1000000,
+            "to": 4321942,
+            "format": "currency_krw",
+            "fontSize": 64,
+            "color": "#FFFFFF"
+          },
+          "animation": {
+            "enter": {
+              "type": "fadeIn",
+              "durationMs": 300
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "scene_16_snowball_effect",
+      "startMs": 11840,
+      "endMs": 12340,
+      "background": "#1a1a2e",
+      "transition": {
+        "in": "fadeIn",
+        "out": "fadeOut",
+        "durationMs": 300
+      },
+      "objects": [
+        {
+          "id": "scene_16_snowball_effect_stickman_1",
+          "type": "stickman",
+          "position": {
+            "x": 350,
+            "y": 600
+          },
+          "props": {
+            "color": "#FFFFFF",
+            "lineWidth": 3,
+            "expression": "happy",
+            "pose": "standing",
+            "motion": "running"
+          },
+          "animation": {
+            "enter": {
+              "type": "fadeIn",
+              "durationMs": 500
+            },
+            "during": {
+              "type": "running",
+              "loop": true
+            }
+          }
+        },
+        {
+          "id": "scene_16_snowball_effect_text_1",
+          "type": "text",
+          "position": {
+            "x": 1100,
+            "y": 350
+          },
+          "props": {
+            "content": "복리 = 눈덩이 효과 ☃️",
+            "fontSize": 48,
+            "fontWeight": "bold",
+            "color": "#FFD700",
+            "align": "center",
+            "maxWidth": 800
+          },
+          "animation": {
+            "enter": {
+              "type": "fadeInUp",
+              "durationMs": 400
+            }
+          }
+        },
+        {
+          "id": "scene_16_snowball_effect_shape_1",
+          "type": "shape",
+          "position": {
+            "x": 960,
+            "y": 540
+          },
+          "props": {
+            "shape": "circle",
+            "color": "#4FC3F7",
+            "strokeWidth": 3,
+            "fill": false
+          },
+          "animation": {
+            "enter": {
+              "type": "drawLine",
+              "durationMs": 500
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "scene_17_rule72_intro",
+      "startMs": 12340,
+      "endMs": 12460,
+      "background": "#1a1a2e",
+      "transition": {
+        "in": "fadeIn",
+        "out": "fadeOut",
+        "durationMs": 300
+      },
+      "objects": [
+        {
+          "id": "scene_17_rule72_intro_stickman_1",
+          "type": "stickman",
+          "position": {
+            "x": 300,
+            "y": 600
+          },
+          "props": {
+            "color": "#FFFFFF",
+            "lineWidth": 3,
+            "expression": "neutral",
+            "pose": "standing",
+            "targetPose": "beckoning",
+            "motion": "breathing"
+          },
+          "animation": {
+            "enter": {
+              "type": "poseTransition",
+              "durationMs": 400
+            },
+            "exit": {
+              "type": "poseTransition",
+              "durationMs": 300
+            }
+          }
+        },
+        {
+          "id": "scene_17_rule72_intro_text_1",
+          "type": "text",
+          "position": {
+            "x": 960,
+            "y": 500
+          },
+          "props": {
+            "content": "72의 법칙",
+            "fontSize": 48,
+            "fontWeight": "bold",
+            "color": "#FFD700",
+            "align": "center",
+            "maxWidth": 800
+          },
+          "animation": {
+            "enter": {
+              "type": "fadeInUp",
+              "durationMs": 400
+            }
+          }
+        },
+        {
+          "id": "scene_17_rule72_intro_icon_1",
+          "type": "icon",
+          "position": {
+            "x": 960,
+            "y": 300
+          },
+          "props": {
+            "name": "lightbulb",
+            "size": 80,
+            "color": "#FFFFFF"
+          },
+          "animation": {
+            "enter": {
+              "type": "popIn",
+              "durationMs": 400
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "scene_18_rule72_explain",
+      "startMs": 12460,
+      "endMs": 12740,
+      "background": "#1a1a2e",
+      "transition": {
+        "in": "fadeIn",
+        "out": "fadeOut",
+        "durationMs": 300
+      },
+      "objects": [
+        {
+          "id": "scene_18_rule72_explain_stickman_1",
+          "type": "stickman",
+          "position": {
+            "x": 350,
+            "y": 600
+          },
+          "props": {
+            "color": "#FFFFFF",
+            "lineWidth": 3,
+            "expression": "happy",
+            "pose": "standing",
+            "targetPose": "pointing_right",
+            "motion": "breathing"
+          },
+          "animation": {
+            "enter": {
+              "type": "poseTransition",
+              "durationMs": 400
+            },
+            "exit": {
+              "type": "poseTransition",
+              "durationMs": 300
+            }
+          }
+        },
+        {
+          "id": "scene_18_rule72_explain_text_1",
+          "type": "text",
+          "position": {
+            "x": 1100,
+            "y": 350
+          },
+          "props": {
+            "content": "72 ÷ 수익률 = 원금 2배 기간",
+            "fontSize": 48,
+            "fontWeight": "bold",
+            "color": "#FFD700",
+            "align": "center",
+            "maxWidth": 800
+          },
+          "animation": {
+            "enter": {
+              "type": "fadeInUp",
+              "durationMs": 400
+            }
+          }
+        },
+        {
+          "id": "scene_18_rule72_explain_shape_1",
+          "type": "shape",
+          "position": {
+            "x": 960,
+            "y": 540
+          },
+          "props": {
+            "shape": "rectangle",
+            "color": "#FFD700",
+            "strokeWidth": 3,
+            "fill": false
+          },
+          "animation": {
+            "enter": {
+              "type": "drawLine",
+              "durationMs": 500
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "scene_19_rule72_example",
+      "startMs": 12740,
+      "endMs": 13240,
+      "background": "#1a1a2e",
+      "transition": {
+        "in": "fadeIn",
+        "out": "fadeOut",
+        "durationMs": 300
+      },
+      "objects": [
+        {
+          "id": "scene_19_rule72_example_stickman_1",
+          "type": "stickman",
+          "position": {
+            "x": 300,
+            "y": 600
+          },
+          "props": {
+            "color": "#FFFFFF",
+            "lineWidth": 3,
+            "expression": "neutral",
+            "pose": "standing",
+            "motion": "typing"
+          },
+          "animation": {
+            "enter": {
+              "type": "fadeIn",
+              "durationMs": 500
+            },
+            "during": {
+              "type": "typing",
+              "loop": true
+            }
+          }
+        },
+        {
+          "id": "scene_19_rule72_example_text_1",
+          "type": "text",
+          "position": {
+            "x": 960,
+            "y": 250
+          },
+          "props": {
+            "content": "연 6% → 72÷6 = 12년",
+            "fontSize": 48,
+            "fontWeight": "bold",
+            "color": "#FFD700",
+            "align": "center",
+            "maxWidth": 800
+          },
+          "animation": {
+            "enter": {
+              "type": "fadeInUp",
+              "durationMs": 400
+            }
+          }
+        },
+        {
+          "id": "scene_19_rule72_example_counter_1",
+          "type": "counter",
+          "position": {
+            "x": 960,
+            "y": 450
+          },
+          "props": {
+            "from": 1000000,
+            "to": 2000000,
+            "format": "currency_krw",
+            "fontSize": 64,
+            "color": "#FFFFFF"
+          },
+          "animation": {
+            "enter": {
+              "type": "fadeIn",
+              "durationMs": 300
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "scene_20_real_example_intro",
+      "startMs": 13240,
+      "endMs": 13740,
+      "background": "#1a1a2e",
+      "transition": {
+        "in": "fadeIn",
+        "out": "fadeOut",
+        "durationMs": 300
+      },
+      "objects": [
+        {
+          "id": "scene_20_real_example_intro_stickman_1",
+          "type": "stickman",
+          "position": {
+            "x": 300,
+            "y": 600
+          },
+          "props": {
+            "color": "#FFFFFF",
+            "lineWidth": 3,
+            "expression": "neutral",
+            "pose": "explaining",
+            "motion": "breathing"
+          },
+          "animation": {
+            "enter": {
+              "type": "fadeIn",
+              "durationMs": 500
+            },
+            "during": {
+              "type": "breathing",
+              "loop": true
+            }
+          }
+        },
+        {
+          "id": "scene_20_real_example_intro_text_1",
+          "type": "text",
+          "position": {
+            "x": 960,
+            "y": 500
+          },
+          "props": {
+            "content": "실전 예시 💼",
+            "fontSize": 48,
+            "fontWeight": "bold",
+            "color": "#FFD700",
+            "align": "center",
+            "maxWidth": 800
+          },
+          "animation": {
+            "enter": {
+              "type": "fadeInUp",
+              "durationMs": 400
+            }
+          }
+        },
+        {
+          "id": "scene_20_real_example_intro_icon_1",
+          "type": "icon",
+          "position": {
+            "x": 960,
+            "y": 300
+          },
+          "props": {
+            "name": "piggy-bank",
+            "size": 80,
+            "color": "#FFFFFF"
+          },
+          "animation": {
+            "enter": {
+              "type": "popIn",
+              "durationMs": 400
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "scene_21_real_example_20s",
+      "startMs": 13740,
+      "endMs": 14120,
+      "background": "#1a1a2e",
+      "transition": {
+        "in": "fadeIn",
+        "out": "fadeOut",
+        "durationMs": 300
+      },
+      "objects": [
+        {
+          "id": "scene_21_real_example_20s_stickman_1",
+          "type": "stickman",
+          "position": {
+            "x": 300,
+            "y": 600
+          },
+          "props": {
+            "color": "#FFFFFF",
+            "lineWidth": 3,
+            "expression": "happy",
+            "pose": "standing",
+            "targetPose": "thumbsUp",
+            "motion": "breathing"
+          },
+          "animation": {
+            "enter": {
+              "type": "poseTransition",
+              "durationMs": 400
+            },
+            "exit": {
+              "type": "poseTransition",
+              "durationMs": 300
+            }
+          }
+        },
+        {
+          "id": "scene_21_real_example_20s_text_1",
+          "type": "text",
+          "position": {
+            "x": 960,
+            "y": 500
+          },
+          "props": {
+            "content": "25세, 매월 30만원 투자 시작",
+            "fontSize": 48,
+            "fontWeight": "bold",
+            "color": "#FFD700",
+            "align": "center",
+            "maxWidth": 800
+          },
+          "animation": {
+            "enter": {
+              "type": "fadeInUp",
+              "durationMs": 400
+            }
+          }
+        },
+        {
+          "id": "scene_21_real_example_20s_icon_1",
+          "type": "icon",
+          "position": {
+            "x": 960,
+            "y": 300
+          },
+          "props": {
+            "name": "piggy-bank",
+            "size": 80,
+            "color": "#FFFFFF"
+          },
+          "animation": {
+            "enter": {
+              "type": "popIn",
+              "durationMs": 400
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "scene_22_real_example_result",
+      "startMs": 14120,
+      "endMs": 14820,
+      "background": "#1a1a2e",
+      "transition": {
+        "in": "fadeIn",
+        "out": "fadeOut",
+        "durationMs": 300
+      },
+      "objects": [
+        {
+          "id": "scene_22_real_example_result_stickman_1",
+          "type": "stickman",
+          "position": {
+            "x": 300,
+            "y": 600
+          },
+          "props": {
+            "color": "#FFFFFF",
+            "lineWidth": 3,
+            "expression": "surprised",
+            "pose": "standing",
+            "motion": "jumping"
+          },
+          "animation": {
+            "enter": {
+              "type": "fadeIn",
+              "durationMs": 500
+            },
+            "during": {
+              "type": "jumping",
+              "loop": true
+            }
+          }
+        },
+        {
+          "id": "scene_22_real_example_result_text_1",
+          "type": "text",
+          "position": {
+            "x": 960,
+            "y": 250
+          },
+          "props": {
+            "content": "60세 → 약 3억 6천만원!",
+            "fontSize": 48,
+            "fontWeight": "bold",
+            "color": "#FFD700",
+            "align": "center",
+            "maxWidth": 800
+          },
+          "animation": {
+            "enter": {
+              "type": "fadeInUp",
+              "durationMs": 400
+            }
+          }
+        },
+        {
+          "id": "scene_22_real_example_result_counter_1",
+          "type": "counter",
+          "position": {
+            "x": 960,
+            "y": 450
+          },
+          "props": {
+            "from": 0,
+            "to": 360000000,
+            "format": "currency_krw",
+            "fontSize": 64,
+            "color": "#FFFFFF"
+          },
+          "animation": {
+            "enter": {
+              "type": "fadeIn",
+              "durationMs": 300
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "scene_23_late_start_compare",
+      "startMs": 14820,
+      "endMs": 15720,
+      "background": "#1a1a2e",
+      "transition": {
+        "in": "fadeIn",
+        "out": "fadeOut",
+        "durationMs": 300
+      },
+      "objects": [
+        {
+          "id": "scene_23_late_start_compare_stickman_1",
+          "type": "stickman",
+          "position": {
+            "x": 300,
+            "y": 600
+          },
+          "props": {
+            "color": "#FFFFFF",
+            "lineWidth": 3,
+            "expression": "sad",
+            "pose": "standing",
+            "motion": "nervous"
+          },
+          "animation": {
+            "enter": {
+              "type": "fadeIn",
+              "durationMs": 500
+            },
+            "during": {
+              "type": "nervous",
+              "loop": true
+            }
+          }
+        },
+        {
+          "id": "scene_23_late_start_compare_text_1",
+          "type": "text",
+          "position": {
+            "x": 960,
+            "y": 250
+          },
+          "props": {
+            "content": "35세 시작 → 약 1억 7천만원",
+            "fontSize": 48,
+            "fontWeight": "bold",
+            "color": "#FFD700",
+            "align": "center",
+            "maxWidth": 800
+          },
+          "animation": {
+            "enter": {
+              "type": "fadeInUp",
+              "durationMs": 400
+            }
+          }
+        },
+        {
+          "id": "scene_23_late_start_compare_counter_1",
+          "type": "counter",
+          "position": {
+            "x": 960,
+            "y": 450
+          },
+          "props": {
+            "from": 0,
+            "to": 170000000,
+            "format": "currency_krw",
+            "fontSize": 64,
+            "color": "#FFFFFF"
+          },
+          "animation": {
+            "enter": {
+              "type": "fadeIn",
+              "durationMs": 300
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "scene_24_early_message",
+      "startMs": 16400,
+      "endMs": 17040,
+      "background": "#1a1a2e",
+      "transition": {
+        "in": "fadeIn",
+        "out": "fadeOut",
+        "durationMs": 300
+      },
+      "objects": [
+        {
+          "id": "scene_24_early_message_stickman_1",
+          "type": "stickman",
+          "position": {
+            "x": 350,
+            "y": 600
+          },
+          "props": {
+            "color": "#FFFFFF",
+            "lineWidth": 3,
+            "expression": "surprised",
+            "pose": "standing",
+            "targetPose": "pointing_right",
+            "motion": "breathing"
+          },
+          "animation": {
+            "enter": {
+              "type": "poseTransition",
+              "durationMs": 400
+            },
+            "exit": {
+              "type": "poseTransition",
+              "durationMs": 300
+            }
+          }
+        },
+        {
+          "id": "scene_24_early_message_text_1",
+          "type": "text",
+          "position": {
+            "x": 1100,
+            "y": 350
+          },
+          "props": {
+            "content": "10년 차이 = 2억원 차이!",
+            "fontSize": 48,
+            "fontWeight": "bold",
+            "color": "#FFD700",
+            "align": "center",
+            "maxWidth": 800
+          },
+          "animation": {
+            "enter": {
+              "type": "fadeInUp",
+              "durationMs": 400
+            }
+          }
+        },
+        {
+          "id": "scene_24_early_message_shape_1",
+          "type": "shape",
+          "position": {
+            "x": 960,
+            "y": 540
+          },
+          "props": {
+            "shape": "arrow",
+            "color": "#FF5722",
+            "strokeWidth": 3,
+            "fill": false
+          },
+          "animation": {
+            "enter": {
+              "type": "drawLine",
+              "durationMs": 500
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "scene_25_warning_fee",
+      "startMs": 17040,
+      "endMs": 17520,
+      "background": "#1a1a2e",
+      "transition": {
+        "in": "fadeIn",
+        "out": "fadeOut",
+        "durationMs": 300
+      },
+      "objects": [
+        {
+          "id": "scene_25_warning_fee_stickman_1",
+          "type": "stickman",
+          "position": {
+            "x": 300,
+            "y": 600
+          },
+          "props": {
+            "color": "#FFFFFF",
+            "lineWidth": 3,
+            "expression": "sad",
+            "pose": "standing",
+            "motion": "headShake"
+          },
+          "animation": {
+            "enter": {
+              "type": "fadeIn",
+              "durationMs": 500
+            },
+            "during": {
+              "type": "headShake",
+              "loop": true
+            }
+          }
+        },
+        {
+          "id": "scene_25_warning_fee_text_1",
+          "type": "text",
+          "position": {
+            "x": 960,
+            "y": 500
+          },
+          "props": {
+            "content": "⚠️ 수수료와 인플레이션 주의",
+            "fontSize": 48,
+            "fontWeight": "bold",
+            "color": "#FFD700",
+            "align": "center",
+            "maxWidth": 800
+          },
+          "animation": {
+            "enter": {
+              "type": "fadeInUp",
+              "durationMs": 400
+            }
+          }
+        },
+        {
+          "id": "scene_25_warning_fee_icon_1",
+          "type": "icon",
+          "position": {
+            "x": 960,
+            "y": 300
+          },
+          "props": {
+            "name": "warning",
+            "size": 80,
+            "color": "#FFFFFF"
+          },
+          "animation": {
+            "enter": {
+              "type": "popIn",
+              "durationMs": 400
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "scene_26_warning_detail",
+      "startMs": 17520,
+      "endMs": 17900,
+      "background": "#1a1a2e",
+      "transition": {
+        "in": "fadeIn",
+        "out": "fadeOut",
+        "durationMs": 300
+      },
+      "objects": [
+        {
+          "id": "scene_26_warning_detail_stickman_1",
+          "type": "stickman",
+          "position": {
+            "x": 350,
+            "y": 600
+          },
+          "props": {
+            "color": "#FFFFFF",
+            "lineWidth": 3,
+            "expression": "neutral",
+            "pose": "explaining",
+            "motion": "breathing"
+          },
+          "animation": {
+            "enter": {
+              "type": "fadeIn",
+              "durationMs": 500
+            },
+            "during": {
+              "type": "breathing",
+              "loop": true
+            }
+          }
+        },
+        {
+          "id": "scene_26_warning_detail_text_1",
+          "type": "text",
+          "position": {
+            "x": 1100,
+            "y": 350
+          },
+          "props": {
+            "content": "수수료 1% 차이 → 수천만원 손해",
+            "fontSize": 48,
+            "fontWeight": "bold",
+            "color": "#FFD700",
+            "align": "center",
+            "maxWidth": 800
+          },
+          "animation": {
+            "enter": {
+              "type": "fadeInUp",
+              "durationMs": 400
+            }
+          }
+        },
+        {
+          "id": "scene_26_warning_detail_shape_1",
+          "type": "shape",
+          "position": {
+            "x": 960,
+            "y": 540
+          },
+          "props": {
+            "shape": "line",
+            "color": "#F44336",
+            "strokeWidth": 3,
+            "fill": false
+          },
+          "animation": {
+            "enter": {
+              "type": "drawLine",
+              "durationMs": 500
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "scene_27_tip_reinvest",
+      "startMs": 17900,
+      "endMs": 18360,
+      "background": "#1a1a2e",
+      "transition": {
+        "in": "fadeIn",
+        "out": "fadeOut",
+        "durationMs": 300
+      },
+      "objects": [
+        {
+          "id": "scene_27_tip_reinvest_stickman_1",
+          "type": "stickman",
+          "position": {
+            "x": 300,
+            "y": 600
+          },
+          "props": {
+            "color": "#FFFFFF",
+            "lineWidth": 3,
+            "expression": "happy",
+            "pose": "standing",
+            "motion": "nodding"
+          },
+          "animation": {
+            "enter": {
+              "type": "fadeIn",
+              "durationMs": 500
+            },
+            "during": {
+              "type": "nodding",
+              "loop": true
+            }
+          }
+        },
+        {
+          "id": "scene_27_tip_reinvest_text_1",
+          "type": "text",
+          "position": {
+            "x": 960,
+            "y": 500
+          },
+          "props": {
+            "content": "이자 재투자가 핵심!",
+            "fontSize": 48,
+            "fontWeight": "bold",
+            "color": "#FFD700",
+            "align": "center",
+            "maxWidth": 800
+          },
+          "animation": {
+            "enter": {
+              "type": "fadeInUp",
+              "durationMs": 400
+            }
+          }
+        },
+        {
+          "id": "scene_27_tip_reinvest_icon_1",
+          "type": "icon",
+          "position": {
+            "x": 960,
+            "y": 300
+          },
+          "props": {
+            "name": "chart-up",
+            "size": 80,
+            "color": "#FFFFFF"
+          },
+          "animation": {
+            "enter": {
+              "type": "popIn",
+              "durationMs": 400
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "scene_28_tip_consistent",
+      "startMs": 18360,
+      "endMs": 18740,
+      "background": "#1a1a2e",
+      "transition": {
+        "in": "fadeIn",
+        "out": "fadeOut",
+        "durationMs": 300
+      },
+      "objects": [
+        {
+          "id": "scene_28_tip_consistent_stickman_1",
+          "type": "stickman",
+          "position": {
+            "x": 300,
+            "y": 600
+          },
+          "props": {
+            "color": "#FFFFFF",
+            "lineWidth": 3,
+            "expression": "happy",
+            "pose": "standing",
+            "motion": "walkCycle"
+          },
+          "animation": {
+            "enter": {
+              "type": "fadeIn",
+              "durationMs": 500
+            },
+            "during": {
+              "type": "walkCycle",
+              "loop": true
+            }
+          }
+        },
+        {
+          "id": "scene_28_tip_consistent_text_1",
+          "type": "text",
+          "position": {
+            "x": 960,
+            "y": 500
+          },
+          "props": {
+            "content": "꾸준함이 복리의 연료 ⛽",
+            "fontSize": 48,
+            "fontWeight": "bold",
+            "color": "#FFD700",
+            "align": "center",
+            "maxWidth": 800
+          },
+          "animation": {
+            "enter": {
+              "type": "fadeInUp",
+              "durationMs": 400
+            }
+          }
+        },
+        {
+          "id": "scene_28_tip_consistent_icon_1",
+          "type": "icon",
+          "position": {
+            "x": 960,
+            "y": 300
+          },
+          "props": {
+            "name": "piggy-bank",
+            "size": 80,
+            "color": "#FFFFFF"
+          },
+          "animation": {
+            "enter": {
+              "type": "popIn",
+              "durationMs": 400
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "scene_29_einstein_quote",
+      "startMs": 18740,
+      "endMs": 19440,
+      "background": "#1a1a2e",
+      "transition": {
+        "in": "fadeIn",
+        "out": "fadeOut",
+        "durationMs": 300
+      },
+      "objects": [
+        {
+          "id": "scene_29_einstein_quote_stickman_1",
+          "type": "stickman",
+          "position": {
+            "x": 350,
+            "y": 600
+          },
+          "props": {
+            "color": "#FFFFFF",
+            "lineWidth": 3,
+            "expression": "thinking",
+            "pose": "thinking",
+            "motion": "breathing"
+          },
+          "animation": {
+            "enter": {
+              "type": "fadeIn",
+              "durationMs": 500
+            },
+            "during": {
+              "type": "breathing",
+              "loop": true
+            }
+          }
+        },
+        {
+          "id": "scene_29_einstein_quote_text_1",
+          "type": "text",
+          "position": {
+            "x": 1100,
+            "y": 350
+          },
+          "props": {
+            "content": "복리는 세계 8번째 불가사의",
+            "fontSize": 48,
+            "fontWeight": "bold",
+            "color": "#FFD700",
+            "align": "center",
+            "maxWidth": 800
+          },
+          "animation": {
+            "enter": {
+              "type": "fadeInUp",
+              "durationMs": 400
+            }
+          }
+        },
+        {
+          "id": "scene_29_einstein_quote_shape_1",
+          "type": "shape",
+          "position": {
+            "x": 960,
+            "y": 540
+          },
+          "props": {
+            "shape": "rectangle",
+            "color": "#FFD700",
+            "strokeWidth": 3,
+            "fill": false
+          },
+          "animation": {
+            "enter": {
+              "type": "drawLine",
+              "durationMs": 500
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "scene_30_conclusion_message",
+      "startMs": 19440,
+      "endMs": 19940,
+      "background": "#1a1a2e",
+      "transition": {
+        "in": "fadeIn",
+        "out": "fadeOut",
+        "durationMs": 300
+      },
+      "objects": [
+        {
+          "id": "scene_30_conclusion_message_stickman_1",
+          "type": "stickman",
+          "position": {
+            "x": 300,
+            "y": 600
+          },
+          "props": {
+            "color": "#FFFFFF",
+            "lineWidth": 3,
+            "expression": "happy",
+            "pose": "celebrating",
+            "motion": "breathing"
+          },
+          "animation": {
+            "enter": {
+              "type": "fadeIn",
+              "durationMs": 500
+            },
+            "during": {
+              "type": "breathing",
+              "loop": true
+            }
+          }
+        },
+        {
+          "id": "scene_30_conclusion_message_text_1",
+          "type": "text",
+          "position": {
+            "x": 960,
+            "y": 500
+          },
+          "props": {
+            "content": "시간 × 복리 = 부의 마법 🪄",
+            "fontSize": 48,
+            "fontWeight": "bold",
+            "color": "#FFD700",
+            "align": "center",
+            "maxWidth": 800
+          },
+          "animation": {
+            "enter": {
+              "type": "fadeInUp",
+              "durationMs": 400
+            }
+          }
+        },
+        {
+          "id": "scene_30_conclusion_message_icon_1",
+          "type": "icon",
+          "position": {
+            "x": 960,
+            "y": 300
+          },
+          "props": {
+            "name": "chart-up",
+            "size": 80,
+            "color": "#FFFFFF"
+          },
+          "animation": {
+            "enter": {
+              "type": "popIn",
+              "durationMs": 400
+            }
+          }
+        },
+        {
+          "id": "scene_30_conclusion_message_shape_1",
+          "type": "shape",
+          "position": {
+            "x": 960,
+            "y": 540
+          },
+          "props": {
+            "shape": "arrow",
+            "color": "#FFD700",
+            "strokeWidth": 3,
+            "fill": false
+          },
+          "animation": {
+            "enter": {
+              "type": "drawLine",
+              "durationMs": 500
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "scene_31_closing",
+      "startMs": 19940,
+      "endMs": 20240,
+      "background": "#1a1a2e",
+      "transition": {
+        "in": "fadeIn",
+        "out": "fadeOut",
+        "durationMs": 300
+      },
+      "objects": [
+        {
+          "id": "scene_31_closing_stickman_1",
+          "type": "stickman",
+          "position": {
+            "x": 300,
+            "y": 600
+          },
+          "props": {
+            "color": "#FFFFFF",
+            "lineWidth": 3,
+            "expression": "happy",
+            "pose": "standing",
+            "targetPose": "waving",
+            "motion": "breathing"
+          },
+          "animation": {
+            "enter": {
+              "type": "poseTransition",
+              "durationMs": 400
+            },
+            "exit": {
+              "type": "poseTransition",
+              "durationMs": 300
+            }
+          }
+        },
+        {
+          "id": "scene_31_closing_text_1",
+          "type": "text",
+          "position": {
+            "x": 960,
+            "y": 500
+          },
+          "props": {
+            "content": "오늘부터 시작하세요! 🚀",
+            "fontSize": 48,
+            "fontWeight": "bold",
+            "color": "#FFD700",
+            "align": "center",
+            "maxWidth": 800
+          },
+          "animation": {
+            "enter": {
+              "type": "fadeInUp",
+              "durationMs": 400
+            }
+          }
+        },
+        {
+          "id": "scene_31_closing_icon_1",
+          "type": "icon",
+          "position": {
+            "x": 960,
+            "y": 300
+          },
+          "props": {
+            "name": "lightbulb",
+            "size": 80,
+            "color": "#FFFFFF"
+          },
+          "animation": {
+            "enter": {
+              "type": "popIn",
+              "durationMs": 400
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

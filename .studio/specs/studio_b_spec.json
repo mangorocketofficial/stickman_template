@@ -1,0 +1,56 @@
+{
+  "studio_id": "studio_b",
+  "theme": "동작 모션",
+  "branch": "feat/motion-action",
+  "worktree_path": "C:/Users/User/Desktop/studio-b",
+  "target_file": "remotion/src/components/StickMan/motions.ts",
+  "motions": [
+    {
+      "name": "jumping",
+      "description": "점프 모션 - 준비-점프-착지 사이클",
+      "cycleDurationMs": 600,
+      "affectedJoints": ["torso", "upperLegL", "lowerLegL", "upperLegR", "lowerLegR", "upperArmL", "upperArmR"],
+      "keyframes": [
+        { "progress": 0, "overrides": { "torso": 5, "upperLegL": 30, "lowerLegL": -60, "upperLegR": 30, "lowerLegR": -60, "upperArmL": 20, "upperArmR": -20 } },
+        { "progress": 0.3, "overrides": { "torso": -10, "upperLegL": -20, "lowerLegL": 0, "upperLegR": -20, "lowerLegR": 0, "upperArmL": -60, "upperArmR": 60 } },
+        { "progress": 0.6, "overrides": { "torso": -5, "upperLegL": 0, "lowerLegL": 0, "upperLegR": 0, "lowerLegR": 0, "upperArmL": -30, "upperArmR": 30 } },
+        { "progress": 1, "overrides": { "torso": 5, "upperLegL": 30, "lowerLegL": -60, "upperLegR": 30, "lowerLegR": -60, "upperArmL": 20, "upperArmR": -20 } }
+      ]
+    },
+    {
+      "name": "running",
+      "description": "달리기 모션 - walkCycle보다 빠르고 역동적",
+      "cycleDurationMs": 400,
+      "affectedJoints": ["torso", "upperArmL", "upperArmR", "upperLegL", "lowerLegL", "upperLegR", "lowerLegR"],
+      "keyframes": [
+        { "progress": 0, "overrides": { "torso": -10, "upperArmL": 45, "upperArmR": -45, "upperLegL": -35, "lowerLegL": 20, "upperLegR": 35, "lowerLegR": -50 } },
+        { "progress": 0.5, "overrides": { "torso": -10, "upperArmL": -45, "upperArmR": 45, "upperLegL": 35, "lowerLegL": -50, "upperLegR": -35, "lowerLegR": 20 } },
+        { "progress": 1, "overrides": { "torso": -10, "upperArmL": 45, "upperArmR": -45, "upperLegL": -35, "lowerLegL": 20, "upperLegR": 35, "lowerLegR": -50 } }
+      ]
+    },
+    {
+      "name": "clapping",
+      "description": "박수 모션 - 양손이 앞에서 만남",
+      "cycleDurationMs": 500,
+      "affectedJoints": ["upperArmL", "lowerArmL", "upperArmR", "lowerArmR"],
+      "keyframes": [
+        { "progress": 0, "overrides": { "upperArmL": 60, "lowerArmL": -90, "upperArmR": -60, "lowerArmR": 90 } },
+        { "progress": 0.4, "overrides": { "upperArmL": 30, "lowerArmL": -45, "upperArmR": -30, "lowerArmR": 45 } },
+        { "progress": 1, "overrides": { "upperArmL": 60, "lowerArmL": -90, "upperArmR": -60, "lowerArmR": 90 } }
+      ]
+    },
+    {
+      "name": "typing",
+      "description": "타이핑 모션 - 손가락 대신 팔 움직임으로 표현",
+      "cycleDurationMs": 300,
+      "affectedJoints": ["upperArmL", "lowerArmL", "upperArmR", "lowerArmR"],
+      "keyframes": [
+        { "progress": 0, "overrides": { "upperArmL": 30, "lowerArmL": -100, "upperArmR": -30, "lowerArmR": 100 } },
+        { "progress": 0.25, "overrides": { "upperArmL": 35, "lowerArmL": -95, "upperArmR": -25, "lowerArmR": 105 } },
+        { "progress": 0.5, "overrides": { "upperArmL": 25, "lowerArmL": -105, "upperArmR": -35, "lowerArmR": 95 } },
+        { "progress": 0.75, "overrides": { "upperArmL": 30, "lowerArmL": -100, "upperArmR": -30, "lowerArmR": 100 } },
+        { "progress": 1, "overrides": { "upperArmL": 30, "lowerArmL": -100, "upperArmR": -30, "lowerArmR": 100 } }
+      ]
+    }
+  ]
+}
