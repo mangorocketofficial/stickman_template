@@ -164,6 +164,210 @@ export const POSES: Record<string, Pose> = {
     upperLegR: -5,
     lowerLegR: 0,
   },
+
+  // ============================================
+  // MVP 포즈 (4개)
+  // ============================================
+
+  // Pointing up - right arm raised pointing upward
+  pointing_up: {
+    torso: 0,
+    head: -15,          // looking up
+    upperArmL: 20,
+    lowerArmL: 0,
+    upperArmR: -150,    // arm raised high
+    lowerArmR: -20,     // forearm slightly bent upward
+    upperLegL: 5,
+    lowerLegL: 0,
+    upperLegR: -5,
+    lowerLegR: 0,
+  },
+
+  // Depressed - slouched, dejected posture
+  depressed: {
+    torso: 15,          // slouched forward
+    head: 25,           // head down
+    upperArmL: 10,      // arms hanging
+    lowerArmL: 20,
+    upperArmR: -10,
+    lowerArmR: -20,
+    upperLegL: 10,
+    lowerLegL: 5,
+    upperLegR: -10,
+    lowerLegR: -5,
+  },
+
+  // Surprised pose - startled full body reaction
+  surprised_pose: {
+    torso: -5,          // slight lean back
+    head: 0,
+    upperArmL: 60,      // arms up in surprise
+    lowerArmL: -70,
+    upperArmR: -60,
+    lowerArmR: 70,
+    upperLegL: 15,      // legs apart
+    lowerLegL: 0,
+    upperLegR: -15,
+    lowerLegR: 0,
+  },
+
+  // Arms crossed - defensive/confident stance
+  arms_crossed: {
+    torso: 0,
+    head: 0,
+    upperArmL: 50,      // arms folded across chest
+    lowerArmL: -130,
+    upperArmR: -50,
+    lowerArmR: 130,
+    upperLegL: 5,
+    lowerLegL: 0,
+    upperLegR: -5,
+    lowerLegR: 0,
+  },
+
+  // ============================================
+  // V2 포즈 (10개)
+  // ============================================
+
+  // Leaning - leaning against something
+  leaning: {
+    torso: -15,         // leaning to the right
+    head: -10,
+    upperArmL: 30,
+    lowerArmL: 0,
+    upperArmR: -90,     // arm resting
+    lowerArmR: -90,
+    upperLegL: 10,
+    lowerLegL: 0,
+    upperLegR: -20,     // leg crossed
+    lowerLegR: 0,
+  },
+
+  // Crouching - squatting position
+  crouching: {
+    torso: 20,          // bent forward
+    head: 0,
+    upperArmL: 40,
+    lowerArmL: -90,
+    upperArmR: -40,
+    lowerArmR: 90,
+    upperLegL: 120,     // legs bent deeply
+    lowerLegL: -130,
+    upperLegR: -120,
+    lowerLegR: 130,
+  },
+
+  // Stop - hand up in stop gesture
+  stop: {
+    torso: 0,
+    head: 0,
+    upperArmL: 20,
+    lowerArmL: 0,
+    upperArmR: -90,     // arm extended horizontally
+    lowerArmR: -90,     // forearm up (palm out)
+    upperLegL: 5,
+    lowerLegL: 0,
+    upperLegR: -5,
+    lowerLegR: 0,
+  },
+
+  // Facepalm - hand on face in frustration
+  facepalm: {
+    torso: 10,          // slight forward lean
+    head: 15,           // head tilted down
+    upperArmL: 20,
+    lowerArmL: 0,
+    upperArmR: -80,     // arm raised to face
+    lowerArmR: -150,    // hand covering face
+    upperLegL: 5,
+    lowerLegL: 0,
+    upperLegR: -5,
+    lowerLegR: 0,
+  },
+
+  // Hand on hip - confident/impatient stance
+  hand_on_hip: {
+    torso: -3,
+    head: -5,
+    upperArmL: 60,      // hand on hip
+    lowerArmL: -120,
+    upperArmR: -20,
+    lowerArmR: 0,
+    upperLegL: 8,
+    lowerLegL: 0,
+    upperLegR: -8,
+    lowerLegR: 0,
+  },
+
+  // Raising hand - hand raised like asking a question
+  raising_hand: {
+    torso: 0,
+    head: 5,
+    upperArmL: 20,
+    lowerArmL: 0,
+    upperArmR: -160,    // arm raised high
+    lowerArmR: -30,     // forearm bent
+    upperLegL: 5,
+    lowerLegL: 0,
+    upperLegR: -5,
+    lowerLegR: 0,
+  },
+
+  // Confident - chest out, powerful stance
+  confident: {
+    torso: -5,          // chest out
+    head: -5,
+    upperArmL: 40,      // hands on hips
+    lowerArmL: -100,
+    upperArmR: -40,
+    lowerArmR: 100,
+    upperLegL: 15,      // wide stance
+    lowerLegL: 0,
+    upperLegR: -15,
+    lowerLegR: 0,
+  },
+
+  // Scared - cowering, defensive posture
+  scared: {
+    torso: 15,          // hunched
+    head: 20,           // head ducked
+    upperArmL: 80,      // arms up defensively
+    lowerArmL: -140,
+    upperArmR: -80,
+    lowerArmR: 140,
+    upperLegL: 20,      // legs slightly bent
+    lowerLegL: -15,
+    upperLegR: -20,
+    lowerLegR: 15,
+  },
+
+  // Writing - posed as if writing on paper
+  writing: {
+    torso: 10,          // leaning forward
+    head: 20,           // looking down
+    upperArmL: 40,      // holding paper
+    lowerArmL: -80,
+    upperArmR: -50,     // writing hand
+    lowerArmR: -110,
+    upperLegL: 5,
+    lowerLegL: 0,
+    upperLegR: -5,
+    lowerLegR: 0,
+  },
+
+  // Presenting - one arm extended presenting something
+  presenting: {
+    torso: -5,
+    head: -10,          // looking toward presented item
+    upperArmL: 90,      // arm extended to side
+    lowerArmL: -30,     // slight bend
+    upperArmR: -30,
+    lowerArmR: -20,
+    upperLegL: 10,
+    lowerLegL: 0,
+    upperLegR: -10,
+    lowerLegR: 0,
+  },
 };
 
 // Default pose when none specified

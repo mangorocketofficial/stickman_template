@@ -218,6 +218,113 @@ export const Shape: React.FC<AnimatedShapeProps> = ({
         );
       }
 
+      case 'curved_arrow': {
+        // Curved arrow from bottom-left to top-right
+        const x1 = fromPoint ? fromPoint.x : 0;
+        const y1 = fromPoint ? fromPoint.y : height;
+        const x2 = toPoint ? toPoint.x : width;
+        const y2 = toPoint ? toPoint.y : 0;
+
+        // Control point for curve (offset to create arc)
+        const midX = (x1 + x2) / 2;
+        const midY = (y1 + y2) / 2;
+        const curveOffset = Math.min(width, height) * 0.4;
+        const ctrlX = midX - curveOffset;
+        const ctrlY = midY - curveOffset;
+
+        // Arrow head
+        const headLength = 15;
+        const headAngle = Math.PI / 6;
+        // Calculate tangent angle at end of curve
+        const tangentAngle = Math.atan2(y2 - ctrlY, x2 - ctrlX);
+
+        // Interpolated end point for draw animation
+        const t = drawProgress;
+        const curveEndX = strokeWidth + (1-t)*(1-t)*x1 + 2*(1-t)*t*ctrlX + t*t*x2;
+        const curveEndY = strokeWidth + (1-t)*(1-t)*y1 + 2*(1-t)*t*ctrlY + t*t*y2;
+
+        const arrowX1 = strokeWidth + x2 - headLength * Math.cos(tangentAngle - headAngle);
+        const arrowY1 = strokeWidth + y2 - headLength * Math.sin(tangentAngle - headAngle);
+        const arrowX2 = strokeWidth + x2 - headLength * Math.cos(tangentAngle + headAngle);
+        const arrowY2 = strokeWidth + y2 - headLength * Math.sin(tangentAngle + headAngle);
+
+        // Build path with animation
+        const pathLength = 200; // approximate
+        const dashOffset = pathLength * (1 - drawProgress);
+
+        return (
+          <svg width={svgDims.width} height={svgDims.height} style={{ overflow: 'visible' }}>
+            <path
+              d={`M ${strokeWidth + x1} ${strokeWidth + y1} Q ${strokeWidth + ctrlX} ${strokeWidth + ctrlY} ${strokeWidth + x2} ${strokeWidth + y2}`}
+              stroke={color}
+              strokeWidth={strokeWidth}
+              strokeLinecap="round"
+              fill="none"
+              strokeDasharray={pathLength}
+              strokeDashoffset={dashOffset}
+            />
+            {drawProgress > 0.85 && (
+              <>
+                <line
+                  x1={strokeWidth + x2}
+                  y1={strokeWidth + y2}
+                  x2={arrowX1}
+                  y2={arrowY1}
+                  stroke={color}
+                  strokeWidth={strokeWidth}
+                  strokeLinecap="round"
+                />
+                <line
+                  x1={strokeWidth + x2}
+                  y1={strokeWidth + y2}
+                  x2={arrowX2}
+                  y2={arrowY2}
+                  stroke={color}
+                  strokeWidth={strokeWidth}
+                  strokeLinecap="round"
+                />
+              </>
+            )}
+          </svg>
+        );
+      }
+
+      case 'bracket': {
+        // Curly brace / bracket shape
+        // Default is left-facing bracket {
+        const bracketHeight = height;
+        const bracketWidth = width * 0.3;
+        const midY = bracketHeight / 2;
+
+        // Control points for bezier curves
+        const curveDepth = bracketWidth * 0.6;
+
+        const pathLength = bracketHeight * 2;
+        const dashOffset = pathLength * (1 - drawProgress);
+
+        return (
+          <svg width={width + strokeWidth * 2} height={height + strokeWidth * 2} style={{ overflow: 'visible' }}>
+            <path
+              d={`
+                M ${strokeWidth + bracketWidth} ${strokeWidth}
+                Q ${strokeWidth} ${strokeWidth} ${strokeWidth} ${strokeWidth + midY * 0.4}
+                L ${strokeWidth} ${strokeWidth + midY * 0.8}
+                Q ${strokeWidth - curveDepth} ${strokeWidth + midY} ${strokeWidth} ${strokeWidth + midY * 1.2}
+                L ${strokeWidth} ${strokeWidth + midY * 1.6}
+                Q ${strokeWidth} ${strokeWidth + bracketHeight} ${strokeWidth + bracketWidth} ${strokeWidth + bracketHeight}
+              `}
+              stroke={color}
+              strokeWidth={strokeWidth}
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              fill="none"
+              strokeDasharray={pathLength}
+              strokeDashoffset={dashOffset}
+            />
+          </svg>
+        );
+      }
+
       default:
         return null;
     }

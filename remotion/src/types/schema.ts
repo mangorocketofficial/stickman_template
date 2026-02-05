@@ -78,7 +78,7 @@ export interface IconProps {
 }
 
 export interface ShapeProps {
-  shape: "arrow" | "line" | "circle" | "rectangle";
+  shape: "arrow" | "line" | "circle" | "rectangle" | "curved_arrow" | "bracket";
   from?: { x: number; y: number };
   to?: { x: number; y: number };
   width?: number;
