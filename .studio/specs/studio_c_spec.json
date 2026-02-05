@@ -1,0 +1,57 @@
+{
+  "studio_id": "studio_c",
+  "theme": "제스처 모션",
+  "branch": "feat/motion-gesture",
+  "worktree_path": "C:/Users/User/Desktop/studio-c",
+  "target_file": "remotion/src/components/StickMan/motions.ts",
+  "motions": [
+    {
+      "name": "headShake",
+      "description": "고개 젓기 모션 - 좌우로 흔들며 '아니오' 표현",
+      "cycleDurationMs": 600,
+      "affectedJoints": ["head"],
+      "keyframes": [
+        { "progress": 0, "overrides": { "head": 0 } },
+        { "progress": 0.25, "overrides": { "head": -20 } },
+        { "progress": 0.75, "overrides": { "head": 20 } },
+        { "progress": 1, "overrides": { "head": 0 } }
+      ]
+    },
+    {
+      "name": "beckoning",
+      "description": "손짓 부르기 모션 - 손을 앞으로 구부려 부름",
+      "cycleDurationMs": 700,
+      "affectedJoints": ["upperArmR", "lowerArmR"],
+      "keyframes": [
+        { "progress": 0, "overrides": { "upperArmR": -70, "lowerArmR": -90 } },
+        { "progress": 0.3, "overrides": { "upperArmR": -70, "lowerArmR": -45 } },
+        { "progress": 0.6, "overrides": { "upperArmR": -70, "lowerArmR": -90 } },
+        { "progress": 1, "overrides": { "upperArmR": -70, "lowerArmR": -90 } }
+      ]
+    },
+    {
+      "name": "thumbsUp",
+      "description": "엄지 척 모션 - 팔을 들어올려 승인 표시",
+      "cycleDurationMs": 1000,
+      "affectedJoints": ["upperArmR", "lowerArmR"],
+      "keyframes": [
+        { "progress": 0, "overrides": { "upperArmR": 20, "lowerArmR": 0 } },
+        { "progress": 0.3, "overrides": { "upperArmR": -100, "lowerArmR": -30 } },
+        { "progress": 0.7, "overrides": { "upperArmR": -100, "lowerArmR": -30 } },
+        { "progress": 1, "overrides": { "upperArmR": 20, "lowerArmR": 0 } }
+      ]
+    },
+    {
+      "name": "pointing",
+      "description": "가리키기 모션 - 한 방향으로 손가락 찌르기",
+      "cycleDurationMs": 800,
+      "affectedJoints": ["upperArmR", "lowerArmR", "head"],
+      "keyframes": [
+        { "progress": 0, "overrides": { "upperArmR": -60, "lowerArmR": 0, "head": -10 } },
+        { "progress": 0.4, "overrides": { "upperArmR": -90, "lowerArmR": 0, "head": -15 } },
+        { "progress": 0.6, "overrides": { "upperArmR": -90, "lowerArmR": 0, "head": -15 } },
+        { "progress": 1, "overrides": { "upperArmR": -60, "lowerArmR": 0, "head": -10 } }
+      ]
+    }
+  ]
+}

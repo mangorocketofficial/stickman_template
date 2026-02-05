@@ -1,0 +1,28 @@
+{
+  "created_at": "2026-02-05T00:00:00Z",
+  "phase": "initialized",
+  "studios": {
+    "studio_a": {
+      "worktree_path": "C:/Users/User/Desktop/studio-a",
+      "branch": "feat/motion-emotion",
+      "theme": "감정 표현 모션",
+      "status": "pending",
+      "motions": ["laughing", "crying", "excited", "nervous"]
+    },
+    "studio_b": {
+      "worktree_path": "C:/Users/User/Desktop/studio-b",
+      "branch": "feat/motion-action",
+      "theme": "동작 모션",
+      "status": "pending",
+      "motions": ["jumping", "running", "clapping", "typing"]
+    },
+    "studio_c": {
+      "worktree_path": "C:/Users/User/Desktop/studio-c",
+      "branch": "feat/motion-gesture",
+      "theme": "제스처 모션",
+      "status": "pending",
+      "motions": ["headShake", "beckoning", "thumbsUp", "pointing"]
+    }
+  },
+  "merge_status": "pending"
+}

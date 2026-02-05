@@ -1,0 +1,54 @@
+{
+  "studio_id": "studio_a",
+  "theme": "감정 표현 모션",
+  "branch": "feat/motion-emotion",
+  "worktree_path": "C:/Users/User/Desktop/studio-a",
+  "target_file": "remotion/src/components/StickMan/motions.ts",
+  "motions": [
+    {
+      "name": "laughing",
+      "description": "웃음 모션 - 어깨와 몸통이 위아래로 흔들림",
+      "cycleDurationMs": 400,
+      "affectedJoints": ["torso", "head", "upperArmL", "upperArmR"],
+      "keyframes": [
+        { "progress": 0, "overrides": { "torso": 0, "head": 0, "upperArmL": 25, "upperArmR": -25 } },
+        { "progress": 0.5, "overrides": { "torso": -3, "head": -5, "upperArmL": 30, "upperArmR": -30 } },
+        { "progress": 1, "overrides": { "torso": 0, "head": 0, "upperArmL": 25, "upperArmR": -25 } }
+      ]
+    },
+    {
+      "name": "crying",
+      "description": "울음 모션 - 고개 숙이고 손으로 얼굴 가림",
+      "cycleDurationMs": 1500,
+      "affectedJoints": ["head", "torso", "upperArmL", "lowerArmL", "upperArmR", "lowerArmR"],
+      "keyframes": [
+        { "progress": 0, "overrides": { "head": 20, "torso": 5, "upperArmL": 60, "lowerArmL": -120, "upperArmR": -60, "lowerArmR": 120 } },
+        { "progress": 0.3, "overrides": { "head": 25, "torso": 8, "upperArmL": 65, "lowerArmL": -125, "upperArmR": -65, "lowerArmR": 125 } },
+        { "progress": 0.7, "overrides": { "head": 20, "torso": 5, "upperArmL": 60, "lowerArmL": -120, "upperArmR": -60, "lowerArmR": 120 } },
+        { "progress": 1, "overrides": { "head": 20, "torso": 5, "upperArmL": 60, "lowerArmL": -120, "upperArmR": -60, "lowerArmR": 120 } }
+      ]
+    },
+    {
+      "name": "excited",
+      "description": "흥분 모션 - 전신이 위아래로 점프하듯 움직임",
+      "cycleDurationMs": 300,
+      "affectedJoints": ["torso", "upperArmL", "upperArmR", "upperLegL", "upperLegR"],
+      "keyframes": [
+        { "progress": 0, "overrides": { "torso": 0, "upperArmL": -30, "upperArmR": 30, "upperLegL": 0, "upperLegR": 0 } },
+        { "progress": 0.5, "overrides": { "torso": -5, "upperArmL": -60, "upperArmR": 60, "upperLegL": 10, "upperLegR": 10 } },
+        { "progress": 1, "overrides": { "torso": 0, "upperArmL": -30, "upperArmR": 30, "upperLegL": 0, "upperLegR": 0 } }
+      ]
+    },
+    {
+      "name": "nervous",
+      "description": "불안 모션 - 손을 비비고 불안하게 움직임",
+      "cycleDurationMs": 800,
+      "affectedJoints": ["torso", "head", "upperArmL", "lowerArmL", "upperArmR", "lowerArmR"],
+      "keyframes": [
+        { "progress": 0, "overrides": { "torso": 2, "head": -5, "upperArmL": 40, "lowerArmL": -90, "upperArmR": -40, "lowerArmR": 90 } },
+        { "progress": 0.5, "overrides": { "torso": -2, "head": 5, "upperArmL": 45, "lowerArmL": -85, "upperArmR": -45, "lowerArmR": 85 } },
+        { "progress": 1, "overrides": { "torso": 2, "head": -5, "upperArmL": 40, "lowerArmL": -90, "upperArmR": -40, "lowerArmR": 90 } }
+      ]
+    }
+  ]
+}
