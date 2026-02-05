@@ -1,8 +1,8 @@
 // Expression definitions for StickMan face
 // All expressions use simple SVG primitives inside the head circle
 
-export type EyeStyle = 'dot' | 'circle' | 'closed' | 'wink';
-export type MouthStyle = 'line' | 'smile' | 'frown' | 'circle' | 'wavy';
+export type EyeStyle = 'dot' | 'circle' | 'closed' | 'wink' | 'narrow' | 'angry';
+export type MouthStyle = 'line' | 'smile' | 'frown' | 'circle' | 'wavy' | 'wide_smile' | 'angry';
 
 export interface Expression {
   leftEye: EyeStyle;
@@ -50,6 +50,37 @@ export const EXPRESSIONS: Record<string, Expression> = {
     leftEye: 'dot',
     rightEye: 'dot',
     mouth: 'wavy',
+  },
+
+  // ============================================
+  // L1 MVP ADDITIONS
+  // ============================================
+
+  // Excited - big circle eyes, wide smile
+  excited: {
+    leftEye: 'circle',
+    rightEye: 'circle',
+    mouth: 'wide_smile',
+    eyeSize: 1.8,
+    mouthSize: 1.2,
+  },
+
+  // Focused - narrow eyes, straight mouth
+  focused: {
+    leftEye: 'narrow',
+    rightEye: 'narrow',
+    mouth: 'line',
+    eyeSize: 1,
+    mouthSize: 0.8,
+  },
+
+  // Angry - angry eyes with eyebrows, angry mouth
+  angry: {
+    leftEye: 'angry',
+    rightEye: 'angry',
+    mouth: 'angry',
+    eyeSize: 1,
+    mouthSize: 0.9,
   },
 };
 
