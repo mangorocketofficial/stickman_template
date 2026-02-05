@@ -230,6 +230,152 @@ export const MOTIONS: Record<string, Motion> = {
     ],
   },
 
+  // ============================================
+  // L2 MVP ADDITIONS - LOOP MOTIONS
+  // ============================================
+
+  // Blinking motion - subtle head micro-movement with eye blink timing
+  // Note: Actual eye closing is handled by expression; this adds subtle head movement
+  blinking: {
+    name: 'blinking',
+    cycleDurationMs: 3000,
+    affectedJoints: ['head'],
+    keyframes: [
+      { progress: 0, overrides: { head: 0 } },
+      { progress: 0.08, overrides: { head: 2 } },    // slight head dip during blink
+      { progress: 0.12, overrides: { head: 0 } },    // return to normal
+      { progress: 0.5, overrides: { head: 0 } },     // hold neutral
+      { progress: 0.58, overrides: { head: 2 } },    // second blink
+      { progress: 0.62, overrides: { head: 0 } },    // return to normal
+      { progress: 1, overrides: { head: 0 } },       // loop back to start
+    ],
+  },
+
+  // Waving loop - repeated hand waving motion
+  waving_loop: {
+    name: 'waving_loop',
+    cycleDurationMs: 500,
+    affectedJoints: ['upperArmR', 'lowerArmR'],
+    keyframes: [
+      { progress: 0, overrides: { upperArmR: -130, lowerArmR: -30 } },   // arm up, hand right
+      { progress: 0.5, overrides: { upperArmR: -130, lowerArmR: -60 } }, // arm up, hand left
+      { progress: 1, overrides: { upperArmR: -130, lowerArmR: -30 } },   // back to start
+    ],
+  },
+
+  // Thinking loop - chin scratching with head tilt
+  thinking_loop: {
+    name: 'thinking_loop',
+    cycleDurationMs: 1500,
+    affectedJoints: ['upperArmR', 'lowerArmR', 'head'],
+    keyframes: [
+      { progress: 0, overrides: { head: 8, upperArmR: -55, lowerArmR: -125 } },    // chin touch, head tilted
+      { progress: 0.3, overrides: { head: 12, upperArmR: -60, lowerArmR: -120 } }, // deeper thought
+      { progress: 0.6, overrides: { head: 8, upperArmR: -55, lowerArmR: -125 } },  // back to touch
+      { progress: 1, overrides: { head: 8, upperArmR: -55, lowerArmR: -125 } },    // loop to start
+    ],
+  },
+
+  // ============================================
+  // L2 MVP ADDITIONS - POSE TRANSITION MOTIONS
+  // ============================================
+
+  // Sit down transition - standing to sitting animation
+  // Use with pose="standing" targetPose="sitting"
+  sit_down: {
+    name: 'sit_down',
+    cycleDurationMs: 600,
+    affectedJoints: ['torso', 'upperLegL', 'lowerLegL', 'upperLegR', 'lowerLegR', 'upperArmL', 'lowerArmL', 'upperArmR', 'lowerArmR'],
+    keyframes: [
+      // Start: standing pose
+      { progress: 0, overrides: {
+        torso: 0,
+        upperLegL: 5, lowerLegL: 0,
+        upperLegR: -5, lowerLegR: 0,
+        upperArmL: 20, lowerArmL: 0,
+        upperArmR: -20, lowerArmR: 0
+      } },
+      // Mid: crouching/bending
+      { progress: 0.5, overrides: {
+        torso: 10,
+        upperLegL: 45, lowerLegL: -45,
+        upperLegR: -45, lowerLegR: 45,
+        upperArmL: 25, lowerArmL: -45,
+        upperArmR: -25, lowerArmR: 45
+      } },
+      // End: seated pose
+      { progress: 1, overrides: {
+        torso: 0,
+        upperLegL: 90, lowerLegL: -90,
+        upperLegR: -90, lowerLegR: 90,
+        upperArmL: 30, lowerArmL: -90,
+        upperArmR: -30, lowerArmR: 90
+      } },
+    ],
+  },
+
+  // Depressing transition - standing to depressed/slumped
+  // Use with pose="standing" targetPose="depressed"
+  depressing: {
+    name: 'depressing',
+    cycleDurationMs: 800,
+    affectedJoints: ['torso', 'head', 'upperArmL', 'lowerArmL', 'upperArmR', 'lowerArmR', 'upperLegL', 'upperLegR'],
+    keyframes: [
+      // Start: standing pose
+      { progress: 0, overrides: {
+        torso: 0, head: 0,
+        upperArmL: 20, lowerArmL: 0,
+        upperArmR: -20, lowerArmR: 0,
+        upperLegL: 5, upperLegR: -5
+      } },
+      // Mid: starting to slump
+      { progress: 0.4, overrides: {
+        torso: 8, head: 12,
+        upperArmL: 15, lowerArmL: 10,
+        upperArmR: -15, lowerArmR: -10,
+        upperLegL: 8, upperLegR: -8
+      } },
+      // End: fully depressed/slumped
+      { progress: 1, overrides: {
+        torso: 15, head: 25,
+        upperArmL: 10, lowerArmL: 20,
+        upperArmR: -10, lowerArmR: -20,
+        upperLegL: 10, upperLegR: -10
+      } },
+    ],
+  },
+
+  // Surprising transition - standing to surprised pose
+  // Use with pose="standing" targetPose="surprised_pose"
+  surprising: {
+    name: 'surprising',
+    cycleDurationMs: 400,
+    affectedJoints: ['torso', 'head', 'upperArmL', 'lowerArmL', 'upperArmR', 'lowerArmR', 'upperLegL', 'upperLegR'],
+    keyframes: [
+      // Start: standing pose
+      { progress: 0, overrides: {
+        torso: 0, head: 0,
+        upperArmL: 20, lowerArmL: 0,
+        upperArmR: -20, lowerArmR: 0,
+        upperLegL: 5, upperLegR: -5
+      } },
+      // Quick jolt - arms spreading rapidly
+      { progress: 0.3, overrides: {
+        torso: -8, head: -8,
+        upperArmL: 70, lowerArmL: -60,
+        upperArmR: -70, lowerArmR: 60,
+        upperLegL: 18, upperLegR: -18
+      } },
+      // End: surprised pose with arms out
+      { progress: 1, overrides: {
+        torso: -5, head: -5,
+        upperArmL: 60, lowerArmL: -45,
+        upperArmR: -60, lowerArmR: 45,
+        upperLegL: 15, upperLegR: -15
+      } },
+    ],
+  },
+
 };
 
 // Get motion by name
