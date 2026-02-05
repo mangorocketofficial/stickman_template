@@ -49,9 +49,9 @@ export const MOTIONS: Record<string, Motion> = {
     cycleDurationMs: 500,
     affectedJoints: ['upperArmR', 'lowerArmR'],
     keyframes: [
-      { progress: 0, overrides: { upperArmR: -150, lowerArmR: -60 } },
-      { progress: 0.5, overrides: { upperArmR: -150, lowerArmR: -20 } },
-      { progress: 1, overrides: { upperArmR: -150, lowerArmR: -60 } },
+      { progress: 0, overrides: { upperArmR: -130, lowerArmR: -60 } },
+      { progress: 0.5, overrides: { upperArmR: -130, lowerArmR: -20 } },
+      { progress: 1, overrides: { upperArmR: -130, lowerArmR: -60 } },
     ],
   },
 
