@@ -69,7 +69,7 @@ export const JOINT_NAMES = [
 export type JointName = typeof JOINT_NAMES[number];
 
 // Shoulder offset from torso center for arm attachment
-export const SHOULDER_OFFSET = 25;
+export const SHOULDER_OFFSET = 18;
 
 // Hip width for leg attachment spread
 export const HIP_WIDTH = 12;

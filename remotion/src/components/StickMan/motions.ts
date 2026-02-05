@@ -59,11 +59,13 @@ export const MOTIONS: Record<string, Motion> = {
   walkCycle: {
     name: 'walkCycle',
     cycleDurationMs: 800,
-    affectedJoints: ['upperArmL', 'upperArmR', 'upperLegL', 'lowerLegL', 'upperLegR', 'lowerLegR'],
+    affectedJoints: ['torso', 'head', 'upperArmL', 'upperArmR', 'upperLegL', 'lowerLegL', 'upperLegR', 'lowerLegR'],
     keyframes: [
       {
         progress: 0,
         overrides: {
+          torso: -5,
+          head: -3,
           upperArmL: 30,
           upperArmR: -30,
           upperLegL: -20,
@@ -75,6 +77,8 @@ export const MOTIONS: Record<string, Motion> = {
       {
         progress: 0.25,
         overrides: {
+          torso: -5,
+          head: 0,
           upperArmL: 10,
           upperArmR: -10,
           upperLegL: 0,
@@ -86,6 +90,8 @@ export const MOTIONS: Record<string, Motion> = {
       {
         progress: 0.5,
         overrides: {
+          torso: -5,
+          head: 3,
           upperArmL: -30,
           upperArmR: 30,
           upperLegL: 20,
@@ -97,6 +103,8 @@ export const MOTIONS: Record<string, Motion> = {
       {
         progress: 0.75,
         overrides: {
+          torso: -5,
+          head: 0,
           upperArmL: -10,
           upperArmR: 10,
           upperLegL: 0,
@@ -108,6 +116,8 @@ export const MOTIONS: Record<string, Motion> = {
       {
         progress: 1,
         overrides: {
+          torso: -5,
+          head: -3,
           upperArmL: 30,
           upperArmR: -30,
           upperLegL: -20,

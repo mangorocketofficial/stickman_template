@@ -112,8 +112,8 @@ export const Body: React.FC<JointProps> = ({ pose, color, lineWidth }) => {
       {/* Torso line from hip to shoulders */}
       <Bone length={BONE_LENGTHS.torso} color={color} lineWidth={lineWidth} />
 
-      {/* Arms below neck (shoulders) - 10px down from torso top for neck-shoulder gap */}
-      <g transform={`translate(0, ${-BONE_LENGTHS.torso + 10})`}>
+      {/* Arms below neck (shoulders) - 20px down from torso top for neck-shoulder gap */}
+      <g transform={`translate(0, ${-BONE_LENGTHS.torso + 20})`}>
         <Arm side="L" pose={pose} color={color} lineWidth={lineWidth} />
         <Arm side="R" pose={pose} color={color} lineWidth={lineWidth} />
       </g>
