@@ -43,18 +43,6 @@ export const MOTIONS: Record<string, Motion> = {
     ],
   },
 
-  // Arm waving motion (right arm)
-  waving: {
-    name: 'waving',
-    cycleDurationMs: 500,
-    affectedJoints: ['upperArmR', 'lowerArmR'],
-    keyframes: [
-      { progress: 0, overrides: { upperArmR: -130, lowerArmR: -60 } },
-      { progress: 0.5, overrides: { upperArmR: -130, lowerArmR: -20 } },
-      { progress: 1, overrides: { upperArmR: -130, lowerArmR: -60 } },
-    ],
-  },
-
   // Walking cycle - alternating leg and arm swing
   walkCycle: {
     name: 'walkCycle',
@@ -158,18 +146,6 @@ export const MOTIONS: Record<string, Motion> = {
     ],
   },
 
-  // Excited motion - bouncing with arms raised
-  excited: {
-    name: 'excited',
-    cycleDurationMs: 300,
-    affectedJoints: ['torso', 'upperArmL', 'upperArmR', 'upperLegL', 'upperLegR'],
-    keyframes: [
-      { progress: 0, overrides: { torso: 0, upperArmL: 150, upperArmR: -150, upperLegL: 0, upperLegR: 0 } },
-      { progress: 0.5, overrides: { torso: -5, upperArmL: 170, upperArmR: -170, upperLegL: 10, upperLegR: -10 } },
-      { progress: 1, overrides: { torso: 0, upperArmL: 150, upperArmR: -150, upperLegL: 0, upperLegR: 0 } },
-    ],
-  },
-
   // Nervous motion - fidgeting with shifting weight
   nervous: {
     name: 'nervous',
@@ -254,44 +230,6 @@ export const MOTIONS: Record<string, Motion> = {
     ],
   },
 
-  // Beckoning motion (come here gesture)
-  beckoning: {
-    name: 'beckoning',
-    cycleDurationMs: 700,
-    affectedJoints: ['upperArmR', 'lowerArmR'],
-    keyframes: [
-      { progress: 0, overrides: { upperArmR: -70, lowerArmR: -90 } },
-      { progress: 0.3, overrides: { upperArmR: -70, lowerArmR: -45 } },
-      { progress: 0.6, overrides: { upperArmR: -70, lowerArmR: -90 } },
-      { progress: 1, overrides: { upperArmR: -70, lowerArmR: -90 } },
-    ],
-  },
-
-  // Thumbs up motion (approval gesture)
-  thumbsUp: {
-    name: 'thumbsUp',
-    cycleDurationMs: 1000,
-    affectedJoints: ['upperArmR', 'lowerArmR'],
-    keyframes: [
-      { progress: 0, overrides: { upperArmR: -20, lowerArmR: 0 } },
-      { progress: 0.3, overrides: { upperArmR: -100, lowerArmR: -30 } },
-      { progress: 0.7, overrides: { upperArmR: -100, lowerArmR: -30 } },
-      { progress: 1, overrides: { upperArmR: -20, lowerArmR: 0 } },
-    ],
-  },
-
-  // Pointing motion (directing attention)
-  pointing: {
-    name: 'pointing',
-    cycleDurationMs: 800,
-    affectedJoints: ['upperArmR', 'lowerArmR', 'head'],
-    keyframes: [
-      { progress: 0, overrides: { upperArmR: -60, lowerArmR: 0, head: -10 } },
-      { progress: 0.4, overrides: { upperArmR: -90, lowerArmR: 0, head: -15 } },
-      { progress: 0.6, overrides: { upperArmR: -90, lowerArmR: 0, head: -15 } },
-      { progress: 1, overrides: { upperArmR: -60, lowerArmR: 0, head: -10 } },
-    ],
-  },
 };
 
 // Get motion by name

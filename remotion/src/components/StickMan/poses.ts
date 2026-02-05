@@ -118,6 +118,52 @@ export const POSES: Record<string, Pose> = {
     upperLegR: -90,
     lowerLegR: 90,
   },
+
+  // ============================================
+  // POSE TRANSITION TARGETS (리팩토링 추가)
+  // ============================================
+
+  // Waving pose - right arm raised for wave
+  waving: {
+    torso: 0,
+    head: -5,
+    upperArmL: 20,
+    lowerArmL: 0,
+    upperArmR: -130,    // 팔 올림
+    lowerArmR: -40,     // 손 흔드는 위치
+    upperLegL: 5,
+    lowerLegL: 0,
+    upperLegR: -5,
+    lowerLegR: 0,
+  },
+
+  // Thumbs up pose - right arm raised with thumb up gesture
+  thumbsUp: {
+    torso: 0,
+    head: 0,
+    upperArmL: 20,
+    lowerArmL: 0,
+    upperArmR: -100,    // 팔 올림
+    lowerArmR: -30,     // 엄지 척 위치
+    upperLegL: 5,
+    lowerLegL: 0,
+    upperLegR: -5,
+    lowerLegR: 0,
+  },
+
+  // Beckoning pose - hand gesture calling someone
+  beckoning: {
+    torso: 0,
+    head: 0,
+    upperArmL: 20,
+    lowerArmL: 0,
+    upperArmR: -70,     // 팔 들어올림
+    lowerArmR: -90,     // 손짓 위치
+    upperLegL: 5,
+    lowerLegL: 0,
+    upperLegR: -5,
+    lowerLegR: 0,
+  },
 };
 
 // Default pose when none specified

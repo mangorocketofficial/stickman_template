@@ -13,6 +13,16 @@ function lerpAngle(a: number, b: number, t: number): number {
 }
 
 /**
+ * Cubic ease-in-out for smooth pose transitions
+ * Returns 0 at t=0, 1 at t=1, with smooth acceleration/deceleration
+ */
+export function easeInOutCubic(t: number): number {
+  return t < 0.5
+    ? 4 * t * t * t
+    : 1 - Math.pow(-2 * t + 2, 3) / 2;
+}
+
+/**
  * Interpolate between two poses
  * @param poseA Starting pose
  * @param poseB Ending pose

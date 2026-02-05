@@ -67,6 +67,34 @@ DEFAULT_ANIMATIONS = {
     },
 }
 
+# ============================================
+# Motion Architecture Refactoring
+# ============================================
+
+# Pose transition actions: use targetPose for enter/during/exit transitions
+POSE_ACTIONS = {
+    "waving": "waving",           # → waving pose
+    "pointing": "pointing_right",  # → pointing_right pose (existing)
+    "thumbsUp": "thumbsUp",        # → thumbsUp pose
+    "beckoning": "beckoning",      # → beckoning pose
+    "excited": "celebrating",      # → celebrating pose (existing)
+}
+
+# Loop motions: continuous animation during the scene
+LOOP_MOTIONS = [
+    "breathing",   # default idle
+    "nodding",     # agreeing while explaining
+    "typing",      # typing action
+    "nervous",     # nervous state
+    "laughing",    # laughing
+    "crying",      # crying
+    "headShake",   # disagreement
+    "clapping",    # applause (loop is natural)
+    "jumping",     # jumping (loop is natural)
+    "running",     # running (loop is natural)
+    "walkCycle",   # walking (loop is natural)
+]
+
 
 def determine_layout(directives: list[Directive]) -> str:
     """Determine which layout pattern to use based on directives."""
@@ -112,14 +140,36 @@ def directive_to_object(
     }
 
     if directive.type == "stickman":
-        # [stickman: pose, expression]
-        obj["props"]["pose"] = directive.args[0] if directive.args else "standing"
-        if len(directive.args) > 1:
-            obj["props"]["expression"] = directive.args[1]
-        else:
-            obj["props"]["expression"] = "neutral"
+        # [stickman: action_or_pose, expression]
+        # action_or_pose can be: pose name, pose action, or loop motion
+        action_or_pose = directive.args[0] if directive.args else "standing"
+        expression = directive.args[1] if len(directive.args) > 1 else "neutral"
+
         obj["props"]["color"] = "#FFFFFF"
         obj["props"]["lineWidth"] = 3
+        obj["props"]["expression"] = expression
+
+        if action_or_pose in POSE_ACTIONS:
+            # Pose transition: enter → hold targetPose → exit
+            obj["props"]["pose"] = "standing"
+            obj["props"]["targetPose"] = POSE_ACTIONS[action_or_pose]
+            obj["props"]["motion"] = "breathing"  # subtle movement while holding pose
+            obj["animation"] = {
+                "enter": {"type": "poseTransition", "durationMs": 400},
+                "exit": {"type": "poseTransition", "durationMs": 300},
+            }
+        elif action_or_pose in LOOP_MOTIONS:
+            # Loop motion: base pose + continuous animation
+            obj["props"]["pose"] = "standing"
+            obj["props"]["motion"] = action_or_pose
+            obj["animation"] = {
+                "enter": {"type": "fadeIn", "durationMs": 500},
+                "during": {"type": action_or_pose, "loop": True},
+            }
+        else:
+            # Static pose (existing behavior)
+            obj["props"]["pose"] = action_or_pose
+            obj["props"]["motion"] = "breathing"  # default idle animation
 
     elif directive.type == "text":
         # [text: "content", style]
