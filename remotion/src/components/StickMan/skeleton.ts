@@ -14,16 +14,16 @@ export interface BoneDefinition {
 // hip (root) → legs
 
 export const BONE_LENGTHS = {
-  torso: 80,
-  head: 30,           // radius, not length
-  upperArmL: 50,
-  lowerArmL: 45,
-  upperArmR: 50,
-  lowerArmR: 45,
-  upperLegL: 55,
-  lowerLegL: 50,
-  upperLegR: 55,
-  lowerLegR: 50,
+  torso: 70,
+  head: 30,           // radius, not length (diameter 60)
+  upperArmL: 35,
+  lowerArmL: 30,
+  upperArmR: 35,
+  lowerArmR: 30,
+  upperLegL: 50,
+  lowerLegL: 45,
+  upperLegR: 50,
+  lowerLegR: 45,
 } as const;
 
 // Skeleton hierarchy definition
@@ -69,7 +69,7 @@ export const JOINT_NAMES = [
 export type JointName = typeof JOINT_NAMES[number];
 
 // Shoulder offset from torso center for arm attachment
-export const SHOULDER_OFFSET = 20;
+export const SHOULDER_OFFSET = 15;
 
 // Hip width for leg attachment spread
 export const HIP_WIDTH = 12;
