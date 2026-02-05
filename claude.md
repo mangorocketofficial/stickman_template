@@ -93,3 +93,32 @@ cd remotion && npm install && npm run build
 - 코덱: H.264 + AAC
 - 재생시간: 36.3초
 - 파일크기: 2.6 MB
+
+---
+
+## Recent Updates (2026-02-05)
+
+### Commits
+| Hash | Description |
+|------|-------------|
+| `4ff2b8d` | fix: improve subtitle timing with proportional character counting |
+| `cfe3225` | Initial commit: MVP complete stickman video automation |
+
+### Fixed Issues
+1. **Scene 2+ 오브젝트 렌더링 안됨**
+   - 원인: `useCurrentFrame()`이 Sequence 내에서 상대 프레임 반환
+   - 해결: `SceneRenderer.tsx`에서 `sceneStartFrame={0}` 사용
+
+2. **자막 타이밍 10초 이상 차이**
+   - 원인: Whisper가 "72를"을 "70일을"로 잘못 인식 → 단어 매칭 실패
+   - 해결: `alignment.py`에서 비례 문자 카운팅 방식으로 변경
+
+### Key Technical Notes
+- **Remotion Sequence 내 프레임**: `useCurrentFrame()`은 Sequence 시작 기준 0부터 시작하는 상대 프레임 반환
+- **자막 동기화**: 스크립트 문자 비율로 Whisper 단어 타임스탬프 매핑
+- **환경변수**: `.env` 파일에서 `python-dotenv`로 로드 (Windows 호환)
+
+### Current Working State
+- 파이프라인 정상 작동
+- 31개 씬, 59개 자막 라인 동기화 완료
+- Remotion Studio: `cd remotion && npm start` → http://localhost:3000
