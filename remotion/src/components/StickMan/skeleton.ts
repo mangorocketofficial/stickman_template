@@ -15,7 +15,7 @@ export interface BoneDefinition {
 
 export const BONE_LENGTHS = {
   torso: 80,
-  head: 20,           // radius, not length
+  head: 30,           // radius, not length
   upperArmL: 50,
   lowerArmL: 45,
   upperArmR: 50,
@@ -69,7 +69,7 @@ export const JOINT_NAMES = [
 export type JointName = typeof JOINT_NAMES[number];
 
 // Shoulder offset from torso center for arm attachment
-export const SHOULDER_OFFSET = 10;
+export const SHOULDER_OFFSET = 20;
 
 // Hip width for leg attachment spread
-export const HIP_WIDTH = 15;
+export const HIP_WIDTH = 12;

@@ -60,7 +60,7 @@ export const StickMan: React.FC<StickManProps> = ({
   position,
   scale = 1,
   color = '#FFFFFF',
-  lineWidth = 3,
+  lineWidth = 2,
   motion,
   targetPose,
   transitionProgress,

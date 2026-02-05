@@ -52,8 +52,8 @@ const Arm: React.FC<{
 
   return (
     <g transform={`translate(${shoulderX}, 0)`}>
-      {/* Upper arm rotation */}
-      <g transform={`rotate(${upperAngle})`}>
+      {/* Upper arm rotation - arms rotate from shoulder, pointing down by default */}
+      <g transform={`rotate(${180 + upperAngle})`}>
         <Bone length={upperLength} color={color} lineWidth={lineWidth} />
         {/* Lower arm at end of upper arm */}
         <g transform={`translate(0, ${-upperLength})`}>
@@ -112,8 +112,8 @@ export const Body: React.FC<JointProps> = ({ pose, color, lineWidth }) => {
       {/* Torso line from hip to shoulders */}
       <Bone length={BONE_LENGTHS.torso} color={color} lineWidth={lineWidth} />
 
-      {/* Arms at top of torso (shoulders) */}
-      <g transform={`translate(0, ${-BONE_LENGTHS.torso})`}>
+      {/* Arms below neck (shoulders) - 15px down from torso top for neck-shoulder gap */}
+      <g transform={`translate(0, ${-BONE_LENGTHS.torso + 15})`}>
         <Arm side="L" pose={pose} color={color} lineWidth={lineWidth} />
         <Arm side="R" pose={pose} color={color} lineWidth={lineWidth} />
       </g>

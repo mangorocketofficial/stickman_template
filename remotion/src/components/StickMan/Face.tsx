@@ -1,5 +1,5 @@
 // SVG face renderer for StickMan
-// Renders head circle and expression (eyes + mouth)
+// Renders filled head circle and expression (eyes + mouth)
 
 import React from 'react';
 import { Expression, EyeStyle, MouthStyle } from './expressions';
@@ -10,18 +10,22 @@ interface FaceProps {
   color: string;
   lineWidth: number;
   rotation: number;  // head rotation angle
+  backgroundColor?: string;  // for eye/mouth contrast
 }
 
 const HEAD_RADIUS = BONE_LENGTHS.head;
 
-// Eye positioning
-const EYE_Y = -5;           // above center
-const EYE_SPACING = 8;      // distance from center
-const BASE_EYE_SIZE = 2;
+// Eye positioning (scaled for radius 30)
+const EYE_Y = -10;          // above center
+const EYE_SPACING = 14;     // distance from center
+const BASE_EYE_SIZE = 4;
 
-// Mouth positioning
-const MOUTH_Y = 6;          // below center
-const MOUTH_WIDTH = 10;
+// Mouth positioning (scaled for radius 30)
+const MOUTH_Y = 10;         // below center
+const MOUTH_WIDTH = 18;
+
+// Default background color for contrast
+const DEFAULT_BG = '#1a1a2e';
 
 /**
  * Render a single eye based on style
@@ -109,7 +113,7 @@ const Mouth: React.FC<{
     case 'smile':
       return (
         <path
-          d={`M ${-halfWidth} ${MOUTH_Y - 2} Q 0 ${MOUTH_Y + 6} ${halfWidth} ${MOUTH_Y - 2}`}
+          d={`M ${-halfWidth} ${MOUTH_Y - 3} Q 0 ${MOUTH_Y + 10} ${halfWidth} ${MOUTH_Y - 3}`}
           fill="none"
           stroke={color}
           strokeWidth={lineWidth * 0.5}
@@ -120,7 +124,7 @@ const Mouth: React.FC<{
     case 'frown':
       return (
         <path
-          d={`M ${-halfWidth} ${MOUTH_Y + 2} Q 0 ${MOUTH_Y - 4} ${halfWidth} ${MOUTH_Y + 2}`}
+          d={`M ${-halfWidth} ${MOUTH_Y + 3} Q 0 ${MOUTH_Y - 7} ${halfWidth} ${MOUTH_Y + 3}`}
           fill="none"
           stroke={color}
           strokeWidth={lineWidth * 0.5}
@@ -144,7 +148,7 @@ const Mouth: React.FC<{
     case 'wavy':
       return (
         <path
-          d={`M ${-halfWidth} ${MOUTH_Y} Q ${-halfWidth * 0.5} ${MOUTH_Y - 3} 0 ${MOUTH_Y} Q ${halfWidth * 0.5} ${MOUTH_Y + 3} ${halfWidth} ${MOUTH_Y}`}
+          d={`M ${-halfWidth} ${MOUTH_Y} Q ${-halfWidth * 0.5} ${MOUTH_Y - 5} 0 ${MOUTH_Y} Q ${halfWidth * 0.5} ${MOUTH_Y + 5} ${halfWidth} ${MOUTH_Y}`}
           fill="none"
           stroke={color}
           strokeWidth={lineWidth * 0.5}
@@ -168,7 +172,7 @@ const Mouth: React.FC<{
 };
 
 /**
- * Face component - head circle with expression
+ * Face component - filled head circle with expression
  * Positioned at origin (0, 0) - parent should translate to correct position
  */
 export const Face: React.FC<FaceProps> = ({
@@ -176,30 +180,31 @@ export const Face: React.FC<FaceProps> = ({
   color,
   lineWidth,
   rotation,
+  backgroundColor = DEFAULT_BG,
 }) => {
   const eyeSize = BASE_EYE_SIZE * (expression.eyeSize ?? 1);
   const mouthSize = expression.mouthSize ?? 1;
 
   return (
     <g transform={`rotate(${rotation})`}>
-      {/* Head circle */}
+      {/* Head circle - filled */}
       <circle
         cx={0}
         cy={0}
         r={HEAD_RADIUS}
-        fill="none"
+        fill={color}
         stroke={color}
         strokeWidth={lineWidth}
       />
 
-      {/* Face features inside the head */}
+      {/* Face features inside the head - contrasting color */}
       <g>
         {/* Left eye */}
         <Eye
           x={-EYE_SPACING}
           style={expression.leftEye}
           size={eyeSize}
-          color={color}
+          color={backgroundColor}
           lineWidth={lineWidth}
         />
         {/* Right eye */}
@@ -207,14 +212,14 @@ export const Face: React.FC<FaceProps> = ({
           x={EYE_SPACING}
           style={expression.rightEye}
           size={eyeSize}
-          color={color}
+          color={backgroundColor}
           lineWidth={lineWidth}
         />
         {/* Mouth */}
         <Mouth
           style={expression.mouth}
           size={mouthSize}
-          color={color}
+          color={backgroundColor}
           lineWidth={lineWidth}
         />
       </g>
