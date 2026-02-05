@@ -1,23 +1,14 @@
 /**
  * IconElement - SVG icon display with animation
+ *
+ * Refactored to use useAnimationPhases hook for cleaner code
  */
 
 import React from 'react';
-import { useCurrentFrame, useVideoConfig, staticFile } from 'remotion';
+import { staticFile } from 'remotion';
 import { IconProps, AnimationDef } from '../types/schema';
-import {
-  calculateEnterAnimation,
-  ENTER_DURATIONS,
-} from '../animations/enter';
-import {
-  calculateDuringAnimation,
-  DURING_CYCLES,
-} from '../animations/during';
-import {
-  calculateExitAnimation,
-  EXIT_DURATIONS,
-} from '../animations/exit';
-import { msToFrames } from '../utils/timing';
+import { useAnimationPhases } from '../hooks/useAnimationPhases';
+import { ICON } from '../constants';
 
 interface IconElementProps {
   props: IconProps;
@@ -189,45 +180,23 @@ export const IconElement: React.FC<IconElementProps> = ({
   sceneStartFrame,
   sceneDurationFrames,
 }) => {
-  const frame = useCurrentFrame();
-  const { fps } = useVideoConfig();
+  const { name, size = ICON.DEFAULT_SIZE, color = ICON.DEFAULT_COLOR } = props;
 
-  const { name, size = 80, color = '#FFFFFF' } = props;
-
-  // Animation phases
-  const enterType = animation?.enter?.type || 'popIn';
-  const enterDurationMs = animation?.enter?.durationMs || ENTER_DURATIONS[enterType] || 400;
-  const enterDelayMs = animation?.enter?.delayMs || 0;
-  const enterStartFrame = sceneStartFrame + msToFrames(enterDelayMs, fps);
-
-  const duringType = animation?.during?.type || 'floating';
-
-  const exitType = animation?.exit?.type || 'none';
-  const exitDurationMs = animation?.exit?.durationMs || EXIT_DURATIONS[exitType] || 300;
-  const exitStartFrame = sceneStartFrame + sceneDurationFrames - msToFrames(exitDurationMs, fps);
-
-  // Enter animation
-  const enterAnim = calculateEnterAnimation(
-    enterType,
-    frame,
-    fps,
-    enterStartFrame,
-    enterDurationMs
+  // Use centralized animation hook with icon-specific defaults
+  const {
+    enterAnim,
+    duringAnim,
+    finalOpacity,
+  } = useAnimationPhases(
+    animation,
+    sceneStartFrame,
+    sceneDurationFrames,
+    {
+      enterType: ICON.DEFAULT_ENTER_ANIMATION,
+      duringType: ICON.DEFAULT_DURING_ANIMATION,
+      exitType: 'none',
+    }
   );
-
-  // During animation
-  const duringAnim = calculateDuringAnimation(
-    duringType,
-    frame,
-    fps,
-    animation?.during?.durationMs || DURING_CYCLES[duringType]
-  );
-
-  // Exit animation
-  const exitAnim = calculateExitAnimation(exitType, frame, fps, exitStartFrame, exitDurationMs);
-
-  const isInExitPhase = frame >= exitStartFrame && exitType !== 'none';
-  const finalOpacity = isInExitPhase ? exitAnim.opacity : enterAnim.opacity;
 
   // Get icon component or fallback
   const IconComponent = INLINE_ICONS[name];

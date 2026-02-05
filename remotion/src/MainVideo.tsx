@@ -10,7 +10,7 @@ import {
   staticFile,
   Sequence,
 } from 'remotion';
-import { VideoProject, SubtitleData } from './types/schema';
+import { VideoProject, SubtitleData, getBackgroundColor } from './types/schema';
 import SceneRenderer from './SceneRenderer';
 import SubtitleOverlay from './components/SubtitleOverlay';
 import { msToFrames, getDurationInFrames } from './utils/timing';
@@ -41,7 +41,9 @@ export const MainVideo: React.FC<MainVideoProps> = ({
 
   // Get current scene's background for full-screen fill
   const currentScene = currentSceneIndex >= 0 ? scenes[currentSceneIndex] : null;
-  const backgroundColor = currentScene?.background || defaultBackground;
+  const backgroundColor = currentScene
+    ? getBackgroundColor(currentScene.background)
+    : defaultBackground;
 
   return (
     <div

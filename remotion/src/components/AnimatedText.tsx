@@ -1,23 +1,13 @@
 /**
  * AnimatedText - Text component with enter/during/exit animation support
+ *
+ * Refactored to use useAnimationPhases hook for cleaner code
  */
 
 import React from 'react';
-import { useCurrentFrame, useVideoConfig, interpolate } from 'remotion';
 import { TextProps, AnimationDef } from '../types/schema';
-import {
-  calculateEnterAnimation,
-  ENTER_DURATIONS,
-} from '../animations/enter';
-import {
-  calculateDuringAnimation,
-  DURING_CYCLES,
-} from '../animations/during';
-import {
-  calculateExitAnimation,
-  EXIT_DURATIONS,
-} from '../animations/exit';
-import { msToFrames } from '../utils/timing';
+import { useAnimationPhases } from '../hooks/useAnimationPhases';
+import { TEXT } from '../constants';
 
 interface AnimatedTextProps {
   props: TextProps;
@@ -40,67 +30,32 @@ export const AnimatedText: React.FC<AnimatedTextProps> = ({
   sceneStartFrame,
   sceneDurationFrames,
 }) => {
-  const frame = useCurrentFrame();
-  const { fps } = useVideoConfig();
-
   const {
     content,
-    fontSize = 48,
-    fontWeight = 'normal',
-    color = '#FFFFFF',
-    maxWidth = 800,
-    align = 'center',
+    fontSize = TEXT.DEFAULT_FONT_SIZE,
+    fontWeight = TEXT.DEFAULT_FONT_WEIGHT,
+    color = TEXT.DEFAULT_COLOR,
+    maxWidth = TEXT.DEFAULT_MAX_WIDTH,
+    align = TEXT.DEFAULT_ALIGN,
   } = props;
 
-  // Calculate animation phases
-  const enterType = animation?.enter?.type || 'fadeIn';
-  const enterDurationMs = animation?.enter?.durationMs || ENTER_DURATIONS[enterType] || 500;
-  const enterDelayMs = animation?.enter?.delayMs || 0;
-  const enterStartFrame = sceneStartFrame + msToFrames(enterDelayMs, fps);
-
-  const duringType = animation?.during?.type || 'none';
-
-  const exitType = animation?.exit?.type || 'none';
-  const exitDurationMs = animation?.exit?.durationMs || EXIT_DURATIONS[exitType] || 300;
-  const exitStartFrame = sceneStartFrame + sceneDurationFrames - msToFrames(exitDurationMs, fps);
-
-  // Calculate enter animation
-  const enterAnim = calculateEnterAnimation(
-    enterType,
-    frame,
-    fps,
-    enterStartFrame,
-    enterDurationMs
+  // Use centralized animation hook
+  const {
+    enterAnim,
+    duringAnim,
+    finalOpacity,
+    enterProgress,
+  } = useAnimationPhases(
+    animation,
+    sceneStartFrame,
+    sceneDurationFrames,
+    { enterType: 'fadeIn', duringType: 'none', exitType: 'none' }
   );
-
-  // Calculate during animation
-  const duringAnim = calculateDuringAnimation(
-    duringType,
-    frame,
-    fps,
-    animation?.during?.durationMs || DURING_CYCLES[duringType]
-  );
-
-  // Calculate exit animation
-  const exitAnim = calculateExitAnimation(
-    exitType,
-    frame,
-    fps,
-    exitStartFrame,
-    exitDurationMs
-  );
-
-  // Combine animations
-  const isInExitPhase = frame >= exitStartFrame && exitType !== 'none';
-  const finalOpacity = isInExitPhase ? exitAnim.opacity : enterAnim.opacity;
 
   // Handle typewriter effect
-  const isTypewriter = enterType === 'typewriter';
-  const typewriterProgress = isTypewriter
-    ? Math.min(1, (frame - enterStartFrame) / msToFrames(enterDurationMs, fps))
-    : 1;
+  const isTypewriter = animation?.enter?.type === 'typewriter';
   const visibleChars = isTypewriter
-    ? Math.floor(content.length * typewriterProgress)
+    ? Math.floor(content.length * enterProgress)
     : content.length;
   const displayText = isTypewriter ? content.slice(0, visibleChars) : content;
 
@@ -114,17 +69,17 @@ export const AnimatedText: React.FC<AnimatedTextProps> = ({
         opacity: finalOpacity,
         maxWidth,
         textAlign: align,
-        fontFamily: 'sans-serif',
+        fontFamily: TEXT.FONT_FAMILY,
         fontSize,
         fontWeight,
         color,
         whiteSpace: 'pre-wrap',
         wordBreak: 'keep-all',
-        lineHeight: 1.4,
+        lineHeight: TEXT.LINE_HEIGHT,
       }}
     >
       {displayText}
-      {isTypewriter && typewriterProgress < 1 && (
+      {isTypewriter && enterProgress < 1 && (
         <span
           style={{
             borderRight: '2px solid',

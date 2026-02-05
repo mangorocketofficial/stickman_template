@@ -1,19 +1,13 @@
 /**
  * Shape - Arrow, line, circle, rectangle component
+ *
+ * Refactored to use useAnimationPhases hook for cleaner code
  */
 
 import React from 'react';
-import { useCurrentFrame, useVideoConfig } from 'remotion';
 import { ShapeProps, AnimationDef } from '../types/schema';
-import {
-  calculateEnterAnimation,
-  ENTER_DURATIONS,
-} from '../animations/enter';
-import {
-  calculateExitAnimation,
-  EXIT_DURATIONS,
-} from '../animations/exit';
-import { msToFrames } from '../utils/timing';
+import { useAnimationPhases } from '../hooks/useAnimationPhases';
+import { SHAPE } from '../constants';
 
 interface AnimatedShapeProps {
   props: ShapeProps;
@@ -36,44 +30,32 @@ export const Shape: React.FC<AnimatedShapeProps> = ({
   sceneStartFrame,
   sceneDurationFrames,
 }) => {
-  const frame = useCurrentFrame();
-  const { fps } = useVideoConfig();
-
   const {
     shape,
     from: fromPoint,
     to: toPoint,
-    width = 100,
-    height = 100,
-    color = '#FFFFFF',
-    strokeWidth = 3,
+    width = SHAPE.DEFAULT_WIDTH,
+    height = SHAPE.DEFAULT_HEIGHT,
+    color = SHAPE.DEFAULT_COLOR,
+    strokeWidth = SHAPE.DEFAULT_STROKE_WIDTH,
     fill = false,
   } = props;
 
-  // Animation phases
-  const enterType = animation?.enter?.type || 'fadeIn';
-  const enterDurationMs = animation?.enter?.durationMs || ENTER_DURATIONS[enterType] || 500;
-  const enterDelayMs = animation?.enter?.delayMs || 0;
-  const enterStartFrame = sceneStartFrame + msToFrames(enterDelayMs, fps);
-
-  const exitType = animation?.exit?.type || 'none';
-  const exitDurationMs = animation?.exit?.durationMs || EXIT_DURATIONS[exitType] || 300;
-  const exitStartFrame = sceneStartFrame + sceneDurationFrames - msToFrames(exitDurationMs, fps);
-
-  // Enter animation
-  const enterAnim = calculateEnterAnimation(
-    enterType,
-    frame,
-    fps,
-    enterStartFrame,
-    enterDurationMs
+  // Use centralized animation hook
+  const {
+    enterAnim,
+    finalOpacity,
+    enterProgress,
+  } = useAnimationPhases(
+    animation,
+    sceneStartFrame,
+    sceneDurationFrames,
+    { enterType: 'fadeIn', duringType: 'none', exitType: 'none' }
   );
 
-  // Exit animation
-  const exitAnim = calculateExitAnimation(exitType, frame, fps, exitStartFrame, exitDurationMs);
-
-  const isInExitPhase = frame >= exitStartFrame && exitType !== 'none';
-  const finalOpacity = isInExitPhase ? exitAnim.opacity : enterAnim.opacity;
+  // Draw line progress for drawLine animation
+  const isDrawLine = animation?.enter?.type === 'drawLine';
+  const drawProgress = isDrawLine ? enterProgress : 1;
 
   // Calculate SVG dimensions based on shape type
   const getSvgDimensions = () => {
@@ -90,15 +72,6 @@ export const Shape: React.FC<AnimatedShapeProps> = ({
 
   const svgDims = getSvgDimensions();
 
-  // Draw line progress for drawLine animation
-  const isDrawLine = enterType === 'drawLine';
-  const drawProgress = isDrawLine
-    ? Math.min(
-        1,
-        Math.max(0, (frame - enterStartFrame) / msToFrames(enterDurationMs, fps))
-      )
-    : 1;
-
   const renderShape = () => {
     switch (shape) {
       case 'line': {
@@ -106,9 +79,6 @@ export const Shape: React.FC<AnimatedShapeProps> = ({
         const y1 = fromPoint ? fromPoint.y : 0;
         const x2 = toPoint ? toPoint.x : width;
         const y2 = toPoint ? toPoint.y : 0;
-
-        // Calculate line length for dash animation
-        const lineLength = Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
 
         return (
           <svg width={svgDims.width} height={svgDims.height} style={{ overflow: 'visible' }}>
@@ -131,19 +101,17 @@ export const Shape: React.FC<AnimatedShapeProps> = ({
         const x2 = toPoint ? toPoint.x : width;
         const y2 = toPoint ? toPoint.y : 0;
 
-        // Arrow head size
-        const headLength = 15;
-        const headAngle = Math.PI / 6;
+        // Arrow head
         const angle = Math.atan2(y2 - y1, x2 - x1);
 
         // Interpolated end point for draw animation
         const endX = strokeWidth + (x2 - x1) * drawProgress;
         const endY = strokeWidth + (y2 - y1) * drawProgress;
 
-        const arrowX1 = endX - headLength * Math.cos(angle - headAngle);
-        const arrowY1 = endY - headLength * Math.sin(angle - headAngle);
-        const arrowX2 = endX - headLength * Math.cos(angle + headAngle);
-        const arrowY2 = endY - headLength * Math.sin(angle + headAngle);
+        const arrowX1 = endX - SHAPE.ARROW_HEAD_LENGTH * Math.cos(angle - SHAPE.ARROW_HEAD_ANGLE);
+        const arrowY1 = endY - SHAPE.ARROW_HEAD_LENGTH * Math.sin(angle - SHAPE.ARROW_HEAD_ANGLE);
+        const arrowX2 = endX - SHAPE.ARROW_HEAD_LENGTH * Math.cos(angle + SHAPE.ARROW_HEAD_ANGLE);
+        const arrowY2 = endY - SHAPE.ARROW_HEAD_LENGTH * Math.sin(angle + SHAPE.ARROW_HEAD_ANGLE);
 
         return (
           <svg width={svgDims.width} height={svgDims.height} style={{ overflow: 'visible' }}>

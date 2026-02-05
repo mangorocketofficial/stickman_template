@@ -4,7 +4,7 @@
 
 import React from 'react';
 import { useCurrentFrame, useVideoConfig, interpolate, Sequence } from 'remotion';
-import { Scene } from './types/schema';
+import { Scene, getBackgroundColor } from './types/schema';
 import ObjectRenderer from './ObjectRenderer';
 import { msToFrames, getDurationInFrames } from './utils/timing';
 
@@ -24,10 +24,13 @@ export const SceneRenderer: React.FC<SceneRendererProps> = ({
     id,
     startMs,
     endMs,
-    background = '#1a1a2e',
+    background,
     transition,
     objects,
   } = scene;
+
+  // Get background color (handles both string and BackgroundDef)
+  const backgroundColor = getBackgroundColor(background);
 
   // Calculate scene timing
   const sceneStartFrame = msToFrames(startMs, fps);
@@ -83,7 +86,7 @@ export const SceneRenderer: React.FC<SceneRendererProps> = ({
         position: 'absolute',
         width,
         height,
-        backgroundColor: background,
+        backgroundColor,
         opacity: transitionOpacity,
       }}
     >

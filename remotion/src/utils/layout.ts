@@ -1,33 +1,17 @@
 /**
  * Auto-layout helpers for positioning scene objects
+ *
+ * Refactored to use centralized constants
  */
 
 import { SceneObject } from '../types/schema';
+import { CANVAS, LAYOUT, POSITIONS as CONST_POSITIONS } from '../constants';
 
-// Canvas dimensions (default)
-const CANVAS_WIDTH = 1920;
-const CANVAS_HEIGHT = 1080;
+// Re-export positions for backward compatibility
+export const POSITIONS = CONST_POSITIONS;
 
-// Margins and safe areas
-const MARGIN = 100;
-const SAFE_AREA = {
-  left: MARGIN,
-  right: CANVAS_WIDTH - MARGIN,
-  top: MARGIN,
-  bottom: CANVAS_HEIGHT - MARGIN,
-};
-
-// Common positions
-export const POSITIONS = {
-  center: { x: CANVAS_WIDTH / 2, y: CANVAS_HEIGHT / 2 },
-  centerTop: { x: CANVAS_WIDTH / 2, y: 250 },
-  centerMid: { x: CANVAS_WIDTH / 2, y: 450 },
-  centerBottom: { x: CANVAS_WIDTH / 2, y: CANVAS_HEIGHT - 200 },
-  left: { x: 350, y: CANVAS_HEIGHT / 2 },
-  leftBottom: { x: 300, y: 600 },
-  right: { x: CANVAS_WIDTH - 350, y: CANVAS_HEIGHT / 2 },
-  rightTop: { x: 1100, y: 350 },
-};
+// Re-export safe area for external use
+export const SAFE_AREA = LAYOUT.SAFE_AREA;
 
 // Layout patterns based on object combinations
 export type LayoutPattern =
@@ -64,33 +48,33 @@ export const getAutoLayoutPosition = (
 ): { x: number; y: number } => {
   switch (pattern) {
     case 'stickman_only':
-      if (objectType === 'stickman') return { x: 960, y: 600 };
+      if (objectType === 'stickman') return CONST_POSITIONS.stickmanCenter;
       break;
 
     case 'stickman_text':
-      if (objectType === 'stickman') return { x: 350, y: 600 };
-      if (objectType === 'text') return { x: 1100, y: 350 };
+      if (objectType === 'stickman') return CONST_POSITIONS.stickmanLeft;
+      if (objectType === 'text') return CONST_POSITIONS.rightTop;
       break;
 
     case 'stickman_text_counter':
-      if (objectType === 'stickman') return { x: 300, y: 600 };
-      if (objectType === 'text') return { x: 960, y: 250 };
-      if (objectType === 'counter') return { x: 960, y: 450 };
+      if (objectType === 'stickman') return CONST_POSITIONS.leftBottom;
+      if (objectType === 'text') return CONST_POSITIONS.centerTop;
+      if (objectType === 'counter') return CONST_POSITIONS.centerMid;
       break;
 
     case 'stickman_text_icon':
-      if (objectType === 'stickman') return { x: 300, y: 600 };
-      if (objectType === 'icon') return { x: 960, y: 300 };
-      if (objectType === 'text') return { x: 960, y: 500 };
+      if (objectType === 'stickman') return CONST_POSITIONS.leftBottom;
+      if (objectType === 'icon') return { x: CANVAS.CENTER_X, y: 300 };
+      if (objectType === 'text') return { x: CANVAS.CENTER_X, y: 500 };
       break;
 
     case 'text_only':
-      if (objectType === 'text') return { x: 960, y: 400 };
+      if (objectType === 'text') return { x: CANVAS.CENTER_X, y: 400 };
       break;
   }
 
   // Default center position
-  return POSITIONS.center;
+  return CONST_POSITIONS.center;
 };
 
 /**
@@ -148,3 +132,11 @@ export const clampToSafeArea = (
 
   return { x: clampedX, y: clampedY };
 };
+
+/**
+ * Get canvas dimensions
+ */
+export const getCanvasDimensions = () => ({
+  width: CANVAS.WIDTH,
+  height: CANVAS.HEIGHT,
+});

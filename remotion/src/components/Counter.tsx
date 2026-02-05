@@ -1,19 +1,15 @@
 /**
  * Counter - Animated number counter component
+ *
+ * Refactored to use useAnimationPhases hook for cleaner code
  */
 
 import React from 'react';
-import { useCurrentFrame, useVideoConfig, interpolate } from 'remotion';
+import { useCurrentFrame, useVideoConfig } from 'remotion';
 import { CounterProps, AnimationDef } from '../types/schema';
-import {
-  calculateEnterAnimation,
-  ENTER_DURATIONS,
-} from '../animations/enter';
-import {
-  calculateExitAnimation,
-  EXIT_DURATIONS,
-} from '../animations/exit';
+import { useAnimationPhases } from '../hooks/useAnimationPhases';
 import { msToFrames } from '../utils/timing';
+import { COUNTER, ANIMATION } from '../constants';
 
 interface AnimatedCounterProps {
   props: CounterProps;
@@ -73,30 +69,21 @@ export const Counter: React.FC<AnimatedCounterProps> = ({
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
 
-  const { from, to, format = 'number', fontSize = 64, color = '#FFFFFF' } = props;
+  const { from, to, format = 'number', fontSize = COUNTER.DEFAULT_FONT_SIZE, color = COUNTER.DEFAULT_COLOR } = props;
 
-  // Animation phases
-  const enterType = animation?.enter?.type || 'fadeIn';
-  const enterDurationMs = animation?.enter?.durationMs || ENTER_DURATIONS[enterType] || 500;
-  const enterDelayMs = animation?.enter?.delayMs || 0;
-  const enterStartFrame = sceneStartFrame + msToFrames(enterDelayMs, fps);
-  const enterDurationFrames = msToFrames(enterDurationMs, fps);
-
-  const exitType = animation?.exit?.type || 'none';
-  const exitDurationMs = animation?.exit?.durationMs || EXIT_DURATIONS[exitType] || 300;
-  const exitStartFrame = sceneStartFrame + sceneDurationFrames - msToFrames(exitDurationMs, fps);
-
-  // Enter animation
-  const enterAnim = calculateEnterAnimation(
-    enterType,
-    frame,
-    fps,
+  // Use centralized animation hook
+  const {
+    enterAnim,
+    finalOpacity,
     enterStartFrame,
-    enterDurationMs
+    exitStartFrame,
+    enterDurationFrames,
+  } = useAnimationPhases(
+    animation,
+    sceneStartFrame,
+    sceneDurationFrames,
+    { enterType: 'fadeIn', duringType: 'none', exitType: 'none' }
   );
-
-  // Exit animation
-  const exitAnim = calculateExitAnimation(exitType, frame, fps, exitStartFrame, exitDurationMs);
 
   // Counter animation - counts from 'from' to 'to' during the scene
   // Start counting after enter animation completes
@@ -119,10 +106,6 @@ export const Counter: React.FC<AnimatedCounterProps> = ({
 
   const displayValue = formatNumber(currentValue, format);
 
-  // Combine opacities
-  const isInExitPhase = frame >= exitStartFrame && exitType !== 'none';
-  const finalOpacity = isInExitPhase ? exitAnim.opacity : enterAnim.opacity;
-
   return (
     <div
       style={{
@@ -131,12 +114,12 @@ export const Counter: React.FC<AnimatedCounterProps> = ({
         top: position.y,
         transform: `translate(-50%, -50%) scale(${scale}) ${enterAnim.transform}`,
         opacity: finalOpacity,
-        fontFamily: 'monospace',
+        fontFamily: COUNTER.FONT_FAMILY,
         fontSize,
         fontWeight: 'bold',
         color,
         textAlign: 'center',
-        letterSpacing: '0.02em',
+        letterSpacing: COUNTER.LETTER_SPACING,
       }}
     >
       {displayValue}
