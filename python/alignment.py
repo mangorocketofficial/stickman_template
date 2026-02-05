@@ -160,15 +160,23 @@ def split_into_sentences(text: str) -> list[str]:
     return [s.strip() for s in sentences if s.strip()]
 
 
+def normalize_korean(text: str) -> str:
+    """Normalize Korean text for matching."""
+    import re
+    # Remove spaces and common punctuation
+    text = re.sub(r'[\s,.!?\'\"~·…]+', '', text)
+    return text
+
+
 def map_narration_to_words(
     narration_sections: list[str],
     words: list[WordTimestamp],
 ) -> list[tuple[int, int]]:
     """
-    Map narration sections to word timestamps.
+    Map narration sections to word timestamps using sequential character counting.
 
-    This maps each section's narration text to the corresponding
-    word timestamps, returning (start_ms, end_ms) for each section.
+    This approach counts characters through Whisper words sequentially,
+    which is more robust than word matching when Whisper mishears words.
 
     Args:
         narration_sections: List of narration texts for each section
@@ -180,38 +188,70 @@ def map_narration_to_words(
     if not words:
         return [(0, 0) for _ in narration_sections]
 
-    # Simple approach: divide words proportionally based on character count
-    # This is a simplification - for production, use fuzzy matching
+    if not narration_sections:
+        return []
 
-    total_chars = sum(len(n.replace(' ', '')) for n in narration_sections)
-    if total_chars == 0:
-        return [(0, 0) for _ in narration_sections]
+    # Calculate total characters in script vs audio
+    total_script_chars = sum(len(normalize_korean(n)) for n in narration_sections if n.strip())
+    total_audio_chars = sum(len(normalize_korean(w.word)) for w in words)
 
-    total_words = len(words)
+    # Build cumulative character counts for words
+    word_char_cumsum = []
+    cumsum = 0
+    for w in words:
+        word_char_cumsum.append(cumsum)
+        cumsum += len(normalize_korean(w.word))
+
     result = []
-    word_idx = 0
+    script_char_offset = 0
 
-    for narration in narration_sections:
-        section_chars = len(narration.replace(' ', ''))
-        if section_chars == 0:
-            # Empty section - use previous end or 0
-            prev_end = result[-1][1] if result else 0
+    for i, narration in enumerate(narration_sections):
+        if not narration.strip():
+            prev_end = result[-1][1] if result else words[0].start_ms
             result.append((prev_end, prev_end))
             continue
 
-        # Estimate word count for this section
-        word_proportion = section_chars / total_chars
-        section_word_count = max(1, int(total_words * word_proportion))
+        narr_norm = normalize_korean(narration)
+        narr_chars = len(narr_norm)
 
-        # Get start and end from word timestamps
-        start_idx = min(word_idx, len(words) - 1)
-        end_idx = min(word_idx + section_word_count - 1, len(words) - 1)
+        # Find start word: character position in script -> proportional position in audio
+        script_ratio = script_char_offset / total_script_chars if total_script_chars > 0 else 0
+        target_audio_chars = int(script_ratio * total_audio_chars)
 
-        start_ms = words[start_idx].start_ms
-        end_ms = words[end_idx].end_ms
+        # Find the word at this character position
+        start_word_idx = 0
+        for j, cc in enumerate(word_char_cumsum):
+            if cc >= target_audio_chars:
+                start_word_idx = max(0, j - 1)
+                break
+            start_word_idx = j
+
+        # Find end word
+        end_script_chars = script_char_offset + narr_chars
+        end_ratio = end_script_chars / total_script_chars if total_script_chars > 0 else 1
+        target_end_chars = int(end_ratio * total_audio_chars)
+
+        end_word_idx = start_word_idx
+        for j, cc in enumerate(word_char_cumsum):
+            if cc >= target_end_chars:
+                end_word_idx = max(start_word_idx, j - 1)
+                break
+            end_word_idx = j
+
+        # Ensure we have at least one word
+        if end_word_idx < start_word_idx:
+            end_word_idx = start_word_idx
+
+        # Get timestamps
+        start_ms = words[start_word_idx].start_ms
+        end_ms = words[end_word_idx].end_ms
+
+        # For the last section, extend to audio end
+        if i == len(narration_sections) - 1:
+            end_ms = words[-1].end_ms
 
         result.append((start_ms, end_ms))
-        word_idx = end_idx + 1
+        script_char_offset += narr_chars
 
     return result
 

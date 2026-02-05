@@ -18,8 +18,8 @@
   "scenes": [
     {
       "id": "scene_01_intro_greeting",
-      "startMs": 180,
-      "endMs": 2520,
+      "startMs": 160,
+      "endMs": 5700,
       "background": "#1a1a2e",
       "transition": {
         "in": "fadeIn",
@@ -98,8 +98,8 @@
     },
     {
       "id": "scene_02_hook_question",
-      "startMs": 2520,
-      "endMs": 4059,
+      "startMs": 4860,
+      "endMs": 15900,
       "background": "#1a1a2e",
       "transition": {
         "in": "fadeIn",
@@ -158,8 +158,8 @@
     },
     {
       "id": "scene_03_hook_answer",
-      "startMs": 4059,
-      "endMs": 4640,
+      "startMs": 14820,
+      "endMs": 22300,
       "background": "#1a1a2e",
       "transition": {
         "in": "fadeIn",
@@ -240,8 +240,8 @@
     },
     {
       "id": "scene_04_hook_explain",
-      "startMs": 4640,
-      "endMs": 4860,
+      "startMs": 22100,
+      "endMs": 25960,
       "background": "#1a1a2e",
       "transition": {
         "in": "fadeIn",
@@ -321,8 +321,8 @@
     },
     {
       "id": "scene_05_simple_interest_intro",
-      "startMs": 4860,
-      "endMs": 6080,
+      "startMs": 25000,
+      "endMs": 28800,
       "background": "#1a1a2e",
       "transition": {
         "in": "fadeIn",
@@ -400,8 +400,8 @@
     },
     {
       "id": "scene_06_simple_interest_explain",
-      "startMs": 6780,
-      "endMs": 7060,
+      "startMs": 27640,
+      "endMs": 34380,
       "background": "#1a1a2e",
       "transition": {
         "in": "fadeIn",
@@ -480,8 +480,8 @@
     },
     {
       "id": "scene_07_simple_interest_example",
-      "startMs": 7060,
-      "endMs": 7420,
+      "startMs": 34060,
+      "endMs": 41940,
       "background": "#1a1a2e",
       "transition": {
         "in": "fadeIn",
@@ -561,8 +561,8 @@
     },
     {
       "id": "scene_08_compound_intro",
-      "startMs": 7420,
-      "endMs": 7920,
+      "startMs": 41580,
+      "endMs": 45560,
       "background": "#1a1a2e",
       "transition": {
         "in": "fadeIn",
@@ -641,8 +641,8 @@
     },
     {
       "id": "scene_09_compound_explain",
-      "startMs": 7920,
-      "endMs": 8440,
+      "startMs": 45060,
+      "endMs": 52360,
       "background": "#1a1a2e",
       "transition": {
         "in": "fadeIn",
@@ -721,8 +721,8 @@
     },
     {
       "id": "scene_10_compound_formula",
-      "startMs": 8440,
-      "endMs": 8680,
+      "startMs": 51920,
+      "endMs": 57540,
       "background": "#1a1a2e",
       "transition": {
         "in": "fadeIn",
@@ -802,8 +802,8 @@
     },
     {
       "id": "scene_11_compound_example",
-      "startMs": 8680,
-      "endMs": 9040,
+      "startMs": 57280,
+      "endMs": 64440,
       "background": "#1a1a2e",
       "transition": {
         "in": "fadeIn",
@@ -884,8 +884,8 @@
     },
     {
       "id": "scene_12_difference_compare",
-      "startMs": 9040,
-      "endMs": 10100,
+      "startMs": 64060,
+      "endMs": 72100,
       "background": "#1a1a2e",
       "transition": {
         "in": "fadeIn",
@@ -964,8 +964,8 @@
     },
     {
       "id": "scene_13_time_power",
-      "startMs": 10100,
-      "endMs": 10760,
+      "startMs": 71860,
+      "endMs": 77340,
       "background": "#1a1a2e",
       "transition": {
         "in": "fadeIn",
@@ -1044,8 +1044,8 @@
     },
     {
       "id": "scene_14_time_example_simple",
-      "startMs": 10760,
-      "endMs": 11400,
+      "startMs": 76840,
+      "endMs": 81960,
       "background": "#1a1a2e",
       "transition": {
         "in": "fadeIn",
@@ -1125,8 +1125,8 @@
     },
     {
       "id": "scene_15_time_example_compound",
-      "startMs": 11400,
-      "endMs": 11840,
+      "startMs": 81540,
+      "endMs": 87720,
       "background": "#1a1a2e",
       "transition": {
         "in": "fadeIn",
@@ -1206,8 +1206,8 @@
     },
     {
       "id": "scene_16_snowball_effect",
-      "startMs": 11840,
-      "endMs": 12340,
+      "startMs": 87220,
+      "endMs": 94220,
       "background": "#1a1a2e",
       "transition": {
         "in": "fadeIn",
@@ -1286,8 +1286,8 @@
     },
     {
       "id": "scene_17_rule72_intro",
-      "startMs": 12340,
-      "endMs": 12460,
+      "startMs": 93880,
+      "endMs": 98700,
       "background": "#1a1a2e",
       "transition": {
         "in": "fadeIn",
@@ -1366,8 +1366,8 @@
     },
     {
       "id": "scene_18_rule72_explain",
-      "startMs": 12460,
-      "endMs": 12740,
+      "startMs": 98040,
+      "endMs": 105320,
       "background": "#1a1a2e",
       "transition": {
         "in": "fadeIn",
@@ -1447,8 +1447,8 @@
     },
     {
       "id": "scene_19_rule72_example",
-      "startMs": 12740,
-      "endMs": 13240,
+      "startMs": 105000,
+      "endMs": 114440,
       "background": "#1a1a2e",
       "transition": {
         "in": "fadeIn",
@@ -1528,8 +1528,8 @@
     },
     {
       "id": "scene_20_real_example_intro",
-      "startMs": 13240,
-      "endMs": 13740,
+      "startMs": 113580,
+      "endMs": 118800,
       "background": "#1a1a2e",
       "transition": {
         "in": "fadeIn",
@@ -1607,8 +1607,8 @@
     },
     {
       "id": "scene_21_real_example_20s",
-      "startMs": 13740,
-      "endMs": 14120,
+      "startMs": 117860,
+      "endMs": 125920,
       "background": "#1a1a2e",
       "transition": {
         "in": "fadeIn",
@@ -1687,8 +1687,8 @@
     },
     {
       "id": "scene_22_real_example_result",
-      "startMs": 14120,
-      "endMs": 14820,
+      "startMs": 125280,
+      "endMs": 132480,
       "background": "#1a1a2e",
       "transition": {
         "in": "fadeIn",
@@ -1768,8 +1768,8 @@
     },
     {
       "id": "scene_23_late_start_compare",
-      "startMs": 14820,
-      "endMs": 15720,
+      "startMs": 132100,
+      "endMs": 140640,
       "background": "#1a1a2e",
       "transition": {
         "in": "fadeIn",
@@ -1849,8 +1849,8 @@
     },
     {
       "id": "scene_24_early_message",
-      "startMs": 16400,
-      "endMs": 17040,
+      "startMs": 140220,
+      "endMs": 145680,
       "background": "#1a1a2e",
       "transition": {
         "in": "fadeIn",
@@ -1930,8 +1930,8 @@
     },
     {
       "id": "scene_25_warning_fee",
-      "startMs": 17040,
-      "endMs": 17520,
+      "startMs": 145140,
+      "endMs": 153660,
       "background": "#1a1a2e",
       "transition": {
         "in": "fadeIn",
@@ -2009,8 +2009,8 @@
     },
     {
       "id": "scene_26_warning_detail",
-      "startMs": 17520,
-      "endMs": 17900,
+      "startMs": 152940,
+      "endMs": 161120,
       "background": "#1a1a2e",
       "transition": {
         "in": "fadeIn",
@@ -2089,8 +2089,8 @@
     },
     {
       "id": "scene_27_tip_reinvest",
-      "startMs": 17900,
-      "endMs": 18360,
+      "startMs": 160140,
+      "endMs": 167320,
       "background": "#1a1a2e",
       "transition": {
         "in": "fadeIn",
@@ -2168,8 +2168,8 @@
     },
     {
       "id": "scene_28_tip_consistent",
-      "startMs": 18360,
-      "endMs": 18740,
+      "startMs": 167140,
+      "endMs": 174460,
       "background": "#1a1a2e",
       "transition": {
         "in": "fadeIn",
@@ -2247,8 +2247,8 @@
     },
     {
       "id": "scene_29_einstein_quote",
-      "startMs": 18740,
-      "endMs": 19440,
+      "startMs": 173600,
+      "endMs": 180560,
       "background": "#1a1a2e",
       "transition": {
         "in": "fadeIn",
@@ -2327,8 +2327,8 @@
     },
     {
       "id": "scene_30_conclusion_message",
-      "startMs": 19440,
-      "endMs": 19940,
+      "startMs": 179960,
+      "endMs": 189740,
       "background": "#1a1a2e",
       "transition": {
         "in": "fadeIn",
@@ -2426,8 +2426,8 @@
     },
     {
       "id": "scene_31_closing",
-      "startMs": 19940,
-      "endMs": 20240,
+      "startMs": 189300,
+      "endMs": 194940,
       "background": "#1a1a2e",
       "transition": {
         "in": "fadeIn",

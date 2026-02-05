@@ -2,370 +2,1760 @@
   "segments": [
     {
       "text": "안녕하세요,",
-      "startMs": 180,
-      "endMs": 600
+      "startMs": 160,
+      "endMs": 560
     },
     {
       "text": "오늘은 여러분의 돈을 마법처럼 불려주는",
-      "startMs": 600,
-      "endMs": 1800
+      "startMs": 160,
+      "endMs": 4040
     },
     {
       "text": "복리에 대해 알아보겠습니다.",
-      "startMs": 1800,
-      "endMs": 2520
+      "startMs": 3460,
+      "endMs": 5700
     },
     {
       "text": "만약 지금 당장 1억 원을 받는 것과,",
-      "startMs": 2520,
-      "endMs": 2820
+      "startMs": 4860,
+      "endMs": 9020
     },
     {
       "text": "1원부터 시작해서 매일 두 배씩 늘어나는 돈 중",
-      "startMs": 2820,
-      "endMs": 3460
+      "startMs": 8640,
+      "endMs": 12720
     },
     {
       "text": "하나를 선택해야 한다면 어떻게 하시겠습니까?",
-      "startMs": 3460,
-      "endMs": 4059
+      "startMs": 12440,
+      "endMs": 15900
     },
     {
-      "text": "놀랍게도 매일 두 배로 불어나는 1원은 단 30일 만에 약 5억 3천만 원이 됩니다.",
-      "startMs": 4059,
-      "endMs": 4640
+      "text": "놀랍게도 매일 두 배로 불어나는 1원은",
+      "startMs": 14820,
+      "endMs": 18720
+    },
+    {
+      "text": "단 30일 만에 약 5억 3천만 원이 됩니다.",
+      "startMs": 18340,
+      "endMs": 22300
     },
     {
       "text": "이것이 바로 복리의 힘입니다.",
-      "startMs": 4640,
-      "endMs": 4860
+      "startMs": 22100,
+      "endMs": 25960
     },
     {
       "text": "먼저 단리부터 알아볼까요?",
-      "startMs": 4860,
-      "endMs": 6080
+      "startMs": 25000,
+      "endMs": 28800
     },
     {
       "text": "단리는 처음 넣은 원금에만 이자가 붙는 방식입니다.",
-      "startMs": 6780,
-      "endMs": 7060
+      "startMs": 27640,
+      "endMs": 34380
     },
     {
-      "text": "예를 들어 100만 원을 연 5% 단리로 10년간 맡기면, 매년 5만 원씩 총 150만 원이 됩니다.",
-      "startMs": 7060,
-      "endMs": 7420
+      "text": "예를 들어 100만 원을 연 5% 단리로 10년간 맡기면,",
+      "startMs": 34060,
+      "endMs": 38460
+    },
+    {
+      "text": "매년 5만 원씩 총 150만 원이 됩니다.",
+      "startMs": 37600,
+      "endMs": 41940
     },
     {
       "text": "그럼 이제 복리를 살펴보겠습니다.",
-      "startMs": 7420,
-      "endMs": 7920
+      "startMs": 41580,
+      "endMs": 45560
     },
     {
-      "text": "복리는 원금에 이자를 더한 금액이 다시 새로운 원금이 되어 이자가 붙는 방식입니다.",
-      "startMs": 7920,
-      "endMs": 8440
+      "text": "복리는 원금에 이자를 더한 금액이",
+      "startMs": 45060,
+      "endMs": 48180
     },
     {
-      "text": "복리의 공식은 원금 곱하기 1 더하기 이자율의 n제곱입니다.",
-      "startMs": 8440,
-      "endMs": 8680
+      "text": "다시 새로운 원금이 되어 이자가 붙는 방식입니다.",
+      "startMs": 47360,
+      "endMs": 52360
     },
     {
-      "text": "같은 100만 원을 연 5% 복리로 10년간 투자하면, 약 163만 원이 됩니다.",
-      "startMs": 8680,
-      "endMs": 9040
+      "text": "복리의 공식은",
+      "startMs": 51920,
+      "endMs": 53560
     },
     {
-      "text": "단리는 150만 원, 복리는 163만 원으로, 10년 만에 13만 원의 차이가 발생합니다.",
-      "startMs": 9040,
-      "endMs": 10100
+      "text": "원금 곱하기 1 더하기 이자율의 n제곱입니다.",
+      "startMs": 52920,
+      "endMs": 57540
+    },
+    {
+      "text": "같은 100만 원을 연 5% 복리로 10년간 투자하면,",
+      "startMs": 57280,
+      "endMs": 61600
+    },
+    {
+      "text": "약 163만 원이 됩니다.",
+      "startMs": 60700,
+      "endMs": 64440
+    },
+    {
+      "text": "단리는 150만 원, 복리는 163만 원으로,",
+      "startMs": 64060,
+      "endMs": 68680
+    },
+    {
+      "text": "10년 만에 13만 원의 차이가 발생합니다.",
+      "startMs": 67780,
+      "endMs": 72100
     },
     {
       "text": "하지만 이 차이는 시간이 지날수록 눈덩이처럼 불어납니다.",
-      "startMs": 10100,
-      "endMs": 10760
+      "startMs": 71860,
+      "endMs": 77340
     },
     {
       "text": "단리로 30년을 투자하면 250만 원에 그칩니다.",
-      "startMs": 10760,
-      "endMs": 11400
+      "startMs": 76840,
+      "endMs": 81960
     },
     {
-      "text": "반면 복리로 30년을 투자하면 무려 432만 원이 됩니다.",
-      "startMs": 11400,
-      "endMs": 11840
+      "text": "반면 복리로 30년을 투자하면",
+      "startMs": 81540,
+      "endMs": 84480
     },
     {
-      "text": "이것을 눈덩이 효과라고 부르는데, 시간이 갈수록 증가 속도가 빨라지는 것이 핵심입니다.",
-      "startMs": 11840,
-      "endMs": 12340
+      "text": "무려 432만 원이 됩니다.",
+      "startMs": 83640,
+      "endMs": 87720
+    },
+    {
+      "text": "이것을 눈덩이 효과라고 부르는데,",
+      "startMs": 87220,
+      "endMs": 90040
+    },
+    {
+      "text": "시간이 갈수록 증가 속도가 빨라지는 것이 핵심입니다.",
+      "startMs": 89140,
+      "endMs": 94220
     },
     {
       "text": "여기서 유용한 공식을 하나 알려드리겠습니다.",
-      "startMs": 12340,
-      "endMs": 12460
+      "startMs": 93880,
+      "endMs": 98700
     },
     {
-      "text": "72를 수익률로 나누면 원금이 두 배가 되는 데 걸리는 기간을 쉽게 계산할 수 있습니다.",
-      "startMs": 12460,
-      "endMs": 12740
+      "text": "72를 수익률로 나누면",
+      "startMs": 98040,
+      "endMs": 100840
     },
     {
-      "text": "예를 들어 연 6% 수익률이라면, 72 나누기 6은 12, 약 12년이면 원금이 두 배가 됩니다.",
-      "startMs": 12740,
-      "endMs": 13240
+      "text": "원금이 두 배가 되는 데 걸리는 기간을",
+      "startMs": 99640,
+      "endMs": 103080
+    },
+    {
+      "text": "쉽게 계산할 수 있습니다.",
+      "startMs": 102680,
+      "endMs": 105320
+    },
+    {
+      "text": "예를 들어 연 6% 수익률이라면,",
+      "startMs": 105000,
+      "endMs": 108300
+    },
+    {
+      "text": "72 나누기 6은 12, 약 12년이면 원금이 두 배가 됩니다.",
+      "startMs": 107380,
+      "endMs": 114440
     },
     {
       "text": "자, 그럼 실제로 우리 생활에 적용해 볼까요?",
-      "startMs": 13240,
-      "endMs": 13740
+      "startMs": 113580,
+      "endMs": 118800
     },
     {
-      "text": "25살부터 매달 30만 원씩 연 7% 복리로 투자를 시작한다고 가정해 봅시다.",
-      "startMs": 13740,
-      "endMs": 14120
+      "text": "25살부터 매달 30만 원씩 연 7% 복리로",
+      "startMs": 117860,
+      "endMs": 122480
     },
     {
-      "text": "60세가 되면 총 투자 원금 1억 2천6백만 원이 약 3억 6천만 원이 됩니다.",
-      "startMs": 14120,
-      "endMs": 14820
+      "text": "투자를 시작한다고 가정해 봅시다.",
+      "startMs": 121720,
+      "endMs": 125920
     },
     {
-      "text": "만약 10년 늦은 35살에 시작하면 같은 조건에서 약 1억 7천만 원으로, 절반도 안 됩니다.",
-      "startMs": 14820,
-      "endMs": 15720
+      "text": "60세가 되면 총 투자 원금 1억 2천6백만 원이",
+      "startMs": 125280,
+      "endMs": 129860
     },
     {
-      "text": "단 10년의 차이가 무려 2억 원 가까운 차이를 만들어냅니다.",
-      "startMs": 16400,
-      "endMs": 17040
+      "text": "약 3억 6천만 원이 됩니다.",
+      "startMs": 129500,
+      "endMs": 132480
     },
     {
-      "text": "다만 주의할 점이 있습니다. 높은 수수료와 인플레이션은 복리 효과를 갉아먹을 수 있습니다.",
-      "startMs": 17040,
-      "endMs": 17520
+      "text": "만약 10년 늦은 35살에 시작하면",
+      "startMs": 132100,
+      "endMs": 135520
     },
     {
-      "text": "연 수수료가 1%만 차이 나도 30년이면 수천만 원의 차이가 발생하니 반드시 확인하세요.",
-      "startMs": 17520,
-      "endMs": 17900
+      "text": "같은 조건에서 약 1억 7천만 원으로, 절반도 안 됩니다.",
+      "startMs": 135060,
+      "endMs": 140640
     },
     {
-      "text": "복리의 핵심은 발생한 이자를 인출하지 않고 다시 재투자하는 것입니다.",
-      "startMs": 17900,
-      "endMs": 18360
+      "text": "단 10년의 차이가",
+      "startMs": 140220,
+      "endMs": 142120
     },
     {
-      "text": "거액을 한 번에 넣는 것보다 소액이라도 꾸준히 투자하는 것이 복리에서는 훨씬 유리합니다.",
-      "startMs": 18360,
-      "endMs": 18740
+      "text": "무려 2억 원 가까운 차이를 만들어냅니다.",
+      "startMs": 141600,
+      "endMs": 145680
     },
     {
-      "text": "아인슈타인은 복리를 세계 8번째 불가사의라고 불렀다는 유명한 말이 있습니다.",
-      "startMs": 18740,
-      "endMs": 19440
+      "text": "다만 주의할 점이 있습니다.",
+      "startMs": 145140,
+      "endMs": 148400
     },
     {
-      "text": "여러분의 가장 큰 자산은 바로 시간입니다. 시간과 복리가 만나면 진정한 부의 마법이 시작됩니다.",
-      "startMs": 19440,
-      "endMs": 19940
+      "text": "높은 수수료와 인플레이션은",
+      "startMs": 147840,
+      "endMs": 150580
     },
     {
-      "text": "지금이 가장 빠른 시작점입니다. 오늘부터 복리의 마법을 경험해 보세요!",
-      "startMs": 19940,
-      "endMs": 20240
+      "text": "복리 효과를 갉아먹을 수 있습니다.",
+      "startMs": 150080,
+      "endMs": 153660
+    },
+    {
+      "text": "연 수수료가 1%만 차이 나도",
+      "startMs": 152940,
+      "endMs": 155900
+    },
+    {
+      "text": "30년이면 수천만 원의 차이가 발생하니 반드시 확인하세요.",
+      "startMs": 155040,
+      "endMs": 161120
+    },
+    {
+      "text": "복리의 핵심은 발생한",
+      "startMs": 160140,
+      "endMs": 162600
+    },
+    {
+      "text": "이자를 인출하지 않고 다시 재투자하는 것입니다.",
+      "startMs": 162260,
+      "endMs": 167320
+    },
+    {
+      "text": "거액을 한 번에 넣는 것보다",
+      "startMs": 167140,
+      "endMs": 169180
+    },
+    {
+      "text": "소액이라도 꾸준히 투자하는 것이",
+      "startMs": 168180,
+      "endMs": 171160
+    },
+    {
+      "text": "복리에서는 훨씬 유리합니다.",
+      "startMs": 170540,
+      "endMs": 174460
+    },
+    {
+      "text": "아인슈타인은 복리를",
+      "startMs": 173600,
+      "endMs": 176360
+    },
+    {
+      "text": "세계 8번째 불가사의라고 불렀다는 유명한 말이 있습니다.",
+      "startMs": 175540,
+      "endMs": 180560
+    },
+    {
+      "text": "여러분의 가장 큰 자산은 바로 시간입니다.",
+      "startMs": 179960,
+      "endMs": 184820
+    },
+    {
+      "text": "시간과 복리가 만나면 진정한 부의 마법이 시작됩니다.",
+      "startMs": 184380,
+      "endMs": 189740
+    },
+    {
+      "text": "지금이 가장 빠른 시작점입니다.",
+      "startMs": 189300,
+      "endMs": 192760
+    },
+    {
+      "text": "오늘부터 복리의 마법을 경험해 보세요!",
+      "startMs": 192120,
+      "endMs": 194940
     }
   ],
   "words": [
     {
-      "word": "안녕하세요",
-      "startMs": 180,
-      "endMs": 600
+      "word": "안녕하세요.",
+      "startMs": 160,
+      "endMs": 560
     },
     {
       "word": "오늘은",
-      "startMs": 600,
-      "endMs": 1800
+      "startMs": 560,
+      "endMs": 1760
     },
     {
       "word": "여러분의",
-      "startMs": 1800,
-      "endMs": 2520
+      "startMs": 1760,
+      "endMs": 2480
     },
     {
       "word": "돈을",
-      "startMs": 2520,
-      "endMs": 2820
+      "startMs": 2480,
+      "endMs": 2800
     },
     {
       "word": "마법처럼",
-      "startMs": 2820,
+      "startMs": 2800,
       "endMs": 3460
     },
     {
       "word": "불려주는",
       "startMs": 3460,
-      "endMs": 4059
+      "endMs": 4040
     },
     {
       "word": "복리에",
-      "startMs": 4059,
-      "endMs": 4640
+      "startMs": 4040,
+      "endMs": 4620
     },
     {
       "word": "대해",
-      "startMs": 4640,
+      "startMs": 4620,
       "endMs": 4860
     },
     {
       "word": "알아보겠습니다.",
       "startMs": 4860,
-      "endMs": 6080
+      "endMs": 5700
     },
     {
       "word": "만약",
-      "startMs": 6780,
+      "startMs": 6800,
       "endMs": 7060
     },
     {
       "word": "지금",
       "startMs": 7060,
-      "endMs": 7420
+      "endMs": 7400
     },
     {
       "word": "당장",
-      "startMs": 7420,
-      "endMs": 7920
+      "startMs": 7400,
+      "endMs": 7900
     },
     {
-      "word": "1억원을",
-      "startMs": 7920,
-      "endMs": 8440
+      "word": "1억",
+      "startMs": 7900,
+      "endMs": 8200
+    },
+    {
+      "word": "원을",
+      "startMs": 8200,
+      "endMs": 8420
     },
     {
       "word": "받는",
-      "startMs": 8440,
-      "endMs": 8680
+      "startMs": 8420,
+      "endMs": 8640
     },
     {
       "word": "것과",
-      "startMs": 8680,
-      "endMs": 9040
+      "startMs": 8640,
+      "endMs": 9020
     },
     {
       "word": "1원부터",
-      "startMs": 9040,
+      "startMs": 9020,
       "endMs": 10100
     },
     {
       "word": "시작해서",
       "startMs": 10100,
-      "endMs": 10760
+      "endMs": 10740
     },
     {
       "word": "매일",
-      "startMs": 10760,
-      "endMs": 11400
+      "startMs": 10740,
+      "endMs": 11380
     },
     {
       "word": "2배씩",
-      "startMs": 11400,
-      "endMs": 11840
+      "startMs": 11380,
+      "endMs": 11820
     },
     {
       "word": "늘어나는",
-      "startMs": 11840,
-      "endMs": 12340
+      "startMs": 11820,
+      "endMs": 12300
     },
     {
       "word": "돈",
-      "startMs": 12340,
-      "endMs": 12460
+      "startMs": 12300,
+      "endMs": 12440
     },
     {
       "word": "중",
-      "startMs": 12460,
-      "endMs": 12740
+      "startMs": 12440,
+      "endMs": 12720
     },
     {
       "word": "하나를",
-      "startMs": 12740,
-      "endMs": 13240
+      "startMs": 12720,
+      "endMs": 13220
     },
     {
       "word": "선택해야",
-      "startMs": 13240,
-      "endMs": 13740
+      "startMs": 13220,
+      "endMs": 13720
     },
     {
       "word": "한다면",
-      "startMs": 13740,
-      "endMs": 14120
+      "startMs": 13720,
+      "endMs": 14080
     },
     {
       "word": "어떻게",
-      "startMs": 14120,
+      "startMs": 14080,
       "endMs": 14820
     },
     {
       "word": "하시겠습니까?",
       "startMs": 14820,
-      "endMs": 15720
+      "endMs": 15900
     },
     {
       "word": "놀랍게도",
-      "startMs": 16400,
-      "endMs": 17040
+      "startMs": 16379,
+      "endMs": 17000
     },
     {
       "word": "매일",
-      "startMs": 17040,
-      "endMs": 17520
+      "startMs": 17000,
+      "endMs": 17500
     },
     {
       "word": "2배로",
-      "startMs": 17520,
-      "endMs": 17900
+      "startMs": 17500,
+      "endMs": 17880
     },
     {
       "word": "불어나는",
-      "startMs": 17900,
-      "endMs": 18360
+      "startMs": 17880,
+      "endMs": 18340
     },
     {
       "word": "1원은",
-      "startMs": 18360,
-      "endMs": 18740
+      "startMs": 18340,
+      "endMs": 18720
     },
     {
       "word": "단",
-      "startMs": 18740,
-      "endMs": 19440
+      "startMs": 18720,
+      "endMs": 19400
     },
     {
       "word": "30일",
-      "startMs": 19440,
-      "endMs": 19940
+      "startMs": 19400,
+      "endMs": 19960
     },
     {
       "word": "만에",
-      "startMs": 19940,
-      "endMs": 20240
+      "startMs": 19960,
+      "endMs": 20220
     },
     {
       "word": "약",
-      "startMs": 20240,
-      "endMs": 20920
+      "startMs": 20220,
+      "endMs": 20900
     },
     {
-      "word": "5억원을",
-      "startMs": 20920,
-      "endMs": 21600
+      "word": "5억",
+      "startMs": 20900,
+      "endMs": 21260
     },
     {
-      "word": "받습니다.",
-      "startMs": 21600,
-      "endMs": 21620
+      "word": "3천만",
+      "startMs": 21260,
+      "endMs": 21800
+    },
+    {
+      "word": "원이",
+      "startMs": 21800,
+      "endMs": 22100
+    },
+    {
+      "word": "됩니다.",
+      "startMs": 22100,
+      "endMs": 22300
+    },
+    {
+      "word": "이것이",
+      "startMs": 23320,
+      "endMs": 23900
+    },
+    {
+      "word": "바로",
+      "startMs": 23900,
+      "endMs": 24300
+    },
+    {
+      "word": "복리의",
+      "startMs": 24300,
+      "endMs": 25000
+    },
+    {
+      "word": "힘입니다.",
+      "startMs": 25000,
+      "endMs": 25960
+    },
+    {
+      "word": "먼저",
+      "startMs": 26460,
+      "endMs": 26840
+    },
+    {
+      "word": "달리부터",
+      "startMs": 26840,
+      "endMs": 27640
+    },
+    {
+      "word": "알아볼까요?",
+      "startMs": 27640,
+      "endMs": 28800
+    },
+    {
+      "word": "달리는",
+      "startMs": 29460,
+      "endMs": 29840
+    },
+    {
+      "word": "처음",
+      "startMs": 29840,
+      "endMs": 30280
+    },
+    {
+      "word": "넣은",
+      "startMs": 30280,
+      "endMs": 30700
+    },
+    {
+      "word": "원금에만",
+      "startMs": 30700,
+      "endMs": 31520
+    },
+    {
+      "word": "이자가",
+      "startMs": 31520,
+      "endMs": 32040
+    },
+    {
+      "word": "붙는",
+      "startMs": 32040,
+      "endMs": 32340
+    },
+    {
+      "word": "방식입니다.",
+      "startMs": 32340,
+      "endMs": 33460
+    },
+    {
+      "word": "예를",
+      "startMs": 34060,
+      "endMs": 34380
+    },
+    {
+      "word": "들어",
+      "startMs": 34380,
+      "endMs": 34580
+    },
+    {
+      "word": "100만원을",
+      "startMs": 34580,
+      "endMs": 35420
+    },
+    {
+      "word": "연",
+      "startMs": 35420,
+      "endMs": 35680
+    },
+    {
+      "word": "5%",
+      "startMs": 35680,
+      "endMs": 36200
+    },
+    {
+      "word": "달리로",
+      "startMs": 36200,
+      "endMs": 36620
+    },
+    {
+      "word": "10년간",
+      "startMs": 36620,
+      "endMs": 37140
+    },
+    {
+      "word": "맡기면",
+      "startMs": 37140,
+      "endMs": 37600
+    },
+    {
+      "word": "매년",
+      "startMs": 37600,
+      "endMs": 38460
+    },
+    {
+      "word": "5만원씩",
+      "startMs": 38460,
+      "endMs": 39100
+    },
+    {
+      "word": "총",
+      "startMs": 39100,
+      "endMs": 39440
+    },
+    {
+      "word": "150만원이",
+      "startMs": 39440,
+      "endMs": 40300
+    },
+    {
+      "word": "됩니다.",
+      "startMs": 40300,
+      "endMs": 40600
+    },
+    {
+      "word": "그럼",
+      "startMs": 41580,
+      "endMs": 41940
+    },
+    {
+      "word": "이제",
+      "startMs": 41940,
+      "endMs": 42400
+    },
+    {
+      "word": "복리를",
+      "startMs": 42400,
+      "endMs": 42820
+    },
+    {
+      "word": "살펴보겠습니다.",
+      "startMs": 42820,
+      "endMs": 43860
+    },
+    {
+      "word": "복리는",
+      "startMs": 45060,
+      "endMs": 45560
+    },
+    {
+      "word": "원금에",
+      "startMs": 45560,
+      "endMs": 46240
+    },
+    {
+      "word": "이자를",
+      "startMs": 46240,
+      "endMs": 46600
+    },
+    {
+      "word": "더한",
+      "startMs": 46600,
+      "endMs": 46840
+    },
+    {
+      "word": "금액이",
+      "startMs": 46840,
+      "endMs": 47360
+    },
+    {
+      "word": "다시",
+      "startMs": 47360,
+      "endMs": 48180
+    },
+    {
+      "word": "새로운",
+      "startMs": 48180,
+      "endMs": 48620
+    },
+    {
+      "word": "원금이",
+      "startMs": 48620,
+      "endMs": 49120
+    },
+    {
+      "word": "되어",
+      "startMs": 49120,
+      "endMs": 49340
+    },
+    {
+      "word": "이자가",
+      "startMs": 49340,
+      "endMs": 49960
+    },
+    {
+      "word": "붙는",
+      "startMs": 49960,
+      "endMs": 50240
+    },
+    {
+      "word": "방식입니다.",
+      "startMs": 50240,
+      "endMs": 50920
+    },
+    {
+      "word": "복리의",
+      "startMs": 51920,
+      "endMs": 52360
+    },
+    {
+      "word": "공식은",
+      "startMs": 52360,
+      "endMs": 52920
+    },
+    {
+      "word": "원금",
+      "startMs": 52920,
+      "endMs": 53560
+    },
+    {
+      "word": "곱하기",
+      "startMs": 53560,
+      "endMs": 53980
+    },
+    {
+      "word": "1",
+      "startMs": 53980,
+      "endMs": 54220
+    },
+    {
+      "word": "더하기",
+      "startMs": 54220,
+      "endMs": 54680
+    },
+    {
+      "word": "이자율의",
+      "startMs": 54680,
+      "endMs": 55520
+    },
+    {
+      "word": "n제곱입니다.",
+      "startMs": 55520,
+      "endMs": 56280
+    },
+    {
+      "word": "같은",
+      "startMs": 57280,
+      "endMs": 57540
+    },
+    {
+      "word": "100만원을",
+      "startMs": 57540,
+      "endMs": 58300
+    },
+    {
+      "word": "연",
+      "startMs": 58300,
+      "endMs": 58620
+    },
+    {
+      "word": "5%",
+      "startMs": 58620,
+      "endMs": 59240
+    },
+    {
+      "word": "복리로",
+      "startMs": 59240,
+      "endMs": 59640
+    },
+    {
+      "word": "10년간",
+      "startMs": 59640,
+      "endMs": 60220
+    },
+    {
+      "word": "투자하면",
+      "startMs": 60220,
+      "endMs": 60700
+    },
+    {
+      "word": "약",
+      "startMs": 60700,
+      "endMs": 61600
+    },
+    {
+      "word": "163만원이",
+      "startMs": 61600,
+      "endMs": 62680
+    },
+    {
+      "word": "됩니다.",
+      "startMs": 62680,
+      "endMs": 63520
+    },
+    {
+      "word": "달리는",
+      "startMs": 64060,
+      "endMs": 64440
+    },
+    {
+      "word": "150만원",
+      "startMs": 64440,
+      "endMs": 65440
+    },
+    {
+      "word": "복리는",
+      "startMs": 65440,
+      "endMs": 66420
+    },
+    {
+      "word": "163만원으로",
+      "startMs": 66420,
+      "endMs": 67780
+    },
+    {
+      "word": "10년",
+      "startMs": 67780,
+      "endMs": 68680
+    },
+    {
+      "word": "만에",
+      "startMs": 68680,
+      "endMs": 68960
+    },
+    {
+      "word": "13만원의",
+      "startMs": 68960,
+      "endMs": 69840
+    },
+    {
+      "word": "차이가",
+      "startMs": 69840,
+      "endMs": 70160
+    },
+    {
+      "word": "발생합니다.",
+      "startMs": 70160,
+      "endMs": 70940
+    },
+    {
+      "word": "하지만",
+      "startMs": 71860,
+      "endMs": 72100
+    },
+    {
+      "word": "이",
+      "startMs": 72100,
+      "endMs": 72560
+    },
+    {
+      "word": "차이는",
+      "startMs": 72560,
+      "endMs": 72940
+    },
+    {
+      "word": "시간이",
+      "startMs": 72940,
+      "endMs": 73540
+    },
+    {
+      "word": "지날수록",
+      "startMs": 73540,
+      "endMs": 74340
+    },
+    {
+      "word": "눈덩이처럼",
+      "startMs": 74340,
+      "endMs": 75320
+    },
+    {
+      "word": "불어납니다.",
+      "startMs": 75320,
+      "endMs": 75940
+    },
+    {
+      "word": "달리로",
+      "startMs": 76840,
+      "endMs": 77340
+    },
+    {
+      "word": "30년을",
+      "startMs": 77340,
+      "endMs": 78040
+    },
+    {
+      "word": "투자하면",
+      "startMs": 78040,
+      "endMs": 78600
+    },
+    {
+      "word": "250만원에",
+      "startMs": 78600,
+      "endMs": 80100
+    },
+    {
+      "word": "그칩니다.",
+      "startMs": 80100,
+      "endMs": 80520
+    },
+    {
+      "word": "반면",
+      "startMs": 81540,
+      "endMs": 81960
+    },
+    {
+      "word": "복리로",
+      "startMs": 81960,
+      "endMs": 82440
+    },
+    {
+      "word": "30년을",
+      "startMs": 82440,
+      "endMs": 83160
+    },
+    {
+      "word": "투자하면",
+      "startMs": 83160,
+      "endMs": 83640
+    },
+    {
+      "word": "무려",
+      "startMs": 83640,
+      "endMs": 84480
+    },
+    {
+      "word": "432만원이",
+      "startMs": 84480,
+      "endMs": 85840
+    },
+    {
+      "word": "됩니다.",
+      "startMs": 85840,
+      "endMs": 86280
+    },
+    {
+      "word": "이것을",
+      "startMs": 87220,
+      "endMs": 87720
+    },
+    {
+      "word": "눈덩이",
+      "startMs": 87720,
+      "endMs": 88180
+    },
+    {
+      "word": "효과라고",
+      "startMs": 88180,
+      "endMs": 88700
+    },
+    {
+      "word": "부르는데",
+      "startMs": 88700,
+      "endMs": 89140
+    },
+    {
+      "word": "시간이",
+      "startMs": 89140,
+      "endMs": 90040
+    },
+    {
+      "word": "갈수록",
+      "startMs": 90040,
+      "endMs": 90640
+    },
+    {
+      "word": "증가속도가",
+      "startMs": 90640,
+      "endMs": 91500
+    },
+    {
+      "word": "빨라지는",
+      "startMs": 91500,
+      "endMs": 92020
+    },
+    {
+      "word": "것이",
+      "startMs": 92020,
+      "endMs": 92300
+    },
+    {
+      "word": "핵심입니다.",
+      "startMs": 92300,
+      "endMs": 93360
+    },
+    {
+      "word": "여기서",
+      "startMs": 93880,
+      "endMs": 94220
+    },
+    {
+      "word": "유용한",
+      "startMs": 94220,
+      "endMs": 95040
+    },
+    {
+      "word": "공식을",
+      "startMs": 95040,
+      "endMs": 95560
+    },
+    {
+      "word": "하나",
+      "startMs": 95560,
+      "endMs": 95820
+    },
+    {
+      "word": "알려드리겠습니다.",
+      "startMs": 95820,
+      "endMs": 96780
+    },
+    {
+      "word": "70일을",
+      "startMs": 98040,
+      "endMs": 98700
+    },
+    {
+      "word": "수익률로",
+      "startMs": 98700,
+      "endMs": 99200
+    },
+    {
+      "word": "나누면",
+      "startMs": 99160,
+      "endMs": 99640
+    },
+    {
+      "word": "원금이",
+      "startMs": 99640,
+      "endMs": 100840
+    },
+    {
+      "word": "2배가",
+      "startMs": 100840,
+      "endMs": 101400
+    },
+    {
+      "word": "되는데",
+      "startMs": 101400,
+      "endMs": 101520
+    },
+    {
+      "word": "걸리는",
+      "startMs": 101520,
+      "endMs": 102080
+    },
+    {
+      "word": "기간을",
+      "startMs": 102080,
+      "endMs": 102680
+    },
+    {
+      "word": "쉽게",
+      "startMs": 102680,
+      "endMs": 103080
+    },
+    {
+      "word": "계산할",
+      "startMs": 103080,
+      "endMs": 103540
+    },
+    {
+      "word": "수",
+      "startMs": 103540,
+      "endMs": 103620
+    },
+    {
+      "word": "있습니다.",
+      "startMs": 103620,
+      "endMs": 104500
+    },
+    {
+      "word": "예를",
+      "startMs": 105000,
+      "endMs": 105320
+    },
+    {
+      "word": "들어",
+      "startMs": 105320,
+      "endMs": 105560
+    },
+    {
+      "word": "연",
+      "startMs": 105560,
+      "endMs": 105980
+    },
+    {
+      "word": "6%",
+      "startMs": 105980,
+      "endMs": 106520
+    },
+    {
+      "word": "수익률이라면",
+      "startMs": 106520,
+      "endMs": 107380
+    },
+    {
+      "word": "72",
+      "startMs": 107380,
+      "endMs": 108300
+    },
+    {
+      "word": "나누기",
+      "startMs": 108300,
+      "endMs": 108780
+    },
+    {
+      "word": "6은",
+      "startMs": 108780,
+      "endMs": 109200
+    },
+    {
+      "word": "12,",
+      "startMs": 109200,
+      "endMs": 109740
+    },
+    {
+      "word": "약",
+      "startMs": 109740,
+      "endMs": 110280
+    },
+    {
+      "word": "12년이면",
+      "startMs": 110280,
+      "endMs": 110840
+    },
+    {
+      "word": "원금이",
+      "startMs": 110840,
+      "endMs": 111720
+    },
+    {
+      "word": "2배가",
+      "startMs": 111720,
+      "endMs": 112240
+    },
+    {
+      "word": "됩니다.",
+      "startMs": 112240,
+      "endMs": 112420
+    },
+    {
+      "word": "자",
+      "startMs": 113420,
+      "endMs": 113580
+    },
+    {
+      "word": "그럼",
+      "startMs": 113580,
+      "endMs": 114440
+    },
+    {
+      "word": "실제로",
+      "startMs": 114440,
+      "endMs": 114960
+    },
+    {
+      "word": "우리",
+      "startMs": 114960,
+      "endMs": 115500
+    },
+    {
+      "word": "생활에",
+      "startMs": 115500,
+      "endMs": 116040
+    },
+    {
+      "word": "적용해볼까요?",
+      "startMs": 116040,
+      "endMs": 117000
+    },
+    {
+      "word": "25살부터",
+      "startMs": 117860,
+      "endMs": 118800
+    },
+    {
+      "word": "매달",
+      "startMs": 118800,
+      "endMs": 119480
+    },
+    {
+      "word": "30만원씩",
+      "startMs": 119480,
+      "endMs": 120380
+    },
+    {
+      "word": "연",
+      "startMs": 120380,
+      "endMs": 120520
+    },
+    {
+      "word": "7%",
+      "startMs": 120520,
+      "endMs": 121220
+    },
+    {
+      "word": "복리로",
+      "startMs": 121220,
+      "endMs": 121720
+    },
+    {
+      "word": "투자를",
+      "startMs": 121720,
+      "endMs": 122480
+    },
+    {
+      "word": "시작한다고",
+      "startMs": 122480,
+      "endMs": 123220
+    },
+    {
+      "word": "가정해봅시다.",
+      "startMs": 123220,
+      "endMs": 124460
+    },
+    {
+      "word": "60세가",
+      "startMs": 125280,
+      "endMs": 125920
+    },
+    {
+      "word": "되면",
+      "startMs": 125920,
+      "endMs": 126020
+    },
+    {
+      "word": "총투자원금",
+      "startMs": 126020,
+      "endMs": 127180
+    },
+    {
+      "word": "1억",
+      "startMs": 127180,
+      "endMs": 127660
+    },
+    {
+      "word": "2천",
+      "startMs": 127660,
+      "endMs": 127960
+    },
+    {
+      "word": "6백만원이",
+      "startMs": 127960,
+      "endMs": 128720
+    },
+    {
+      "word": "약",
+      "startMs": 128720,
+      "endMs": 129500
+    },
+    {
+      "word": "3억",
+      "startMs": 129500,
+      "endMs": 129860
+    },
+    {
+      "word": "6천만원이",
+      "startMs": 129860,
+      "endMs": 130500
+    },
+    {
+      "word": "됩니다.",
+      "startMs": 130500,
+      "endMs": 130860
+    },
+    {
+      "word": "만약",
+      "startMs": 131900,
+      "endMs": 132100
+    },
+    {
+      "word": "10년",
+      "startMs": 132100,
+      "endMs": 132480
+    },
+    {
+      "word": "늦은",
+      "startMs": 132480,
+      "endMs": 132800
+    },
+    {
+      "word": "35살에",
+      "startMs": 132800,
+      "endMs": 133660
+    },
+    {
+      "word": "시작하면",
+      "startMs": 133660,
+      "endMs": 134140
+    },
+    {
+      "word": "같은",
+      "startMs": 134140,
+      "endMs": 135060
+    },
+    {
+      "word": "조건에서",
+      "startMs": 135060,
+      "endMs": 135520
+    },
+    {
+      "word": "약",
+      "startMs": 135520,
+      "endMs": 136360
+    },
+    {
+      "word": "1억",
+      "startMs": 136360,
+      "endMs": 136760
+    },
+    {
+      "word": "7천만원으로",
+      "startMs": 136760,
+      "endMs": 137500
+    },
+    {
+      "word": "절반도",
+      "startMs": 137500,
+      "endMs": 138420
+    },
+    {
+      "word": "안됩니다.",
+      "startMs": 138420,
+      "endMs": 139060
+    },
+    {
+      "word": "단",
+      "startMs": 140000,
+      "endMs": 140220
+    },
+    {
+      "word": "10년의",
+      "startMs": 140220,
+      "endMs": 140640
+    },
+    {
+      "word": "차이가",
+      "startMs": 140640,
+      "endMs": 141020
+    },
+    {
+      "word": "무려",
+      "startMs": 141020,
+      "endMs": 141600
+    },
+    {
+      "word": "2억원",
+      "startMs": 141600,
+      "endMs": 142120
+    },
+    {
+      "word": "가까운",
+      "startMs": 142120,
+      "endMs": 142700
+    },
+    {
+      "word": "차이를",
+      "startMs": 142700,
+      "endMs": 143100
+    },
+    {
+      "word": "만들어냅니다.",
+      "startMs": 143100,
+      "endMs": 143860
+    },
+    {
+      "word": "다만",
+      "startMs": 144760,
+      "endMs": 145140
+    },
+    {
+      "word": "주의할",
+      "startMs": 145140,
+      "endMs": 145680
+    },
+    {
+      "word": "점이",
+      "startMs": 145680,
+      "endMs": 145960
+    },
+    {
+      "word": "있습니다.",
+      "startMs": 145960,
+      "endMs": 146380
+    },
+    {
+      "word": "높은",
+      "startMs": 147480,
+      "endMs": 147840
+    },
+    {
+      "word": "수수료와",
+      "startMs": 147840,
+      "endMs": 148400
+    },
+    {
+      "word": "인플레이션은",
+      "startMs": 148400,
+      "endMs": 149320
+    },
+    {
+      "word": "복리",
+      "startMs": 149320,
+      "endMs": 150080
+    },
+    {
+      "word": "효과를",
+      "startMs": 150080,
+      "endMs": 150580
+    },
+    {
+      "word": "갉아먹을",
+      "startMs": 150580,
+      "endMs": 151240
+    },
+    {
+      "word": "수",
+      "startMs": 151240,
+      "endMs": 151360
+    },
+    {
+      "word": "있습니다.",
+      "startMs": 151360,
+      "endMs": 152940
+    },
+    {
+      "word": "연수수료가",
+      "startMs": 152940,
+      "endMs": 153660
+    },
+    {
+      "word": "1%만",
+      "startMs": 153660,
+      "endMs": 154560
+    },
+    {
+      "word": "차이",
+      "startMs": 154560,
+      "endMs": 154960
+    },
+    {
+      "word": "나도",
+      "startMs": 154960,
+      "endMs": 155040
+    },
+    {
+      "word": "30년이면",
+      "startMs": 155040,
+      "endMs": 155900
+    },
+    {
+      "word": "수천만",
+      "startMs": 155900,
+      "endMs": 157040
+    },
+    {
+      "word": "원의",
+      "startMs": 157040,
+      "endMs": 157280
+    },
+    {
+      "word": "차이가",
+      "startMs": 157280,
+      "endMs": 157640
+    },
+    {
+      "word": "발생하니",
+      "startMs": 157640,
+      "endMs": 158360
+    },
+    {
+      "word": "반드시",
+      "startMs": 158360,
+      "endMs": 158880
+    },
+    {
+      "word": "확인하세요.",
+      "startMs": 158880,
+      "endMs": 160140
+    },
+    {
+      "word": "복리의",
+      "startMs": 160140,
+      "endMs": 161120
+    },
+    {
+      "word": "핵심은",
+      "startMs": 161120,
+      "endMs": 161580
+    },
+    {
+      "word": "발생한",
+      "startMs": 161580,
+      "endMs": 162260
+    },
+    {
+      "word": "이자를",
+      "startMs": 162260,
+      "endMs": 162600
+    },
+    {
+      "word": "인출하지",
+      "startMs": 162600,
+      "endMs": 163120
+    },
+    {
+      "word": "않고",
+      "startMs": 163120,
+      "endMs": 163360
+    },
+    {
+      "word": "다시",
+      "startMs": 163360,
+      "endMs": 164340
+    },
+    {
+      "word": "재투자하는",
+      "startMs": 164340,
+      "endMs": 165080
+    },
+    {
+      "word": "것입니다.",
+      "startMs": 165080,
+      "endMs": 166040
+    },
+    {
+      "word": "거액을",
+      "startMs": 166660,
+      "endMs": 167140
+    },
+    {
+      "word": "한",
+      "startMs": 167140,
+      "endMs": 167320
+    },
+    {
+      "word": "번에",
+      "startMs": 167320,
+      "endMs": 167560
+    },
+    {
+      "word": "넣는",
+      "startMs": 167560,
+      "endMs": 167780
+    },
+    {
+      "word": "것보다",
+      "startMs": 167780,
+      "endMs": 168180
+    },
+    {
+      "word": "소액이라도",
+      "startMs": 168180,
+      "endMs": 169180
+    },
+    {
+      "word": "꾸준히",
+      "startMs": 169180,
+      "endMs": 169800
+    },
+    {
+      "word": "투자하는",
+      "startMs": 169800,
+      "endMs": 170280
+    },
+    {
+      "word": "것이",
+      "startMs": 170280,
+      "endMs": 170540
+    },
+    {
+      "word": "복리에서는",
+      "startMs": 170540,
+      "endMs": 171160
+    },
+    {
+      "word": "훨씬",
+      "startMs": 171160,
+      "endMs": 171800
+    },
+    {
+      "word": "유리합니다",
+      "startMs": 171800,
+      "endMs": 172460
+    },
+    {
+      "word": "아인슈타인은",
+      "startMs": 173600,
+      "endMs": 174460
+    },
+    {
+      "word": "복리를",
+      "startMs": 174460,
+      "endMs": 175040
+    },
+    {
+      "word": "세계",
+      "startMs": 175040,
+      "endMs": 175540
+    },
+    {
+      "word": "8번째",
+      "startMs": 175540,
+      "endMs": 176360
+    },
+    {
+      "word": "불가사이라고",
+      "startMs": 176360,
+      "endMs": 177120
+    },
+    {
+      "word": "불렀다는",
+      "startMs": 177120,
+      "endMs": 177740
+    },
+    {
+      "word": "유명한",
+      "startMs": 177740,
+      "endMs": 178400
+    },
+    {
+      "word": "말이",
+      "startMs": 178400,
+      "endMs": 178580
+    },
+    {
+      "word": "있습니다",
+      "startMs": 178580,
+      "endMs": 178920
+    },
+    {
+      "word": "여러분의",
+      "startMs": 179960,
+      "endMs": 180560
+    },
+    {
+      "word": "가장",
+      "startMs": 180560,
+      "endMs": 180920
+    },
+    {
+      "word": "큰",
+      "startMs": 180920,
+      "endMs": 181200
+    },
+    {
+      "word": "자산은",
+      "startMs": 181200,
+      "endMs": 181740
+    },
+    {
+      "word": "바로",
+      "startMs": 181740,
+      "endMs": 182180
+    },
+    {
+      "word": "시간입니다",
+      "startMs": 182180,
+      "endMs": 182840
+    },
+    {
+      "word": "시간과",
+      "startMs": 183840,
+      "endMs": 184380
+    },
+    {
+      "word": "복리가",
+      "startMs": 184380,
+      "endMs": 184820
+    },
+    {
+      "word": "만나면",
+      "startMs": 184820,
+      "endMs": 185320
+    },
+    {
+      "word": "진정한",
+      "startMs": 185320,
+      "endMs": 186340
+    },
+    {
+      "word": "부의",
+      "startMs": 186340,
+      "endMs": 186620
+    },
+    {
+      "word": "마법이",
+      "startMs": 186620,
+      "endMs": 187120
+    },
+    {
+      "word": "시작됩니다",
+      "startMs": 187120,
+      "endMs": 187740
+    },
+    {
+      "word": "지금이",
+      "startMs": 188760,
+      "endMs": 189300
+    },
+    {
+      "word": "가장",
+      "startMs": 189300,
+      "endMs": 189740
+    },
+    {
+      "word": "빠른",
+      "startMs": 189740,
+      "endMs": 190240
+    },
+    {
+      "word": "시작점입니다",
+      "startMs": 190240,
+      "endMs": 191080
+    },
+    {
+      "word": "오늘부터",
+      "startMs": 192120,
+      "endMs": 192760
+    },
+    {
+      "word": "복리의",
+      "startMs": 192760,
+      "endMs": 193500
+    },
+    {
+      "word": "마법을",
+      "startMs": 193500,
+      "endMs": 194020
+    },
+    {
+      "word": "경험해",
+      "startMs": 194020,
+      "endMs": 194500
+    },
+    {
+      "word": "보세요",
+      "startMs": 194500,
+      "endMs": 194720
+    },
+    {
+      "word": "감사합니다.",
+      "startMs": 194840,
+      "endMs": 194940
     }
   ]
 }
