@@ -1,6 +1,8 @@
 """
 Scene Builder Module
 Converts parsed script and alignment data into scene.json for Remotion.
+
+Updated for Track C-1: Smart Defaults integration
 """
 
 import json
@@ -8,6 +10,14 @@ from dataclasses import dataclass, field, asdict
 from typing import Optional, Any
 
 from script_parser import ParsedScript, Directive
+from smart_defaults import (
+    enrich_scene,
+    enrich_stickman_props,
+    auto_select_text_style,
+    auto_background_colors,
+    auto_select_transitions,
+    SmartDefaults,
+)
 
 
 # Default values
@@ -210,6 +220,11 @@ def build_scene(
     directives: list[Directive],
     start_ms: int,
     end_ms: int,
+    total_scenes: int = 1,
+    theme_name: str = "dark_cool",
+    previous_transition: Optional[str] = None,
+    use_smart_defaults: bool = True,
+    narration: str = "",
 ) -> dict:
     """Build a single scene from a script section."""
     scene_id = f"scene_{section_index + 1:02d}_{section_name}"
@@ -230,20 +245,63 @@ def build_scene(
         position = get_position(layout_name, directive.type, count - 1)
 
         obj = directive_to_object(directive, obj_id, position)
+
+        # Apply smart defaults for stickman
+        if use_smart_defaults and obj["type"] == "stickman":
+            obj["props"] = enrich_stickman_props(obj["props"])
+
+        # Apply smart defaults for text style
+        if use_smart_defaults and obj["type"] == "text":
+            text_index = type_counters["text"] - 1
+            total_texts = sum(1 for d in directives if d.type == "text")
+            content = obj["props"].get("content", "")
+            style = auto_select_text_style(text_index, total_texts, content)
+            obj["props"]["style"] = style
+
         objects.append(obj)
 
-    return {
-        "id": scene_id,
-        "startMs": start_ms,
-        "endMs": end_ms,
-        "background": DEFAULT_BG_COLOR,
-        "transition": {
-            "in": "fadeIn",
-            "out": "fadeOut",
-            "durationMs": 300,
-        },
-        "objects": objects,
-    }
+    # Apply smart defaults if enabled
+    directive_types = [d.type for d in directives]
+
+    if use_smart_defaults:
+        smart = enrich_scene(
+            scene_index=section_index,
+            total_scenes=total_scenes,
+            directive_types=directive_types,
+            objects=objects,
+            theme_name=theme_name,
+            previous_transition=previous_transition,
+            narration=narration,
+        )
+
+        return {
+            "id": scene_id,
+            "startMs": start_ms,
+            "endMs": end_ms,
+            "background": smart.background,
+            "sceneTemplate": smart.scene_template,
+            "camera": smart.camera,
+            "transition": {
+                "type": smart.transition,
+                "durationMs": 300,
+            },
+            "sfxTriggers": smart.sfx_triggers,
+            "objects": objects,
+        }
+    else:
+        # Legacy behavior without smart defaults
+        return {
+            "id": scene_id,
+            "startMs": start_ms,
+            "endMs": end_ms,
+            "background": DEFAULT_BG_COLOR,
+            "transition": {
+                "in": "fadeIn",
+                "out": "fadeOut",
+                "durationMs": 300,
+            },
+            "objects": objects,
+        }
 
 
 def build_scene_json(
@@ -251,6 +309,7 @@ def build_scene_json(
     section_timings: list[tuple[int, int]],
     audio_path: str,
     words_path: str,
+    use_smart_defaults: bool = True,
 ) -> dict:
     """
     Build the complete scene.json from parsed script and timings.
@@ -260,11 +319,18 @@ def build_scene_json(
         section_timings: List of (start_ms, end_ms) for each section
         audio_path: Relative path to audio file
         words_path: Relative path to words.json
+        use_smart_defaults: Enable Track C-1 smart defaults (default: True)
 
     Returns:
         Complete scene.json as dictionary
     """
+    # Extract theme from frontmatter or use default
+    theme_name = parsed_script.meta.get("theme", "dark_cool")
+    bgm_mood = parsed_script.meta.get("bgm", None)
+
+    total_scenes = len(parsed_script.sections)
     scenes = []
+    previous_transition = None
 
     for i, section in enumerate(parsed_script.sections):
         if i < len(section_timings):
@@ -281,17 +347,44 @@ def build_scene_json(
             directives=section.directives,
             start_ms=start_ms,
             end_ms=end_ms,
+            total_scenes=total_scenes,
+            theme_name=theme_name,
+            previous_transition=previous_transition,
+            use_smart_defaults=use_smart_defaults,
+            narration=section.narration,
         )
+
+        # Track transition for variety check
+        if "transition" in scene:
+            trans = scene["transition"]
+            previous_transition = trans.get("type") if isinstance(trans, dict) else trans
+
         scenes.append(scene)
 
+    # Build meta with optional BGM config
+    meta = {
+        "title": parsed_script.meta.get("title", "Untitled"),
+        "fps": DEFAULT_FPS,
+        "width": DEFAULT_WIDTH,
+        "height": DEFAULT_HEIGHT,
+        "audioSrc": audio_path,
+        "theme": theme_name,
+    }
+
+    # Add BGM config if specified
+    if bgm_mood:
+        meta["bgm"] = {
+            "src": f"audio/bgm/{bgm_mood}.mp3",
+            "volume": 0.3,
+            "fadeInMs": 2000,
+            "fadeOutMs": 3000,
+            "duckingLevel": 0.15,
+            "duckingAttackMs": 300,
+            "duckingReleaseMs": 500,
+        }
+
     return {
-        "meta": {
-            "title": parsed_script.meta.get("title", "Untitled"),
-            "fps": DEFAULT_FPS,
-            "width": DEFAULT_WIDTH,
-            "height": DEFAULT_HEIGHT,
-            "audioSrc": audio_path,
-        },
+        "meta": meta,
         "subtitles": {
             "src": words_path,
             "style": {
