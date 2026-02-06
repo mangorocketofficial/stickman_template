@@ -1,5 +1,8 @@
 /**
  * ObjectRenderer - Routes object types to their respective components
+ *
+ * Updated for Track B-2: Theme integration
+ * - Uses theme colors as defaults when props don't specify color
  */
 
 import React from 'react';
@@ -17,6 +20,7 @@ import Shape from './components/Shape';
 import IconElement from './components/IconElement';
 import { StickMan } from './components/StickMan';
 import { useVideoConfig } from 'remotion';
+import { useTheme } from './contexts/ThemeContext';
 
 interface ObjectRendererProps {
   object: SceneObject;
@@ -30,6 +34,7 @@ export const ObjectRenderer: React.FC<ObjectRendererProps> = ({
   sceneDurationFrames,
 }) => {
   const { fps } = useVideoConfig();
+  const { theme, getAccentColor } = useTheme();
   const { type, position, scale, animation, props } = object;
 
   const commonProps = {
@@ -54,7 +59,7 @@ export const ObjectRenderer: React.FC<ObjectRendererProps> = ({
           expression={stickmanProps.expression}
           position={position}
           scale={scale}
-          color={stickmanProps.color}
+          color={stickmanProps.color || theme.stickman}
           lineWidth={stickmanProps.lineWidth}
           motion={motion}
           startTimeMs={startTimeMs}
@@ -70,29 +75,48 @@ export const ObjectRenderer: React.FC<ObjectRendererProps> = ({
         />
       );
 
-    case 'counter':
+    case 'counter': {
+      const counterProps = props as CounterProps;
       return (
         <Counter
           {...commonProps}
-          props={props as CounterProps}
+          props={{
+            ...counterProps,
+            color: counterProps.color || theme.text.accent,
+          }}
         />
       );
+    }
 
-    case 'shape':
+    case 'shape': {
+      const shapeProps = props as ShapeProps;
+      // Use rotating accent colors for shapes based on object index
+      const accentIndex = object.id ? parseInt(object.id.replace(/\D/g, ''), 10) || 0 : 0;
       return (
         <Shape
           {...commonProps}
-          props={props as ShapeProps}
+          props={{
+            ...shapeProps,
+            color: shapeProps.color || getAccentColor(accentIndex),
+          }}
         />
       );
+    }
 
-    case 'icon':
+    case 'icon': {
+      const iconProps = props as IconProps;
+      // Use rotating accent colors for icons based on object index
+      const accentIndex = object.id ? parseInt(object.id.replace(/\D/g, ''), 10) || 0 : 0;
       return (
         <IconElement
           {...commonProps}
-          props={props as IconProps}
+          props={{
+            ...iconProps,
+            color: iconProps.color || getAccentColor(accentIndex),
+          }}
         />
       );
+    }
 
     default:
       console.warn(`Unknown object type: ${type}`);

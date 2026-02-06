@@ -5,13 +5,17 @@
  * - Supports text roles (title, body, number, highlight_box, caption)
  * - Supports text decorations (underline_animated, highlight_marker)
  * - Supports background boxes
+ *
+ * Updated for Track B-2: Theme integration
+ * - Uses theme colors from context as defaults
  */
 
 import React from 'react';
 import { TextProps, AnimationDef, TextRole } from '../types/schema';
 import { useAnimationPhases } from '../hooks/useAnimationPhases';
+import { useTheme } from '../contexts/ThemeContext';
 import { TEXT } from '../constants';
-import { TEXT_STYLES, getDecorationStyle } from '../styles/textStyles';
+import { getTextStyleWithTheme, getDecorationStyle } from '../styles/textStyles';
 
 interface AnimatedTextProps {
   props: TextProps;
@@ -34,9 +38,12 @@ export const AnimatedText: React.FC<AnimatedTextProps> = ({
   sceneStartFrame,
   sceneDurationFrames,
 }) => {
-  // Get role-based default style
+  // Get theme from context
+  const { theme } = useTheme();
+
+  // Get role-based default style with theme colors
   const role = props.role || 'body';
-  const roleStyle = TEXT_STYLES[role] || TEXT_STYLES.body;
+  const roleStyle = getTextStyleWithTheme(role, theme);
 
   // Extract props with role-based defaults
   const {

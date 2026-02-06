@@ -7,9 +7,12 @@
  * - number: Monospace numbers (for counters, stats)
  * - highlight_box: Text with background box
  * - caption: Small caption text
+ *
+ * Updated for Track B-2: Theme integration
+ * - getTextStyleWithTheme() returns styles with theme colors
  */
 
-import { TextRole, TextStyleDef, TextDecoration } from '../types/schema';
+import { TextRole, TextStyleDef, TextDecoration, ColorTheme } from '../types/schema';
 import { TEXT, THEME } from '../constants';
 
 /**
@@ -80,6 +83,61 @@ export const getTextStyle = (
     ...baseStyle,
     ...overrides,
   };
+};
+
+/**
+ * Get text style by role with theme colors applied
+ */
+export const getTextStyleWithTheme = (
+  role: TextRole,
+  theme: ColorTheme
+): TextStyleDef => {
+  const baseStyle = TEXT_STYLES[role] || TEXT_STYLES.body;
+
+  // Apply theme colors based on role
+  switch (role) {
+    case 'title':
+      return {
+        ...baseStyle,
+        color: theme.text.primary,
+      };
+
+    case 'body':
+      return {
+        ...baseStyle,
+        color: theme.text.primary,
+      };
+
+    case 'number':
+      return {
+        ...baseStyle,
+        color: theme.text.accent,
+      };
+
+    case 'highlight_box':
+      return {
+        ...baseStyle,
+        color: theme.text.primary,
+        background: {
+          color: theme.background.surface,
+          padding: 20,
+          borderRadius: 12,
+          opacity: 1,
+        },
+      };
+
+    case 'caption':
+      return {
+        ...baseStyle,
+        color: theme.text.secondary,
+      };
+
+    default:
+      return {
+        ...baseStyle,
+        color: theme.text.primary,
+      };
+  }
 };
 
 /**
