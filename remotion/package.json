@@ -6,7 +6,9 @@
     "start": "remotion studio",
     "build": "remotion render src/index.tsx MainVideo --output=./out/final.mp4",
     "render": "remotion render src/index.tsx MainVideo",
-    "preview": "remotion preview"
+    "preview": "remotion preview",
+    "test": "vitest run",
+    "test:watch": "vitest"
   },
   "dependencies": {
     "@remotion/cli": "^4.0.0",
@@ -18,6 +20,7 @@
   "devDependencies": {
     "@types/react": "^18.2.0",
     "@types/react-dom": "^18.2.0",
-    "typescript": "^5.3.0"
+    "typescript": "^5.3.0",
+    "vitest": "^4.0.18"
   }
 }
