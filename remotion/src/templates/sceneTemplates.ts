@@ -1,19 +1,17 @@
 /**
- * Scene Templates - 8 MVP Scene Templates
+ * Scene Templates - 16 Scene Templates (8 MVP + 8 V2)
  * Layer 4 (Scene Templates) for the stickman video system
  *
  * These templates combine L3 direction elements (camera, layout, timing)
  * into reusable scene packages for specific roles in video production.
  *
  * MVP Templates (8):
- * - intro_greeting (opening)
- * - explain_default (explanation)
- * - explain_formula (explanation)
- * - explain_reverse (explanation)
- * - emphasis_number (emphasis)
- * - emphasis_statement (emphasis)
- * - compare_side_by_side (comparison)
- * - transition_topic_change (transition)
+ * - intro_greeting, explain_default, explain_formula, explain_reverse
+ * - emphasis_number, emphasis_statement, compare_side_by_side, transition_topic_change
+ *
+ * V2 Templates (8):
+ * - intro_question, intro_title_card, explain_with_visual, emphasis_spotlight
+ * - compare_before_after, compare_list, example_with_counter, example_story
  */
 
 import { SceneTemplate, SceneTemplateRecord } from './types';
@@ -126,6 +124,114 @@ const transition_topic_change: SceneTemplate = {
 };
 
 // ============================================================================
+// V2 SCENE TEMPLATES (8)
+// ============================================================================
+
+/**
+ * 9. intro_question - Opening with a question to engage viewers
+ */
+const intro_question: SceneTemplate = {
+  name: 'intro_question',
+  role: 'opening',
+  description: 'Opening scene with a compelling question using zoom and reveal',
+  camera: 'zoom_in_slow',
+  layout: 'center_hero',
+  timing: 'reveal_climax',
+  suggestedPoses: ['thinking', 'explaining'],
+  suggestedExpressions: ['thinking', 'curious'],
+};
+
+/**
+ * 10. intro_title_card - Title card opening
+ */
+const intro_title_card: SceneTemplate = {
+  name: 'intro_title_card',
+  role: 'opening',
+  description: 'Full-screen title card for video introduction',
+  camera: 'static_wide',
+  layout: 'overlay_fullscreen_text',
+  timing: 'all_at_once',
+};
+
+/**
+ * 11. explain_with_visual - Explanation with visual elements panning
+ */
+const explain_with_visual: SceneTemplate = {
+  name: 'explain_with_visual',
+  role: 'explanation',
+  description: 'Explanation with multiple visual elements appearing left to right',
+  camera: 'pan_left_to_right',
+  layout: 'triple_horizontal',
+  timing: 'left_to_right',
+  suggestedPoses: ['pointing_right', 'explaining'],
+};
+
+/**
+ * 12. emphasis_spotlight - Spotlight emphasis for key points
+ */
+const emphasis_spotlight: SceneTemplate = {
+  name: 'emphasis_spotlight',
+  role: 'emphasis',
+  description: 'Spotlight effect on key content with dimmed background',
+  camera: 'static_closeup',
+  layout: 'overlay_spotlight',
+  timing: 'reveal_climax',
+  suggestedExpressions: ['surprised', 'excited'],
+};
+
+/**
+ * 13. compare_before_after - Before/after comparison with pan
+ */
+const compare_before_after: SceneTemplate = {
+  name: 'compare_before_after',
+  role: 'comparison',
+  description: 'Before and after comparison with panning camera',
+  camera: 'pan_left_to_right',
+  layout: 'grid_2x1',
+  timing: 'left_to_right',
+};
+
+/**
+ * 14. compare_list - List comparison with multiple items
+ */
+const compare_list: SceneTemplate = {
+  name: 'compare_list',
+  role: 'comparison',
+  description: 'List comparison with three columns appearing top to bottom',
+  camera: 'static_full',
+  layout: 'grid_3x1',
+  timing: 'top_to_bottom',
+};
+
+/**
+ * 15. example_with_counter - Example with animated counter
+ */
+const example_with_counter: SceneTemplate = {
+  name: 'example_with_counter',
+  role: 'example',
+  description: 'Example demonstration with stickman, text, and animated counter',
+  camera: 'static_full',
+  layout: 'triple_stickman_text_counter',
+  timing: 'stickman_first',
+  suggestedPoses: ['pointing_right', 'explaining'],
+  suggestedExpressions: ['happy', 'excited'],
+};
+
+/**
+ * 16. example_story - Story-based example
+ */
+const example_story: SceneTemplate = {
+  name: 'example_story',
+  role: 'example',
+  description: 'Story-based example with gradual zoom and stickman focus',
+  camera: 'zoom_in_slow',
+  layout: 'split_left_stickman',
+  timing: 'stickman_first',
+  suggestedPoses: ['standing', 'sitting', 'thinking'],
+  suggestedExpressions: ['neutral', 'thinking', 'happy'],
+};
+
+// ============================================================================
 // EXPORTS
 // ============================================================================
 
@@ -133,6 +239,7 @@ const transition_topic_change: SceneTemplate = {
  * All scene templates indexed by name
  */
 export const SCENE_TEMPLATES: SceneTemplateRecord = {
+  // MVP (8)
   intro_greeting,
   explain_default,
   explain_formula,
@@ -141,6 +248,15 @@ export const SCENE_TEMPLATES: SceneTemplateRecord = {
   emphasis_statement,
   compare_side_by_side,
   transition_topic_change,
+  // V2 (8)
+  intro_question,
+  intro_title_card,
+  explain_with_visual,
+  emphasis_spotlight,
+  compare_before_after,
+  compare_list,
+  example_with_counter,
+  example_story,
 };
 
 /**
@@ -160,6 +276,20 @@ export const MVP_TEMPLATE_NAMES = [
   'emphasis_statement',
   'compare_side_by_side',
   'transition_topic_change',
+] as const;
+
+/**
+ * Array of V2 template names for easy reference
+ */
+export const V2_TEMPLATE_NAMES = [
+  'intro_question',
+  'intro_title_card',
+  'explain_with_visual',
+  'emphasis_spotlight',
+  'compare_before_after',
+  'compare_list',
+  'example_with_counter',
+  'example_story',
 ] as const;
 
 /**

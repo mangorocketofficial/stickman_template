@@ -1,23 +1,21 @@
 /**
- * Templates Module - Scene Templates
- * Layer 4 (Scene Templates) for the stickman video system
+ * Templates Module - Scene Templates (Layer 4)
+ * Combines Layer 3 direction elements (camera + layout + timing) into reusable scene packages
  *
- * Total Templates: 8 MVP
- * - Opening: 1 (intro_greeting)
- * - Explanation: 3 (explain_default, explain_formula, explain_reverse)
- * - Emphasis: 2 (emphasis_number, emphasis_statement)
- * - Comparison: 1 (compare_side_by_side)
- * - Transition: 1 (transition_topic_change)
+ * Total Templates: 16
+ * - MVP: 8 templates
+ * - V2: 8 templates
  */
 
 // Export all types
 export * from './types';
 
-// Export scene templates module
+// Export scene templates and utilities
 export {
   SCENE_TEMPLATES,
   SCENE_TEMPLATE_NAMES,
   MVP_TEMPLATE_NAMES,
+  V2_TEMPLATE_NAMES,
   getSceneTemplate,
   hasSceneTemplate,
   getTemplatesByRole,
