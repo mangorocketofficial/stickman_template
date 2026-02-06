@@ -79,72 +79,70 @@ const Eye: React.FC<{
         />
       );
 
-    case 'angry_left':
-      // Left eye with angry brow (slanting down toward center)
+    case 'squint':
       return (
-        <g>
+        <path
+          d={`M ${x - size * 1.2} ${EYE_Y} L ${x} ${EYE_Y - size * 0.3} L ${x + size * 1.2} ${EYE_Y}`}
+          fill="none"
+          stroke={color}
+          strokeWidth={lineWidth * 0.5}
+          strokeLinecap="round"
+        />
+      );
+
+    case 'wide':
+      return (
+        <>
+          <circle
+            cx={x}
+            cy={EYE_Y}
+            r={size * 1.8}
+            fill="none"
+            stroke={color}
+            strokeWidth={lineWidth * 0.5}
+          />
           <circle cx={x} cy={EYE_Y} r={size * 0.8} fill={color} />
+        </>
+      );
+
+    case 'tear':
+      return (
+        <>
+          <circle cx={x} cy={EYE_Y} r={size} fill={color} />
+          <path
+            d={`M ${x + size * 0.3} ${EYE_Y + size} Q ${x + size * 0.5} ${EYE_Y + size * 3} ${x} ${EYE_Y + size * 3.5}`}
+            fill="none"
+            stroke={color}
+            strokeWidth={lineWidth * 0.4}
+            strokeLinecap="round"
+          />
+        </>
+      );
+
+    case 'angry':
+      return (
+        <>
+          <circle cx={x} cy={EYE_Y} r={size} fill={color} />
           <line
             x1={x - size * 1.5}
-            y1={EYE_Y - size * 2}
-            x2={x + size * 1.2}
-            y2={EYE_Y - size * 0.8}
-            stroke={color}
-            strokeWidth={lineWidth * 0.6}
-            strokeLinecap="round"
-          />
-        </g>
-      );
-
-    case 'angry_right':
-      // Right eye with angry brow (slanting down toward center)
-      return (
-        <g>
-          <circle cx={x} cy={EYE_Y} r={size * 0.8} fill={color} />
-          <line
-            x1={x - size * 1.2}
-            y1={EYE_Y - size * 0.8}
+            y1={x < 0 ? EYE_Y - size * 1.2 : EYE_Y - size * 0.5}
             x2={x + size * 1.5}
-            y2={EYE_Y - size * 2}
+            y2={x < 0 ? EYE_Y - size * 0.5 : EYE_Y - size * 1.2}
             stroke={color}
             strokeWidth={lineWidth * 0.6}
             strokeLinecap="round"
           />
-        </g>
+        </>
       );
 
-    case 'worried_left':
-      // Left eye with worried brow (slanting up toward center)
+    case 'heart':
       return (
-        <g>
-          <circle cx={x} cy={EYE_Y} r={size * 0.9} fill={color} />
-          <line
-            x1={x - size * 1.5}
-            y1={EYE_Y - size * 0.8}
-            x2={x + size * 1.2}
-            y2={EYE_Y - size * 2}
-            stroke={color}
-            strokeWidth={lineWidth * 0.6}
-            strokeLinecap="round"
-          />
-        </g>
-      );
-
-    case 'worried_right':
-      // Right eye with worried brow (slanting up toward center)
-      return (
-        <g>
-          <circle cx={x} cy={EYE_Y} r={size * 0.9} fill={color} />
-          <line
-            x1={x - size * 1.2}
-            y1={EYE_Y - size * 2}
-            x2={x + size * 1.5}
-            y2={EYE_Y - size * 0.8}
-            stroke={color}
-            strokeWidth={lineWidth * 0.6}
-            strokeLinecap="round"
-          />
-        </g>
+        <path
+          d={`M ${x} ${EYE_Y + size * 0.5}
+             C ${x - size * 1.5} ${EYE_Y - size} ${x - size * 1.5} ${EYE_Y - size * 1.5} ${x} ${EYE_Y - size * 0.5}
+             C ${x + size * 1.5} ${EYE_Y - size * 1.5} ${x + size * 1.5} ${EYE_Y - size} ${x} ${EYE_Y + size * 0.5}`}
+          fill={color}
+        />
       );
 
     default:
@@ -224,29 +222,81 @@ const Mouth: React.FC<{
         />
       );
 
-    case 'wide_smile':
-      // Wide open smile (D shape)
+    case 'grin':
       return (
-        <path
-          d={`M ${-halfWidth} ${MOUTH_Y - 2} Q 0 ${MOUTH_Y + 14} ${halfWidth} ${MOUTH_Y - 2}`}
-          fill="none"
+        <>
+          <path
+            d={`M ${-halfWidth} ${MOUTH_Y - 5} Q 0 ${MOUTH_Y + 15} ${halfWidth} ${MOUTH_Y - 5}`}
+            fill="none"
+            stroke={color}
+            strokeWidth={lineWidth * 0.5}
+            strokeLinecap="round"
+          />
+          <line
+            x1={-halfWidth * 0.7}
+            y1={MOUTH_Y}
+            x2={halfWidth * 0.7}
+            y2={MOUTH_Y}
+            stroke={color}
+            strokeWidth={lineWidth * 0.3}
+          />
+        </>
+      );
+
+    case 'open':
+      return (
+        <ellipse
+          cx={0}
+          cy={MOUTH_Y + 2}
+          rx={halfWidth * 0.6}
+          ry={halfWidth * 0.5}
+          fill={color}
+          fillOpacity="0.3"
           stroke={color}
-          strokeWidth={lineWidth * 0.6}
-          strokeLinecap="round"
+          strokeWidth={lineWidth * 0.5}
         />
       );
 
-    case 'angry':
-      // Angry mouth (inverted V or zigzag)
+    case 'teeth':
       return (
-        <path
-          d={`M ${-halfWidth} ${MOUTH_Y + 2} L 0 ${MOUTH_Y - 4} L ${halfWidth} ${MOUTH_Y + 2}`}
-          fill="none"
-          stroke={color}
-          strokeWidth={lineWidth * 0.6}
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        />
+        <>
+          <path
+            d={`M ${-halfWidth} ${MOUTH_Y - 3} Q 0 ${MOUTH_Y + 10} ${halfWidth} ${MOUTH_Y - 3}`}
+            fill="none"
+            stroke={color}
+            strokeWidth={lineWidth * 0.5}
+            strokeLinecap="round"
+          />
+          <line
+            x1={-halfWidth * 0.6}
+            y1={MOUTH_Y + 2}
+            x2={halfWidth * 0.6}
+            y2={MOUTH_Y + 2}
+            stroke={color}
+            strokeWidth={lineWidth * 0.4}
+          />
+        </>
+      );
+
+    case 'tongue':
+      return (
+        <>
+          <path
+            d={`M ${-halfWidth} ${MOUTH_Y - 3} Q 0 ${MOUTH_Y + 10} ${halfWidth} ${MOUTH_Y - 3}`}
+            fill="none"
+            stroke={color}
+            strokeWidth={lineWidth * 0.5}
+            strokeLinecap="round"
+          />
+          <ellipse
+            cx={0}
+            cy={MOUTH_Y + 8}
+            rx={halfWidth * 0.3}
+            ry={halfWidth * 0.25}
+            fill={color}
+            fillOpacity="0.5"
+          />
+        </>
       );
 
     default:

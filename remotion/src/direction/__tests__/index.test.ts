@@ -1,177 +1,385 @@
 /**
  * Direction Module Index Tests
- * Verifies all exports are properly available from index
+ * Testing exports and utility functions
  */
 
 import { describe, it, expect } from 'vitest';
 import {
   // Types
-  CameraKeyframe,
   CameraPreset,
-  CameraPresetName,
-  LayoutSlot,
+  CameraKeyframe,
+  CameraState,
+  CameraEasing,
   LayoutPreset,
-  LayoutPresetName,
-  TimingEntry,
+  LayoutSlot,
+  LayoutRole,
+  LayoutAnchor,
   TimingPreset,
-  TimingPresetName,
+  TimingEntry,
+  EnterAnimationType,
+  ExitAnimationType,
+  DirectionConfig,
+  ResolvedLayoutSlot,
+
   // Camera exports
   CAMERA_PRESETS,
-  CAMERA_PRESET_NAMES,
-  MVP_CAMERA_PRESET_NAMES,
-  V2_CAMERA_PRESET_NAMES,
+  CAMERA_NAMES,
   getCameraPreset,
-  DEFAULT_CAMERA_PRESET,
+  hasCameraPreset,
+  calculateCameraState,
+  MVP_CAMERA_NAMES,
+  V2_CAMERA_NAMES,
+  V3_CAMERA_NAMES,
+
   // Layout exports
   LAYOUT_PRESETS,
-  LAYOUT_PRESET_NAMES,
-  MVP_LAYOUT_PRESET_NAMES,
-  V2_LAYOUT_PRESET_NAMES,
+  LAYOUT_NAMES,
   getLayoutPreset,
-  DEFAULT_LAYOUT_PRESET,
+  hasLayoutPreset,
   getSlotByRole,
+  getSlotsByRole,
+  resolveSlotPosition,
+  MVP_LAYOUT_NAMES,
+  V2_LAYOUT_NAMES,
+  V3_LAYOUT_NAMES,
+
   // Timing exports
   TIMING_PRESETS,
-  TIMING_PRESET_NAMES,
-  MVP_TIMING_PRESET_NAMES,
-  V2_TIMING_PRESET_NAMES,
+  TIMING_NAMES,
   getTimingPreset,
-  DEFAULT_TIMING_PRESET,
-  getTimingByTarget,
-  getTimingEntriesSorted,
+  hasTimingPreset,
+  getTimingForTarget,
+  calculateTotalDuration,
+  getSortedEntries,
+  MVP_TIMING_NAMES,
+  V2_TIMING_NAMES,
+  V3_TIMING_NAMES,
+
+  // Index utility functions
+  getDirectionPreset,
+  validateDirectionConfig,
+  getPresetCounts,
 } from '../index';
 
-describe('Direction Module Index Exports', () => {
-  describe('Camera Exports', () => {
-    it('should export CAMERA_PRESETS', () => {
-      expect(CAMERA_PRESETS).toBeDefined();
-      expect(Object.keys(CAMERA_PRESETS).length).toBe(10);
+describe('Direction Module Index', () => {
+  // ==========================================================================
+  // Export Verification
+  // ==========================================================================
+  describe('Export Verification', () => {
+    describe('Camera exports', () => {
+      it('should export CAMERA_PRESETS', () => {
+        expect(CAMERA_PRESETS).toBeDefined();
+        expect(typeof CAMERA_PRESETS).toBe('object');
+      });
+
+      it('should export CAMERA_NAMES', () => {
+        expect(CAMERA_NAMES).toBeDefined();
+        expect(Array.isArray(CAMERA_NAMES)).toBe(true);
+      });
+
+      it('should export camera helper functions', () => {
+        expect(typeof getCameraPreset).toBe('function');
+        expect(typeof hasCameraPreset).toBe('function');
+        expect(typeof calculateCameraState).toBe('function');
+      });
+
+      it('should export camera name arrays', () => {
+        expect(MVP_CAMERA_NAMES).toBeDefined();
+        expect(V2_CAMERA_NAMES).toBeDefined();
+        expect(V3_CAMERA_NAMES).toBeDefined();
+      });
     });
 
-    it('should export CAMERA_PRESET_NAMES', () => {
-      expect(CAMERA_PRESET_NAMES).toBeDefined();
-      expect(CAMERA_PRESET_NAMES.length).toBe(10);
+    describe('Layout exports', () => {
+      it('should export LAYOUT_PRESETS', () => {
+        expect(LAYOUT_PRESETS).toBeDefined();
+        expect(typeof LAYOUT_PRESETS).toBe('object');
+      });
+
+      it('should export LAYOUT_NAMES', () => {
+        expect(LAYOUT_NAMES).toBeDefined();
+        expect(Array.isArray(LAYOUT_NAMES)).toBe(true);
+      });
+
+      it('should export layout helper functions', () => {
+        expect(typeof getLayoutPreset).toBe('function');
+        expect(typeof hasLayoutPreset).toBe('function');
+        expect(typeof getSlotByRole).toBe('function');
+        expect(typeof getSlotsByRole).toBe('function');
+        expect(typeof resolveSlotPosition).toBe('function');
+      });
+
+      it('should export layout name arrays', () => {
+        expect(MVP_LAYOUT_NAMES).toBeDefined();
+        expect(V2_LAYOUT_NAMES).toBeDefined();
+        expect(V3_LAYOUT_NAMES).toBeDefined();
+      });
     });
 
-    it('should export MVP_CAMERA_PRESET_NAMES', () => {
-      expect(MVP_CAMERA_PRESET_NAMES).toBeDefined();
-      expect(MVP_CAMERA_PRESET_NAMES.length).toBe(5);
-    });
+    describe('Timing exports', () => {
+      it('should export TIMING_PRESETS', () => {
+        expect(TIMING_PRESETS).toBeDefined();
+        expect(typeof TIMING_PRESETS).toBe('object');
+      });
 
-    it('should export V2_CAMERA_PRESET_NAMES', () => {
-      expect(V2_CAMERA_PRESET_NAMES).toBeDefined();
-      expect(V2_CAMERA_PRESET_NAMES.length).toBe(5);
-    });
+      it('should export TIMING_NAMES', () => {
+        expect(TIMING_NAMES).toBeDefined();
+        expect(Array.isArray(TIMING_NAMES)).toBe(true);
+      });
 
-    it('should export getCameraPreset function', () => {
-      expect(typeof getCameraPreset).toBe('function');
-    });
+      it('should export timing helper functions', () => {
+        expect(typeof getTimingPreset).toBe('function');
+        expect(typeof hasTimingPreset).toBe('function');
+        expect(typeof getTimingForTarget).toBe('function');
+        expect(typeof calculateTotalDuration).toBe('function');
+        expect(typeof getSortedEntries).toBe('function');
+      });
 
-    it('should export DEFAULT_CAMERA_PRESET', () => {
-      expect(DEFAULT_CAMERA_PRESET).toBeDefined();
-      expect(DEFAULT_CAMERA_PRESET.name).toBe('static_full');
-    });
-  });
-
-  describe('Layout Exports', () => {
-    it('should export LAYOUT_PRESETS', () => {
-      expect(LAYOUT_PRESETS).toBeDefined();
-      expect(Object.keys(LAYOUT_PRESETS).length).toBe(18);
-    });
-
-    it('should export LAYOUT_PRESET_NAMES', () => {
-      expect(LAYOUT_PRESET_NAMES).toBeDefined();
-      expect(LAYOUT_PRESET_NAMES.length).toBe(18);
-    });
-
-    it('should export MVP_LAYOUT_PRESET_NAMES', () => {
-      expect(MVP_LAYOUT_PRESET_NAMES).toBeDefined();
-      expect(MVP_LAYOUT_PRESET_NAMES.length).toBe(10);
-    });
-
-    it('should export V2_LAYOUT_PRESET_NAMES', () => {
-      expect(V2_LAYOUT_PRESET_NAMES).toBeDefined();
-      expect(V2_LAYOUT_PRESET_NAMES.length).toBe(8);
-    });
-
-    it('should export getLayoutPreset function', () => {
-      expect(typeof getLayoutPreset).toBe('function');
-    });
-
-    it('should export DEFAULT_LAYOUT_PRESET', () => {
-      expect(DEFAULT_LAYOUT_PRESET).toBeDefined();
-      expect(DEFAULT_LAYOUT_PRESET.name).toBe('center_single');
-    });
-
-    it('should export getSlotByRole function', () => {
-      expect(typeof getSlotByRole).toBe('function');
-    });
-  });
-
-  describe('Timing Exports', () => {
-    it('should export TIMING_PRESETS', () => {
-      expect(TIMING_PRESETS).toBeDefined();
-      expect(Object.keys(TIMING_PRESETS).length).toBe(10);
-    });
-
-    it('should export TIMING_PRESET_NAMES', () => {
-      expect(TIMING_PRESET_NAMES).toBeDefined();
-      expect(TIMING_PRESET_NAMES.length).toBe(10);
-    });
-
-    it('should export MVP_TIMING_PRESET_NAMES', () => {
-      expect(MVP_TIMING_PRESET_NAMES).toBeDefined();
-      expect(MVP_TIMING_PRESET_NAMES.length).toBe(5);
-    });
-
-    it('should export V2_TIMING_PRESET_NAMES', () => {
-      expect(V2_TIMING_PRESET_NAMES).toBeDefined();
-      expect(V2_TIMING_PRESET_NAMES.length).toBe(5);
-    });
-
-    it('should export getTimingPreset function', () => {
-      expect(typeof getTimingPreset).toBe('function');
-    });
-
-    it('should export DEFAULT_TIMING_PRESET', () => {
-      expect(DEFAULT_TIMING_PRESET).toBeDefined();
-      expect(DEFAULT_TIMING_PRESET.name).toBe('all_at_once');
-    });
-
-    it('should export getTimingByTarget function', () => {
-      expect(typeof getTimingByTarget).toBe('function');
-    });
-
-    it('should export getTimingEntriesSorted function', () => {
-      expect(typeof getTimingEntriesSorted).toBe('function');
+      it('should export timing name arrays', () => {
+        expect(MVP_TIMING_NAMES).toBeDefined();
+        expect(V2_TIMING_NAMES).toBeDefined();
+        expect(V3_TIMING_NAMES).toBeDefined();
+      });
     });
   });
 
-  describe('Total Preset Counts Summary', () => {
-    it('should have 10 Camera presets (5 MVP + 5 V2)', () => {
-      const total = MVP_CAMERA_PRESET_NAMES.length + V2_CAMERA_PRESET_NAMES.length;
-      expect(total).toBe(10);
-      expect(CAMERA_PRESET_NAMES.length).toBe(total);
+  // ==========================================================================
+  // getDirectionPreset
+  // ==========================================================================
+  describe('getDirectionPreset', () => {
+    it('should return camera preset for type "camera"', () => {
+      const preset = getDirectionPreset('camera', 'static_full');
+      expect(preset).toBeDefined();
+      expect(preset?.name).toBe('static_full');
     });
 
-    it('should have 18 Layout presets (10 MVP + 8 V2)', () => {
-      const total = MVP_LAYOUT_PRESET_NAMES.length + V2_LAYOUT_PRESET_NAMES.length;
-      expect(total).toBe(18);
-      expect(LAYOUT_PRESET_NAMES.length).toBe(total);
+    it('should return layout preset for type "layout"', () => {
+      const preset = getDirectionPreset('layout', 'center_single');
+      expect(preset).toBeDefined();
+      expect(preset?.name).toBe('center_single');
     });
 
-    it('should have 10 Timing presets (5 MVP + 5 V2)', () => {
-      const total = MVP_TIMING_PRESET_NAMES.length + V2_TIMING_PRESET_NAMES.length;
-      expect(total).toBe(10);
-      expect(TIMING_PRESET_NAMES.length).toBe(total);
+    it('should return timing preset for type "timing"', () => {
+      const preset = getDirectionPreset('timing', 'all_at_once');
+      expect(preset).toBeDefined();
+      expect(preset?.name).toBe('all_at_once');
     });
 
-    it('should have 38 total presets', () => {
+    it('should return undefined for invalid preset name', () => {
+      const preset = getDirectionPreset('camera', 'invalid_preset');
+      expect(preset).toBeUndefined();
+    });
+
+    it('should return undefined for invalid type', () => {
+      // @ts-expect-error Testing invalid type
+      const preset = getDirectionPreset('invalid', 'static_full');
+      expect(preset).toBeUndefined();
+    });
+  });
+
+  // ==========================================================================
+  // validateDirectionConfig
+  // ==========================================================================
+  describe('validateDirectionConfig', () => {
+    it('should validate valid camera config', () => {
+      const result = validateDirectionConfig({ camera: 'static_full' });
+      expect(result.valid).toBe(true);
+      expect(result.errors).toHaveLength(0);
+    });
+
+    it('should validate valid layout config', () => {
+      const result = validateDirectionConfig({ layout: 'center_single' });
+      expect(result.valid).toBe(true);
+      expect(result.errors).toHaveLength(0);
+    });
+
+    it('should validate valid timing config', () => {
+      const result = validateDirectionConfig({ timing: 'all_at_once' });
+      expect(result.valid).toBe(true);
+      expect(result.errors).toHaveLength(0);
+    });
+
+    it('should validate combined valid config', () => {
+      const result = validateDirectionConfig({
+        camera: 'static_full',
+        layout: 'center_single',
+        timing: 'all_at_once'
+      });
+      expect(result.valid).toBe(true);
+      expect(result.errors).toHaveLength(0);
+    });
+
+    it('should detect invalid camera preset', () => {
+      const result = validateDirectionConfig({ camera: 'invalid_camera' });
+      expect(result.valid).toBe(false);
+      expect(result.errors).toHaveLength(1);
+      expect(result.errors[0]).toContain('camera');
+    });
+
+    it('should detect invalid layout preset', () => {
+      const result = validateDirectionConfig({ layout: 'invalid_layout' });
+      expect(result.valid).toBe(false);
+      expect(result.errors).toHaveLength(1);
+      expect(result.errors[0]).toContain('layout');
+    });
+
+    it('should detect invalid timing preset', () => {
+      const result = validateDirectionConfig({ timing: 'invalid_timing' });
+      expect(result.valid).toBe(false);
+      expect(result.errors).toHaveLength(1);
+      expect(result.errors[0]).toContain('timing');
+    });
+
+    it('should detect multiple invalid presets', () => {
+      const result = validateDirectionConfig({
+        camera: 'invalid_camera',
+        layout: 'invalid_layout',
+        timing: 'invalid_timing'
+      });
+      expect(result.valid).toBe(false);
+      expect(result.errors).toHaveLength(3);
+    });
+
+    it('should accept preset objects', () => {
+      const result = validateDirectionConfig({
+        camera: CAMERA_PRESETS['static_full'],
+        layout: LAYOUT_PRESETS['center_single'],
+        timing: TIMING_PRESETS['all_at_once']
+      });
+      expect(result.valid).toBe(true);
+    });
+
+    it('should validate empty config', () => {
+      const result = validateDirectionConfig({});
+      expect(result.valid).toBe(true);
+      expect(result.errors).toHaveLength(0);
+    });
+  });
+
+  // ==========================================================================
+  // getPresetCounts
+  // ==========================================================================
+  describe('getPresetCounts', () => {
+    it('should return correct counts', () => {
+      const counts = getPresetCounts();
+      expect(counts.camera).toBe(15);
+      expect(counts.layout).toBe(25);
+      expect(counts.timing).toBe(15);
+      expect(counts.total).toBe(55);
+    });
+
+    it('should match actual preset object keys', () => {
+      const counts = getPresetCounts();
+      expect(counts.camera).toBe(Object.keys(CAMERA_PRESETS).length);
+      expect(counts.layout).toBe(Object.keys(LAYOUT_PRESETS).length);
+      expect(counts.timing).toBe(Object.keys(TIMING_PRESETS).length);
+    });
+  });
+
+  // ==========================================================================
+  // Version Breakdown
+  // ==========================================================================
+  describe('Version Breakdown', () => {
+    describe('Camera presets by version', () => {
+      it('should have 5 MVP camera presets', () => {
+        expect(MVP_CAMERA_NAMES).toHaveLength(5);
+        MVP_CAMERA_NAMES.forEach(name => {
+          expect(CAMERA_PRESETS[name]).toBeDefined();
+        });
+      });
+
+      it('should have 5 V2 camera presets', () => {
+        expect(V2_CAMERA_NAMES).toHaveLength(5);
+        V2_CAMERA_NAMES.forEach(name => {
+          expect(CAMERA_PRESETS[name]).toBeDefined();
+        });
+      });
+
+      it('should have 5 V3 camera presets', () => {
+        expect(V3_CAMERA_NAMES).toHaveLength(5);
+        V3_CAMERA_NAMES.forEach(name => {
+          expect(CAMERA_PRESETS[name]).toBeDefined();
+        });
+      });
+    });
+
+    describe('Layout presets by version', () => {
+      it('should have 10 MVP layout presets', () => {
+        expect(MVP_LAYOUT_NAMES).toHaveLength(10);
+        MVP_LAYOUT_NAMES.forEach(name => {
+          expect(LAYOUT_PRESETS[name]).toBeDefined();
+        });
+      });
+
+      it('should have 8 V2 layout presets', () => {
+        expect(V2_LAYOUT_NAMES).toHaveLength(8);
+        V2_LAYOUT_NAMES.forEach(name => {
+          expect(LAYOUT_PRESETS[name]).toBeDefined();
+        });
+      });
+
+      it('should have 7 V3 layout presets', () => {
+        expect(V3_LAYOUT_NAMES).toHaveLength(7);
+        V3_LAYOUT_NAMES.forEach(name => {
+          expect(LAYOUT_PRESETS[name]).toBeDefined();
+        });
+      });
+    });
+
+    describe('Timing presets by version', () => {
+      it('should have 5 MVP timing presets', () => {
+        expect(MVP_TIMING_NAMES).toHaveLength(5);
+        MVP_TIMING_NAMES.forEach(name => {
+          expect(TIMING_PRESETS[name]).toBeDefined();
+        });
+      });
+
+      it('should have 5 V2 timing presets', () => {
+        expect(V2_TIMING_NAMES).toHaveLength(5);
+        V2_TIMING_NAMES.forEach(name => {
+          expect(TIMING_PRESETS[name]).toBeDefined();
+        });
+      });
+
+      it('should have 5 V3 timing presets', () => {
+        expect(V3_TIMING_NAMES).toHaveLength(5);
+        V3_TIMING_NAMES.forEach(name => {
+          expect(TIMING_PRESETS[name]).toBeDefined();
+        });
+      });
+    });
+  });
+
+  // ==========================================================================
+  // Total Preset Summary
+  // ==========================================================================
+  describe('Total Preset Summary', () => {
+    it('should have 55 total presets across all categories', () => {
       const total =
-        CAMERA_PRESET_NAMES.length +
-        LAYOUT_PRESET_NAMES.length +
-        TIMING_PRESET_NAMES.length;
-      expect(total).toBe(38);
+        Object.keys(CAMERA_PRESETS).length +
+        Object.keys(LAYOUT_PRESETS).length +
+        Object.keys(TIMING_PRESETS).length;
+      expect(total).toBe(55);
+    });
+
+    it('should have correct breakdown: 15 camera + 25 layout + 15 timing', () => {
+      expect(Object.keys(CAMERA_PRESETS).length).toBe(15);
+      expect(Object.keys(LAYOUT_PRESETS).length).toBe(25);
+      expect(Object.keys(TIMING_PRESETS).length).toBe(15);
+    });
+
+    it('should have correct version totals', () => {
+      // MVP: 5 + 10 + 5 = 20
+      const mvpTotal = MVP_CAMERA_NAMES.length + MVP_LAYOUT_NAMES.length + MVP_TIMING_NAMES.length;
+      expect(mvpTotal).toBe(20);
+
+      // V2: 5 + 8 + 5 = 18
+      const v2Total = V2_CAMERA_NAMES.length + V2_LAYOUT_NAMES.length + V2_TIMING_NAMES.length;
+      expect(v2Total).toBe(18);
+
+      // V3: 5 + 7 + 5 = 17
+      const v3Total = V3_CAMERA_NAMES.length + V3_LAYOUT_NAMES.length + V3_TIMING_NAMES.length;
+      expect(v3Total).toBe(17);
     });
   });
 });

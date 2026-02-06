@@ -1,14 +1,23 @@
 /**
  * IconElement - SVG icon display with animation
- *
- * Refactored to use useAnimationPhases hook for cleaner code
  */
 
 import React from 'react';
-import { staticFile } from 'remotion';
+import { useCurrentFrame, useVideoConfig, staticFile } from 'remotion';
 import { IconProps, AnimationDef } from '../types/schema';
-import { useAnimationPhases } from '../hooks/useAnimationPhases';
-import { ICON } from '../constants';
+import {
+  calculateEnterAnimation,
+  ENTER_DURATIONS,
+} from '../animations/enter';
+import {
+  calculateDuringAnimation,
+  DURING_CYCLES,
+} from '../animations/during';
+import {
+  calculateExitAnimation,
+  EXIT_DURATIONS,
+} from '../animations/exit';
+import { msToFrames } from '../utils/timing';
 
 interface IconElementProps {
   props: IconProps;
@@ -172,781 +181,370 @@ const INLINE_ICONS: Record<string, React.FC<{ size: number; color: string }>> = 
   ),
 
   // ============================================
-  // MVP 아이콘 (10개)
+  // L1 V3 추가 아이콘
   // ============================================
 
-  'coin': ({ size, color }) => (
+  // 금융/비즈니스 아이콘
+  'dollar': ({ size, color }) => (
     <svg width={size} height={size} viewBox="0 0 24 24" fill="none">
-      <circle
-        cx="12"
-        cy="12"
-        r="9"
-        fill={color}
-        fillOpacity="0.3"
-        stroke={color}
-        strokeWidth="1.5"
-      />
-      <text
-        x="12"
-        y="16"
-        textAnchor="middle"
-        fill={color}
-        fontSize="10"
-        fontWeight="bold"
-      >$</text>
-    </svg>
-  ),
-
-  'bank': ({ size, color }) => (
-    <svg width={size} height={size} viewBox="0 0 24 24" fill="none">
-      <path
-        d="M3 21H21"
-        stroke={color}
-        strokeWidth="1.5"
-        strokeLinecap="round"
-      />
-      <path
-        d="M5 21V11"
-        stroke={color}
-        strokeWidth="1.5"
-      />
-      <path
-        d="M9 21V11"
-        stroke={color}
-        strokeWidth="1.5"
-      />
-      <path
-        d="M15 21V11"
-        stroke={color}
-        strokeWidth="1.5"
-      />
-      <path
-        d="M19 21V11"
-        stroke={color}
-        strokeWidth="1.5"
-      />
-      <path
-        d="M12 3L3 9H21L12 3Z"
-        fill={color}
-        fillOpacity="0.3"
-        stroke={color}
-        strokeWidth="1.5"
-        strokeLinejoin="round"
-      />
+      <circle cx="12" cy="12" r="9" fill={color} fillOpacity="0.3" stroke={color} strokeWidth="1.5" />
+      <path d="M12 6V18M9 9C9 7.9 10.3 7 12 7C13.7 7 15 7.9 15 9C15 10.1 13.7 11 12 11C10.3 11 9 11.9 9 13C9 14.1 10.3 15 12 15C13.7 15 15 14.1 15 13" stroke={color} strokeWidth="1.5" strokeLinecap="round" />
     </svg>
   ),
 
   'wallet': ({ size, color }) => (
     <svg width={size} height={size} viewBox="0 0 24 24" fill="none">
-      <rect
-        x="3"
-        y="6"
-        width="18"
-        height="14"
-        rx="2"
-        fill={color}
-        fillOpacity="0.3"
-        stroke={color}
-        strokeWidth="1.5"
-      />
-      <path
-        d="M3 10H21"
-        stroke={color}
-        strokeWidth="1.5"
-      />
+      <rect x="3" y="6" width="18" height="14" rx="2" fill={color} fillOpacity="0.3" stroke={color} strokeWidth="1.5" />
+      <path d="M3 10H21" stroke={color} strokeWidth="1.5" />
       <circle cx="17" cy="14" r="1.5" fill={color} />
     </svg>
   ),
 
-  'checkmark': ({ size, color }) => (
+  'bank': ({ size, color }) => (
     <svg width={size} height={size} viewBox="0 0 24 24" fill="none">
-      <path
-        d="M5 12L10 17L20 7"
-        stroke={color}
-        strokeWidth="2.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
+      <path d="M3 21H21M3 10H21M5 10V21M9 10V21M15 10V21M19 10V21" stroke={color} strokeWidth="1.5" strokeLinecap="round" />
+      <path d="M12 3L3 10H21L12 3Z" fill={color} fillOpacity="0.3" stroke={color} strokeWidth="1.5" strokeLinejoin="round" />
     </svg>
   ),
-
-  'cross': ({ size, color }) => (
-    <svg width={size} height={size} viewBox="0 0 24 24" fill="none">
-      <path
-        d="M6 6L18 18M18 6L6 18"
-        stroke={color}
-        strokeWidth="2.5"
-        strokeLinecap="round"
-      />
-    </svg>
-  ),
-
-  'target': ({ size, color }) => (
-    <svg width={size} height={size} viewBox="0 0 24 24" fill="none">
-      <circle
-        cx="12"
-        cy="12"
-        r="9"
-        stroke={color}
-        strokeWidth="1.5"
-      />
-      <circle
-        cx="12"
-        cy="12"
-        r="5"
-        stroke={color}
-        strokeWidth="1.5"
-      />
-      <circle cx="12" cy="12" r="2" fill={color} />
-    </svg>
-  ),
-
-  'book': ({ size, color }) => (
-    <svg width={size} height={size} viewBox="0 0 24 24" fill="none">
-      <path
-        d="M4 4C4 4 5 3 8 3C11 3 12 4 12 4V20C12 20 11 19 8 19C5 19 4 20 4 20V4Z"
-        fill={color}
-        fillOpacity="0.3"
-        stroke={color}
-        strokeWidth="1.5"
-        strokeLinejoin="round"
-      />
-      <path
-        d="M20 4C20 4 19 3 16 3C13 3 12 4 12 4V20C12 20 13 19 16 19C19 19 20 20 20 20V4Z"
-        fill={color}
-        fillOpacity="0.3"
-        stroke={color}
-        strokeWidth="1.5"
-        strokeLinejoin="round"
-      />
-    </svg>
-  ),
-
-  'arrow-up': ({ size, color }) => (
-    <svg width={size} height={size} viewBox="0 0 24 24" fill="none">
-      <path
-        d="M12 19V5M12 5L5 12M12 5L19 12"
-        stroke={color}
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </svg>
-  ),
-
-  'arrow-down': ({ size, color }) => (
-    <svg width={size} height={size} viewBox="0 0 24 24" fill="none">
-      <path
-        d="M12 5V19M12 19L5 12M12 19L19 12"
-        stroke={color}
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </svg>
-  ),
-
-  'question': ({ size, color }) => (
-    <svg width={size} height={size} viewBox="0 0 24 24" fill="none">
-      <circle
-        cx="12"
-        cy="12"
-        r="9"
-        fill={color}
-        fillOpacity="0.3"
-        stroke={color}
-        strokeWidth="1.5"
-      />
-      <path
-        d="M9 9C9 7.5 10.5 6 12 6C13.5 6 15 7.5 15 9C15 10.5 13 11 12 12V14"
-        stroke={color}
-        strokeWidth="1.5"
-        strokeLinecap="round"
-      />
-      <circle cx="12" cy="17" r="1" fill={color} />
-    </svg>
-  ),
-
-  // ============================================
-  // V2 아이콘 (25개)
-  // ============================================
 
   'credit-card': ({ size, color }) => (
     <svg width={size} height={size} viewBox="0 0 24 24" fill="none">
-      <rect
-        x="2"
-        y="5"
-        width="20"
-        height="14"
-        rx="2"
-        fill={color}
-        fillOpacity="0.3"
-        stroke={color}
-        strokeWidth="1.5"
-      />
-      <path d="M2 9H22" stroke={color} strokeWidth="1.5" />
+      <rect x="2" y="5" width="20" height="14" rx="2" fill={color} fillOpacity="0.3" stroke={color} strokeWidth="1.5" />
+      <path d="M2 10H22" stroke={color} strokeWidth="1.5" />
       <path d="M6 15H10" stroke={color} strokeWidth="1.5" strokeLinecap="round" />
+    </svg>
+  ),
+
+  'coins': ({ size, color }) => (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none">
+      <ellipse cx="9" cy="14" rx="6" ry="3" fill={color} fillOpacity="0.3" stroke={color} strokeWidth="1.5" />
+      <path d="M15 14V10C15 8.34 12.31 7 9 7S3 8.34 3 10V14" stroke={color} strokeWidth="1.5" />
+      <ellipse cx="9" cy="10" rx="6" ry="3" stroke={color} strokeWidth="1.5" />
+      <path d="M21 10V14C21 15.66 18.31 17 15 17" stroke={color} strokeWidth="1.5" />
+      <ellipse cx="15" cy="10" rx="6" ry="3" stroke={color} strokeWidth="1.5" />
     </svg>
   ),
 
   'chart-down': ({ size, color }) => (
     <svg width={size} height={size} viewBox="0 0 24 24" fill="none">
-      <path
-        d="M3 4L9 10L13 6L21 14"
-        stroke={color}
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-      <path
-        d="M17 14H21V10"
-        stroke={color}
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
+      <path d="M3 4L9 10L13 6L21 14" stroke={color} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+      <path d="M17 14H21V10" stroke={color} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
     </svg>
   ),
 
-  'calculator': ({ size, color }) => (
+  'chart-bar': ({ size, color }) => (
     <svg width={size} height={size} viewBox="0 0 24 24" fill="none">
-      <rect
-        x="4"
-        y="2"
-        width="16"
-        height="20"
-        rx="2"
-        fill={color}
-        fillOpacity="0.3"
-        stroke={color}
-        strokeWidth="1.5"
-      />
-      <rect x="6" y="4" width="12" height="4" rx="1" stroke={color} strokeWidth="1" />
-      <circle cx="8" cy="12" r="1" fill={color} />
-      <circle cx="12" cy="12" r="1" fill={color} />
-      <circle cx="16" cy="12" r="1" fill={color} />
-      <circle cx="8" cy="16" r="1" fill={color} />
-      <circle cx="12" cy="16" r="1" fill={color} />
-      <circle cx="16" cy="16" r="1" fill={color} />
-      <circle cx="8" cy="20" r="1" fill={color} />
-      <circle cx="12" cy="20" r="1" fill={color} />
-      <circle cx="16" cy="20" r="1" fill={color} />
+      <rect x="3" y="12" width="4" height="8" fill={color} fillOpacity="0.3" stroke={color} strokeWidth="1.5" />
+      <rect x="10" y="6" width="4" height="14" fill={color} fillOpacity="0.3" stroke={color} strokeWidth="1.5" />
+      <rect x="17" y="9" width="4" height="11" fill={color} fillOpacity="0.3" stroke={color} strokeWidth="1.5" />
     </svg>
   ),
 
-  'briefcase': ({ size, color }) => (
+  'chart-pie': ({ size, color }) => (
     <svg width={size} height={size} viewBox="0 0 24 24" fill="none">
-      <rect
-        x="2"
-        y="7"
-        width="20"
-        height="13"
-        rx="2"
-        fill={color}
-        fillOpacity="0.3"
-        stroke={color}
-        strokeWidth="1.5"
-      />
-      <path
-        d="M8 7V5C8 3.9 8.9 3 10 3H14C15.1 3 16 3.9 16 5V7"
-        stroke={color}
-        strokeWidth="1.5"
-      />
-      <path d="M12 11V15" stroke={color} strokeWidth="1.5" strokeLinecap="round" />
-      <path d="M2 13H22" stroke={color} strokeWidth="1.5" />
+      <circle cx="12" cy="12" r="9" fill={color} fillOpacity="0.3" stroke={color} strokeWidth="1.5" />
+      <path d="M12 3V12L19 16" stroke={color} strokeWidth="1.5" strokeLinecap="round" />
     </svg>
   ),
 
+  // 일반 아이콘
   'heart': ({ size, color }) => (
     <svg width={size} height={size} viewBox="0 0 24 24" fill="none">
-      <path
-        d="M12 21C12 21 3 14 3 8.5C3 5.5 5.5 3 8.5 3C10.24 3 11.91 3.81 12 5C12.09 3.81 13.76 3 15.5 3C18.5 3 21 5.5 21 8.5C21 14 12 21 12 21Z"
-        fill={color}
-        fillOpacity="0.3"
-        stroke={color}
-        strokeWidth="1.5"
-        strokeLinejoin="round"
-      />
-    </svg>
-  ),
-
-  'lock': ({ size, color }) => (
-    <svg width={size} height={size} viewBox="0 0 24 24" fill="none">
-      <rect
-        x="5"
-        y="11"
-        width="14"
-        height="10"
-        rx="2"
-        fill={color}
-        fillOpacity="0.3"
-        stroke={color}
-        strokeWidth="1.5"
-      />
-      <path
-        d="M8 11V7C8 4.8 9.8 3 12 3C14.2 3 16 4.8 16 7V11"
-        stroke={color}
-        strokeWidth="1.5"
-        strokeLinecap="round"
-      />
-      <circle cx="12" cy="16" r="1.5" fill={color} />
-    </svg>
-  ),
-
-  'gear': ({ size, color }) => (
-    <svg width={size} height={size} viewBox="0 0 24 24" fill="none">
-      <circle
-        cx="12"
-        cy="12"
-        r="3"
-        stroke={color}
-        strokeWidth="1.5"
-      />
-      <path
-        d="M12 2V4M12 20V22M2 12H4M20 12H22M4.93 4.93L6.34 6.34M17.66 17.66L19.07 19.07M4.93 19.07L6.34 17.66M17.66 6.34L19.07 4.93"
-        stroke={color}
-        strokeWidth="1.5"
-        strokeLinecap="round"
-      />
-    </svg>
-  ),
-
-  'graduation': ({ size, color }) => (
-    <svg width={size} height={size} viewBox="0 0 24 24" fill="none">
-      <path
-        d="M12 3L1 9L12 15L23 9L12 3Z"
-        fill={color}
-        fillOpacity="0.3"
-        stroke={color}
-        strokeWidth="1.5"
-        strokeLinejoin="round"
-      />
-      <path
-        d="M5 11V17C5 17 8 20 12 20C16 20 19 17 19 17V11"
-        stroke={color}
-        strokeWidth="1.5"
-      />
-      <path d="M21 9V16" stroke={color} strokeWidth="1.5" strokeLinecap="round" />
-    </svg>
-  ),
-
-  'magnifier': ({ size, color }) => (
-    <svg width={size} height={size} viewBox="0 0 24 24" fill="none">
-      <circle
-        cx="10"
-        cy="10"
-        r="7"
-        fill={color}
-        fillOpacity="0.3"
-        stroke={color}
-        strokeWidth="1.5"
-      />
-      <path
-        d="M15 15L21 21"
-        stroke={color}
-        strokeWidth="2"
-        strokeLinecap="round"
-      />
-    </svg>
-  ),
-
-  'globe': ({ size, color }) => (
-    <svg width={size} height={size} viewBox="0 0 24 24" fill="none">
-      <circle
-        cx="12"
-        cy="12"
-        r="9"
-        fill={color}
-        fillOpacity="0.3"
-        stroke={color}
-        strokeWidth="1.5"
-      />
-      <ellipse cx="12" cy="12" rx="4" ry="9" stroke={color} strokeWidth="1.5" />
-      <path d="M3 12H21" stroke={color} strokeWidth="1.5" />
-    </svg>
-  ),
-
-  'trophy': ({ size, color }) => (
-    <svg width={size} height={size} viewBox="0 0 24 24" fill="none">
-      <path
-        d="M8 21H16"
-        stroke={color}
-        strokeWidth="1.5"
-        strokeLinecap="round"
-      />
-      <path
-        d="M12 17V21"
-        stroke={color}
-        strokeWidth="1.5"
-      />
-      <path
-        d="M7 3H17V9C17 12 15 17 12 17C9 17 7 12 7 9V3Z"
-        fill={color}
-        fillOpacity="0.3"
-        stroke={color}
-        strokeWidth="1.5"
-      />
-      <path
-        d="M7 5H4V7C4 9 5 10 7 10"
-        stroke={color}
-        strokeWidth="1.5"
-      />
-      <path
-        d="M17 5H20V7C20 9 19 10 17 10"
-        stroke={color}
-        strokeWidth="1.5"
-      />
-    </svg>
-  ),
-
-  'arrow-right': ({ size, color }) => (
-    <svg width={size} height={size} viewBox="0 0 24 24" fill="none">
-      <path
-        d="M5 12H19M19 12L12 5M19 12L12 19"
-        stroke={color}
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </svg>
-  ),
-
-  'arrow-left': ({ size, color }) => (
-    <svg width={size} height={size} viewBox="0 0 24 24" fill="none">
-      <path
-        d="M19 12H5M5 12L12 5M5 12L12 19"
-        stroke={color}
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </svg>
-  ),
-
-  'compare': ({ size, color }) => (
-    <svg width={size} height={size} viewBox="0 0 24 24" fill="none">
-      <text
-        x="12"
-        y="16"
-        textAnchor="middle"
-        fill={color}
-        fontSize="14"
-        fontWeight="bold"
-        fontFamily="Arial, sans-serif"
-      >VS</text>
-    </svg>
-  ),
-
-  'percentage': ({ size, color }) => (
-    <svg width={size} height={size} viewBox="0 0 24 24" fill="none">
-      <circle cx="7" cy="7" r="3" stroke={color} strokeWidth="1.5" />
-      <circle cx="17" cy="17" r="3" stroke={color} strokeWidth="1.5" />
-      <path d="M18 6L6 18" stroke={color} strokeWidth="1.5" strokeLinecap="round" />
-    </svg>
-  ),
-
-  'money-stack': ({ size, color }) => (
-    <svg width={size} height={size} viewBox="0 0 24 24" fill="none">
-      <rect
-        x="2"
-        y="6"
-        width="20"
-        height="12"
-        rx="2"
-        fill={color}
-        fillOpacity="0.3"
-        stroke={color}
-        strokeWidth="1.5"
-      />
-      <circle cx="12" cy="12" r="3" stroke={color} strokeWidth="1.5" />
-      <path d="M2 10H4" stroke={color} strokeWidth="1.5" />
-      <path d="M20 10H22" stroke={color} strokeWidth="1.5" />
-      <path d="M2 14H4" stroke={color} strokeWidth="1.5" />
-      <path d="M20 14H22" stroke={color} strokeWidth="1.5" />
-    </svg>
-  ),
-
-  'savings': ({ size, color }) => (
-    <svg width={size} height={size} viewBox="0 0 24 24" fill="none">
-      <path
-        d="M19 10C19 5 15.5 2 12 2C8.5 2 5 5 5 10C5 15 8 18 8 18H16C16 18 19 15 19 10Z"
-        fill={color}
-        fillOpacity="0.3"
-        stroke={color}
-        strokeWidth="1.5"
-      />
-      <path d="M9 22H15" stroke={color} strokeWidth="1.5" strokeLinecap="round" />
-      <path d="M12 18V22" stroke={color} strokeWidth="1.5" />
-      <path d="M10 7L14 11" stroke={color} strokeWidth="1.5" strokeLinecap="round" />
-      <path d="M14 7L10 11" stroke={color} strokeWidth="1.5" strokeLinecap="round" />
-    </svg>
-  ),
-
-  'document': ({ size, color }) => (
-    <svg width={size} height={size} viewBox="0 0 24 24" fill="none">
-      <path
-        d="M14 2H6C4.9 2 4 2.9 4 4V20C4 21.1 4.9 22 6 22H18C19.1 22 20 21.1 20 20V8L14 2Z"
-        fill={color}
-        fillOpacity="0.3"
-        stroke={color}
-        strokeWidth="1.5"
-        strokeLinejoin="round"
-      />
-      <path d="M14 2V8H20" stroke={color} strokeWidth="1.5" />
-      <path d="M8 13H16" stroke={color} strokeWidth="1.5" strokeLinecap="round" />
-      <path d="M8 17H12" stroke={color} strokeWidth="1.5" strokeLinecap="round" />
-    </svg>
-  ),
-
-  'calendar': ({ size, color }) => (
-    <svg width={size} height={size} viewBox="0 0 24 24" fill="none">
-      <rect
-        x="3"
-        y="4"
-        width="18"
-        height="18"
-        rx="2"
-        fill={color}
-        fillOpacity="0.3"
-        stroke={color}
-        strokeWidth="1.5"
-      />
-      <path d="M3 9H21" stroke={color} strokeWidth="1.5" />
-      <path d="M8 2V6" stroke={color} strokeWidth="1.5" strokeLinecap="round" />
-      <path d="M16 2V6" stroke={color} strokeWidth="1.5" strokeLinecap="round" />
-      <circle cx="8" cy="14" r="1" fill={color} />
-      <circle cx="12" cy="14" r="1" fill={color} />
-      <circle cx="16" cy="14" r="1" fill={color} />
-    </svg>
-  ),
-
-  'rocket': ({ size, color }) => (
-    <svg width={size} height={size} viewBox="0 0 24 24" fill="none">
-      <path
-        d="M12 2C12 2 8 6 8 12C8 16 10 20 12 22C14 20 16 16 16 12C16 6 12 2 12 2Z"
-        fill={color}
-        fillOpacity="0.3"
-        stroke={color}
-        strokeWidth="1.5"
-        strokeLinejoin="round"
-      />
-      <circle cx="12" cy="10" r="2" stroke={color} strokeWidth="1.5" />
-      <path d="M8 14L4 16L6 12" stroke={color} strokeWidth="1.5" strokeLinejoin="round" />
-      <path d="M16 14L20 16L18 12" stroke={color} strokeWidth="1.5" strokeLinejoin="round" />
-    </svg>
-  ),
-
-  'shield': ({ size, color }) => (
-    <svg width={size} height={size} viewBox="0 0 24 24" fill="none">
-      <path
-        d="M12 2L4 6V12C4 16.5 7.5 20.5 12 22C16.5 20.5 20 16.5 20 12V6L12 2Z"
-        fill={color}
-        fillOpacity="0.3"
-        stroke={color}
-        strokeWidth="1.5"
-        strokeLinejoin="round"
-      />
-      <path d="M9 12L11 14L15 10" stroke={color} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-    </svg>
-  ),
-
-  'bell': ({ size, color }) => (
-    <svg width={size} height={size} viewBox="0 0 24 24" fill="none">
-      <path
-        d="M18 8C18 4.7 15.3 2 12 2C8.7 2 6 4.7 6 8C6 15 3 17 3 17H21C21 17 18 15 18 8Z"
-        fill={color}
-        fillOpacity="0.3"
-        stroke={color}
-        strokeWidth="1.5"
-        strokeLinejoin="round"
-      />
-      <path d="M13.7 21C13.5 21.4 13 21.7 12.4 21.9C11.5 22.1 10.5 21.9 9.9 21.3" stroke={color} strokeWidth="1.5" strokeLinecap="round" />
-    </svg>
-  ),
-
-  'home': ({ size, color }) => (
-    <svg width={size} height={size} viewBox="0 0 24 24" fill="none">
-      <path
-        d="M3 12L12 3L21 12"
-        stroke={color}
-        strokeWidth="1.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-      <path
-        d="M5 10V20C5 20.6 5.4 21 6 21H18C18.6 21 19 20.6 19 20V10"
-        fill={color}
-        fillOpacity="0.3"
-        stroke={color}
-        strokeWidth="1.5"
-      />
-      <rect x="9" y="14" width="6" height="7" stroke={color} strokeWidth="1.5" />
-    </svg>
-  ),
-
-  'user': ({ size, color }) => (
-    <svg width={size} height={size} viewBox="0 0 24 24" fill="none">
-      <circle
-        cx="12"
-        cy="8"
-        r="4"
-        fill={color}
-        fillOpacity="0.3"
-        stroke={color}
-        strokeWidth="1.5"
-      />
-      <path
-        d="M4 20C4 17 7.6 14 12 14C16.4 14 20 17 20 20"
-        stroke={color}
-        strokeWidth="1.5"
-        strokeLinecap="round"
-      />
-    </svg>
-  ),
-
-  'users': ({ size, color }) => (
-    <svg width={size} height={size} viewBox="0 0 24 24" fill="none">
-      <circle cx="9" cy="7" r="3" fill={color} fillOpacity="0.3" stroke={color} strokeWidth="1.5" />
-      <path d="M2 20C2 17 5 14 9 14C13 14 16 17 16 20" stroke={color} strokeWidth="1.5" strokeLinecap="round" />
-      <circle cx="17" cy="7" r="2.5" stroke={color} strokeWidth="1.5" />
-      <path d="M18 14C20.5 14.5 22 17 22 20" stroke={color} strokeWidth="1.5" strokeLinecap="round" />
+      <path d="M12 21C12 21 3 15 3 9C3 6 5.5 3 9 3C10.5 3 12 4 12 4C12 4 13.5 3 15 3C18.5 3 21 6 21 9C21 15 12 21 12 21Z" fill={color} fillOpacity="0.3" stroke={color} strokeWidth="1.5" strokeLinejoin="round" />
     </svg>
   ),
 
   'thumbs-up': ({ size, color }) => (
     <svg width={size} height={size} viewBox="0 0 24 24" fill="none">
-      <path
-        d="M7 22V11L10 3C11 3 13 4 13 7V10H20C21 10 22 11 21.8 12L20 20C19.8 21 19 22 18 22H7Z"
-        fill={color}
-        fillOpacity="0.3"
-        stroke={color}
-        strokeWidth="1.5"
-        strokeLinejoin="round"
-      />
-      <path d="M7 11H4V22H7" stroke={color} strokeWidth="1.5" />
+      <path d="M7 22V11M2 13V20C2 21.1 2.9 22 4 22H17C18.3 22 19.4 21.1 19.6 19.8L21 12.8C21.3 11.3 20.1 10 18.6 10H14V5C14 3.9 13.1 3 12 3L7 11" fill={color} fillOpacity="0.3" stroke={color} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
     </svg>
   ),
 
   'thumbs-down': ({ size, color }) => (
     <svg width={size} height={size} viewBox="0 0 24 24" fill="none">
-      <path
-        d="M7 2V13L10 21C11 21 13 20 13 17V14H20C21 14 22 13 21.8 12L20 4C19.8 3 19 2 18 2H7Z"
-        fill={color}
-        fillOpacity="0.3"
-        stroke={color}
-        strokeWidth="1.5"
-        strokeLinejoin="round"
-      />
-      <path d="M7 13H4V2H7" stroke={color} strokeWidth="1.5" />
+      <path d="M17 2V13M22 11V4C22 2.9 21.1 2 20 2H7C5.7 2 4.6 2.9 4.4 4.2L3 11.2C2.7 12.7 3.9 14 5.4 14H10V19C10 20.1 10.9 21 12 21L17 13" fill={color} fillOpacity="0.3" stroke={color} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  ),
+
+  'target': ({ size, color }) => (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="9" stroke={color} strokeWidth="1.5" />
+      <circle cx="12" cy="12" r="5" stroke={color} strokeWidth="1.5" />
+      <circle cx="12" cy="12" r="1" fill={color} />
+    </svg>
+  ),
+
+  'trophy': ({ size, color }) => (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none">
+      <path d="M8 21H16M12 17V21M6 4H18V9C18 12.3 15.3 15 12 15C8.7 15 6 12.3 6 9V4Z" fill={color} fillOpacity="0.3" stroke={color} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+      <path d="M6 4H4V7C4 8.1 4.9 9 6 9" stroke={color} strokeWidth="1.5" />
+      <path d="M18 4H20V7C20 8.1 19.1 9 18 9" stroke={color} strokeWidth="1.5" />
+    </svg>
+  ),
+
+  'medal': ({ size, color }) => (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="15" r="6" fill={color} fillOpacity="0.3" stroke={color} strokeWidth="1.5" />
+      <path d="M9 3L7 9H17L15 3H9Z" fill={color} fillOpacity="0.3" stroke={color} strokeWidth="1.5" strokeLinejoin="round" />
+      <path d="M12 12V15M10 14L12 15L14 14" stroke={color} strokeWidth="1.5" strokeLinecap="round" />
+    </svg>
+  ),
+
+  'rocket': ({ size, color }) => (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none">
+      <path d="M12 2C12 2 8 6 8 12C8 16 10 20 12 22C14 20 16 16 16 12C16 6 12 2 12 2Z" fill={color} fillOpacity="0.3" stroke={color} strokeWidth="1.5" strokeLinejoin="round" />
+      <circle cx="12" cy="10" r="2" fill={color} />
+      <path d="M5 15L8 12M19 15L16 12" stroke={color} strokeWidth="1.5" strokeLinecap="round" />
+    </svg>
+  ),
+
+  'calendar': ({ size, color }) => (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="4" width="18" height="18" rx="2" fill={color} fillOpacity="0.3" stroke={color} strokeWidth="1.5" />
+      <path d="M3 10H21M8 2V6M16 2V6" stroke={color} strokeWidth="1.5" strokeLinecap="round" />
+      <circle cx="8" cy="15" r="1" fill={color} />
+      <circle cx="12" cy="15" r="1" fill={color} />
+      <circle cx="16" cy="15" r="1" fill={color} />
+    </svg>
+  ),
+
+  'calculator': ({ size, color }) => (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none">
+      <rect x="4" y="2" width="16" height="20" rx="2" fill={color} fillOpacity="0.3" stroke={color} strokeWidth="1.5" />
+      <rect x="7" y="5" width="10" height="4" fill={color} fillOpacity="0.5" rx="1" />
+      <circle cx="8" cy="13" r="1" fill={color} />
+      <circle cx="12" cy="13" r="1" fill={color} />
+      <circle cx="16" cy="13" r="1" fill={color} />
+      <circle cx="8" cy="17" r="1" fill={color} />
+      <circle cx="12" cy="17" r="1" fill={color} />
+      <circle cx="16" cy="17" r="1" fill={color} />
+    </svg>
+  ),
+
+  'percent': ({ size, color }) => (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none">
+      <circle cx="8" cy="8" r="3" fill={color} fillOpacity="0.3" stroke={color} strokeWidth="1.5" />
+      <circle cx="16" cy="16" r="3" fill={color} fillOpacity="0.3" stroke={color} strokeWidth="1.5" />
+      <path d="M19 5L5 19" stroke={color} strokeWidth="2" strokeLinecap="round" />
+    </svg>
+  ),
+
+  'trending': ({ size, color }) => (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none">
+      <path d="M2 20L8 14L12 18L22 8" stroke={color} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+      <path d="M16 8H22V14" stroke={color} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  ),
+
+  // 커뮤니케이션/미디어
+  'speech-bubble': ({ size, color }) => (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none">
+      <path d="M21 12C21 16.4 16.9 20 12 20C10.3 20 8.7 19.6 7.3 18.9L3 20L4.1 15.7C3.4 14.3 3 12.7 3 11C3 6.6 7.1 3 12 3C16.9 3 21 6.6 21 11V12Z" fill={color} fillOpacity="0.3" stroke={color} strokeWidth="1.5" strokeLinejoin="round" />
+    </svg>
+  ),
+
+  'megaphone': ({ size, color }) => (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none">
+      <path d="M3 11V13C3 14.1 3.9 15 5 15H6L8 21H10L8 15H9L18 19V5L9 9H5C3.9 9 3 9.9 3 11Z" fill={color} fillOpacity="0.3" stroke={color} strokeWidth="1.5" strokeLinejoin="round" />
+      <path d="M21 10V14" stroke={color} strokeWidth="2" strokeLinecap="round" />
+    </svg>
+  ),
+
+  'question': ({ size, color }) => (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="9" fill={color} fillOpacity="0.3" stroke={color} strokeWidth="1.5" />
+      <path d="M9 9C9 7.3 10.3 6 12 6C13.7 6 15 7.3 15 9C15 10.4 14.1 11.5 12.8 11.9C12.3 12 12 12.4 12 12.9V14" stroke={color} strokeWidth="1.5" strokeLinecap="round" />
+      <circle cx="12" cy="17" r="1" fill={color} />
+    </svg>
+  ),
+
+  'info': ({ size, color }) => (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="9" fill={color} fillOpacity="0.3" stroke={color} strokeWidth="1.5" />
+      <path d="M12 16V12M12 8V8.01" stroke={color} strokeWidth="2" strokeLinecap="round" />
+    </svg>
+  ),
+
+  'x-mark': ({ size, color }) => (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="9" fill={color} fillOpacity="0.3" stroke={color} strokeWidth="1.5" />
+      <path d="M8 8L16 16M16 8L8 16" stroke={color} strokeWidth="2" strokeLinecap="round" />
+    </svg>
+  ),
+
+  'plus': ({ size, color }) => (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="9" fill={color} fillOpacity="0.3" stroke={color} strokeWidth="1.5" />
+      <path d="M12 8V16M8 12H16" stroke={color} strokeWidth="2" strokeLinecap="round" />
+    </svg>
+  ),
+
+  'minus': ({ size, color }) => (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="9" fill={color} fillOpacity="0.3" stroke={color} strokeWidth="1.5" />
+      <path d="M8 12H16" stroke={color} strokeWidth="2" strokeLinecap="round" />
+    </svg>
+  ),
+
+  // 사람/그룹
+  'user': ({ size, color }) => (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="8" r="4" fill={color} fillOpacity="0.3" stroke={color} strokeWidth="1.5" />
+      <path d="M4 20C4 16.7 7.6 14 12 14C16.4 14 20 16.7 20 20" stroke={color} strokeWidth="1.5" strokeLinecap="round" />
+    </svg>
+  ),
+
+  'users': ({ size, color }) => (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none">
+      <circle cx="9" cy="8" r="3" fill={color} fillOpacity="0.3" stroke={color} strokeWidth="1.5" />
+      <circle cx="16" cy="8" r="3" fill={color} fillOpacity="0.3" stroke={color} strokeWidth="1.5" />
+      <path d="M3 20C3 17 5.7 15 9 15C9.7 15 10.4 15.1 11 15.3" stroke={color} strokeWidth="1.5" strokeLinecap="round" />
+      <path d="M11 15.3C11.6 15.1 12.3 15 13 15C16.3 15 19 17 19 20" stroke={color} strokeWidth="1.5" strokeLinecap="round" />
+    </svg>
+  ),
+
+  // 기타 유용한 아이콘
+  'lock': ({ size, color }) => (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none">
+      <rect x="5" y="11" width="14" height="10" rx="2" fill={color} fillOpacity="0.3" stroke={color} strokeWidth="1.5" />
+      <path d="M8 11V7C8 4.8 9.8 3 12 3C14.2 3 16 4.8 16 7V11" stroke={color} strokeWidth="1.5" strokeLinecap="round" />
+      <circle cx="12" cy="16" r="1.5" fill={color} />
+    </svg>
+  ),
+
+  'unlock': ({ size, color }) => (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none">
+      <rect x="5" y="11" width="14" height="10" rx="2" fill={color} fillOpacity="0.3" stroke={color} strokeWidth="1.5" />
+      <path d="M8 11V7C8 4.8 9.8 3 12 3C13.5 3 14.8 3.8 15.5 5" stroke={color} strokeWidth="1.5" strokeLinecap="round" />
+      <circle cx="12" cy="16" r="1.5" fill={color} />
+    </svg>
+  ),
+
+  'shield': ({ size, color }) => (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none">
+      <path d="M12 2L4 6V12C4 16.4 7.4 20.4 12 22C16.6 20.4 20 16.4 20 12V6L12 2Z" fill={color} fillOpacity="0.3" stroke={color} strokeWidth="1.5" strokeLinejoin="round" />
+      <path d="M9 12L11 14L15 10" stroke={color} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  ),
+
+  'gear': ({ size, color }) => (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="3" fill={color} fillOpacity="0.3" stroke={color} strokeWidth="1.5" />
+      <path d="M12 1V4M12 20V23M23 12H20M4 12H1M20.5 3.5L18.4 5.6M5.6 18.4L3.5 20.5M20.5 20.5L18.4 18.4M5.6 5.6L3.5 3.5" stroke={color} strokeWidth="1.5" strokeLinecap="round" />
+    </svg>
+  ),
+
+  'home': ({ size, color }) => (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none">
+      <path d="M3 10L12 3L21 10V20C21 20.6 20.6 21 20 21H4C3.4 21 3 20.6 3 20V10Z" fill={color} fillOpacity="0.3" stroke={color} strokeWidth="1.5" strokeLinejoin="round" />
+      <path d="M9 21V14H15V21" stroke={color} strokeWidth="1.5" strokeLinejoin="round" />
+    </svg>
+  ),
+
+  'briefcase': ({ size, color }) => (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none">
+      <rect x="2" y="7" width="20" height="14" rx="2" fill={color} fillOpacity="0.3" stroke={color} strokeWidth="1.5" />
+      <path d="M8 7V5C8 3.9 8.9 3 10 3H14C15.1 3 16 3.9 16 5V7" stroke={color} strokeWidth="1.5" />
+      <path d="M2 12H22" stroke={color} strokeWidth="1.5" />
+    </svg>
+  ),
+
+  'book': ({ size, color }) => (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none">
+      <path d="M4 4C4 4 4 3 6 3H20V21H6C4 21 4 20 4 20V4Z" fill={color} fillOpacity="0.3" stroke={color} strokeWidth="1.5" strokeLinejoin="round" />
+      <path d="M4 17C4 17 4 16 6 16H20" stroke={color} strokeWidth="1.5" />
+      <path d="M8 7H16M8 11H14" stroke={color} strokeWidth="1.5" strokeLinecap="round" />
+    </svg>
+  ),
+
+  'bulb': ({ size, color }) => (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none">
+      <path d="M12 2C8.1 2 5 5.1 5 9C5 11.4 6.2 13.5 8 14.7V17C8 17.6 8.4 18 9 18H15C15.6 18 16 17.6 16 17V14.7C17.8 13.5 19 11.4 19 9C19 5.1 15.9 2 12 2Z" fill={color} fillOpacity="0.3" stroke={color} strokeWidth="1.5" />
+      <path d="M9 21H15" stroke={color} strokeWidth="1.5" strokeLinecap="round" />
+      <path d="M10 18V21M14 18V21" stroke={color} strokeWidth="1.5" />
     </svg>
   ),
 
   'fire': ({ size, color }) => (
     <svg width={size} height={size} viewBox="0 0 24 24" fill="none">
-      <path
-        d="M12 2C12 2 8 6 8 10C8 12 9 14 10 15C9 16 8 18 8 19C8 21 10 23 12 23C14 23 16 21 16 19C16 18 15 16 14 15C15 14 16 12 16 10C16 6 12 2 12 2Z"
-        fill={color}
-        fillOpacity="0.3"
-        stroke={color}
-        strokeWidth="1.5"
-        strokeLinejoin="round"
-      />
-      <path d="M12 15C11 16 10 17 10 18C10 19.5 11 20 12 20C13 20 14 19.5 14 18C14 17 13 16 12 15Z" fill={color} />
+      <path d="M12 2C12 2 8 6 8 10C8 12 9 14 12 14C15 14 16 12 16 10C16 6 12 2 12 2Z" fill={color} fillOpacity="0.5" stroke={color} strokeWidth="1.5" strokeLinejoin="round" />
+      <path d="M12 22C8 22 5 19 5 15C5 11 8 8 12 10C16 8 19 11 19 15C19 19 16 22 12 22Z" fill={color} fillOpacity="0.3" stroke={color} strokeWidth="1.5" strokeLinejoin="round" />
     </svg>
   ),
 
-  'bolt': ({ size, color }) => (
+  'lightning': ({ size, color }) => (
     <svg width={size} height={size} viewBox="0 0 24 24" fill="none">
-      <path
-        d="M13 2L4 14H12L11 22L20 10H12L13 2Z"
-        fill={color}
-        fillOpacity="0.3"
-        stroke={color}
-        strokeWidth="1.5"
-        strokeLinejoin="round"
-      />
+      <path d="M13 2L4 14H12L11 22L20 10H12L13 2Z" fill={color} fillOpacity="0.3" stroke={color} strokeWidth="1.5" strokeLinejoin="round" />
     </svg>
   ),
 
-  'sun': ({ size, color }) => (
+  'arrow-up': ({ size, color }) => (
     <svg width={size} height={size} viewBox="0 0 24 24" fill="none">
-      <circle
-        cx="12"
-        cy="12"
-        r="4"
-        fill={color}
-        fillOpacity="0.3"
-        stroke={color}
-        strokeWidth="1.5"
-      />
-      <path
-        d="M12 2V4M12 20V22M2 12H4M20 12H22M4.93 4.93L6.34 6.34M17.66 17.66L19.07 19.07M4.93 19.07L6.34 17.66M17.66 6.34L19.07 4.93"
-        stroke={color}
-        strokeWidth="1.5"
-        strokeLinecap="round"
-      />
+      <path d="M12 19V5M5 12L12 5L19 12" stroke={color} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
     </svg>
   ),
 
-  'moon': ({ size, color }) => (
+  'arrow-down': ({ size, color }) => (
     <svg width={size} height={size} viewBox="0 0 24 24" fill="none">
-      <path
-        d="M21 12.79C20.8 14.4 20 15.9 19 17C16.8 19.5 13.2 20.5 10 19.5C6.8 18.5 4.2 15.9 3.5 12.5C2.8 9.2 4 5.5 6.5 3.3C5.5 6.3 6.2 9.7 8.3 12C10.4 14.3 13.8 15.2 16.8 14.3C18.3 13.8 19.8 12.9 21 12.79Z"
-        fill={color}
-        fillOpacity="0.3"
-        stroke={color}
-        strokeWidth="1.5"
-        strokeLinejoin="round"
-      />
+      <path d="M12 5V19M19 12L12 19L5 12" stroke={color} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
     </svg>
   ),
 
-  'cloud': ({ size, color }) => (
+  'arrow-left': ({ size, color }) => (
     <svg width={size} height={size} viewBox="0 0 24 24" fill="none">
-      <path
-        d="M18 10C19.7 10 21 11.3 21 13C21 14.7 19.7 16 18 16H7C4.8 16 3 14.2 3 12C3 9.8 4.8 8 7 8C7.4 8 7.8 8.1 8.2 8.2C9 5.8 11.3 4 14 4C17.3 4 20 6.7 20 10C20 10 19 10 18 10Z"
-        fill={color}
-        fillOpacity="0.3"
-        stroke={color}
-        strokeWidth="1.5"
-        strokeLinejoin="round"
-      />
+      <path d="M19 12H5M12 5L5 12L12 19" stroke={color} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  ),
+
+  'arrow-right': ({ size, color }) => (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none">
+      <path d="M5 12H19M12 5L19 12L12 19" stroke={color} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  ),
+
+  'refresh': ({ size, color }) => (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none">
+      <path d="M4 12C4 7.6 7.6 4 12 4C15.4 4 18.3 6.1 19.4 9" stroke={color} strokeWidth="2" strokeLinecap="round" />
+      <path d="M20 12C20 16.4 16.4 20 12 20C8.6 20 5.7 17.9 4.6 15" stroke={color} strokeWidth="2" strokeLinecap="round" />
+      <path d="M16 9H20V5" stroke={color} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+      <path d="M8 15H4V19" stroke={color} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  ),
+
+  'flag': ({ size, color }) => (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none">
+      <path d="M5 4V21" stroke={color} strokeWidth="2" strokeLinecap="round" />
+      <path d="M5 4H19L15 9L19 14H5" fill={color} fillOpacity="0.3" stroke={color} strokeWidth="1.5" strokeLinejoin="round" />
+    </svg>
+  ),
+
+  'globe': ({ size, color }) => (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="9" fill={color} fillOpacity="0.3" stroke={color} strokeWidth="1.5" />
+      <ellipse cx="12" cy="12" rx="4" ry="9" stroke={color} strokeWidth="1.5" />
+      <path d="M3 12H21M4 8H20M4 16H20" stroke={color} strokeWidth="1" />
     </svg>
   ),
 
   'gift': ({ size, color }) => (
     <svg width={size} height={size} viewBox="0 0 24 24" fill="none">
-      <rect
-        x="3"
-        y="8"
-        width="18"
-        height="4"
-        fill={color}
-        fillOpacity="0.3"
-        stroke={color}
-        strokeWidth="1.5"
-      />
-      <rect
-        x="5"
-        y="12"
-        width="14"
-        height="9"
-        fill={color}
-        fillOpacity="0.3"
-        stroke={color}
-        strokeWidth="1.5"
-      />
-      <path d="M12 8V21" stroke={color} strokeWidth="1.5" />
-      <path
-        d="M12 8C12 8 9 8 8 6C7 4 9 2 11 3C12 3.5 12 5 12 8Z"
-        stroke={color}
-        strokeWidth="1.5"
-      />
-      <path
-        d="M12 8C12 8 15 8 16 6C17 4 15 2 13 3C12 3.5 12 5 12 8Z"
-        stroke={color}
-        strokeWidth="1.5"
-      />
+      <rect x="3" y="8" width="18" height="14" rx="2" fill={color} fillOpacity="0.3" stroke={color} strokeWidth="1.5" />
+      <path d="M12 8V22M3 12H21" stroke={color} strokeWidth="1.5" />
+      <path d="M12 8C12 8 12 4 9 4C7 4 6 5 6 6.5C6 8 8 8 12 8Z" stroke={color} strokeWidth="1.5" />
+      <path d="M12 8C12 8 12 4 15 4C17 4 18 5 18 6.5C18 8 16 8 12 8Z" stroke={color} strokeWidth="1.5" />
+    </svg>
+  ),
+
+  'phone': ({ size, color }) => (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none">
+      <path d="M5 4H9L11 9L8.5 10.5C9.5 12.6 11.4 14.5 13.5 15.5L15 13L20 15V19C20 20.1 19.1 21 18 21C9.7 21 3 14.3 3 6C3 4.9 3.9 4 5 4Z" fill={color} fillOpacity="0.3" stroke={color} strokeWidth="1.5" strokeLinejoin="round" />
+    </svg>
+  ),
+
+  'email': ({ size, color }) => (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="5" width="18" height="14" rx="2" fill={color} fillOpacity="0.3" stroke={color} strokeWidth="1.5" />
+      <path d="M3 7L12 13L21 7" stroke={color} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
     </svg>
   ),
 };
@@ -959,23 +557,45 @@ export const IconElement: React.FC<IconElementProps> = ({
   sceneStartFrame,
   sceneDurationFrames,
 }) => {
-  const { name, size = ICON.DEFAULT_SIZE, color = ICON.DEFAULT_COLOR } = props;
+  const frame = useCurrentFrame();
+  const { fps } = useVideoConfig();
 
-  // Use centralized animation hook with icon-specific defaults
-  const {
-    enterAnim,
-    duringAnim,
-    finalOpacity,
-  } = useAnimationPhases(
-    animation,
-    sceneStartFrame,
-    sceneDurationFrames,
-    {
-      enterType: ICON.DEFAULT_ENTER_ANIMATION,
-      duringType: ICON.DEFAULT_DURING_ANIMATION,
-      exitType: 'none',
-    }
+  const { name, size = 80, color = '#FFFFFF' } = props;
+
+  // Animation phases
+  const enterType = animation?.enter?.type || 'popIn';
+  const enterDurationMs = animation?.enter?.durationMs || ENTER_DURATIONS[enterType] || 400;
+  const enterDelayMs = animation?.enter?.delayMs || 0;
+  const enterStartFrame = sceneStartFrame + msToFrames(enterDelayMs, fps);
+
+  const duringType = animation?.during?.type || 'floating';
+
+  const exitType = animation?.exit?.type || 'none';
+  const exitDurationMs = animation?.exit?.durationMs || EXIT_DURATIONS[exitType] || 300;
+  const exitStartFrame = sceneStartFrame + sceneDurationFrames - msToFrames(exitDurationMs, fps);
+
+  // Enter animation
+  const enterAnim = calculateEnterAnimation(
+    enterType,
+    frame,
+    fps,
+    enterStartFrame,
+    enterDurationMs
   );
+
+  // During animation
+  const duringAnim = calculateDuringAnimation(
+    duringType,
+    frame,
+    fps,
+    animation?.during?.durationMs || DURING_CYCLES[duringType]
+  );
+
+  // Exit animation
+  const exitAnim = calculateExitAnimation(exitType, frame, fps, exitStartFrame, exitDurationMs);
+
+  const isInExitPhase = frame >= exitStartFrame && exitType !== 'none';
+  const finalOpacity = isInExitPhase ? exitAnim.opacity : enterAnim.opacity;
 
   // Get icon component or fallback
   const IconComponent = INLINE_ICONS[name];

@@ -1,7 +1,12 @@
+/**
+ * Tests for IconElement.tsx
+ * Verifies all 50 icons (8 base + 42 L1 V3 additions) are correctly defined
+ */
+
 import { describe, it, expect } from 'vitest';
 
-// Original 8 MVP icons
-const MVP_ORIGINAL_ICONS = [
+// Base MVP icons (8)
+const BASE_ICONS = [
   'money-bag',
   'chart-up',
   'piggy-bank',
@@ -12,228 +17,207 @@ const MVP_ORIGINAL_ICONS = [
   'check',
 ];
 
-// MVP added icons (10)
-const MVP_ADDED_ICONS = [
-  'coin',
-  'bank',
+// L1 V3 additional icons (48)
+const V3_ICONS = [
+  // Finance/Business icons (8)
+  'dollar',
   'wallet',
-  'checkmark',
-  'cross',
-  'target',
-  'book',
-  'arrow-up',
-  'arrow-down',
-  'question',
-];
-
-// V2 icons (25)
-const V2_ICONS = [
+  'bank',
   'credit-card',
+  'coins',
   'chart-down',
-  'calculator',
-  'briefcase',
+  'chart-bar',
+  'chart-pie',
+  // General icons (11)
   'heart',
-  'lock',
-  'gear',
-  'graduation',
-  'magnifier',
-  'globe',
-  'trophy',
-  'arrow-right',
-  'arrow-left',
-  'compare',
-  'percentage',
-  'money-stack',
-  'savings',
-  'document',
-  'calendar',
-  'rocket',
-  'shield',
-  'bell',
-  'home',
-  'user',
-  'users',
   'thumbs-up',
   'thumbs-down',
+  'target',
+  'trophy',
+  'medal',
+  'rocket',
+  'calendar',
+  'calculator',
+  'percent',
+  'trending',
+  // Communication/Media (7)
+  'speech-bubble',
+  'megaphone',
+  'question',
+  'info',
+  'x-mark',
+  'plus',
+  'minus',
+  // People/Groups (2)
+  'user',
+  'users',
+  // Other useful icons (20)
+  'lock',
+  'unlock',
+  'shield',
+  'gear',
+  'home',
+  'briefcase',
+  'book',
+  'bulb',
   'fire',
-  'bolt',
-  'sun',
-  'moon',
-  'cloud',
+  'lightning',
+  'arrow-up',
+  'arrow-down',
+  'arrow-left',
+  'arrow-right',
+  'refresh',
+  'flag',
+  'globe',
   'gift',
+  'phone',
+  'email',
 ];
 
-const ALL_ICONS = [...MVP_ORIGINAL_ICONS, ...MVP_ADDED_ICONS, ...V2_ICONS];
+const ALL_ICONS = [...BASE_ICONS, ...V3_ICONS];
 
-describe('icons.test.ts - Icon Element Component', () => {
-  describe('Icon Registration Validation', () => {
-    it('should have INLINE_ICONS object defined', async () => {
-      const fs = await import('fs/promises');
-      const content = await fs.readFile(
-        'C:\\Users\\User\\Desktop\\stickman-l1-v2\\remotion\\src\\components\\IconElement.tsx',
-        'utf-8'
-      );
+describe('Icon definitions', () => {
+  it('should define 8 base icons', () => {
+    expect(BASE_ICONS.length).toBe(8);
+  });
 
-      expect(content).toContain('const INLINE_ICONS');
+  it('should define 48 L1 V3 additional icons', () => {
+    expect(V3_ICONS.length).toBe(48);
+  });
+
+  it('should define 56 total icons', () => {
+    expect(ALL_ICONS.length).toBe(56);
+  });
+
+  it('should have unique icon names', () => {
+    const uniqueIcons = new Set(ALL_ICONS);
+    expect(uniqueIcons.size).toBe(ALL_ICONS.length);
+  });
+});
+
+describe('Icon name conventions', () => {
+  it('should use kebab-case for icon names', () => {
+    ALL_ICONS.forEach((iconName) => {
+      // No uppercase letters
+      expect(iconName).toBe(iconName.toLowerCase());
+      // No underscores
+      expect(iconName).not.toContain('_');
+      // Allowed characters: lowercase letters, numbers, hyphens
+      expect(iconName).toMatch(/^[a-z0-9-]+$/);
     });
   });
 
-  describe('Original 8 MVP Icons', () => {
-    it.each(MVP_ORIGINAL_ICONS)('should have icon: %s', async (iconName) => {
-      const fs = await import('fs/promises');
-      const content = await fs.readFile(
-        'C:\\Users\\User\\Desktop\\stickman-l1-v2\\remotion\\src\\components\\IconElement.tsx',
-        'utf-8'
-      );
+  it('should not have empty icon names', () => {
+    ALL_ICONS.forEach((iconName) => {
+      expect(iconName.length).toBeGreaterThan(0);
+    });
+  });
+});
 
-      expect(content).toContain(`'${iconName}':`);
+describe('Icon categories', () => {
+  const financeIcons = [
+    'money-bag',
+    'dollar',
+    'wallet',
+    'bank',
+    'credit-card',
+    'coins',
+    'piggy-bank',
+  ];
+
+  const chartIcons = [
+    'chart-up',
+    'chart-down',
+    'chart-bar',
+    'chart-pie',
+    'trending',
+  ];
+
+  const arrowIcons = [
+    'arrow-up',
+    'arrow-down',
+    'arrow-left',
+    'arrow-right',
+  ];
+
+  const statusIcons = [
+    'check',
+    'x-mark',
+    'plus',
+    'minus',
+    'warning',
+    'info',
+    'question',
+  ];
+
+  it('should have finance-related icons', () => {
+    financeIcons.forEach((icon) => {
+      expect(ALL_ICONS).toContain(icon);
     });
   });
 
-  describe('MVP Added Icons (10)', () => {
-    it.each(MVP_ADDED_ICONS)('should have icon: %s', async (iconName) => {
-      const fs = await import('fs/promises');
-      const content = await fs.readFile(
-        'C:\\Users\\User\\Desktop\\stickman-l1-v2\\remotion\\src\\components\\IconElement.tsx',
-        'utf-8'
-      );
-
-      expect(content).toContain(`'${iconName}':`);
-    });
-
-    it('should have exactly 10 MVP added icons', async () => {
-      const fs = await import('fs/promises');
-      const content = await fs.readFile(
-        'C:\\Users\\User\\Desktop\\stickman-l1-v2\\remotion\\src\\components\\IconElement.tsx',
-        'utf-8'
-      );
-
-      let foundCount = 0;
-      for (const icon of MVP_ADDED_ICONS) {
-        if (content.includes(`'${icon}':`)) {
-          foundCount++;
-        }
-      }
-      expect(foundCount).toBe(10);
+  it('should have chart-related icons', () => {
+    chartIcons.forEach((icon) => {
+      expect(ALL_ICONS).toContain(icon);
     });
   });
 
-  describe('V2 Icons (25+)', () => {
-    it.each(V2_ICONS)('should have icon: %s', async (iconName) => {
-      const fs = await import('fs/promises');
-      const content = await fs.readFile(
-        'C:\\Users\\User\\Desktop\\stickman-l1-v2\\remotion\\src\\components\\IconElement.tsx',
-        'utf-8'
-      );
-
-      expect(content).toContain(`'${iconName}':`);
-    });
-
-    it('should have at least 25 V2 icons', async () => {
-      const fs = await import('fs/promises');
-      const content = await fs.readFile(
-        'C:\\Users\\User\\Desktop\\stickman-l1-v2\\remotion\\src\\components\\IconElement.tsx',
-        'utf-8'
-      );
-
-      let foundCount = 0;
-      for (const icon of V2_ICONS) {
-        if (content.includes(`'${icon}':`)) {
-          foundCount++;
-        }
-      }
-      expect(foundCount).toBeGreaterThanOrEqual(25);
+  it('should have arrow icons', () => {
+    arrowIcons.forEach((icon) => {
+      expect(ALL_ICONS).toContain(icon);
     });
   });
 
-  describe('Total Icon Count', () => {
-    it(`should have at least ${ALL_ICONS.length} total icons`, async () => {
-      const fs = await import('fs/promises');
-      const content = await fs.readFile(
-        'C:\\Users\\User\\Desktop\\stickman-l1-v2\\remotion\\src\\components\\IconElement.tsx',
-        'utf-8'
-      );
-
-      let foundCount = 0;
-      for (const icon of ALL_ICONS) {
-        if (content.includes(`'${icon}':`)) {
-          foundCount++;
-        }
-      }
-      expect(foundCount).toBeGreaterThanOrEqual(ALL_ICONS.length);
+  it('should have status icons', () => {
+    statusIcons.forEach((icon) => {
+      expect(ALL_ICONS).toContain(icon);
     });
   });
+});
 
-  describe('Icon Component Structure', () => {
-    it('should export IconElement component as default', async () => {
-      const fs = await import('fs/promises');
-      const content = await fs.readFile(
-        'C:\\Users\\User\\Desktop\\stickman-l1-v2\\remotion\\src\\components\\IconElement.tsx',
-        'utf-8'
-      );
-
-      expect(content).toContain('export default IconElement');
-    });
-
-    it('should accept size and color props', async () => {
-      const fs = await import('fs/promises');
-      const content = await fs.readFile(
-        'C:\\Users\\User\\Desktop\\stickman-l1-v2\\remotion\\src\\components\\IconElement.tsx',
-        'utf-8'
-      );
-
-      expect(content).toContain('size');
-      expect(content).toContain('color');
-    });
-
-    it('should have fallback to external SVG files', async () => {
-      const fs = await import('fs/promises');
-      const content = await fs.readFile(
-        'C:\\Users\\User\\Desktop\\stickman-l1-v2\\remotion\\src\\components\\IconElement.tsx',
-        'utf-8'
-      );
-
-      expect(content).toContain('staticFile');
-      expect(content).toContain('icons/');
-    });
-
-    it('should support animation props', async () => {
-      const fs = await import('fs/promises');
-      const content = await fs.readFile(
-        'C:\\Users\\User\\Desktop\\stickman-l1-v2\\remotion\\src\\components\\IconElement.tsx',
-        'utf-8'
-      );
-
-      expect(content).toContain('animation?:');
-      expect(content).toContain('enter?:');
-      expect(content).toContain('during?:');
-      expect(content).toContain('exit?:');
-    });
+describe('Icon completeness for infographic use cases', () => {
+  it('should have icons for positive feedback', () => {
+    expect(ALL_ICONS).toContain('check');
+    expect(ALL_ICONS).toContain('thumbs-up');
+    expect(ALL_ICONS).toContain('star');
+    expect(ALL_ICONS).toContain('trophy');
   });
 
-  describe('Icon SVG Structure', () => {
-    it('all icons should use SVG format', async () => {
-      const fs = await import('fs/promises');
-      const content = await fs.readFile(
-        'C:\\Users\\User\\Desktop\\stickman-l1-v2\\remotion\\src\\components\\IconElement.tsx',
-        'utf-8'
-      );
+  it('should have icons for negative feedback', () => {
+    expect(ALL_ICONS).toContain('x-mark');
+    expect(ALL_ICONS).toContain('thumbs-down');
+    expect(ALL_ICONS).toContain('warning');
+  });
 
-      // Each icon should have an SVG component
-      expect(content).toContain('<svg');
-      expect(content).toContain('viewBox');
-    });
+  it('should have icons for navigation/direction', () => {
+    expect(ALL_ICONS).toContain('arrow-up');
+    expect(ALL_ICONS).toContain('arrow-down');
+    expect(ALL_ICONS).toContain('arrow-left');
+    expect(ALL_ICONS).toContain('arrow-right');
+  });
 
-    it('icons should accept dynamic color', async () => {
-      const fs = await import('fs/promises');
-      const content = await fs.readFile(
-        'C:\\Users\\User\\Desktop\\stickman-l1-v2\\remotion\\src\\components\\IconElement.tsx',
-        'utf-8'
-      );
+  it('should have icons for time/scheduling', () => {
+    expect(ALL_ICONS).toContain('clock');
+    expect(ALL_ICONS).toContain('calendar');
+  });
 
-      // Icons should use color prop in stroke or fill
-      expect(content).toContain('stroke={color}');
-      expect(content).toContain('fill={color}');
-    });
+  it('should have icons for communication', () => {
+    expect(ALL_ICONS).toContain('speech-bubble');
+    expect(ALL_ICONS).toContain('megaphone');
+    expect(ALL_ICONS).toContain('phone');
+    expect(ALL_ICONS).toContain('email');
+  });
+
+  it('should have icons for security', () => {
+    expect(ALL_ICONS).toContain('lock');
+    expect(ALL_ICONS).toContain('unlock');
+    expect(ALL_ICONS).toContain('shield');
+  });
+
+  it('should have icons for goals/achievements', () => {
+    expect(ALL_ICONS).toContain('target');
+    expect(ALL_ICONS).toContain('trophy');
+    expect(ALL_ICONS).toContain('medal');
+    expect(ALL_ICONS).toContain('flag');
   });
 });

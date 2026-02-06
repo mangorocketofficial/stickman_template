@@ -1,150 +1,258 @@
 /**
- * Direction Types - Camera, Layout, and Timing preset interfaces
- * Layer 3: Direction Elements for scene composition
+ * Direction Types - Camera, Layout, and Timing Presets
+ * Layer 3 (Direction Elements) for the stickman video system
  */
 
-// ============================================================
-// Camera Types
-// ============================================================
+// ============================================================================
+// CAMERA TYPES
+// ============================================================================
+
+/**
+ * Easing function names for camera animations
+ */
+export type CameraEasing =
+  | 'linear'
+  | 'easeIn'
+  | 'easeOut'
+  | 'easeInOut'
+  | 'easeInQuad'
+  | 'easeOutQuad'
+  | 'easeInOutQuad'
+  | 'easeInCubic'
+  | 'easeOutCubic'
+  | 'easeInOutCubic'
+  | 'easeOutBack'
+  | 'spring';
 
 /**
  * A single keyframe in a camera animation
- * @property atPercent - Position in the animation (0-100)
- * @property zoom - Zoom level (1.0 = normal, >1 = zoom in, <1 = zoom out)
- * @property offsetX - Horizontal pan offset in pixels
- * @property offsetY - Vertical pan offset in pixels
- * @property easing - CSS easing function name
  */
 export interface CameraKeyframe {
+  /** Position in the animation as a percentage (0-100) */
   atPercent: number;
+  /** Zoom level (1.0 = normal, >1.0 = zoomed in, <1.0 = zoomed out) */
+  zoom: number;
+  /** Horizontal offset in pixels (positive = right, negative = left) */
+  offsetX: number;
+  /** Vertical offset in pixels (positive = down, negative = up) */
+  offsetY: number;
+  /** Easing function for transition to this keyframe */
+  easing: CameraEasing;
+}
+
+/**
+ * A camera preset defining how the camera moves during a scene
+ */
+export interface CameraPreset {
+  /** Unique identifier for the preset */
+  name: string;
+  /** Human-readable description */
+  description: string;
+  /** Sequence of keyframes defining the camera movement */
+  keyframes: CameraKeyframe[];
+  /** Whether this preset requires runtime data (e.g., stickman position) */
+  isDynamic?: boolean;
+}
+
+// ============================================================================
+// LAYOUT TYPES
+// ============================================================================
+
+/**
+ * Anchor point for positioning
+ */
+export type LayoutAnchor = 'center' | 'left' | 'right' | 'top' | 'bottom' | 'top-left' | 'top-right' | 'bottom-left' | 'bottom-right';
+
+/**
+ * Role of an element in a layout
+ */
+export type LayoutRole =
+  | 'stickman'
+  | 'text'
+  | 'title'
+  | 'subtitle'
+  | 'icon'
+  | 'counter'
+  | 'shape'
+  | 'primary'
+  | 'secondary'
+  | 'tertiary'
+  | 'item1'
+  | 'item2'
+  | 'item3'
+  | 'item4'
+  | 'item5'
+  | 'item6'
+  | 'hero'
+  | 'background'
+  | 'overlay'
+  | 'any';
+
+/**
+ * A slot in a layout defining where an element should be positioned
+ */
+export interface LayoutSlot {
+  /** Role identifier for this slot */
+  role: LayoutRole;
+  /** Position in pixels from top-left (1920x1080 canvas) */
+  position: { x: number; y: number };
+  /** Scale factor (1.0 = normal) */
+  scale?: number;
+  /** Maximum width in pixels */
+  maxWidth?: number;
+  /** Anchor point for positioning */
+  anchor?: LayoutAnchor;
+  /** Z-index layer */
+  layer?: number;
+  /** Optional rotation in degrees */
+  rotation?: number;
+  /** Optional opacity (0-1) */
+  opacity?: number;
+}
+
+/**
+ * A layout preset defining positions for multiple elements
+ */
+export interface LayoutPreset {
+  /** Unique identifier for the preset */
+  name: string;
+  /** Human-readable description */
+  description: string;
+  /** Slots defining element positions */
+  slots: LayoutSlot[];
+  /** Minimum number of elements required */
+  minElements?: number;
+  /** Maximum number of elements supported */
+  maxElements?: number;
+}
+
+// ============================================================================
+// TIMING TYPES
+// ============================================================================
+
+/**
+ * Enter animation types available
+ */
+export type EnterAnimationType =
+  | 'fadeIn'
+  | 'fadeInUp'
+  | 'fadeInDown'
+  | 'fadeInLeft'
+  | 'fadeInRight'
+  | 'slideLeft'
+  | 'slideRight'
+  | 'slideUp'
+  | 'slideDown'
+  | 'popIn'
+  | 'popInBounce'
+  | 'typewriter'
+  | 'drawLine'
+  | 'scaleIn'
+  | 'rotateIn'
+  | 'flipIn'
+  | 'wipeLeft'
+  | 'wipeRight'
+  | 'wipeUp'
+  | 'wipeDown'
+  | 'morphIn'
+  | 'none';
+
+/**
+ * Exit animation types available
+ */
+export type ExitAnimationType =
+  | 'fadeOut'
+  | 'fadeOutUp'
+  | 'fadeOutDown'
+  | 'fadeOutLeft'
+  | 'fadeOutRight'
+  | 'slideOutLeft'
+  | 'slideOutRight'
+  | 'slideOutUp'
+  | 'slideOutDown'
+  | 'popOut'
+  | 'scaleOut'
+  | 'rotateOut'
+  | 'wipeOutLeft'
+  | 'wipeOutRight'
+  | 'none';
+
+/**
+ * Target selector for timing entries
+ */
+export type TimingTarget =
+  | 'stickman'
+  | 'text'
+  | 'title'
+  | 'icon'
+  | 'counter'
+  | 'shape'
+  | 'all'
+  | 'primary'
+  | 'secondary'
+  | 'background'
+  | string; // Allow custom IDs
+
+/**
+ * A timing entry defining animation timing for an element
+ */
+export interface TimingEntry {
+  /** Target element selector */
+  target: TimingTarget;
+  /** Delay before animation starts (in milliseconds) */
+  delayMs: number;
+  /** Enter animation type */
+  enterAnimation: EnterAnimationType;
+  /** Duration of enter animation (in milliseconds) */
+  enterDurationMs: number;
+  /** Exit animation type */
+  exitAnimation?: ExitAnimationType;
+  /** Duration of exit animation (in milliseconds) */
+  exitDurationMs?: number;
+  /** Easing function for animations */
+  easing?: CameraEasing;
+}
+
+/**
+ * A timing preset defining animation sequence for a scene
+ */
+export interface TimingPreset {
+  /** Unique identifier for the preset */
+  name: string;
+  /** Human-readable description */
+  description: string;
+  /** Timing entries for each element type */
+  entries: TimingEntry[];
+  /** Base stagger delay for sequential animations */
+  baseStaggerMs?: number;
+}
+
+// ============================================================================
+// UTILITY TYPES
+// ============================================================================
+
+/**
+ * Combined direction configuration for a scene
+ */
+export interface DirectionConfig {
+  camera?: string | CameraPreset;
+  layout?: string | LayoutPreset;
+  timing?: string | TimingPreset;
+}
+
+/**
+ * Runtime camera state calculated from preset
+ */
+export interface CameraState {
   zoom: number;
   offsetX: number;
   offsetY: number;
-  easing: string;
 }
 
 /**
- * A complete camera movement preset
- * @property name - Unique identifier for the preset
- * @property keyframes - Array of keyframes defining the camera path
+ * Runtime layout slot with resolved position
  */
-export interface CameraPreset {
-  name: string;
-  keyframes: CameraKeyframe[];
+export interface ResolvedLayoutSlot extends LayoutSlot {
+  absoluteX: number;
+  absoluteY: number;
 }
-
-// ============================================================
-// Layout Types
-// ============================================================
-
-/**
- * A slot position in a layout template
- * @property role - The type of content expected (e.g., "stickman", "text", "icon")
- * @property position - X/Y coordinates relative to canvas center (percentages or pixels)
- * @property scale - Scale multiplier for the element
- * @property maxWidth - Maximum width constraint in pixels
- * @property anchor - Alignment anchor point
- */
-export interface LayoutSlot {
-  role: string;
-  position: { x: number; y: number };
-  scale?: number;
-  maxWidth?: number;
-  anchor?: 'center' | 'left' | 'right';
-}
-
-/**
- * A complete layout preset defining element positions
- * @property name - Unique identifier for the preset
- * @property slots - Array of slot definitions
- */
-export interface LayoutPreset {
-  name: string;
-  slots: LayoutSlot[];
-}
-
-// ============================================================
-// Timing Types
-// ============================================================
-
-/**
- * Timing configuration for a single element in a scene
- * @property target - Element role/type to apply timing to
- * @property delayMs - Delay before element appears (ms)
- * @property enterAnimation - Animation preset for entrance
- * @property enterDurationMs - Duration of enter animation (ms)
- * @property exitAnimation - Optional animation preset for exit
- * @property exitDurationMs - Optional duration of exit animation (ms)
- */
-export interface TimingEntry {
-  target: string;
-  delayMs: number;
-  enterAnimation: string;
-  enterDurationMs: number;
-  exitAnimation?: string;
-  exitDurationMs?: number;
-}
-
-/**
- * A complete timing preset defining element choreography
- * @property name - Unique identifier for the preset
- * @property entries - Array of timing configurations per element
- */
-export interface TimingPreset {
-  name: string;
-  entries: TimingEntry[];
-}
-
-// ============================================================
-// Preset Name Types (for type safety)
-// ============================================================
-
-export type CameraPresetName =
-  // MVP 5
-  | 'static_full'
-  | 'static_closeup'
-  | 'static_wide'
-  | 'zoom_in_slow'
-  | 'zoom_in_fast'
-  // V2 5
-  | 'zoom_out_reveal'
-  | 'zoom_pulse'
-  | 'pan_left_to_right'
-  | 'pan_right_to_left'
-  | 'dolly_in';
-
-export type LayoutPresetName =
-  // MVP 10
-  | 'center_single'
-  | 'split_left_stickman'
-  | 'triple_stickman_text_counter'
-  | 'triple_stickman_icon_text'
-  | 'text_only'
-  | 'center_stack'
-  | 'split_right_stickman'
-  | 'split_equal'
-  | 'grid_2x1'
-  | 'overlay_fullscreen_text'
-  // V2 8
-  | 'center_hero'
-  | 'triple_horizontal'
-  | 'triple_top_bottom'
-  | 'grid_2x2'
-  | 'grid_3x1'
-  | 'overlay_spotlight'
-  | 'stickman_center_text_sides'
-  | 'icon_grid';
-
-export type TimingPresetName =
-  // MVP 5
-  | 'all_at_once'
-  | 'all_at_once_stagger'
-  | 'stickman_first'
-  | 'text_first'
-  | 'reveal_climax'
-  // V2 5
-  | 'left_to_right'
-  | 'top_to_bottom'
-  | 'counter_focus'
-  | 'icon_burst'
-  | 'carry_stickman';
