@@ -164,6 +164,66 @@ export const POSES: Record<string, Pose> = {
     upperLegR: -5,
     lowerLegR: 0,
   },
+
+  // ============================================
+  // L1 MVP ADDITIONS
+  // ============================================
+
+  // Pointing up - right arm raised pointing upward
+  pointing_up: {
+    torso: 0,
+    head: -10,          // looking slightly up
+    upperArmL: 20,      // left arm at side
+    lowerArmL: 0,
+    upperArmR: -150,    // right arm raised high
+    lowerArmR: -20,     // forearm angled up
+    upperLegL: 5,
+    lowerLegL: 0,
+    upperLegR: -5,
+    lowerLegR: 0,
+  },
+
+  // Depressed - slumped, defeated posture
+  depressed: {
+    torso: 15,          // hunched forward
+    head: 25,           // head down
+    upperArmL: 10,      // arms hanging loosely
+    lowerArmL: 20,
+    upperArmR: -10,
+    lowerArmR: -20,
+    upperLegL: 10,      // legs close together
+    lowerLegL: 0,
+    upperLegR: -10,
+    lowerLegR: 0,
+  },
+
+  // Surprised pose - whole body startled
+  surprised_pose: {
+    torso: -5,          // leaning back slightly
+    head: -5,           // head back
+    upperArmL: 60,      // arms spread out
+    lowerArmL: -45,     // forearms up
+    upperArmR: -60,
+    lowerArmR: 45,
+    upperLegL: 15,      // legs apart
+    lowerLegL: 0,
+    upperLegR: -15,
+    lowerLegR: 0,
+  },
+
+  // Arms crossed - confident/defensive posture
+  arms_crossed: {
+    torso: 0,
+    head: 0,
+    upperArmL: 50,      // arms folded across chest
+    lowerArmL: -130,    // forearm crossing body
+    upperArmR: -50,
+    lowerArmR: 130,
+    upperLegL: 5,
+    lowerLegL: 0,
+    upperLegR: -5,
+    lowerLegR: 0,
+  },
 };
 
 // Default pose when none specified

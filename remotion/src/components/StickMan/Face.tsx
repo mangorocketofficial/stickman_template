@@ -79,6 +79,43 @@ const Eye: React.FC<{
         />
       );
 
+    case 'narrow':
+      // Narrow horizontal line for focused expression
+      return (
+        <line
+          x1={x - size * 1.2}
+          y1={EYE_Y}
+          x2={x + size * 1.2}
+          y2={EYE_Y}
+          stroke={color}
+          strokeWidth={lineWidth * 0.6}
+          strokeLinecap="round"
+        />
+      );
+
+    case 'angry':
+      // Angry eye with eyebrow - eye dot + angled eyebrow
+      const isLeftEye = x < 0;
+      const browAngle = isLeftEye ? -20 : 20;
+      const browOffsetX = isLeftEye ? size * 0.3 : -size * 0.3;
+      return (
+        <g>
+          {/* Eye dot */}
+          <circle cx={x} cy={EYE_Y} r={size * 0.8} fill={color} />
+          {/* Angry eyebrow */}
+          <line
+            x1={x - size * 1.5 + browOffsetX}
+            y1={EYE_Y - size * 2}
+            x2={x + size * 1.5 + browOffsetX}
+            y2={EYE_Y - size * 2}
+            stroke={color}
+            strokeWidth={lineWidth * 0.6}
+            strokeLinecap="round"
+            transform={`rotate(${browAngle}, ${x}, ${EYE_Y - size * 2})`}
+          />
+        </g>
+      );
+
     default:
       return <circle cx={x} cy={EYE_Y} r={size} fill={color} />;
   }
@@ -153,6 +190,31 @@ const Mouth: React.FC<{
           stroke={color}
           strokeWidth={lineWidth * 0.5}
           strokeLinecap="round"
+        />
+      );
+
+    case 'wide_smile':
+      // Wide D-shaped smile for excited expression
+      return (
+        <path
+          d={`M ${-halfWidth} ${MOUTH_Y - 2} Q 0 ${MOUTH_Y + 15} ${halfWidth} ${MOUTH_Y - 2} L ${halfWidth} ${MOUTH_Y - 2} Q 0 ${MOUTH_Y + 2} ${-halfWidth} ${MOUTH_Y - 2} Z`}
+          fill={color}
+          stroke={color}
+          strokeWidth={lineWidth * 0.3}
+          strokeLinecap="round"
+        />
+      );
+
+    case 'angry':
+      // Inverted V shape for angry expression
+      return (
+        <path
+          d={`M ${-halfWidth * 0.6} ${MOUTH_Y + 4} L 0 ${MOUTH_Y - 2} L ${halfWidth * 0.6} ${MOUTH_Y + 4}`}
+          fill="none"
+          stroke={color}
+          strokeWidth={lineWidth * 0.5}
+          strokeLinecap="round"
+          strokeLinejoin="round"
         />
       );
 

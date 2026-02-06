@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 80" fill="none">
+  <!-- Roof/Triangle -->
+  <polygon points="40,8 8,28 72,28" stroke="currentColor" stroke-width="3" fill="none"/>
+  <!-- Base -->
+  <rect x="10" y="60" width="60" height="8" stroke="currentColor" stroke-width="3" fill="none"/>
+  <!-- Columns -->
+  <line x1="20" y1="28" x2="20" y2="60" stroke="currentColor" stroke-width="4"/>
+  <line x1="35" y1="28" x2="35" y2="60" stroke="currentColor" stroke-width="4"/>
+  <line x1="45" y1="28" x2="45" y2="60" stroke="currentColor" stroke-width="4"/>
+  <line x1="60" y1="28" x2="60" y2="60" stroke="currentColor" stroke-width="4"/>
+</svg>
