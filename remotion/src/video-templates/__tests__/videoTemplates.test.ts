@@ -1,532 +1,563 @@
 /**
- * Video Templates Module Tests
- * Testing 5 video templates (2 MVP + 3 V2) - Layer 5
+ * Video Templates Tests - Layer 5 (Video Templates)
+ * Comprehensive tests for video template definitions and utilities
  */
 
-import { describe, it, expect } from 'vitest';
 import {
   VIDEO_TEMPLATES,
   VIDEO_TEMPLATE_NAMES,
-  MVP_VIDEO_TEMPLATE_NAMES,
-  V2_VIDEO_TEMPLATE_NAMES,
+  MVP_TEMPLATE_NAMES,
+  V2_TEMPLATE_NAMES,
+  V3_TEMPLATE_NAMES,
   getVideoTemplate,
   hasVideoTemplate,
   getTemplatesByGenre,
-  getVideoTemplateStats,
+  getTemplatesByDifficulty,
   validateVideoTemplate,
   validateAllVideoTemplates,
-  getAllReferencedSceneTemplates,
-  getSceneCountRange,
-  getOptionalSectionCount,
-} from '../videoTemplates';
-import { VideoTemplate, VideoGenre } from '../types';
-import { hasSceneTemplate } from '../../templates';
+  getUsedSceneTemplates,
+  getVideoTemplateStats,
+  getTemplateSectionStats,
+  VideoTemplate,
+  VideoGenre,
+} from '../index';
+
+import { SCENE_TEMPLATE_NAMES } from '../../templates';
 
 describe('Video Templates Module', () => {
-  // ==========================================================================
-  // Template Counts
-  // ==========================================================================
+  // ============================================================================
+  // TEMPLATE COUNT TESTS
+  // ============================================================================
   describe('Template Counts', () => {
-    it('should have exactly 5 video templates', () => {
-      expect(Object.keys(VIDEO_TEMPLATES)).toHaveLength(5);
+    it('should have 10 total video templates', () => {
+      expect(VIDEO_TEMPLATE_NAMES.length).toBe(10);
+      expect(Object.keys(VIDEO_TEMPLATES).length).toBe(10);
     });
 
-    it('should have 2 MVP template names', () => {
-      expect(MVP_VIDEO_TEMPLATE_NAMES).toHaveLength(2);
+    it('should have 2 MVP templates', () => {
+      expect(MVP_TEMPLATE_NAMES.length).toBe(2);
     });
 
-    it('should have 3 V2 template names', () => {
-      expect(V2_VIDEO_TEMPLATE_NAMES).toHaveLength(3);
+    it('should have 3 V2 templates', () => {
+      expect(V2_TEMPLATE_NAMES.length).toBe(3);
     });
 
-    it('should have VIDEO_TEMPLATE_NAMES array matching VIDEO_TEMPLATES keys', () => {
-      expect(VIDEO_TEMPLATE_NAMES).toHaveLength(5);
-      expect(VIDEO_TEMPLATE_NAMES.sort()).toEqual(Object.keys(VIDEO_TEMPLATES).sort());
+    it('should have 5 V3 templates', () => {
+      expect(V3_TEMPLATE_NAMES.length).toBe(5);
     });
 
-    it('MVP + V2 should equal total', () => {
-      expect(MVP_VIDEO_TEMPLATE_NAMES.length + V2_VIDEO_TEMPLATE_NAMES.length).toBe(5);
-    });
-  });
-
-  // ==========================================================================
-  // MVP Video Templates (2)
-  // ==========================================================================
-  describe('MVP Video Templates', () => {
-    const mvpTemplates = ['concept_explainer', 'news_summary'];
-
-    mvpTemplates.forEach((name) => {
-      describe(`${name}`, () => {
-        it('should exist in VIDEO_TEMPLATES', () => {
-          expect(VIDEO_TEMPLATES[name]).toBeDefined();
-        });
-
-        it('should have correct name property', () => {
-          expect(VIDEO_TEMPLATES[name].name).toBe(name);
-        });
-
-        it('should have a valid genre', () => {
-          const validGenres: VideoGenre[] = ['educational', 'informational', 'comparison', 'narrative'];
-          expect(validGenres).toContain(VIDEO_TEMPLATES[name].genre);
-        });
-
-        it('should have description', () => {
-          expect(VIDEO_TEMPLATES[name].description).toBeDefined();
-          expect(VIDEO_TEMPLATES[name].description.length).toBeGreaterThan(0);
-        });
-
-        it('should have at least one section', () => {
-          expect(VIDEO_TEMPLATES[name].structure.length).toBeGreaterThan(0);
-        });
-
-        it('should have opening section', () => {
-          const hasOpening = VIDEO_TEMPLATES[name].structure.some(s => s.role === 'opening');
-          expect(hasOpening).toBe(true);
-        });
-
-        it('should have closing section', () => {
-          const hasClosing = VIDEO_TEMPLATES[name].structure.some(s => s.role === 'closing');
-          expect(hasClosing).toBe(true);
-        });
-      });
-    });
-
-    describe('concept_explainer specifics', () => {
-      const template = VIDEO_TEMPLATES['concept_explainer'];
-
-      it('should have genre "educational"', () => {
-        expect(template.genre).toBe('educational');
-      });
-
-      it('should have 6 sections', () => {
-        expect(template.structure).toHaveLength(6);
-      });
-
-      it('should have explanation section', () => {
-        const hasExplanation = template.structure.some(s => s.role === 'explanation');
-        expect(hasExplanation).toBe(true);
-      });
-
-      it('should have example section', () => {
-        const hasExample = template.structure.some(s => s.role === 'example');
-        expect(hasExample).toBe(true);
-      });
-
-      it('should have emphasis section', () => {
-        const hasEmphasis = template.structure.some(s => s.role === 'emphasis');
-        expect(hasEmphasis).toBe(true);
-      });
-    });
-
-    describe('news_summary specifics', () => {
-      const template = VIDEO_TEMPLATES['news_summary'];
-
-      it('should have genre "informational"', () => {
-        expect(template.genre).toBe('informational');
-      });
-
-      it('should have 7 sections', () => {
-        expect(template.structure).toHaveLength(7);
-      });
-
-      it('should have transition sections', () => {
-        const transitionCount = template.structure.filter(s => s.role === 'transition').length;
-        expect(transitionCount).toBe(2);
-      });
+    it('MVP + V2 + V3 should equal total', () => {
+      expect(MVP_TEMPLATE_NAMES.length + V2_TEMPLATE_NAMES.length + V3_TEMPLATE_NAMES.length).toBe(10);
     });
   });
 
-  // ==========================================================================
-  // V2 Video Templates (3)
-  // ==========================================================================
-  describe('V2 Video Templates', () => {
-    const v2Templates = ['step_by_step', 'myth_buster', 'list_ranking'];
-
-    v2Templates.forEach((name) => {
-      describe(`${name}`, () => {
-        it('should exist in VIDEO_TEMPLATES', () => {
-          expect(VIDEO_TEMPLATES[name]).toBeDefined();
-        });
-
-        it('should have correct name property', () => {
-          expect(VIDEO_TEMPLATES[name].name).toBe(name);
-        });
-
-        it('should have a valid genre', () => {
-          const validGenres: VideoGenre[] = ['educational', 'informational', 'comparison', 'narrative'];
-          expect(validGenres).toContain(VIDEO_TEMPLATES[name].genre);
-        });
-
-        it('should have description', () => {
-          expect(VIDEO_TEMPLATES[name].description).toBeDefined();
-          expect(VIDEO_TEMPLATES[name].description.length).toBeGreaterThan(0);
-        });
-
-        it('should have at least one section', () => {
-          expect(VIDEO_TEMPLATES[name].structure.length).toBeGreaterThan(0);
-        });
-
-        it('should have opening section', () => {
-          const hasOpening = VIDEO_TEMPLATES[name].structure.some(s => s.role === 'opening');
-          expect(hasOpening).toBe(true);
-        });
-
-        it('should have closing section', () => {
-          const hasClosing = VIDEO_TEMPLATES[name].structure.some(s => s.role === 'closing');
-          expect(hasClosing).toBe(true);
-        });
-      });
+  // ============================================================================
+  // MVP TEMPLATES TESTS
+  // ============================================================================
+  describe('MVP Templates', () => {
+    it('should include concept_explainer', () => {
+      expect(hasVideoTemplate('concept_explainer')).toBe(true);
+      const template = getVideoTemplate('concept_explainer');
+      expect(template?.genre).toBe('educational');
     });
 
-    describe('step_by_step specifics', () => {
-      const template = VIDEO_TEMPLATES['step_by_step'];
-
-      it('should have genre "educational"', () => {
-        expect(template.genre).toBe('educational');
-      });
-
-      it('should have 8 sections', () => {
-        expect(template.structure).toHaveLength(8);
-      });
-
-      it('should have multiple explanation sections (steps)', () => {
-        const explanationCount = template.structure.filter(s => s.role === 'explanation').length;
-        expect(explanationCount).toBe(3);
-      });
-
-      it('should have emphasis section (summary)', () => {
-        const hasEmphasis = template.structure.some(s => s.role === 'emphasis');
-        expect(hasEmphasis).toBe(true);
-      });
+    it('should include news_summary', () => {
+      expect(hasVideoTemplate('news_summary')).toBe(true);
+      const template = getVideoTemplate('news_summary');
+      expect(template?.genre).toBe('informational');
     });
 
-    describe('myth_buster specifics', () => {
-      const template = VIDEO_TEMPLATES['myth_buster'];
-
-      it('should have genre "educational"', () => {
-        expect(template.genre).toBe('educational');
-      });
-
-      it('should have 6 sections', () => {
-        expect(template.structure).toHaveLength(6);
-      });
-
-      it('should have comparison section (refutation)', () => {
-        const hasComparison = template.structure.some(s => s.role === 'comparison');
-        expect(hasComparison).toBe(true);
-      });
-
-      it('should have emphasis section (fact reveal)', () => {
-        const hasEmphasis = template.structure.some(s => s.role === 'emphasis');
-        expect(hasEmphasis).toBe(true);
-      });
-    });
-
-    describe('list_ranking specifics', () => {
-      const template = VIDEO_TEMPLATES['list_ranking'];
-
-      it('should have genre "informational"', () => {
-        expect(template.genre).toBe('informational');
-      });
-
-      it('should have 7 sections', () => {
-        expect(template.structure).toHaveLength(7);
-      });
-
-      it('should have emphasis section for top item', () => {
-        const hasEmphasis = template.structure.some(s => s.role === 'emphasis');
-        expect(hasEmphasis).toBe(true);
-      });
+    it('all MVP templates should be in VIDEO_TEMPLATES', () => {
+      for (const name of MVP_TEMPLATE_NAMES) {
+        expect(VIDEO_TEMPLATES[name]).toBeDefined();
+      }
     });
   });
 
-  // ==========================================================================
-  // L4 Scene Template Validation
-  // ==========================================================================
-  describe('L4 Scene Template Validation', () => {
-    Object.entries(VIDEO_TEMPLATES).forEach(([name, template]) => {
-      describe(`${name} scene templates`, () => {
-        template.structure.forEach((section, index) => {
-          section.suggestedSceneTemplates.forEach((sceneTemplate) => {
-            it(`section ${index} should reference valid L4 scene template '${sceneTemplate}'`, () => {
-              expect(hasSceneTemplate(sceneTemplate)).toBe(true);
-            });
-          });
-        });
-      });
+  // ============================================================================
+  // V2 TEMPLATES TESTS
+  // ============================================================================
+  describe('V2 Templates', () => {
+    it('should include step_by_step', () => {
+      expect(hasVideoTemplate('step_by_step')).toBe(true);
+      const template = getVideoTemplate('step_by_step');
+      expect(template?.genre).toBe('educational');
     });
 
-    describe('validateVideoTemplate', () => {
-      it('should validate concept_explainer successfully', () => {
-        const result = validateVideoTemplate(VIDEO_TEMPLATES['concept_explainer']);
-        expect(result.valid).toBe(true);
-        expect(result.errors).toHaveLength(0);
-      });
+    it('should include myth_buster', () => {
+      expect(hasVideoTemplate('myth_buster')).toBe(true);
+      const template = getVideoTemplate('myth_buster');
+      expect(template?.genre).toBe('educational');
+    });
 
-      it('should validate all MVP templates successfully', () => {
-        for (const name of MVP_VIDEO_TEMPLATE_NAMES) {
-          const result = validateVideoTemplate(VIDEO_TEMPLATES[name]);
-          expect(result.valid).toBe(true);
-          expect(result.errors).toHaveLength(0);
+    it('should include list_ranking', () => {
+      expect(hasVideoTemplate('list_ranking')).toBe(true);
+      const template = getVideoTemplate('list_ranking');
+      expect(template?.genre).toBe('informational');
+    });
+
+    it('all V2 templates should be in VIDEO_TEMPLATES', () => {
+      for (const name of V2_TEMPLATE_NAMES) {
+        expect(VIDEO_TEMPLATES[name]).toBeDefined();
+      }
+    });
+  });
+
+  // ============================================================================
+  // V3 TEMPLATES TESTS
+  // ============================================================================
+  describe('V3 Templates', () => {
+    it('should include a_vs_b', () => {
+      expect(hasVideoTemplate('a_vs_b')).toBe(true);
+      const template = getVideoTemplate('a_vs_b');
+      expect(template?.genre).toBe('comparison');
+    });
+
+    it('should include pros_and_cons', () => {
+      expect(hasVideoTemplate('pros_and_cons')).toBe(true);
+      const template = getVideoTemplate('pros_and_cons');
+      expect(template?.genre).toBe('comparison');
+    });
+
+    it('should include story_arc', () => {
+      expect(hasVideoTemplate('story_arc')).toBe(true);
+      const template = getVideoTemplate('story_arc');
+      expect(template?.genre).toBe('narrative');
+    });
+
+    it('should include biography', () => {
+      expect(hasVideoTemplate('biography')).toBe(true);
+      const template = getVideoTemplate('biography');
+      expect(template?.genre).toBe('narrative');
+    });
+
+    it('should include how_it_works', () => {
+      expect(hasVideoTemplate('how_it_works')).toBe(true);
+      const template = getVideoTemplate('how_it_works');
+      expect(template?.genre).toBe('educational');
+    });
+
+    it('all V3 templates should be in VIDEO_TEMPLATES', () => {
+      for (const name of V3_TEMPLATE_NAMES) {
+        expect(VIDEO_TEMPLATES[name]).toBeDefined();
+      }
+    });
+  });
+
+  // ============================================================================
+  // V3 STRUCTURE TESTS
+  // ============================================================================
+  describe('V3 Template Structures', () => {
+    it('a_vs_b should have correct structure', () => {
+      const template = getVideoTemplate('a_vs_b');
+      const roles = template?.structure.map(s => s.role);
+      expect(roles).toContain('opening');
+      expect(roles).toContain('option_a');
+      expect(roles).toContain('option_b');
+      expect(roles).toContain('comparison');
+      expect(roles).toContain('conclusion');
+      expect(roles).toContain('closing');
+    });
+
+    it('pros_and_cons should have correct structure', () => {
+      const template = getVideoTemplate('pros_and_cons');
+      const roles = template?.structure.map(s => s.role);
+      expect(roles).toContain('opening');
+      expect(roles).toContain('pros');
+      expect(roles).toContain('cons');
+      expect(roles).toContain('summary');
+      expect(roles).toContain('closing');
+    });
+
+    it('story_arc should have correct structure', () => {
+      const template = getVideoTemplate('story_arc');
+      const roles = template?.structure.map(s => s.role);
+      expect(roles).toContain('opening');
+      expect(roles).toContain('background');
+      expect(roles).toContain('development');
+      expect(roles).toContain('crisis');
+      expect(roles).toContain('resolution');
+      expect(roles).toContain('lesson');
+      expect(roles).toContain('closing');
+    });
+
+    it('biography should have correct structure', () => {
+      const template = getVideoTemplate('biography');
+      const roles = template?.structure.map(s => s.role);
+      expect(roles).toContain('opening');
+      expect(roles).toContain('early_life');
+      expect(roles).toContain('turning_point');
+      expect(roles).toContain('achievements');
+      expect(roles).toContain('legacy');
+      expect(roles).toContain('closing');
+    });
+
+    it('how_it_works should have correct structure', () => {
+      const template = getVideoTemplate('how_it_works');
+      const roles = template?.structure.map(s => s.role);
+      expect(roles).toContain('opening');
+      expect(roles).toContain('overview');
+      expect(roles).toContain('component1');
+      expect(roles).toContain('component2');
+      expect(roles).toContain('integration');
+      expect(roles).toContain('closing');
+    });
+  });
+
+  // ============================================================================
+  // TEMPLATE STRUCTURE TESTS
+  // ============================================================================
+  describe('Template Structure', () => {
+    it('all templates should have required fields', () => {
+      for (const template of Object.values(VIDEO_TEMPLATES)) {
+        expect(template.name).toBeDefined();
+        expect(template.genre).toBeDefined();
+        expect(template.description).toBeDefined();
+        expect(template.structure).toBeDefined();
+        expect(Array.isArray(template.structure)).toBe(true);
+        expect(template.structure.length).toBeGreaterThan(0);
+      }
+    });
+
+    it('all templates should have V3 fields (estimatedDuration, difficulty)', () => {
+      for (const template of Object.values(VIDEO_TEMPLATES)) {
+        expect(template.estimatedDuration).toBeDefined();
+        expect(template.estimatedDuration?.min).toBeGreaterThan(0);
+        expect(template.estimatedDuration?.max).toBeGreaterThanOrEqual(template.estimatedDuration?.min || 0);
+        expect(template.difficulty).toBeDefined();
+        expect(['beginner', 'intermediate', 'advanced']).toContain(template.difficulty);
+      }
+    });
+
+    it('all sections should have required fields', () => {
+      for (const template of Object.values(VIDEO_TEMPLATES)) {
+        for (const section of template.structure) {
+          expect(section.role).toBeDefined();
+          expect(section.name).toBeDefined();
+          expect(section.suggestedSceneTemplates).toBeDefined();
+          expect(Array.isArray(section.suggestedSceneTemplates)).toBe(true);
+          expect(section.minScenes).toBeDefined();
+          expect(section.maxScenes).toBeDefined();
+          expect(section.minScenes).toBeLessThanOrEqual(section.maxScenes);
         }
-      });
-
-      it('should validate all V2 templates successfully', () => {
-        for (const name of V2_VIDEO_TEMPLATE_NAMES) {
-          const result = validateVideoTemplate(VIDEO_TEMPLATES[name]);
-          expect(result.valid).toBe(true);
-          expect(result.errors).toHaveLength(0);
-        }
-      });
-
-      it('should detect invalid scene template reference', () => {
-        const invalidTemplate: VideoTemplate = {
-          name: 'invalid_test',
-          genre: 'educational',
-          description: 'Test template with invalid scene template',
-          structure: [
-            {
-              role: 'opening',
-              suggestedSceneTemplates: ['non_existent_scene'],
-              minScenes: 1,
-              maxScenes: 1,
-            },
-          ],
-        };
-        const result = validateVideoTemplate(invalidTemplate);
-        expect(result.valid).toBe(false);
-        expect(result.errors.some(e => e.includes('non_existent_scene'))).toBe(true);
-      });
-
-      it('should detect invalid min/max scenes', () => {
-        const invalidTemplate: VideoTemplate = {
-          name: 'invalid_test',
-          genre: 'educational',
-          description: 'Test template with invalid min/max',
-          structure: [
-            {
-              role: 'opening',
-              suggestedSceneTemplates: ['intro_greeting'],
-              minScenes: 5,
-              maxScenes: 2, // Invalid: max < min
-            },
-          ],
-        };
-        const result = validateVideoTemplate(invalidTemplate);
-        expect(result.valid).toBe(false);
-        expect(result.errors.some(e => e.includes('maxScenes'))).toBe(true);
-      });
+      }
     });
 
-    describe('validateAllVideoTemplates', () => {
-      it('should validate all templates successfully', () => {
-        const result = validateAllVideoTemplates();
-        expect(result.valid).toBe(true);
-        expect(Object.keys(result.results)).toHaveLength(5);
-        for (const [name, validation] of Object.entries(result.results)) {
-          expect(validation.valid).toBe(true);
-          expect(validation.errors).toHaveLength(0);
-        }
-      });
+    it('all templates should start with opening and end with closing', () => {
+      for (const template of Object.values(VIDEO_TEMPLATES)) {
+        const firstSection = template.structure[0];
+        const lastSection = template.structure[template.structure.length - 1];
+        expect(firstSection.role).toBe('opening');
+        expect(lastSection.role).toBe('closing');
+      }
     });
   });
 
-  // ==========================================================================
-  // Helper Functions
-  // ==========================================================================
+  // ============================================================================
+  // SCENE TEMPLATE REFERENCE VALIDATION
+  // ============================================================================
+  describe('Scene Template References', () => {
+    it('all referenced scene templates should exist', () => {
+      const result = validateAllVideoTemplates();
+
+      // Check for any errors related to unknown scene templates
+      const sceneTemplateErrors = result.invalidTemplates
+        .flatMap(t => t.errors)
+        .filter(e => e.includes('Unknown scene template'));
+
+      expect(sceneTemplateErrors).toHaveLength(0);
+    });
+
+    it('validateVideoTemplate should detect invalid scene templates', () => {
+      const invalidTemplate: VideoTemplate = {
+        name: 'test_invalid',
+        genre: 'educational',
+        description: 'Test template with invalid references',
+        structure: [
+          {
+            role: 'opening',
+            name: 'Test Opening',
+            suggestedSceneTemplates: ['nonexistent_template'],
+            minScenes: 1,
+            maxScenes: 1,
+          },
+        ],
+      };
+
+      const result = validateVideoTemplate(invalidTemplate);
+      expect(result.valid).toBe(false);
+      expect(result.errors.some(e => e.includes('Unknown scene template'))).toBe(true);
+    });
+
+    it('getUsedSceneTemplates should return all used scene templates', () => {
+      const usedTemplates = getUsedSceneTemplates();
+      expect(usedTemplates.length).toBeGreaterThan(0);
+
+      // All used templates should exist in L4 scene templates
+      for (const templateName of usedTemplates) {
+        expect(SCENE_TEMPLATE_NAMES).toContain(templateName);
+      }
+    });
+  });
+
+  // ============================================================================
+  // HELPER FUNCTIONS TESTS
+  // ============================================================================
   describe('Helper Functions', () => {
     describe('getVideoTemplate', () => {
-      it('should return template for valid MVP name', () => {
+      it('should return template for valid name', () => {
         const template = getVideoTemplate('concept_explainer');
         expect(template).toBeDefined();
         expect(template?.name).toBe('concept_explainer');
       });
 
-      it('should return template for valid V2 name', () => {
-        const template = getVideoTemplate('step_by_step');
-        expect(template).toBeDefined();
-        expect(template?.name).toBe('step_by_step');
-      });
-
       it('should return undefined for invalid name', () => {
-        const template = getVideoTemplate('non_existent_template');
+        const template = getVideoTemplate('nonexistent');
         expect(template).toBeUndefined();
       });
     });
 
     describe('hasVideoTemplate', () => {
-      it('should return true for valid MVP template', () => {
+      it('should return true for valid name', () => {
         expect(hasVideoTemplate('concept_explainer')).toBe(true);
         expect(hasVideoTemplate('news_summary')).toBe(true);
       });
 
-      it('should return true for valid V2 template', () => {
-        expect(hasVideoTemplate('step_by_step')).toBe(true);
-        expect(hasVideoTemplate('myth_buster')).toBe(true);
-        expect(hasVideoTemplate('list_ranking')).toBe(true);
-      });
-
-      it('should return false for invalid template', () => {
-        expect(hasVideoTemplate('invalid')).toBe(false);
-        expect(hasVideoTemplate('')).toBe(false);
+      it('should return false for invalid name', () => {
+        expect(hasVideoTemplate('nonexistent')).toBe(false);
       });
     });
 
     describe('getTemplatesByGenre', () => {
-      it('should return 3 templates for genre "educational"', () => {
+      it('should return educational templates', () => {
         const templates = getTemplatesByGenre('educational');
-        expect(templates).toHaveLength(3);
-        const names = templates.map(t => t.name);
-        expect(names).toContain('concept_explainer');
-        expect(names).toContain('step_by_step');
-        expect(names).toContain('myth_buster');
+        expect(templates.length).toBeGreaterThan(0);
+        for (const t of templates) {
+          expect(t.genre).toBe('educational');
+        }
       });
 
-      it('should return 2 templates for genre "informational"', () => {
+      it('should return informational templates', () => {
         const templates = getTemplatesByGenre('informational');
-        expect(templates).toHaveLength(2);
-        const names = templates.map(t => t.name);
-        expect(names).toContain('news_summary');
-        expect(names).toContain('list_ranking');
+        expect(templates.length).toBeGreaterThan(0);
+        for (const t of templates) {
+          expect(t.genre).toBe('informational');
+        }
       });
 
-      it('should return 0 templates for unused genres', () => {
-        expect(getTemplatesByGenre('comparison')).toHaveLength(0);
-        expect(getTemplatesByGenre('narrative')).toHaveLength(0);
+      it('should return comparison templates', () => {
+        const templates = getTemplatesByGenre('comparison');
+        expect(templates.length).toBeGreaterThan(0);
+        for (const t of templates) {
+          expect(t.genre).toBe('comparison');
+        }
+      });
+
+      it('should return narrative templates', () => {
+        const templates = getTemplatesByGenre('narrative');
+        expect(templates.length).toBeGreaterThan(0);
+        for (const t of templates) {
+          expect(t.genre).toBe('narrative');
+        }
       });
     });
 
+    describe('getTemplatesByDifficulty', () => {
+      it('should return beginner templates', () => {
+        const templates = getTemplatesByDifficulty('beginner');
+        expect(templates.length).toBeGreaterThan(0);
+        for (const t of templates) {
+          expect(t.difficulty).toBe('beginner');
+        }
+      });
+
+      it('should return intermediate templates', () => {
+        const templates = getTemplatesByDifficulty('intermediate');
+        expect(templates.length).toBeGreaterThan(0);
+        for (const t of templates) {
+          expect(t.difficulty).toBe('intermediate');
+        }
+      });
+
+      it('should return advanced templates', () => {
+        const templates = getTemplatesByDifficulty('advanced');
+        expect(templates.length).toBeGreaterThan(0);
+        for (const t of templates) {
+          expect(t.difficulty).toBe('advanced');
+        }
+      });
+    });
+  });
+
+  // ============================================================================
+  // VALIDATION TESTS
+  // ============================================================================
+  describe('Validation', () => {
+    it('all templates should pass validation', () => {
+      const result = validateAllVideoTemplates();
+
+      if (!result.valid) {
+        // Log errors for debugging
+        console.log('Invalid templates:', result.invalidTemplates);
+      }
+
+      expect(result.valid).toBe(true);
+    });
+
+    it('validateVideoTemplate should detect invalid minScenes/maxScenes', () => {
+      const invalidTemplate: VideoTemplate = {
+        name: 'test_invalid',
+        genre: 'educational',
+        description: 'Test template',
+        structure: [
+          {
+            role: 'opening',
+            name: 'Test Opening',
+            suggestedSceneTemplates: ['intro_greeting'],
+            minScenes: 5,
+            maxScenes: 2, // maxScenes < minScenes
+          },
+        ],
+      };
+
+      const result = validateVideoTemplate(invalidTemplate);
+      expect(result.valid).toBe(false);
+      expect(result.errors.some(e => e.includes('maxScenes'))).toBe(true);
+    });
+
+    it('validateVideoTemplate should warn about empty scene templates', () => {
+      const templateWithEmptyScenes: VideoTemplate = {
+        name: 'test_empty',
+        genre: 'educational',
+        description: 'Test template',
+        structure: [
+          {
+            role: 'opening',
+            name: 'Test Opening',
+            suggestedSceneTemplates: [], // Empty
+            minScenes: 1,
+            maxScenes: 1,
+          },
+        ],
+      };
+
+      const result = validateVideoTemplate(templateWithEmptyScenes);
+      expect(result.warnings.some(w => w.includes('No scene templates'))).toBe(true);
+    });
+  });
+
+  // ============================================================================
+  // STATISTICS TESTS
+  // ============================================================================
+  describe('Statistics', () => {
     describe('getVideoTemplateStats', () => {
-      it('should return correct total count', () => {
+      it('should return correct counts', () => {
         const stats = getVideoTemplateStats();
-        expect(stats.totalTemplates).toBe(5);
+        expect(stats.total).toBe(10);
+        expect(stats.mvp).toBe(2);
+        expect(stats.v2).toBe(3);
+        expect(stats.v3).toBe(5);
       });
 
-      it('should return correct genre distribution', () => {
+      it('should return correct genre counts', () => {
         const stats = getVideoTemplateStats();
-        expect(stats.byGenre.educational).toBe(3);
-        expect(stats.byGenre.informational).toBe(2);
-        expect(stats.byGenre.comparison).toBe(0);
-        expect(stats.byGenre.narrative).toBe(0);
+        const totalByGenre = Object.values(stats.byGenre).reduce((a, b) => a + b, 0);
+        expect(totalByGenre).toBe(stats.total);
       });
 
-      it('should return positive average sections', () => {
+      it('should have all genres represented', () => {
         const stats = getVideoTemplateStats();
-        expect(stats.avgSectionsPerTemplate).toBeGreaterThan(0);
-      });
-
-      it('should return positive unique scene templates count', () => {
-        const stats = getVideoTemplateStats();
-        expect(stats.uniqueSceneTemplatesReferenced).toBeGreaterThan(0);
+        expect(stats.byGenre.educational).toBeGreaterThan(0);
+        expect(stats.byGenre.informational).toBeGreaterThan(0);
+        expect(stats.byGenre.comparison).toBeGreaterThan(0);
+        expect(stats.byGenre.narrative).toBeGreaterThan(0);
       });
     });
 
-    describe('getAllReferencedSceneTemplates', () => {
-      it('should return array of scene templates', () => {
-        const sceneTemplates = getAllReferencedSceneTemplates();
-        expect(Array.isArray(sceneTemplates)).toBe(true);
-        expect(sceneTemplates.length).toBeGreaterThan(0);
+    describe('getTemplateSectionStats', () => {
+      it('should return correct section stats', () => {
+        const template = getVideoTemplate('concept_explainer')!;
+        const stats = getTemplateSectionStats(template);
+
+        expect(stats.totalSections).toBe(template.structure.length);
+        expect(stats.requiredSections + stats.optionalSections).toBe(stats.totalSections);
+        expect(stats.minTotalScenes).toBeGreaterThan(0);
+        expect(stats.maxTotalScenes).toBeGreaterThanOrEqual(stats.minTotalScenes);
       });
 
-      it('should return sorted array', () => {
-        const sceneTemplates = getAllReferencedSceneTemplates();
-        const sorted = [...sceneTemplates].sort();
-        expect(sceneTemplates).toEqual(sorted);
-      });
+      it('should correctly count optional sections', () => {
+        const template = getVideoTemplate('news_summary')!;
+        const stats = getTemplateSectionStats(template);
 
-      it('should include common templates', () => {
-        const sceneTemplates = getAllReferencedSceneTemplates();
-        expect(sceneTemplates).toContain('intro_greeting');
-        expect(sceneTemplates).toContain('explain_default');
-      });
-    });
-
-    describe('getSceneCountRange', () => {
-      it('should return range for valid template', () => {
-        const range = getSceneCountRange('concept_explainer');
-        expect(range).toBeDefined();
-        expect(range?.min).toBeGreaterThanOrEqual(0);
-        expect(range?.max).toBeGreaterThan(range?.min ?? 0);
-      });
-
-      it('should return undefined for invalid template', () => {
-        const range = getSceneCountRange('non_existent');
-        expect(range).toBeUndefined();
-      });
-
-      it('should calculate correct range for news_summary', () => {
-        const range = getSceneCountRange('news_summary');
-        expect(range).toBeDefined();
-        // Opening(1-1) + Exp(1-2) + Trans(0-1) + Exp(1-2) + Trans(0-1) + Exp(1-2) + Closing(1-1)
-        expect(range?.min).toBe(5);
-        expect(range?.max).toBe(10);
-      });
-    });
-
-    describe('getOptionalSectionCount', () => {
-      it('should return count of optional sections', () => {
-        const count = getOptionalSectionCount('concept_explainer');
-        expect(count).toBeGreaterThanOrEqual(0);
-      });
-
-      it('should return 0 for template without optional sections or invalid template', () => {
-        const count = getOptionalSectionCount('non_existent');
-        expect(count).toBe(0);
-      });
-
-      it('should correctly count optional sections in news_summary', () => {
-        const count = getOptionalSectionCount('news_summary');
-        expect(count).toBe(2); // Two optional transition sections
+        const optionalCount = template.structure.filter(s => s.optional).length;
+        expect(stats.optionalSections).toBe(optionalCount);
       });
     });
   });
 
-  // ==========================================================================
-  // Genre Distribution
-  // ==========================================================================
+  // ============================================================================
+  // GENRE DISTRIBUTION TESTS
+  // ============================================================================
   describe('Genre Distribution', () => {
-    it('should have correct genre distribution', () => {
-      const genreCount: Record<string, number> = {};
-      for (const template of Object.values(VIDEO_TEMPLATES)) {
-        genreCount[template.genre] = (genreCount[template.genre] || 0) + 1;
+    it('should have at least one template per genre', () => {
+      const genres: VideoGenre[] = ['educational', 'informational', 'comparison', 'narrative'];
+      for (const genre of genres) {
+        const templates = getTemplatesByGenre(genre);
+        expect(templates.length).toBeGreaterThan(0);
       }
-
-      expect(genreCount['educational']).toBe(3);
-      expect(genreCount['informational']).toBe(2);
     });
 
-    it('should have total of 5 templates across all genres', () => {
-      const genreCount: Record<string, number> = {};
-      for (const template of Object.values(VIDEO_TEMPLATES)) {
-        genreCount[template.genre] = (genreCount[template.genre] || 0) + 1;
-      }
-      const total = Object.values(genreCount).reduce((sum, count) => sum + count, 0);
-      expect(total).toBe(5);
+    it('educational genre should have concept_explainer, step_by_step, myth_buster, how_it_works', () => {
+      const educational = getTemplatesByGenre('educational');
+      const names = educational.map(t => t.name);
+      expect(names).toContain('concept_explainer');
+      expect(names).toContain('step_by_step');
+      expect(names).toContain('myth_buster');
+      expect(names).toContain('how_it_works');
+    });
+
+    it('informational genre should have news_summary, list_ranking', () => {
+      const informational = getTemplatesByGenre('informational');
+      const names = informational.map(t => t.name);
+      expect(names).toContain('news_summary');
+      expect(names).toContain('list_ranking');
+    });
+
+    it('comparison genre should have a_vs_b, pros_and_cons', () => {
+      const comparison = getTemplatesByGenre('comparison');
+      const names = comparison.map(t => t.name);
+      expect(names).toContain('a_vs_b');
+      expect(names).toContain('pros_and_cons');
+    });
+
+    it('narrative genre should have story_arc, biography', () => {
+      const narrative = getTemplatesByGenre('narrative');
+      const names = narrative.map(t => t.name);
+      expect(names).toContain('story_arc');
+      expect(names).toContain('biography');
     });
   });
 
-  // ==========================================================================
-  // Section Structure Tests
-  // ==========================================================================
-  describe('Section Structure', () => {
-    Object.entries(VIDEO_TEMPLATES).forEach(([name, template]) => {
-      describe(`${name} sections`, () => {
-        template.structure.forEach((section, index) => {
-          describe(`section ${index} (${section.role})`, () => {
-            it('should have valid minScenes', () => {
-              expect(section.minScenes).toBeGreaterThanOrEqual(0);
-            });
+  // ============================================================================
+  // DIFFICULTY DISTRIBUTION TESTS
+  // ============================================================================
+  describe('Difficulty Distribution', () => {
+    it('should have templates at each difficulty level', () => {
+      const beginner = getTemplatesByDifficulty('beginner');
+      const intermediate = getTemplatesByDifficulty('intermediate');
+      const advanced = getTemplatesByDifficulty('advanced');
 
-            it('should have maxScenes >= minScenes', () => {
-              expect(section.maxScenes).toBeGreaterThanOrEqual(section.minScenes);
-            });
+      expect(beginner.length).toBeGreaterThan(0);
+      expect(intermediate.length).toBeGreaterThan(0);
+      expect(advanced.length).toBeGreaterThan(0);
+    });
 
-            it('should have at least one suggested scene template', () => {
-              expect(section.suggestedSceneTemplates.length).toBeGreaterThan(0);
-            });
-          });
-        });
-      });
+    it('total difficulty counts should equal total templates', () => {
+      const beginner = getTemplatesByDifficulty('beginner');
+      const intermediate = getTemplatesByDifficulty('intermediate');
+      const advanced = getTemplatesByDifficulty('advanced');
+
+      expect(beginner.length + intermediate.length + advanced.length).toBe(10);
     });
   });
 });

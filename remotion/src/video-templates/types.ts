@@ -1,94 +1,80 @@
 /**
  * Video Template Types - Layer 5 (Video Templates)
- * Defines the structure for complete video templates that combine multiple scene templates
- *
- * Video templates provide a blueprint for entire videos, specifying:
- * - The sequence of sections (opening, explanation, closing, etc.)
- * - Which L4 scene templates are appropriate for each section
- * - Constraints on scene counts per section
+ * Orchestrates Layer 4 scene templates into complete video structures
  */
 
-import { SceneRole } from '../templates/types';
-
 /**
- * Video genre types defining the category of video
+ * Video genre categories
  */
-export type VideoGenre =
-  | 'educational'    // Educational/tutorial content
-  | 'informational'  // News and information
-  | 'comparison'     // Comparison content
-  | 'narrative';     // Story/narrative content
+export type VideoGenre = 'educational' | 'informational' | 'comparison' | 'narrative';
 
 /**
- * A section within a video template
- * Defines a logical segment of the video with its role and scene template suggestions
+ * Template difficulty level (V3)
+ */
+export type TemplateDifficulty = 'beginner' | 'intermediate' | 'advanced';
+
+/**
+ * Estimated duration range in seconds (V3)
+ */
+export interface DurationRange {
+  min: number;
+  max: number;
+}
+
+/**
+ * Video section configuration
+ * Defines a segment of the video with scene template suggestions
  */
 export interface VideoSection {
-  /** The role/purpose of this section in the video */
-  role: SceneRole;
-
-  /** L4 scene template names suggested for this section */
+  /** Role/purpose of this section in the video structure */
+  role: string;
+  /** Display name for the section (V3) */
+  name: string;
+  /** Suggested L4 scene templates for this section */
   suggestedSceneTemplates: string[];
-
   /** Minimum number of scenes in this section */
   minScenes: number;
-
   /** Maximum number of scenes in this section */
   maxScenes: number;
-
-  /** Whether this section is optional (V2) */
+  /** Whether this section is optional */
   optional?: boolean;
 }
 
 /**
- * A complete video template defining the structure of an entire video
+ * Video Template interface
+ * Defines a complete video structure with ordered sections
  */
 export interface VideoTemplate {
   /** Unique identifier for the template */
   name: string;
-
   /** Genre/category of the video */
   genre: VideoGenre;
-
-  /** Human-readable description of the template */
+  /** Human-readable description */
   description: string;
-
-  /** Ordered sequence of sections that make up the video */
+  /** Ordered list of video sections */
   structure: VideoSection[];
+  /** Estimated duration in seconds (V3) */
+  estimatedDuration?: DurationRange;
+  /** Difficulty level for content creators (V3) */
+  difficulty?: TemplateDifficulty;
 }
 
 /**
- * Record type for video template collection
- */
-export type VideoTemplateRecord = Record<string, VideoTemplate>;
-
-/**
- * Statistics about video templates
- */
-export interface VideoTemplateStats {
-  /** Total number of video templates */
-  totalTemplates: number;
-
-  /** Number of templates per genre */
-  byGenre: Record<VideoGenre, number>;
-
-  /** Average number of sections per template */
-  avgSectionsPerTemplate: number;
-
-  /** Total number of unique scene templates referenced */
-  uniqueSceneTemplatesReferenced: number;
-}
-
-/**
- * Validation result for a video template
+ * Validation result for video templates
  */
 export interface VideoTemplateValidationResult {
-  /** Whether the template is valid */
   valid: boolean;
-
-  /** List of validation errors */
   errors: string[];
-
-  /** List of validation warnings */
   warnings: string[];
+}
+
+/**
+ * Statistics for video templates
+ */
+export interface VideoTemplateStats {
+  total: number;
+  mvp: number;
+  v2: number;
+  v3: number;
+  byGenre: Record<VideoGenre, number>;
 }
