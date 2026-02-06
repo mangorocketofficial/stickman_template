@@ -16,6 +16,10 @@ const VALID_EYE_STYLES: EyeStyle[] = [
   'wink',
   'narrow',
   'angry',
+  'squint',
+  'wide',
+  'tear',
+  'heart',
 ];
 
 // Valid mouth styles
@@ -27,6 +31,9 @@ const VALID_MOUTH_STYLES: MouthStyle[] = [
   'wavy',
   'wide_smile',
   'angry',
+  'open',
+  'tongue',
+  'grin',
 ];
 
 // Helper function to validate expression structure
@@ -60,13 +67,13 @@ describe('L1 MVP Expressions', () => {
       expect(EXPRESSION_NAMES).toContain('excited');
     });
 
-    it('should have circle eyes for excited look', () => {
-      expect(EXPRESSIONS.excited.leftEye).toBe('circle');
-      expect(EXPRESSIONS.excited.rightEye).toBe('circle');
+    it('should have wide eyes for excited look', () => {
+      expect(EXPRESSIONS.excited.leftEye).toBe('wide');
+      expect(EXPRESSIONS.excited.rightEye).toBe('wide');
     });
 
-    it('should have wide_smile mouth', () => {
-      expect(EXPRESSIONS.excited.mouth).toBe('wide_smile');
+    it('should have grin mouth', () => {
+      expect(EXPRESSIONS.excited.mouth).toBe('grin');
     });
   });
 
@@ -89,9 +96,9 @@ describe('L1 MVP Expressions', () => {
       expect(EXPRESSION_NAMES).toContain('focused');
     });
 
-    it('should have narrow eyes for focused look', () => {
-      expect(EXPRESSIONS.focused.leftEye).toBe('narrow');
-      expect(EXPRESSIONS.focused.rightEye).toBe('narrow');
+    it('should have squint eyes for focused look', () => {
+      expect(EXPRESSIONS.focused.leftEye).toBe('squint');
+      expect(EXPRESSIONS.focused.rightEye).toBe('squint');
     });
   });
 
@@ -119,8 +126,8 @@ describe('L1 MVP Expressions', () => {
       expect(EXPRESSIONS.angry.rightEye).toBe('angry');
     });
 
-    it('should have angry mouth', () => {
-      expect(EXPRESSIONS.angry.mouth).toBe('angry');
+    it('should have frown mouth', () => {
+      expect(EXPRESSIONS.angry.mouth).toBe('frown');
     });
   });
 });
