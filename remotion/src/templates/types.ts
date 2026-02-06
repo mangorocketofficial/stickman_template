@@ -1,55 +1,50 @@
 /**
- * Scene Template Types - Layer 4 (Scene Templates)
- * Combines L3 direction elements (camera + layout + timing) into reusable scene packages
+ * Scene Template Types - Layer 4 (Scene Packages)
+ * Combines Layer 3 direction elements (camera + layout + timing) into reusable scene packages
  */
 
 /**
- * Scene role types defining the purpose of a scene in a video
+ * Scene role categories for content classification
  */
 export type SceneRole =
-  | 'opening'      // Video introduction
-  | 'explanation'  // Main content explanation
-  | 'emphasis'     // Key point emphasis
-  | 'comparison'   // Side-by-side comparison
-  | 'transition'   // Scene transition
-  | 'example'      // Example demonstration
-  | 'warning'      // Warning or caution
-  | 'closing';     // Video conclusion
+  | 'opening'
+  | 'explanation'
+  | 'emphasis'
+  | 'comparison'
+  | 'transition'
+  | 'example'
+  | 'warning'
+  | 'closing';
 
 /**
- * A scene template combining camera, layout, and timing presets
- * into a reusable package for specific scene roles
+ * Scene Template interface
+ * Combines L3 direction presets into a cohesive scene package
  */
 export interface SceneTemplate {
   /** Unique identifier for the template */
   name: string;
-
-  /** Role of the scene in the video */
+  /** Role/purpose of this scene in the video narrative */
   role: SceneRole;
-
   /** Human-readable description of the template */
   description: string;
-
-  /** Camera preset name from L3 direction module */
+  /** Camera preset name from L3 direction/camera */
   camera: string;
-
-  /** Layout preset name from L3 direction module */
+  /** Layout preset name from L3 direction/layout */
   layout: string;
-
-  /** Timing preset name from L3 direction module */
+  /** Timing preset name from L3 direction/timing */
   timing: string;
-
-  /** Default motion for stickman (if applicable) */
+  /** Default motion animation for stickman (optional) */
   defaultMotion?: string;
-
-  /** Suggested poses for the scene */
+  /** Suggested poses for this template (optional) */
   suggestedPoses?: string[];
-
-  /** Suggested expressions for the scene */
+  /** Suggested expressions for this template (optional) */
   suggestedExpressions?: string[];
 }
 
 /**
- * Record type for scene template collection
+ * Template validation result
  */
-export type SceneTemplateRecord = Record<string, SceneTemplate>;
+export interface TemplateValidationResult {
+  valid: boolean;
+  errors: string[];
+}
