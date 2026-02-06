@@ -1,23 +1,21 @@
 /**
  * Video Templates Module - Layer 5 (Video Templates)
- * Complete video structure templates for the stickman video system
+ * Combines Layer 4 scene templates into complete video structures
  *
- * Total Templates: 2 MVP
- * - Educational: 1 (concept_explainer)
- * - News: 1 (news_summary)
- *
- * These templates combine L4 scene templates into complete video blueprints,
- * defining the structure, flow, and scene composition of entire videos.
+ * Total Templates: 5
+ * - MVP: 2 templates
+ * - V2: 3 templates
  */
 
 // Export all types
 export * from './types';
 
-// Export video templates module
+// Export video templates and utilities
 export {
   VIDEO_TEMPLATES,
   VIDEO_TEMPLATE_NAMES,
   MVP_VIDEO_TEMPLATE_NAMES,
+  V2_VIDEO_TEMPLATE_NAMES,
   getVideoTemplate,
   hasVideoTemplate,
   getTemplatesByGenre,
@@ -26,4 +24,5 @@ export {
   validateAllVideoTemplates,
   getAllReferencedSceneTemplates,
   getSceneCountRange,
+  getOptionalSectionCount,
 } from './videoTemplates';

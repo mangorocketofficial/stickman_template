@@ -15,9 +15,9 @@ import { SceneRole } from '../templates/types';
  */
 export type VideoGenre =
   | 'educational'    // Educational/tutorial content
-  | 'news'           // News and information
-  | 'marketing'      // Marketing and promotional
-  | 'entertainment'; // Entertainment content
+  | 'informational'  // News and information
+  | 'comparison'     // Comparison content
+  | 'narrative';     // Story/narrative content
 
 /**
  * A section within a video template
@@ -35,6 +35,9 @@ export interface VideoSection {
 
   /** Maximum number of scenes in this section */
   maxScenes: number;
+
+  /** Whether this section is optional (V2) */
+  optional?: boolean;
 }
 
 /**

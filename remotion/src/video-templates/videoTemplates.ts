@@ -1,13 +1,18 @@
 /**
- * Video Templates - 2 MVP Video Templates
+ * Video Templates - 5 Video Templates (2 MVP + 3 V2)
  * Layer 5 (Video Templates) for the stickman video system
  *
  * These templates define complete video structures by combining L4 scene templates
  * into logical sections for different video genres.
  *
  * MVP Templates (2):
- * - concept_explainer (educational) - Educational concept explanation
- * - news_summary (news) - News/information summary
+ * - concept_explainer (educational)
+ * - news_summary (informational)
+ *
+ * V2 Templates (3):
+ * - step_by_step (educational)
+ * - myth_buster (educational)
+ * - list_ranking (informational)
  */
 
 import {
@@ -18,7 +23,7 @@ import {
   VideoTemplateStats,
   VideoTemplateValidationResult,
 } from './types';
-import { hasSceneTemplate, SCENE_TEMPLATES } from '../templates';
+import { hasSceneTemplate } from '../templates';
 
 // ============================================================================
 // MVP VIDEO TEMPLATES (2)
@@ -35,37 +40,38 @@ const concept_explainer: VideoTemplate = {
   structure: [
     {
       role: 'opening',
-      suggestedSceneTemplates: ['intro_greeting'],
+      suggestedSceneTemplates: ['intro_greeting', 'intro_question', 'intro_title_card'],
       minScenes: 1,
       maxScenes: 1,
     },
     {
       role: 'explanation',
-      suggestedSceneTemplates: ['explain_default', 'explain_formula', 'explain_reverse'],
+      suggestedSceneTemplates: ['explain_default', 'explain_formula', 'explain_reverse', 'explain_with_visual'],
       minScenes: 2,
       maxScenes: 5,
     },
     {
       role: 'example',
-      suggestedSceneTemplates: ['explain_default', 'explain_reverse'],
+      suggestedSceneTemplates: ['example_with_counter', 'example_story', 'explain_default'],
       minScenes: 1,
       maxScenes: 3,
     },
     {
       role: 'comparison',
-      suggestedSceneTemplates: ['compare_side_by_side'],
+      suggestedSceneTemplates: ['compare_side_by_side', 'compare_before_after', 'compare_list'],
       minScenes: 0,
       maxScenes: 2,
+      optional: true,
     },
     {
       role: 'emphasis',
-      suggestedSceneTemplates: ['emphasis_number', 'emphasis_statement'],
+      suggestedSceneTemplates: ['emphasis_number', 'emphasis_statement', 'emphasis_spotlight'],
       minScenes: 1,
       maxScenes: 3,
     },
     {
       role: 'closing',
-      suggestedSceneTemplates: ['intro_greeting'],
+      suggestedSceneTemplates: ['intro_greeting', 'emphasis_statement'],
       minScenes: 1,
       maxScenes: 1,
     },
@@ -75,22 +81,21 @@ const concept_explainer: VideoTemplate = {
 /**
  * 2. news_summary - News/information summary video
  * Structure: opening -> point1 -> point2 -> point3 -> closing
- * Note: point1, point2, point3 are mapped to explanation role
  */
 const news_summary: VideoTemplate = {
   name: 'news_summary',
-  genre: 'news',
+  genre: 'informational',
   description: 'News or information summary with key points',
   structure: [
     {
       role: 'opening',
-      suggestedSceneTemplates: ['intro_greeting'],
+      suggestedSceneTemplates: ['intro_greeting', 'intro_title_card'],
       minScenes: 1,
       maxScenes: 1,
     },
     {
       role: 'explanation', // Point 1
-      suggestedSceneTemplates: ['explain_default', 'emphasis_statement'],
+      suggestedSceneTemplates: ['explain_default', 'explain_with_visual', 'emphasis_statement'],
       minScenes: 1,
       maxScenes: 2,
     },
@@ -99,6 +104,7 @@ const news_summary: VideoTemplate = {
       suggestedSceneTemplates: ['transition_topic_change'],
       minScenes: 0,
       maxScenes: 1,
+      optional: true,
     },
     {
       role: 'explanation', // Point 2
@@ -111,16 +117,188 @@ const news_summary: VideoTemplate = {
       suggestedSceneTemplates: ['transition_topic_change'],
       minScenes: 0,
       maxScenes: 1,
+      optional: true,
     },
     {
       role: 'explanation', // Point 3
-      suggestedSceneTemplates: ['explain_default', 'emphasis_statement'],
+      suggestedSceneTemplates: ['explain_default', 'emphasis_statement', 'emphasis_spotlight'],
       minScenes: 1,
       maxScenes: 2,
     },
     {
       role: 'closing',
       suggestedSceneTemplates: ['intro_greeting', 'emphasis_statement'],
+      minScenes: 1,
+      maxScenes: 1,
+    },
+  ],
+};
+
+// ============================================================================
+// V2 VIDEO TEMPLATES (3)
+// ============================================================================
+
+/**
+ * 3. step_by_step - Step-by-step tutorial video
+ * Structure: opening -> step1 -> step2 -> step3 -> summary -> closing
+ */
+const step_by_step: VideoTemplate = {
+  name: 'step_by_step',
+  genre: 'educational',
+  description: 'Step-by-step tutorial guiding through a process',
+  structure: [
+    {
+      role: 'opening',
+      suggestedSceneTemplates: ['intro_greeting', 'intro_question'],
+      minScenes: 1,
+      maxScenes: 1,
+    },
+    {
+      role: 'explanation', // Step 1
+      suggestedSceneTemplates: ['explain_default', 'explain_with_visual', 'example_with_counter'],
+      minScenes: 1,
+      maxScenes: 2,
+    },
+    {
+      role: 'transition',
+      suggestedSceneTemplates: ['transition_topic_change'],
+      minScenes: 0,
+      maxScenes: 1,
+      optional: true,
+    },
+    {
+      role: 'explanation', // Step 2
+      suggestedSceneTemplates: ['explain_default', 'explain_reverse', 'explain_with_visual'],
+      minScenes: 1,
+      maxScenes: 2,
+    },
+    {
+      role: 'transition',
+      suggestedSceneTemplates: ['transition_topic_change'],
+      minScenes: 0,
+      maxScenes: 1,
+      optional: true,
+    },
+    {
+      role: 'explanation', // Step 3
+      suggestedSceneTemplates: ['explain_default', 'explain_formula', 'example_story'],
+      minScenes: 1,
+      maxScenes: 2,
+    },
+    {
+      role: 'emphasis', // Summary
+      suggestedSceneTemplates: ['emphasis_statement', 'emphasis_spotlight', 'compare_list'],
+      minScenes: 1,
+      maxScenes: 2,
+    },
+    {
+      role: 'closing',
+      suggestedSceneTemplates: ['intro_greeting', 'emphasis_statement'],
+      minScenes: 1,
+      maxScenes: 1,
+    },
+  ],
+};
+
+/**
+ * 4. myth_buster - Myth vs reality video
+ * Structure: opening -> myth -> refutation -> fact -> closing
+ */
+const myth_buster: VideoTemplate = {
+  name: 'myth_buster',
+  genre: 'educational',
+  description: 'Myth-busting video that debunks common misconceptions',
+  structure: [
+    {
+      role: 'opening',
+      suggestedSceneTemplates: ['intro_question', 'intro_greeting'],
+      minScenes: 1,
+      maxScenes: 1,
+    },
+    {
+      role: 'explanation', // Myth presentation
+      suggestedSceneTemplates: ['explain_default', 'emphasis_statement'],
+      minScenes: 1,
+      maxScenes: 2,
+    },
+    {
+      role: 'comparison', // Refutation
+      suggestedSceneTemplates: ['compare_before_after', 'compare_side_by_side'],
+      minScenes: 1,
+      maxScenes: 2,
+    },
+    {
+      role: 'emphasis', // Fact reveal
+      suggestedSceneTemplates: ['emphasis_spotlight', 'emphasis_number', 'emphasis_statement'],
+      minScenes: 1,
+      maxScenes: 2,
+    },
+    {
+      role: 'example', // Supporting evidence
+      suggestedSceneTemplates: ['example_with_counter', 'example_story'],
+      minScenes: 0,
+      maxScenes: 2,
+      optional: true,
+    },
+    {
+      role: 'closing',
+      suggestedSceneTemplates: ['intro_greeting', 'emphasis_statement'],
+      minScenes: 1,
+      maxScenes: 1,
+    },
+  ],
+};
+
+/**
+ * 5. list_ranking - Ranked list video
+ * Structure: opening -> item_n -> ... -> item_1 -> closing
+ */
+const list_ranking: VideoTemplate = {
+  name: 'list_ranking',
+  genre: 'informational',
+  description: 'Countdown or ranked list of items',
+  structure: [
+    {
+      role: 'opening',
+      suggestedSceneTemplates: ['intro_title_card', 'intro_question', 'intro_greeting'],
+      minScenes: 1,
+      maxScenes: 1,
+    },
+    {
+      role: 'explanation', // Lower ranked items
+      suggestedSceneTemplates: ['explain_default', 'explain_with_visual'],
+      minScenes: 2,
+      maxScenes: 5,
+    },
+    {
+      role: 'transition',
+      suggestedSceneTemplates: ['transition_topic_change'],
+      minScenes: 0,
+      maxScenes: 1,
+      optional: true,
+    },
+    {
+      role: 'explanation', // Middle ranked items
+      suggestedSceneTemplates: ['explain_default', 'explain_reverse', 'emphasis_number'],
+      minScenes: 2,
+      maxScenes: 4,
+    },
+    {
+      role: 'transition',
+      suggestedSceneTemplates: ['transition_topic_change'],
+      minScenes: 0,
+      maxScenes: 1,
+      optional: true,
+    },
+    {
+      role: 'emphasis', // Top ranked item (#1)
+      suggestedSceneTemplates: ['emphasis_spotlight', 'emphasis_number', 'emphasis_statement'],
+      minScenes: 1,
+      maxScenes: 2,
+    },
+    {
+      role: 'closing',
+      suggestedSceneTemplates: ['intro_greeting', 'compare_list'],
       minScenes: 1,
       maxScenes: 1,
     },
@@ -135,8 +313,13 @@ const news_summary: VideoTemplate = {
  * All video templates indexed by name
  */
 export const VIDEO_TEMPLATES: VideoTemplateRecord = {
+  // MVP (2)
   concept_explainer,
   news_summary,
+  // V2 (3)
+  step_by_step,
+  myth_buster,
+  list_ranking,
 };
 
 /**
@@ -145,11 +328,20 @@ export const VIDEO_TEMPLATES: VideoTemplateRecord = {
 export const VIDEO_TEMPLATE_NAMES = Object.keys(VIDEO_TEMPLATES) as string[];
 
 /**
- * Array of MVP template names for easy reference
+ * Array of MVP template names
  */
 export const MVP_VIDEO_TEMPLATE_NAMES = [
   'concept_explainer',
   'news_summary',
+] as const;
+
+/**
+ * Array of V2 template names
+ */
+export const V2_VIDEO_TEMPLATE_NAMES = [
+  'step_by_step',
+  'myth_buster',
+  'list_ranking',
 ] as const;
 
 // ============================================================================
@@ -186,9 +378,9 @@ export const getVideoTemplateStats = (): VideoTemplateStats => {
   // Count templates by genre
   const byGenre: Record<VideoGenre, number> = {
     educational: 0,
-    news: 0,
-    marketing: 0,
-    entertainment: 0,
+    informational: 0,
+    comparison: 0,
+    narrative: 0,
   };
 
   for (const template of templates) {
@@ -367,4 +559,16 @@ export const getSceneCountRange = (
   }
 
   return { min, max };
+};
+
+/**
+ * Get count of optional sections in a template
+ */
+export const getOptionalSectionCount = (templateName: string): number => {
+  const template = getVideoTemplate(templateName);
+  if (!template) {
+    return 0;
+  }
+
+  return template.structure.filter(s => s.optional === true).length;
 };
