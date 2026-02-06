@@ -1,12 +1,22 @@
 /**
  * SceneRenderer - Renders a single scene with background, transitions, and objects
+ *
+ * Updated for Track B-1: Now supports gradient and pattern backgrounds
+ * Updated for Track B-5: Enhanced transition support (wipe, slide, crossfade)
+ * Updated for Track B-3: Visual effects (vignette, spotlight, screen shake)
  */
 
 import React from 'react';
-import { useCurrentFrame, useVideoConfig, interpolate, Sequence } from 'remotion';
-import { Scene, getBackgroundColor } from './types/schema';
+import { useCurrentFrame, useVideoConfig } from 'remotion';
+import { Scene, TransitionType } from './types/schema';
 import ObjectRenderer from './ObjectRenderer';
-import { msToFrames, getDurationInFrames } from './utils/timing';
+import BackgroundRenderer from './components/BackgroundRenderer';
+import EffectsLayer, { useScreenShake } from './components/EffectsLayer';
+import { msToFrames } from './utils/timing';
+import {
+  getTransitionStyle,
+  getTransitionProgress,
+} from './utils/transitions';
 
 interface SceneRendererProps {
   scene: Scene;
@@ -27,10 +37,8 @@ export const SceneRenderer: React.FC<SceneRendererProps> = ({
     background,
     transition,
     objects,
+    effects = [],
   } = scene;
-
-  // Get background color (handles both string and BackgroundDef)
-  const backgroundColor = getBackgroundColor(background);
 
   // Calculate scene timing
   const sceneStartFrame = msToFrames(startMs, fps);
@@ -38,39 +46,61 @@ export const SceneRenderer: React.FC<SceneRendererProps> = ({
   const sceneDurationFrames = sceneEndFrame - sceneStartFrame;
 
   // Transition settings
-  const transitionIn = transition?.in || 'fadeIn';
-  const transitionOut = transition?.out || 'fadeOut';
+  const transitionIn = (transition?.in || 'fadeIn') as TransitionType;
+  const transitionOut = (transition?.out || 'fadeOut') as TransitionType;
   const transitionDurationMs = transition?.durationMs || 300;
   const transitionDurationFrames = msToFrames(transitionDurationMs, fps);
 
-  // Calculate transition opacity
   // Note: Inside Sequence, useCurrentFrame() already returns frame relative to Sequence start (0-based)
-  // So we use 'frame' directly as the relative frame
   const relativeFrame = frame;
 
-  let transitionOpacity = 1;
+  // Calculate enter transition progress and style
+  const enterProgress = getTransitionProgress(
+    relativeFrame,
+    sceneDurationFrames,
+    transitionDurationFrames,
+    true
+  );
+  const enterStyle = getTransitionStyle(
+    transitionIn,
+    enterProgress,
+    true,
+    width,
+    height
+  );
 
-  // Fade in at scene start
-  if (transitionIn === 'fadeIn' && relativeFrame < transitionDurationFrames) {
-    transitionOpacity = interpolate(
-      relativeFrame,
-      [0, transitionDurationFrames],
-      [0, 1],
-      { extrapolateRight: 'clamp' }
-    );
-  }
+  // Calculate exit transition progress and style
+  const exitProgress = getTransitionProgress(
+    relativeFrame,
+    sceneDurationFrames,
+    transitionDurationFrames,
+    false
+  );
+  const exitStyle = getTransitionStyle(
+    transitionOut,
+    exitProgress,
+    false,
+    width,
+    height
+  );
 
-  // Fade out at scene end
-  if (transitionOut === 'fadeOut') {
-    const fadeOutStart = sceneDurationFrames - transitionDurationFrames;
-    if (relativeFrame > fadeOutStart) {
-      transitionOpacity = interpolate(
-        relativeFrame,
-        [fadeOutStart, sceneDurationFrames],
-        [1, 0],
-        { extrapolateLeft: 'clamp', extrapolateRight: 'clamp' }
-      );
-    }
+  // Combine transitions: enter applies at start, exit applies at end
+  // During middle of scene, both should be at "complete" state
+  const isInEnterPhase = relativeFrame < transitionDurationFrames;
+  const isInExitPhase = relativeFrame > sceneDurationFrames - transitionDurationFrames;
+
+  let finalOpacity = 1;
+  let finalTransform = 'none';
+  let finalClipPath: string | undefined;
+
+  if (isInEnterPhase && transitionIn !== 'none') {
+    finalOpacity = enterStyle.opacity;
+    finalTransform = enterStyle.transform;
+    finalClipPath = enterStyle.clipPath;
+  } else if (isInExitPhase && transitionOut !== 'none') {
+    finalOpacity = exitStyle.opacity;
+    finalTransform = exitStyle.transform;
+    finalClipPath = exitStyle.clipPath;
   }
 
   // Sort objects by layer
@@ -80,16 +110,36 @@ export const SceneRenderer: React.FC<SceneRendererProps> = ({
     return layerA - layerB;
   });
 
+  // Get screen shake transform if effect is active
+  const shakeTransform = useScreenShake(effects, startMs);
+
+  // Combine transition transform with shake transform
+  const combinedTransform =
+    shakeTransform !== 'none' && finalTransform !== 'none'
+      ? `${finalTransform} ${shakeTransform}`
+      : shakeTransform !== 'none'
+        ? shakeTransform
+        : finalTransform;
+
   return (
     <div
       style={{
         position: 'absolute',
         width,
         height,
-        backgroundColor,
-        opacity: transitionOpacity,
+        opacity: finalOpacity,
+        transform: combinedTransform,
+        clipPath: finalClipPath,
+        overflow: 'hidden',
       }}
     >
+      {/* Background layer (supports gradients, patterns, animations) */}
+      <BackgroundRenderer
+        background={background}
+        width={width}
+        height={height}
+      />
+
       {/* Render objects sorted by layer */}
       {/* sceneStartFrame=0 because frame is already relative to Sequence start */}
       {sortedObjects.map((obj) => (
@@ -100,6 +150,16 @@ export const SceneRenderer: React.FC<SceneRendererProps> = ({
           sceneDurationFrames={sceneDurationFrames}
         />
       ))}
+
+      {/* Effects overlay layer (vignette, spotlight, etc.) */}
+      {effects.length > 0 && (
+        <EffectsLayer
+          effects={effects}
+          sceneStartMs={startMs}
+          width={width}
+          height={height}
+        />
+      )}
     </div>
   );
 };
