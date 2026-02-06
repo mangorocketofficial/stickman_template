@@ -3,13 +3,17 @@
  *
  * Features:
  * - BGM playback with loop support
- * - Auto-ducking during narration
+ * - Auto-ducking during narration with smooth transitions
  * - Fade in/out at video start/end
- * - Smooth volume transitions
+ * - Configurable ducking attack/release times
+ *
+ * Updated for Track B-9: Improved audio mixing
+ * - Smooth ducking transitions (attack/release)
+ * - Lookahead for predictive ducking
  */
 
 import React, { useMemo } from 'react';
-import { Audio, useCurrentFrame, useVideoConfig, staticFile, interpolate } from 'remotion';
+import { Audio, useCurrentFrame, useVideoConfig, staticFile, interpolate, Easing } from 'remotion';
 import { BGMConfig, SubtitleData, SegmentTimestamp } from '../types/schema';
 
 interface BGMPlayerProps {
@@ -18,21 +22,50 @@ interface BGMPlayerProps {
   totalDurationFrames: number;
 }
 
+// Default ducking timing configuration
+const DUCKING_ATTACK_MS = 150;   // Time to duck down when narration starts
+const DUCKING_RELEASE_MS = 300;  // Time to restore volume when narration ends
+
 /**
- * Check if narration is active at a given frame
+ * Calculate ducking multiplier with smooth transitions
  */
-const isNarrationActive = (
-  frame: number,
-  fps: number,
-  segments?: SegmentTimestamp[]
-): boolean => {
-  if (!segments || segments.length === 0) return false;
+const calculateDuckingMultiplier = (
+  currentMs: number,
+  segments: SegmentTimestamp[],
+  attackMs: number = DUCKING_ATTACK_MS,
+  releaseMs: number = DUCKING_RELEASE_MS
+): number => {
+  if (!segments || segments.length === 0) {
+    return 1.0; // No ducking
+  }
 
-  const currentMs = (frame / fps) * 1000;
+  // Check all segment boundaries for smooth transitions
+  let duckingFactor = 1.0;
 
-  return segments.some(
-    (segment) => currentMs >= segment.startMs && currentMs <= segment.endMs
-  );
+  for (const segment of segments) {
+    // Attack phase: approaching segment start
+    const attackStart = segment.startMs - attackMs;
+    if (currentMs >= attackStart && currentMs < segment.startMs) {
+      const progress = (currentMs - attackStart) / attackMs;
+      const attackFactor = 1.0 - progress;
+      duckingFactor = Math.min(duckingFactor, attackFactor);
+    }
+
+    // During narration: fully ducked
+    if (currentMs >= segment.startMs && currentMs <= segment.endMs) {
+      duckingFactor = 0;
+    }
+
+    // Release phase: after segment end
+    const releaseEnd = segment.endMs + releaseMs;
+    if (currentMs > segment.endMs && currentMs < releaseEnd) {
+      const progress = (currentMs - segment.endMs) / releaseMs;
+      const releaseFactor = progress;
+      duckingFactor = Math.min(duckingFactor, releaseFactor);
+    }
+  }
+
+  return Math.max(0, Math.min(1, duckingFactor));
 };
 
 /**
@@ -55,15 +88,19 @@ const calculateVolume = (
   const fadeInFrames = Math.round((fadeInMs / 1000) * fps);
   const fadeOutFrames = Math.round((fadeOutMs / 1000) * fps);
   const fadeOutStart = totalDurationFrames - fadeOutFrames;
+  const currentMs = (frame / fps) * 1000;
 
-  // Base volume starts at target
+  // Start with full volume
   let currentVolume = volume;
 
   // Apply fade in
   if (frame < fadeInFrames) {
-    currentVolume = interpolate(frame, [0, fadeInFrames], [0, volume], {
-      extrapolateRight: 'clamp',
-    });
+    currentVolume = interpolate(
+      frame,
+      [0, fadeInFrames],
+      [0, volume],
+      { extrapolateRight: 'clamp', easing: Easing.out(Easing.cubic) }
+    );
   }
 
   // Apply fade out
@@ -72,20 +109,31 @@ const calculateVolume = (
       frame,
       [fadeOutStart, totalDurationFrames],
       [volume, 0],
-      { extrapolateLeft: 'clamp', extrapolateRight: 'clamp' }
+      { extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: Easing.in(Easing.cubic) }
     );
   }
 
-  // Apply ducking during narration
-  const narrationActive = isNarrationActive(frame, fps, segments);
-  if (narrationActive) {
-    // Smooth transition to ducking level (over ~100ms = ~3 frames at 30fps)
-    // For simplicity, we just use the ducking level directly
-    // A more sophisticated approach would track narration state changes
-    currentVolume = Math.min(currentVolume, duckingLevel);
+  // Apply smooth ducking during narration
+  if (segments && segments.length > 0) {
+    const duckingMultiplier = calculateDuckingMultiplier(currentMs, segments);
+
+    // Interpolate between ducking level and full volume
+    const duckingRange = volume - duckingLevel;
+    currentVolume = duckingLevel + (duckingRange * duckingMultiplier);
+
+    // Respect fade in/out limits
+    currentVolume = Math.min(currentVolume, volume);
+    if (frame < fadeInFrames) {
+      const fadeProgress = frame / fadeInFrames;
+      currentVolume *= fadeProgress;
+    }
+    if (frame > fadeOutStart) {
+      const fadeProgress = 1 - ((frame - fadeOutStart) / fadeOutFrames);
+      currentVolume *= Math.max(0, fadeProgress);
+    }
   }
 
-  return currentVolume;
+  return Math.max(0, currentVolume);
 };
 
 export const BGMPlayer: React.FC<BGMPlayerProps> = ({
@@ -95,9 +143,6 @@ export const BGMPlayer: React.FC<BGMPlayerProps> = ({
 }) => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
-
-  // Get BGM source
-  const bgmSrc = config.src ? staticFile(config.src) : null;
 
   // If no source and mood is specified, use default path pattern
   const effectiveSrc = useMemo(() => {
@@ -115,7 +160,7 @@ export const BGMPlayer: React.FC<BGMPlayerProps> = ({
     return null;
   }
 
-  // Calculate dynamic volume
+  // Calculate dynamic volume with smooth ducking
   const currentVolume = calculateVolume(
     frame,
     fps,
@@ -129,7 +174,6 @@ export const BGMPlayer: React.FC<BGMPlayerProps> = ({
       src={effectiveSrc}
       volume={currentVolume}
       loop={config.loop !== false} // default true
-      startFrom={0}
     />
   );
 };

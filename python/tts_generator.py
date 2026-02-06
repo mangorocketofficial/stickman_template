@@ -1,6 +1,11 @@
 """
 TTS Generator Module
 Generates speech audio from text using Edge TTS.
+
+Updated for Track B-8: TTS Enhancement
+- Supports inline tags: [pause: 500], [rate: slow/fast], [emphasis: strong]
+- Auto-pause after punctuation
+- Rate/pitch adjustment per section
 """
 
 import asyncio
@@ -8,6 +13,14 @@ import os
 from pathlib import Path
 
 import edge_tts
+
+from ssml_utils import (
+    preprocess_for_edge_tts,
+    strip_inline_tags,
+    convert_rate_value,
+    convert_pitch_value,
+    SSMLConfig,
+)
 
 
 # Default TTS configuration
@@ -24,17 +37,19 @@ async def generate_tts_async(
     rate: str = DEFAULT_RATE,
     volume: str = DEFAULT_VOLUME,
     pitch: str = DEFAULT_PITCH,
+    process_inline_tags: bool = True,
 ) -> str:
     """
     Generate TTS audio asynchronously.
 
     Args:
-        text: Text to convert to speech
+        text: Text to convert to speech (may contain inline tags)
         output_path: Path to save the audio file
         voice: Edge TTS voice ID
-        rate: Speech rate (e.g., "+10%", "-20%")
+        rate: Speech rate (e.g., "+10%", "-20%", "slow", "fast")
         volume: Volume adjustment
         pitch: Pitch adjustment
+        process_inline_tags: Whether to process [pause:], [rate:] tags
 
     Returns:
         Path to the generated audio file
@@ -44,13 +59,26 @@ async def generate_tts_async(
     if output_dir:
         os.makedirs(output_dir, exist_ok=True)
 
+    # Process inline tags if enabled
+    if process_inline_tags:
+        clean_text, extracted_rate = preprocess_for_edge_tts(text)
+        # Use extracted rate if different from default
+        if extracted_rate != '+0%' and rate == DEFAULT_RATE:
+            rate = extracted_rate
+    else:
+        clean_text = text
+
+    # Convert rate/pitch presets to Edge TTS format
+    final_rate = convert_rate_value(rate)
+    final_pitch = convert_pitch_value(pitch)
+
     # Create TTS communicate object
     communicate = edge_tts.Communicate(
-        text=text,
+        text=clean_text,
         voice=voice,
-        rate=rate,
+        rate=final_rate,
         volume=volume,
-        pitch=pitch,
+        pitch=final_pitch,
     )
 
     # Generate and save audio
@@ -66,17 +94,19 @@ def generate_tts(
     rate: str = DEFAULT_RATE,
     volume: str = DEFAULT_VOLUME,
     pitch: str = DEFAULT_PITCH,
+    process_inline_tags: bool = True,
 ) -> str:
     """
     Generate TTS audio synchronously.
 
     Args:
-        text: Text to convert to speech
+        text: Text to convert to speech (may contain inline tags)
         output_path: Path to save the audio file
         voice: Edge TTS voice ID
-        rate: Speech rate (e.g., "+10%", "-20%")
+        rate: Speech rate (e.g., "+10%", "-20%", "slow", "fast")
         volume: Volume adjustment
         pitch: Pitch adjustment
+        process_inline_tags: Whether to process [pause:], [rate:] tags
 
     Returns:
         Path to the generated audio file
@@ -88,6 +118,7 @@ def generate_tts(
         rate=rate,
         volume=volume,
         pitch=pitch,
+        process_inline_tags=process_inline_tags,
     ))
 
 
