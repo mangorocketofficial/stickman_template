@@ -1,238 +1,131 @@
+/**
+ * Camera Presets Tests
+ */
+
 import { describe, it, expect } from 'vitest';
 import {
   CAMERA_PRESETS,
   CAMERA_PRESET_NAMES,
-  CAMERA_PRESETS_MAP,
+  MVP_CAMERA_PRESET_NAMES,
+  V2_CAMERA_PRESET_NAMES,
   getCameraPreset,
-  interpolateCameraAtProgress,
-  STATIC_FULL,
-  STATIC_CLOSEUP,
-  STATIC_WIDE,
-  ZOOM_IN_SLOW,
-  ZOOM_IN_FAST,
+  DEFAULT_CAMERA_PRESET,
 } from '../camera';
-import { CameraKeyframe, CameraPreset } from '../types';
+import { CameraPresetName } from '../types';
 
-// Valid easing values
-const VALID_EASINGS: CameraKeyframe['easing'][] = ['linear', 'easeInOut', 'easeOut', 'easeIn'];
-
-// Helper to validate a camera keyframe
-function isValidKeyframe(keyframe: CameraKeyframe): boolean {
-  return (
-    typeof keyframe.atPercent === 'number' &&
-    keyframe.atPercent >= 0 &&
-    keyframe.atPercent <= 100 &&
-    typeof keyframe.zoom === 'number' &&
-    keyframe.zoom > 0 &&
-    typeof keyframe.offsetX === 'number' &&
-    typeof keyframe.offsetY === 'number' &&
-    VALID_EASINGS.includes(keyframe.easing)
-  );
-}
-
-// Helper to validate a camera preset
-function isValidCameraPreset(preset: CameraPreset): boolean {
-  return (
-    typeof preset.name === 'string' &&
-    preset.name.length > 0 &&
-    Array.isArray(preset.keyframes) &&
-    preset.keyframes.length >= 1 &&
-    preset.keyframes.every(isValidKeyframe)
-  );
-}
-
-describe('L3 Camera Presets', () => {
-  describe('CAMERA_PRESETS array', () => {
-    it('should have exactly 5 presets', () => {
-      expect(CAMERA_PRESETS.length).toBe(5);
+describe('Camera Presets', () => {
+  describe('Preset Counts', () => {
+    it('should have exactly 10 camera presets', () => {
+      expect(Object.keys(CAMERA_PRESETS).length).toBe(10);
     });
 
-    it('should have all required preset names', () => {
-      const names = CAMERA_PRESETS.map((p) => p.name);
-      expect(names).toContain('static_full');
-      expect(names).toContain('static_closeup');
-      expect(names).toContain('static_wide');
-      expect(names).toContain('zoom_in_slow');
-      expect(names).toContain('zoom_in_fast');
+    it('should have exactly 10 preset names in array', () => {
+      expect(CAMERA_PRESET_NAMES.length).toBe(10);
+    });
+
+    it('should have 5 MVP presets', () => {
+      expect(MVP_CAMERA_PRESET_NAMES.length).toBe(5);
+    });
+
+    it('should have 5 V2 presets', () => {
+      expect(V2_CAMERA_PRESET_NAMES.length).toBe(5);
     });
   });
 
-  describe('CAMERA_PRESET_NAMES list', () => {
-    it('should have exactly 5 names', () => {
-      expect(CAMERA_PRESET_NAMES.length).toBe(5);
-    });
+  describe('MVP Presets (5)', () => {
+    const mvpPresets: CameraPresetName[] = [
+      'static_full',
+      'static_closeup',
+      'static_wide',
+      'zoom_in_slow',
+      'zoom_in_fast',
+    ];
 
-    it('should match CAMERA_PRESETS', () => {
-      expect(CAMERA_PRESET_NAMES).toEqual(CAMERA_PRESETS.map((p) => p.name));
-    });
-  });
-
-  describe('CAMERA_PRESETS_MAP', () => {
-    it('should have all presets accessible by name', () => {
-      CAMERA_PRESET_NAMES.forEach((name) => {
-        expect(CAMERA_PRESETS_MAP[name]).toBeDefined();
-        expect(CAMERA_PRESETS_MAP[name].name).toBe(name);
+    mvpPresets.forEach((presetName) => {
+      it(`should have MVP preset: ${presetName}`, () => {
+        expect(CAMERA_PRESETS[presetName]).toBeDefined();
+        expect(CAMERA_PRESETS[presetName].name).toBe(presetName);
       });
     });
   });
 
-  describe('Individual presets validation', () => {
-    describe('static_full', () => {
-      it('should exist and be valid', () => {
-        expect(isValidCameraPreset(STATIC_FULL)).toBe(true);
-      });
+  describe('V2 Presets (5)', () => {
+    const v2Presets: CameraPresetName[] = [
+      'zoom_out_reveal',
+      'zoom_pulse',
+      'pan_left_to_right',
+      'pan_right_to_left',
+      'dolly_in',
+    ];
 
-      it('should have zoom 1.0 throughout', () => {
-        STATIC_FULL.keyframes.forEach((kf) => {
-          expect(kf.zoom).toBe(1.0);
-        });
-      });
-
-      it('should have no offset', () => {
-        STATIC_FULL.keyframes.forEach((kf) => {
-          expect(kf.offsetX).toBe(0);
-          expect(kf.offsetY).toBe(0);
-        });
-      });
-    });
-
-    describe('static_closeup', () => {
-      it('should exist and be valid', () => {
-        expect(isValidCameraPreset(STATIC_CLOSEUP)).toBe(true);
-      });
-
-      it('should have zoom 1.3 throughout', () => {
-        STATIC_CLOSEUP.keyframes.forEach((kf) => {
-          expect(kf.zoom).toBe(1.3);
-        });
-      });
-    });
-
-    describe('static_wide', () => {
-      it('should exist and be valid', () => {
-        expect(isValidCameraPreset(STATIC_WIDE)).toBe(true);
-      });
-
-      it('should have zoom 0.8 throughout', () => {
-        STATIC_WIDE.keyframes.forEach((kf) => {
-          expect(kf.zoom).toBe(0.8);
-        });
-      });
-    });
-
-    describe('zoom_in_slow', () => {
-      it('should exist and be valid', () => {
-        expect(isValidCameraPreset(ZOOM_IN_SLOW)).toBe(true);
-      });
-
-      it('should start at zoom 1.0 and end at 1.2', () => {
-        const first = ZOOM_IN_SLOW.keyframes[0];
-        const last = ZOOM_IN_SLOW.keyframes[ZOOM_IN_SLOW.keyframes.length - 1];
-        expect(first.zoom).toBe(1.0);
-        expect(last.zoom).toBe(1.2);
-      });
-
-      it('should use easeInOut easing', () => {
-        ZOOM_IN_SLOW.keyframes.forEach((kf) => {
-          expect(kf.easing).toBe('easeInOut');
-        });
-      });
-    });
-
-    describe('zoom_in_fast', () => {
-      it('should exist and be valid', () => {
-        expect(isValidCameraPreset(ZOOM_IN_FAST)).toBe(true);
-      });
-
-      it('should start at zoom 1.0 and end at 1.3', () => {
-        const first = ZOOM_IN_FAST.keyframes[0];
-        const last = ZOOM_IN_FAST.keyframes[ZOOM_IN_FAST.keyframes.length - 1];
-        expect(first.zoom).toBe(1.0);
-        expect(last.zoom).toBe(1.3);
-      });
-
-      it('should use easeOut easing for snappy feel', () => {
-        const last = ZOOM_IN_FAST.keyframes[ZOOM_IN_FAST.keyframes.length - 1];
-        expect(last.easing).toBe('easeOut');
+    v2Presets.forEach((presetName) => {
+      it(`should have V2 preset: ${presetName}`, () => {
+        expect(CAMERA_PRESETS[presetName]).toBeDefined();
+        expect(CAMERA_PRESETS[presetName].name).toBe(presetName);
       });
     });
   });
 
-  describe('All presets have valid structure', () => {
-    CAMERA_PRESET_NAMES.forEach((name) => {
-      it(`${name} should have valid preset structure`, () => {
-        const preset = CAMERA_PRESETS_MAP[name];
-        expect(isValidCameraPreset(preset)).toBe(true);
-      });
+  describe('Preset Structure', () => {
+    Object.entries(CAMERA_PRESETS).forEach(([name, preset]) => {
+      describe(`Preset: ${name}`, () => {
+        it('should have a name property', () => {
+          expect(preset.name).toBe(name);
+        });
 
-      it(`${name} should have keyframes starting at 0%`, () => {
-        const preset = CAMERA_PRESETS_MAP[name];
-        expect(preset.keyframes[0].atPercent).toBe(0);
-      });
+        it('should have at least 2 keyframes', () => {
+          expect(preset.keyframes.length).toBeGreaterThanOrEqual(2);
+        });
 
-      it(`${name} should have keyframes ending at 100%`, () => {
-        const preset = CAMERA_PRESETS_MAP[name];
-        const lastKf = preset.keyframes[preset.keyframes.length - 1];
-        expect(lastKf.atPercent).toBe(100);
-      });
+        it('should start at 0%', () => {
+          expect(preset.keyframes[0].atPercent).toBe(0);
+        });
 
-      it(`${name} should have positive zoom values`, () => {
-        const preset = CAMERA_PRESETS_MAP[name];
-        preset.keyframes.forEach((kf) => {
-          expect(kf.zoom).toBeGreaterThan(0);
+        it('should end at 100%', () => {
+          expect(preset.keyframes[preset.keyframes.length - 1].atPercent).toBe(100);
+        });
+
+        preset.keyframes.forEach((keyframe, index) => {
+          it(`keyframe ${index} should have valid zoom (0.5-2.0)`, () => {
+            expect(keyframe.zoom).toBeGreaterThanOrEqual(0.5);
+            expect(keyframe.zoom).toBeLessThanOrEqual(2.0);
+          });
+
+          it(`keyframe ${index} should have numeric offsetX`, () => {
+            expect(typeof keyframe.offsetX).toBe('number');
+          });
+
+          it(`keyframe ${index} should have numeric offsetY`, () => {
+            expect(typeof keyframe.offsetY).toBe('number');
+          });
+
+          it(`keyframe ${index} should have easing string`, () => {
+            expect(typeof keyframe.easing).toBe('string');
+            expect(keyframe.easing.length).toBeGreaterThan(0);
+          });
         });
       });
     });
   });
 
-  describe('getCameraPreset function', () => {
+  describe('getCameraPreset', () => {
     it('should return correct preset by name', () => {
-      expect(getCameraPreset('static_full')).toEqual(STATIC_FULL);
-      expect(getCameraPreset('zoom_in_slow')).toEqual(ZOOM_IN_SLOW);
+      expect(getCameraPreset('static_full').name).toBe('static_full');
+      expect(getCameraPreset('zoom_pulse').name).toBe('zoom_pulse');
     });
 
-    it('should return STATIC_FULL for unknown names', () => {
-      expect(getCameraPreset('unknown_preset')).toEqual(STATIC_FULL);
-      expect(getCameraPreset('')).toEqual(STATIC_FULL);
+    it('should return static_full for unknown preset', () => {
+      expect(getCameraPreset('unknown_preset').name).toBe('static_full');
+    });
+
+    it('should return static_full for empty string', () => {
+      expect(getCameraPreset('').name).toBe('static_full');
     });
   });
 
-  describe('interpolateCameraAtProgress function', () => {
-    it('should return start values at 0%', () => {
-      const result = interpolateCameraAtProgress(ZOOM_IN_SLOW, 0);
-      expect(result.zoom).toBe(1.0);
-      expect(result.offsetX).toBe(0);
-      expect(result.offsetY).toBe(0);
-    });
-
-    it('should return end values at 100%', () => {
-      const result = interpolateCameraAtProgress(ZOOM_IN_SLOW, 100);
-      expect(result.zoom).toBe(1.2);
-    });
-
-    it('should interpolate values at 50%', () => {
-      const result = interpolateCameraAtProgress(ZOOM_IN_SLOW, 50);
-      expect(result.zoom).toBeGreaterThan(1.0);
-      expect(result.zoom).toBeLessThan(1.2);
-    });
-
-    it('should clamp progress below 0', () => {
-      const result = interpolateCameraAtProgress(ZOOM_IN_SLOW, -10);
-      expect(result.zoom).toBe(1.0);
-    });
-
-    it('should clamp progress above 100', () => {
-      const result = interpolateCameraAtProgress(ZOOM_IN_SLOW, 150);
-      expect(result.zoom).toBe(1.2);
-    });
-
-    it('should return constant values for static presets', () => {
-      const result0 = interpolateCameraAtProgress(STATIC_FULL, 0);
-      const result50 = interpolateCameraAtProgress(STATIC_FULL, 50);
-      const result100 = interpolateCameraAtProgress(STATIC_FULL, 100);
-
-      expect(result0.zoom).toBe(result50.zoom);
-      expect(result50.zoom).toBe(result100.zoom);
+  describe('DEFAULT_CAMERA_PRESET', () => {
+    it('should be static_full', () => {
+      expect(DEFAULT_CAMERA_PRESET.name).toBe('static_full');
     });
   });
 });

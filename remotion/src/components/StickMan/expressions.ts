@@ -1,7 +1,7 @@
 // Expression definitions for StickMan face
 // All expressions use simple SVG primitives inside the head circle
 
-export type EyeStyle = 'dot' | 'circle' | 'closed' | 'wink' | 'narrow' | 'angry';
+export type EyeStyle = 'dot' | 'circle' | 'closed' | 'wink' | 'angry_left' | 'angry_right' | 'worried_left' | 'worried_right';
 export type MouthStyle = 'line' | 'smile' | 'frown' | 'circle' | 'wavy' | 'wide_smile' | 'angry';
 
 export interface Expression {
@@ -53,7 +53,7 @@ export const EXPRESSIONS: Record<string, Expression> = {
   },
 
   // ============================================
-  // L1 MVP ADDITIONS
+  // MVP 표정 (3개)
   // ============================================
 
   // Excited - big circle eyes, wide smile
@@ -61,26 +61,59 @@ export const EXPRESSIONS: Record<string, Expression> = {
     leftEye: 'circle',
     rightEye: 'circle',
     mouth: 'wide_smile',
-    eyeSize: 1.8,
+    eyeSize: 1.3,
     mouthSize: 1.2,
   },
 
-  // Focused - narrow eyes, straight mouth
+  // Focused - closed/squinting eyes, line mouth
   focused: {
-    leftEye: 'narrow',
-    rightEye: 'narrow',
+    leftEye: 'closed',
+    rightEye: 'closed',
     mouth: 'line',
-    eyeSize: 1,
+  },
+
+  // Angry - angled eyebrows implied by eye style, angry mouth
+  angry: {
+    leftEye: 'angry_left',
+    rightEye: 'angry_right',
+    mouth: 'angry',
+    eyeSize: 0.9,
+  },
+
+  // ============================================
+  // V2 표정 (4개)
+  // ============================================
+
+  // Proud - closed/content eyes, subtle smile
+  proud: {
+    leftEye: 'closed',
+    rightEye: 'closed',
+    mouth: 'smile',
     mouthSize: 0.8,
   },
 
-  // Angry - angry eyes with eyebrows, angry mouth
-  angry: {
-    leftEye: 'angry',
-    rightEye: 'angry',
-    mouth: 'angry',
-    eyeSize: 1,
-    mouthSize: 0.9,
+  // Sleepy - closed eyes, circle mouth (yawning)
+  sleepy: {
+    leftEye: 'closed',
+    rightEye: 'closed',
+    mouth: 'circle',
+    eyeSize: 1.2,
+    mouthSize: 1.2,
+  },
+
+  // Confused - one eye different, wavy mouth
+  confused: {
+    leftEye: 'circle',
+    rightEye: 'dot',
+    mouth: 'wavy',
+    eyeSize: 1.1,
+  },
+
+  // Worried - angled brow eyes, frown
+  worried: {
+    leftEye: 'worried_left',
+    rightEye: 'worried_right',
+    mouth: 'frown',
   },
 };
 

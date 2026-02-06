@@ -1,104 +1,150 @@
 /**
- * Direction Module - Shared Type Definitions
- * Layer 3: Camera, Layout, and Timing presets for scene direction
+ * Direction Types - Camera, Layout, and Timing preset interfaces
+ * Layer 3: Direction Elements for scene composition
  */
 
-// =============================================================================
+// ============================================================
 // Camera Types
-// =============================================================================
+// ============================================================
 
 /**
  * A single keyframe in a camera animation
+ * @property atPercent - Position in the animation (0-100)
+ * @property zoom - Zoom level (1.0 = normal, >1 = zoom in, <1 = zoom out)
+ * @property offsetX - Horizontal pan offset in pixels
+ * @property offsetY - Vertical pan offset in pixels
+ * @property easing - CSS easing function name
  */
 export interface CameraKeyframe {
-  /** Position within scene as percentage (0-100) */
   atPercent: number;
-  /** Zoom level (1.0 = default, >1 = zoom in, <1 = zoom out) */
   zoom: number;
-  /** Horizontal offset in pixels */
   offsetX: number;
-  /** Vertical offset in pixels */
   offsetY: number;
-  /** Easing function for transition to this keyframe */
-  easing: 'linear' | 'easeInOut' | 'easeOut' | 'easeIn';
+  easing: string;
 }
 
 /**
- * A camera preset defining camera behavior for a scene
+ * A complete camera movement preset
+ * @property name - Unique identifier for the preset
+ * @property keyframes - Array of keyframes defining the camera path
  */
 export interface CameraPreset {
-  /** Unique identifier for the preset */
   name: string;
-  /** Description of the camera effect */
-  description?: string;
-  /** Keyframes defining the camera animation */
   keyframes: CameraKeyframe[];
 }
 
-// =============================================================================
+// ============================================================
 // Layout Types
-// =============================================================================
+// ============================================================
 
 /**
- * A slot in a layout defining position and properties for an object
+ * A slot position in a layout template
+ * @property role - The type of content expected (e.g., "stickman", "text", "icon")
+ * @property position - X/Y coordinates relative to canvas center (percentages or pixels)
+ * @property scale - Scale multiplier for the element
+ * @property maxWidth - Maximum width constraint in pixels
+ * @property anchor - Alignment anchor point
  */
 export interface LayoutSlot {
-  /** Role identifier (stickman, primary_text, secondary, accent, etc.) */
-  role: 'stickman' | 'primary_text' | 'secondary' | 'accent' | 'background' | 'overlay';
-  /** Position in pixels (1920x1080 canvas) */
+  role: string;
   position: { x: number; y: number };
-  /** Scale multiplier (default: 1.0) */
   scale?: number;
-  /** Maximum width for text elements */
   maxWidth?: number;
-  /** Anchor point for positioning */
-  anchor?: 'center' | 'left' | 'right' | 'top' | 'bottom';
-  /** Z-index layer (higher = on top) */
-  layer?: number;
+  anchor?: 'center' | 'left' | 'right';
 }
 
 /**
- * A layout preset defining object arrangement
+ * A complete layout preset defining element positions
+ * @property name - Unique identifier for the preset
+ * @property slots - Array of slot definitions
  */
 export interface LayoutPreset {
-  /** Unique identifier for the preset */
   name: string;
-  /** Description of the layout pattern */
-  description?: string;
-  /** Slots defining positions for different object roles */
   slots: LayoutSlot[];
 }
 
-// =============================================================================
+// ============================================================
 // Timing Types
-// =============================================================================
+// ============================================================
 
 /**
- * A timing entry for a specific object or role
+ * Timing configuration for a single element in a scene
+ * @property target - Element role/type to apply timing to
+ * @property delayMs - Delay before element appears (ms)
+ * @property enterAnimation - Animation preset for entrance
+ * @property enterDurationMs - Duration of enter animation (ms)
+ * @property exitAnimation - Optional animation preset for exit
+ * @property exitDurationMs - Optional duration of exit animation (ms)
  */
 export interface TimingEntry {
-  /** Target object role or type */
-  target: 'stickman' | 'primary_text' | 'secondary' | 'accent' | 'background' | 'all';
-  /** Delay in milliseconds from scene start */
+  target: string;
   delayMs: number;
-  /** Enter animation preset name */
   enterAnimation: string;
-  /** Duration of enter animation in milliseconds */
   enterDurationMs: number;
-  /** Exit animation preset name (optional) */
   exitAnimation?: string;
-  /** Duration of exit animation in milliseconds (optional) */
   exitDurationMs?: number;
 }
 
 /**
- * A timing preset defining animation choreography
+ * A complete timing preset defining element choreography
+ * @property name - Unique identifier for the preset
+ * @property entries - Array of timing configurations per element
  */
 export interface TimingPreset {
-  /** Unique identifier for the preset */
   name: string;
-  /** Description of the timing pattern */
-  description?: string;
-  /** Timing entries for different objects/roles */
   entries: TimingEntry[];
 }
+
+// ============================================================
+// Preset Name Types (for type safety)
+// ============================================================
+
+export type CameraPresetName =
+  // MVP 5
+  | 'static_full'
+  | 'static_closeup'
+  | 'static_wide'
+  | 'zoom_in_slow'
+  | 'zoom_in_fast'
+  // V2 5
+  | 'zoom_out_reveal'
+  | 'zoom_pulse'
+  | 'pan_left_to_right'
+  | 'pan_right_to_left'
+  | 'dolly_in';
+
+export type LayoutPresetName =
+  // MVP 10
+  | 'center_single'
+  | 'split_left_stickman'
+  | 'triple_stickman_text_counter'
+  | 'triple_stickman_icon_text'
+  | 'text_only'
+  | 'center_stack'
+  | 'split_right_stickman'
+  | 'split_equal'
+  | 'grid_2x1'
+  | 'overlay_fullscreen_text'
+  // V2 8
+  | 'center_hero'
+  | 'triple_horizontal'
+  | 'triple_top_bottom'
+  | 'grid_2x2'
+  | 'grid_3x1'
+  | 'overlay_spotlight'
+  | 'stickman_center_text_sides'
+  | 'icon_grid';
+
+export type TimingPresetName =
+  // MVP 5
+  | 'all_at_once'
+  | 'all_at_once_stagger'
+  | 'stickman_first'
+  | 'text_first'
+  | 'reveal_climax'
+  // V2 5
+  | 'left_to_right'
+  | 'top_to_bottom'
+  | 'counter_focus'
+  | 'icon_burst'
+  | 'carry_stickman';

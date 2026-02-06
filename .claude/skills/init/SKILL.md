@@ -6,8 +6,7 @@
 
 1. 다음 문서들을 순서대로 읽습니다:
    - `CLAUDE.md` - 프로젝트 개요 및 구조
-   - `DEV_SPEC.md` - 전체 개발 명세서
-   - `STICKMAN_COMPONENT_COMPLETE.md` - StickMan 컴포넌트 완료 현황
+   - 'MEMORY.md' - 코드 특이점
 
 2. 읽은 내용을 바탕으로 현재 프로젝트 상태를 간단히 요약합니다:
    - MVP 완료 상태

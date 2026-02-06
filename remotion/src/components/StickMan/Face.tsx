@@ -79,39 +79,70 @@ const Eye: React.FC<{
         />
       );
 
-    case 'narrow':
-      // Narrow horizontal line for focused expression
-      return (
-        <line
-          x1={x - size * 1.2}
-          y1={EYE_Y}
-          x2={x + size * 1.2}
-          y2={EYE_Y}
-          stroke={color}
-          strokeWidth={lineWidth * 0.6}
-          strokeLinecap="round"
-        />
-      );
-
-    case 'angry':
-      // Angry eye with eyebrow - eye dot + angled eyebrow
-      const isLeftEye = x < 0;
-      const browAngle = isLeftEye ? -20 : 20;
-      const browOffsetX = isLeftEye ? size * 0.3 : -size * 0.3;
+    case 'angry_left':
+      // Left eye with angry brow (slanting down toward center)
       return (
         <g>
-          {/* Eye dot */}
           <circle cx={x} cy={EYE_Y} r={size * 0.8} fill={color} />
-          {/* Angry eyebrow */}
           <line
-            x1={x - size * 1.5 + browOffsetX}
+            x1={x - size * 1.5}
             y1={EYE_Y - size * 2}
-            x2={x + size * 1.5 + browOffsetX}
+            x2={x + size * 1.2}
+            y2={EYE_Y - size * 0.8}
+            stroke={color}
+            strokeWidth={lineWidth * 0.6}
+            strokeLinecap="round"
+          />
+        </g>
+      );
+
+    case 'angry_right':
+      // Right eye with angry brow (slanting down toward center)
+      return (
+        <g>
+          <circle cx={x} cy={EYE_Y} r={size * 0.8} fill={color} />
+          <line
+            x1={x - size * 1.2}
+            y1={EYE_Y - size * 0.8}
+            x2={x + size * 1.5}
             y2={EYE_Y - size * 2}
             stroke={color}
             strokeWidth={lineWidth * 0.6}
             strokeLinecap="round"
-            transform={`rotate(${browAngle}, ${x}, ${EYE_Y - size * 2})`}
+          />
+        </g>
+      );
+
+    case 'worried_left':
+      // Left eye with worried brow (slanting up toward center)
+      return (
+        <g>
+          <circle cx={x} cy={EYE_Y} r={size * 0.9} fill={color} />
+          <line
+            x1={x - size * 1.5}
+            y1={EYE_Y - size * 0.8}
+            x2={x + size * 1.2}
+            y2={EYE_Y - size * 2}
+            stroke={color}
+            strokeWidth={lineWidth * 0.6}
+            strokeLinecap="round"
+          />
+        </g>
+      );
+
+    case 'worried_right':
+      // Right eye with worried brow (slanting up toward center)
+      return (
+        <g>
+          <circle cx={x} cy={EYE_Y} r={size * 0.9} fill={color} />
+          <line
+            x1={x - size * 1.2}
+            y1={EYE_Y - size * 2}
+            x2={x + size * 1.5}
+            y2={EYE_Y - size * 0.8}
+            stroke={color}
+            strokeWidth={lineWidth * 0.6}
+            strokeLinecap="round"
           />
         </g>
       );
@@ -194,25 +225,25 @@ const Mouth: React.FC<{
       );
 
     case 'wide_smile':
-      // Wide D-shaped smile for excited expression
+      // Wide open smile (D shape)
       return (
         <path
-          d={`M ${-halfWidth} ${MOUTH_Y - 2} Q 0 ${MOUTH_Y + 15} ${halfWidth} ${MOUTH_Y - 2} L ${halfWidth} ${MOUTH_Y - 2} Q 0 ${MOUTH_Y + 2} ${-halfWidth} ${MOUTH_Y - 2} Z`}
-          fill={color}
+          d={`M ${-halfWidth} ${MOUTH_Y - 2} Q 0 ${MOUTH_Y + 14} ${halfWidth} ${MOUTH_Y - 2}`}
+          fill="none"
           stroke={color}
-          strokeWidth={lineWidth * 0.3}
+          strokeWidth={lineWidth * 0.6}
           strokeLinecap="round"
         />
       );
 
     case 'angry':
-      // Inverted V shape for angry expression
+      // Angry mouth (inverted V or zigzag)
       return (
         <path
-          d={`M ${-halfWidth * 0.6} ${MOUTH_Y + 4} L 0 ${MOUTH_Y - 2} L ${halfWidth * 0.6} ${MOUTH_Y + 4}`}
+          d={`M ${-halfWidth} ${MOUTH_Y + 2} L 0 ${MOUTH_Y - 4} L ${halfWidth} ${MOUTH_Y + 2}`}
           fill="none"
           stroke={color}
-          strokeWidth={lineWidth * 0.5}
+          strokeWidth={lineWidth * 0.6}
           strokeLinecap="round"
           strokeLinejoin="round"
         />

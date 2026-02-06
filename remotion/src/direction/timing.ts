@@ -1,303 +1,558 @@
 /**
- * Timing Presets - Layer 3 Direction Elements
+ * Timing Presets - 10 timing choreography presets for scene animation
+ * Layer 3: Direction Elements
  *
- * 5 timing presets for animation choreography:
- * 1. all_at_once - All objects appear simultaneously
- * 2. all_at_once_stagger - Simultaneous with 50ms micro-delays
- * 3. stickman_first - Stickman enters first, then others sequentially
- * 4. text_first - Text first, then stickman, then secondary elements
- * 5. reveal_climax - Background first, pause, then key elements appear
+ * Controls the order and timing of element entrance/exit animations
+ *
+ * MVP (5): all_at_once, all_at_once_stagger, stickman_first, text_first, reveal_climax
+ * V2 (5): left_to_right, top_to_bottom, counter_focus, icon_burst, carry_stickman
  */
 
-import { TimingEntry, TimingPreset } from './types';
+import { TimingPreset, TimingPresetName, TimingEntry } from './types';
 
-// =============================================================================
-// Timing Presets
-// =============================================================================
+// ============================================================
+// MVP Timing Presets (5)
+// ============================================================
 
 /**
- * 1. All At Once - Everything appears at the same time
+ * 1. all_at_once - All elements appear simultaneously
+ * Simple, no choreography
  */
-export const ALL_AT_ONCE: TimingPreset = {
+const all_at_once: TimingPreset = {
   name: 'all_at_once',
-  description: 'All objects appear simultaneously',
   entries: [
     {
-      target: 'all',
+      target: 'stickman',
       delayMs: 0,
       enterAnimation: 'fadeIn',
       enterDurationMs: 500,
-      exitAnimation: 'fadeOut',
-      exitDurationMs: 300,
+    },
+    {
+      target: 'text',
+      delayMs: 0,
+      enterAnimation: 'fadeIn',
+      enterDurationMs: 500,
+    },
+    {
+      target: 'icon',
+      delayMs: 0,
+      enterAnimation: 'fadeIn',
+      enterDurationMs: 500,
+    },
+    {
+      target: 'counter',
+      delayMs: 0,
+      enterAnimation: 'fadeIn',
+      enterDurationMs: 500,
+    },
+    {
+      target: 'shape',
+      delayMs: 0,
+      enterAnimation: 'fadeIn',
+      enterDurationMs: 500,
     },
   ],
 };
 
 /**
- * 2. All At Once Stagger - Simultaneous with micro-delays for polish
+ * 2. all_at_once_stagger - All elements with slight stagger (50ms each)
+ * Adds subtle polish without noticeable delay
  */
-export const ALL_AT_ONCE_STAGGER: TimingPreset = {
+const all_at_once_stagger: TimingPreset = {
   name: 'all_at_once_stagger',
-  description: 'Simultaneous appearance with 50ms stagger for visual polish',
   entries: [
     {
-      target: 'background',
+      target: 'stickman',
+      delayMs: 0,
+      enterAnimation: 'fadeIn',
+      enterDurationMs: 400,
+    },
+    {
+      target: 'text',
+      delayMs: 50,
+      enterAnimation: 'fadeIn',
+      enterDurationMs: 400,
+    },
+    {
+      target: 'icon',
+      delayMs: 100,
+      enterAnimation: 'fadeIn',
+      enterDurationMs: 400,
+    },
+    {
+      target: 'counter',
+      delayMs: 150,
+      enterAnimation: 'fadeIn',
+      enterDurationMs: 400,
+    },
+    {
+      target: 'shape',
+      delayMs: 200,
+      enterAnimation: 'fadeIn',
+      enterDurationMs: 400,
+    },
+  ],
+};
+
+/**
+ * 3. stickman_first - Stickman enters, then other elements follow
+ * Good for character-driven scenes
+ */
+const stickman_first: TimingPreset = {
+  name: 'stickman_first',
+  entries: [
+    {
+      target: 'stickman',
+      delayMs: 0,
+      enterAnimation: 'fadeInUp',
+      enterDurationMs: 600,
+    },
+    {
+      target: 'text',
+      delayMs: 400,
+      enterAnimation: 'fadeIn',
+      enterDurationMs: 500,
+    },
+    {
+      target: 'icon',
+      delayMs: 500,
+      enterAnimation: 'popIn',
+      enterDurationMs: 400,
+    },
+    {
+      target: 'counter',
+      delayMs: 600,
+      enterAnimation: 'fadeIn',
+      enterDurationMs: 500,
+    },
+    {
+      target: 'shape',
+      delayMs: 300,
+      enterAnimation: 'drawLine',
+      enterDurationMs: 600,
+    },
+  ],
+};
+
+/**
+ * 4. text_first - Text appears first, then stickman and other elements
+ * Good for text-heavy information scenes
+ */
+const text_first: TimingPreset = {
+  name: 'text_first',
+  entries: [
+    {
+      target: 'text',
+      delayMs: 0,
+      enterAnimation: 'fadeInUp',
+      enterDurationMs: 500,
+    },
+    {
+      target: 'stickman',
+      delayMs: 300,
+      enterAnimation: 'fadeIn',
+      enterDurationMs: 500,
+    },
+    {
+      target: 'icon',
+      delayMs: 400,
+      enterAnimation: 'fadeIn',
+      enterDurationMs: 400,
+    },
+    {
+      target: 'counter',
+      delayMs: 500,
+      enterAnimation: 'fadeIn',
+      enterDurationMs: 500,
+    },
+    {
+      target: 'shape',
+      delayMs: 200,
+      enterAnimation: 'fadeIn',
+      enterDurationMs: 400,
+    },
+  ],
+};
+
+/**
+ * 5. reveal_climax - Build-up to climax reveal
+ * Background/shapes first, pause, then key element dramatically
+ */
+const reveal_climax: TimingPreset = {
+  name: 'reveal_climax',
+  entries: [
+    {
+      target: 'shape',
       delayMs: 0,
       enterAnimation: 'fadeIn',
       enterDurationMs: 400,
     },
     {
       target: 'stickman',
-      delayMs: 50,
+      delayMs: 200,
       enterAnimation: 'fadeIn',
       enterDurationMs: 500,
-      exitAnimation: 'fadeOut',
-      exitDurationMs: 300,
     },
     {
-      target: 'primary_text',
+      target: 'text',
+      delayMs: 800,
+      enterAnimation: 'popIn',
+      enterDurationMs: 500,
+    },
+    {
+      target: 'icon',
+      delayMs: 900,
+      enterAnimation: 'popIn',
+      enterDurationMs: 400,
+    },
+    {
+      target: 'counter',
+      delayMs: 1000,
+      enterAnimation: 'popIn',
+      enterDurationMs: 500,
+    },
+  ],
+};
+
+// ============================================================
+// V2 Timing Presets (5)
+// ============================================================
+
+/**
+ * 6. left_to_right - Elements appear from left to right
+ * Good for sequential flow or progression
+ */
+const left_to_right: TimingPreset = {
+  name: 'left_to_right',
+  entries: [
+    {
+      target: 'left',
+      delayMs: 0,
+      enterAnimation: 'slideLeft',
+      enterDurationMs: 500,
+    },
+    {
+      target: 'stickman',
+      delayMs: 0,
+      enterAnimation: 'slideLeft',
+      enterDurationMs: 500,
+    },
+    {
+      target: 'center',
+      delayMs: 200,
+      enterAnimation: 'fadeInUp',
+      enterDurationMs: 500,
+    },
+    {
+      target: 'text',
+      delayMs: 200,
+      enterAnimation: 'fadeInUp',
+      enterDurationMs: 500,
+    },
+    {
+      target: 'right',
+      delayMs: 400,
+      enterAnimation: 'slideRight',
+      enterDurationMs: 500,
+    },
+    {
+      target: 'icon',
+      delayMs: 400,
+      enterAnimation: 'fadeIn',
+      enterDurationMs: 400,
+    },
+    {
+      target: 'counter',
+      delayMs: 400,
+      enterAnimation: 'fadeIn',
+      enterDurationMs: 500,
+    },
+    {
+      target: 'shape',
+      delayMs: 100,
+      enterAnimation: 'drawLine',
+      enterDurationMs: 600,
+    },
+  ],
+};
+
+/**
+ * 7. top_to_bottom - Elements appear from top to bottom
+ * Good for hierarchical information
+ */
+const top_to_bottom: TimingPreset = {
+  name: 'top_to_bottom',
+  entries: [
+    {
+      target: 'title',
+      delayMs: 0,
+      enterAnimation: 'fadeInUp',
+      enterDurationMs: 500,
+    },
+    {
+      target: 'text',
+      delayMs: 0,
+      enterAnimation: 'fadeInUp',
+      enterDurationMs: 500,
+    },
+    {
+      target: 'stickman',
+      delayMs: 200,
+      enterAnimation: 'fadeIn',
+      enterDurationMs: 500,
+    },
+    {
+      target: 'icon',
+      delayMs: 300,
+      enterAnimation: 'popIn',
+      enterDurationMs: 400,
+    },
+    {
+      target: 'content',
+      delayMs: 400,
+      enterAnimation: 'fadeInUp',
+      enterDurationMs: 500,
+    },
+    {
+      target: 'counter',
+      delayMs: 500,
+      enterAnimation: 'fadeIn',
+      enterDurationMs: 500,
+    },
+    {
+      target: 'footer',
+      delayMs: 600,
+      enterAnimation: 'fadeIn',
+      enterDurationMs: 400,
+    },
+    {
+      target: 'shape',
+      delayMs: 100,
+      enterAnimation: 'drawLine',
+      enterDurationMs: 600,
+    },
+  ],
+};
+
+/**
+ * 8. counter_focus - Other elements static, counter animated prominently
+ * Good for data/stats emphasis
+ */
+const counter_focus: TimingPreset = {
+  name: 'counter_focus',
+  entries: [
+    {
+      target: 'stickman',
+      delayMs: 0,
+      enterAnimation: 'fadeIn',
+      enterDurationMs: 300,
+    },
+    {
+      target: 'text',
+      delayMs: 0,
+      enterAnimation: 'fadeIn',
+      enterDurationMs: 300,
+    },
+    {
+      target: 'icon',
+      delayMs: 0,
+      enterAnimation: 'fadeIn',
+      enterDurationMs: 300,
+    },
+    {
+      target: 'shape',
+      delayMs: 0,
+      enterAnimation: 'fadeIn',
+      enterDurationMs: 300,
+    },
+    {
+      target: 'counter',
+      delayMs: 500,
+      enterAnimation: 'popIn',
+      enterDurationMs: 600,
+    },
+  ],
+};
+
+/**
+ * 9. icon_burst - Icons pop in with emphasis
+ * Good for feature highlights or benefits
+ */
+const icon_burst: TimingPreset = {
+  name: 'icon_burst',
+  entries: [
+    {
+      target: 'stickman',
+      delayMs: 0,
+      enterAnimation: 'fadeIn',
+      enterDurationMs: 400,
+    },
+    {
+      target: 'text',
       delayMs: 100,
       enterAnimation: 'fadeIn',
-      enterDurationMs: 500,
-      exitAnimation: 'fadeOut',
-      exitDurationMs: 300,
+      enterDurationMs: 400,
     },
     {
-      target: 'secondary',
-      delayMs: 150,
+      target: 'icon',
+      delayMs: 400,
+      enterAnimation: 'popIn',
+      enterDurationMs: 500,
+    },
+    {
+      target: 'counter',
+      delayMs: 600,
+      enterAnimation: 'fadeIn',
+      enterDurationMs: 400,
+    },
+    {
+      target: 'shape',
+      delayMs: 200,
+      enterAnimation: 'fadeIn',
+      enterDurationMs: 400,
+    },
+  ],
+};
+
+/**
+ * 10. carry_stickman - Stickman persists, other elements transition
+ * Good for scene continuity with changing context
+ */
+const carry_stickman: TimingPreset = {
+  name: 'carry_stickman',
+  entries: [
+    {
+      target: 'stickman',
+      delayMs: 0,
+      enterAnimation: 'none',
+      enterDurationMs: 0,
+    },
+    {
+      target: 'text',
+      delayMs: 0,
       enterAnimation: 'fadeIn',
       enterDurationMs: 500,
       exitAnimation: 'fadeOut',
       exitDurationMs: 300,
     },
     {
-      target: 'accent',
+      target: 'icon',
+      delayMs: 100,
+      enterAnimation: 'fadeIn',
+      enterDurationMs: 400,
+      exitAnimation: 'fadeOut',
+      exitDurationMs: 300,
+    },
+    {
+      target: 'counter',
       delayMs: 200,
       enterAnimation: 'fadeIn',
       enterDurationMs: 500,
       exitAnimation: 'fadeOut',
       exitDurationMs: 300,
     },
-  ],
-};
-
-/**
- * 3. Stickman First - Stickman leads, others follow
- */
-export const STICKMAN_FIRST: TimingPreset = {
-  name: 'stickman_first',
-  description: 'Stickman enters first, then content follows sequentially',
-  entries: [
     {
-      target: 'background',
-      delayMs: 0,
-      enterAnimation: 'fadeIn',
-      enterDurationMs: 300,
-    },
-    {
-      target: 'stickman',
-      delayMs: 100,
-      enterAnimation: 'slideLeft',
-      enterDurationMs: 500,
-      exitAnimation: 'fadeOut',
-      exitDurationMs: 400,
-    },
-    {
-      target: 'primary_text',
-      delayMs: 500,
-      enterAnimation: 'fadeInUp',
-      enterDurationMs: 600,
-      exitAnimation: 'fadeOut',
-      exitDurationMs: 300,
-    },
-    {
-      target: 'secondary',
-      delayMs: 800,
-      enterAnimation: 'fadeInUp',
-      enterDurationMs: 600,
-      exitAnimation: 'fadeOut',
-      exitDurationMs: 300,
-    },
-    {
-      target: 'accent',
-      delayMs: 1000,
-      enterAnimation: 'popIn',
-      enterDurationMs: 400,
-      exitAnimation: 'fadeOut',
-      exitDurationMs: 300,
-    },
-  ],
-};
-
-/**
- * 4. Text First - Text leads the scene
- */
-export const TEXT_FIRST: TimingPreset = {
-  name: 'text_first',
-  description: 'Text appears first, then stickman, then secondary elements',
-  entries: [
-    {
-      target: 'background',
-      delayMs: 0,
-      enterAnimation: 'fadeIn',
-      enterDurationMs: 300,
-    },
-    {
-      target: 'primary_text',
-      delayMs: 100,
-      enterAnimation: 'fadeInUp',
-      enterDurationMs: 600,
-      exitAnimation: 'fadeOut',
-      exitDurationMs: 300,
-    },
-    {
-      target: 'stickman',
-      delayMs: 500,
-      enterAnimation: 'fadeIn',
-      enterDurationMs: 500,
-      exitAnimation: 'fadeOut',
-      exitDurationMs: 400,
-    },
-    {
-      target: 'secondary',
-      delayMs: 800,
-      enterAnimation: 'fadeInUp',
-      enterDurationMs: 500,
-      exitAnimation: 'fadeOut',
-      exitDurationMs: 300,
-    },
-    {
-      target: 'accent',
-      delayMs: 1100,
-      enterAnimation: 'popIn',
-      enterDurationMs: 400,
-      exitAnimation: 'fadeOut',
-      exitDurationMs: 300,
-    },
-  ],
-};
-
-/**
- * 5. Reveal Climax - Build suspense then reveal key elements
- */
-export const REVEAL_CLIMAX: TimingPreset = {
-  name: 'reveal_climax',
-  description: 'Background first, brief pause, then dramatic reveal of key elements',
-  entries: [
-    {
-      target: 'background',
+      target: 'shape',
       delayMs: 0,
       enterAnimation: 'fadeIn',
       enterDurationMs: 400,
-    },
-    {
-      target: 'stickman',
-      delayMs: 600,
-      enterAnimation: 'fadeIn',
-      enterDurationMs: 300,
-      exitAnimation: 'fadeOut',
-      exitDurationMs: 400,
-    },
-    {
-      target: 'primary_text',
-      delayMs: 1200,
-      enterAnimation: 'popIn',
-      enterDurationMs: 500,
-      exitAnimation: 'fadeOut',
-      exitDurationMs: 300,
-    },
-    {
-      target: 'secondary',
-      delayMs: 1400,
-      enterAnimation: 'popIn',
-      enterDurationMs: 500,
-      exitAnimation: 'fadeOut',
-      exitDurationMs: 300,
-    },
-    {
-      target: 'accent',
-      delayMs: 1600,
-      enterAnimation: 'popIn',
-      enterDurationMs: 400,
       exitAnimation: 'fadeOut',
       exitDurationMs: 300,
     },
   ],
 };
 
-// =============================================================================
+// ============================================================
 // Exports
-// =============================================================================
+// ============================================================
 
 /**
- * All timing presets as an array
+ * All timing presets as a record
  */
-export const TIMING_PRESETS: TimingPreset[] = [
-  ALL_AT_ONCE,
-  ALL_AT_ONCE_STAGGER,
-  STICKMAN_FIRST,
-  TEXT_FIRST,
-  REVEAL_CLIMAX,
+export const TIMING_PRESETS: Record<TimingPresetName, TimingPreset> = {
+  // MVP
+  all_at_once,
+  all_at_once_stagger,
+  stickman_first,
+  text_first,
+  reveal_climax,
+  // V2
+  left_to_right,
+  top_to_bottom,
+  counter_focus,
+  icon_burst,
+  carry_stickman,
+};
+
+/**
+ * Array of all timing preset names
+ */
+export const TIMING_PRESET_NAMES: TimingPresetName[] = [
+  // MVP
+  'all_at_once',
+  'all_at_once_stagger',
+  'stickman_first',
+  'text_first',
+  'reveal_climax',
+  // V2
+  'left_to_right',
+  'top_to_bottom',
+  'counter_focus',
+  'icon_burst',
+  'carry_stickman',
 ];
 
 /**
- * Timing preset names list
+ * MVP timing preset names (first 5)
  */
-export const TIMING_PRESET_NAMES = TIMING_PRESETS.map((p) => p.name);
+export const MVP_TIMING_PRESET_NAMES: TimingPresetName[] = [
+  'all_at_once',
+  'all_at_once_stagger',
+  'stickman_first',
+  'text_first',
+  'reveal_climax',
+];
 
 /**
- * Timing presets as a map for quick lookup
+ * V2 timing preset names (additional 5)
  */
-export const TIMING_PRESETS_MAP: Record<string, TimingPreset> = Object.fromEntries(
-  TIMING_PRESETS.map((p) => [p.name, p])
-);
+export const V2_TIMING_PRESET_NAMES: TimingPresetName[] = [
+  'left_to_right',
+  'top_to_bottom',
+  'counter_focus',
+  'icon_burst',
+  'carry_stickman',
+];
 
 /**
  * Get a timing preset by name
  * @param name - The preset name
- * @returns The timing preset, or ALL_AT_ONCE as default
+ * @returns The timing preset or all_at_once as default
  */
 export const getTimingPreset = (name: string): TimingPreset => {
-  return TIMING_PRESETS_MAP[name] ?? ALL_AT_ONCE;
+  return TIMING_PRESETS[name as TimingPresetName] || TIMING_PRESETS.all_at_once;
 };
 
 /**
- * Get timing entry for a specific target
- * @param preset - The timing preset
- * @param target - The target role
- * @returns The matching timing entry, or the 'all' entry if exists, or undefined
+ * Default timing preset
  */
-export const getTimingForTarget = (
-  preset: TimingPreset,
-  target: TimingEntry['target']
-): TimingEntry | undefined => {
-  // First try exact match
-  const exactMatch = preset.entries.find((entry) => entry.target === target);
-  if (exactMatch) return exactMatch;
+export const DEFAULT_TIMING_PRESET = TIMING_PRESETS.all_at_once;
 
-  // Fall back to 'all' entry
-  return preset.entries.find((entry) => entry.target === 'all');
+/**
+ * Get timing entry for a specific target from a preset
+ * @param preset - The timing preset
+ * @param target - The target role to find
+ * @returns The timing entry or undefined
+ */
+export const getTimingByTarget = (preset: TimingPreset, target: string): TimingEntry | undefined => {
+  return preset.entries.find((entry) => entry.target === target);
 };
 
 /**
- * Get all entries sorted by delay (for execution order)
+ * Get all timing entries sorted by delay
  * @param preset - The timing preset
- * @returns Entries sorted by delayMs (ascending)
+ * @returns Array of entries sorted by delayMs ascending
  */
-export const getEntriesByDelay = (preset: TimingPreset): TimingEntry[] => {
+export const getTimingEntriesSorted = (preset: TimingPreset): TimingEntry[] => {
   return [...preset.entries].sort((a, b) => a.delayMs - b.delayMs);
-};
-
-/**
- * Calculate total animation duration for a preset
- * @param preset - The timing preset
- * @returns Maximum delay + duration in milliseconds
- */
-export const getTotalAnimationDuration = (preset: TimingPreset): number => {
-  let maxEndTime = 0;
-  for (const entry of preset.entries) {
-    const entryEnd = entry.delayMs + entry.enterDurationMs;
-    if (entryEnd > maxEndTime) maxEndTime = entryEnd;
-  }
-  return maxEndTime;
 };
