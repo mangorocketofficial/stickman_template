@@ -3,6 +3,7 @@
  *
  * Updated for Track B-1: Now supports gradient and pattern backgrounds
  * Updated for Track B-5: Enhanced transition support (wipe, slide, crossfade)
+ * Updated for Track B-3: Visual effects (vignette, spotlight, screen shake)
  */
 
 import React from 'react';
@@ -10,6 +11,7 @@ import { useCurrentFrame, useVideoConfig } from 'remotion';
 import { Scene, TransitionType } from './types/schema';
 import ObjectRenderer from './ObjectRenderer';
 import BackgroundRenderer from './components/BackgroundRenderer';
+import EffectsLayer, { useScreenShake } from './components/EffectsLayer';
 import { msToFrames } from './utils/timing';
 import {
   getTransitionStyle,
@@ -35,6 +37,7 @@ export const SceneRenderer: React.FC<SceneRendererProps> = ({
     background,
     transition,
     objects,
+    effects = [],
   } = scene;
 
   // Calculate scene timing
@@ -107,6 +110,17 @@ export const SceneRenderer: React.FC<SceneRendererProps> = ({
     return layerA - layerB;
   });
 
+  // Get screen shake transform if effect is active
+  const shakeTransform = useScreenShake(effects, startMs);
+
+  // Combine transition transform with shake transform
+  const combinedTransform =
+    shakeTransform !== 'none' && finalTransform !== 'none'
+      ? `${finalTransform} ${shakeTransform}`
+      : shakeTransform !== 'none'
+        ? shakeTransform
+        : finalTransform;
+
   return (
     <div
       style={{
@@ -114,7 +128,7 @@ export const SceneRenderer: React.FC<SceneRendererProps> = ({
         width,
         height,
         opacity: finalOpacity,
-        transform: finalTransform,
+        transform: combinedTransform,
         clipPath: finalClipPath,
         overflow: 'hidden',
       }}
@@ -136,6 +150,16 @@ export const SceneRenderer: React.FC<SceneRendererProps> = ({
           sceneDurationFrames={sceneDurationFrames}
         />
       ))}
+
+      {/* Effects overlay layer (vignette, spotlight, etc.) */}
+      {effects.length > 0 && (
+        <EffectsLayer
+          effects={effects}
+          sceneStartMs={startMs}
+          width={width}
+          height={height}
+        />
+      )}
     </div>
   );
 };
