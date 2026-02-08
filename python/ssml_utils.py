@@ -106,21 +106,30 @@ def convert_rate_value(value: str) -> str:
 
 def convert_pitch_value(value: str) -> str:
     """Convert pitch value to Edge TTS format."""
-    value = value.lower().strip()
+    original_value = value.strip()
+    value_lower = original_value.lower()
 
     # Check presets
-    if value in PITCH_PRESETS:
-        return PITCH_PRESETS[value]
+    if value_lower in PITCH_PRESETS:
+        return PITCH_PRESETS[value_lower]
 
-    # Check if it's a percentage or Hz value
-    if value.endswith('%') or value.endswith('hz'):
-        if not value.startswith('+') and not value.startswith('-'):
-            return f'+{value}'
-        return value
+    # Check if it's a percentage value
+    if value_lower.endswith('%'):
+        if not value_lower.startswith('+') and not value_lower.startswith('-'):
+            return f'+{value_lower}'
+        return value_lower
+
+    # Check if it's a Hz value (preserve case for Hz)
+    if value_lower.endswith('hz'):
+        # Extract numeric part
+        numeric_part = value_lower[:-2].strip()
+        if not numeric_part.startswith('+') and not numeric_part.startswith('-'):
+            return f'+{numeric_part}Hz'
+        return f'{numeric_part}Hz'
 
     # Try to parse as number (assume Hz)
     try:
-        num = int(value)
+        num = int(value_lower)
         return f'{num:+d}Hz'
     except ValueError:
         return '+0Hz'

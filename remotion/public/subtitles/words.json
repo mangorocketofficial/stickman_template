@@ -2,64 +2,470 @@
   "segments": [
     {
       "text": "안녕하세요! 오늘은 복리의 놀라운 힘에 대해 알아보겠습니다.",
-      "startMs": 0,
-      "endMs": 3300
+      "startMs": 180,
+      "endMs": 5260
     },
     {
       "text": "단리는 원금에만 이자가 붙습니다.",
-      "startMs": 3500,
-      "endMs": 5300
+      "startMs": 3860,
+      "endMs": 8660
     },
     {
       "text": "하지만 복리는 원금에 이자를 더한 금액에 다시 이자가 붙습니다.",
-      "startMs": 5500,
-      "endMs": 9000
+      "startMs": 7680,
+      "endMs": 13860
     },
     {
       "text": "백만원을 연 7%로 30년 동안 투자하면 약 761만원이 됩니다.",
-      "startMs": 9200,
-      "endMs": 12800
+      "startMs": 13360,
+      "endMs": 20320
     },
     {
       "text": "복리의 힘은 눈덩이 효과와 같습니다.",
-      "startMs": 13000,
-      "endMs": 15000
+      "startMs": 20100,
+      "endMs": 23640
     },
     {
       "text": "처음에는 작지만, 시간이 지날수록 기하급수적으로 불어납니다.",
-      "startMs": 15200,
-      "endMs": 18500
+      "startMs": 23340,
+      "endMs": 29100
     },
     {
       "text": "72를 연이율로 나누면 원금이 두 배가 되는 기간을 알 수 있습니다.",
-      "startMs": 18700,
-      "endMs": 22500
+      "startMs": 28460,
+      "endMs": 35420
     },
     {
       "text": "연 7%라면 약 10년이면 원금이 두 배가 됩니다.",
-      "startMs": 22700,
-      "endMs": 25500
+      "startMs": 34520,
+      "endMs": 39780
     },
     {
       "text": "복리에서 가장 중요한 변수는 바로 시간입니다.",
-      "startMs": 25700,
-      "endMs": 28200
+      "startMs": 39540,
+      "endMs": 44100
     },
     {
       "text": "일찍 시작할수록 복리의 혜택을 더 크게 누릴 수 있습니다.",
-      "startMs": 28400,
-      "endMs": 31600
+      "startMs": 43460,
+      "endMs": 49240
     },
     {
       "text": "시간은 복리의 가장 강력한 무기입니다.",
-      "startMs": 31800,
-      "endMs": 33900
+      "startMs": 48880,
+      "endMs": 53180
     },
     {
       "text": "오늘부터 시작하세요!",
-      "startMs": 34100,
-      "endMs": 35600
+      "startMs": 52560,
+      "endMs": 55780
     }
   ],
-  "words": []
+  "words": [
+    {
+      "word": "안녕하세요.",
+      "startMs": 180,
+      "endMs": 1840
+    },
+    {
+      "word": "오늘은",
+      "startMs": 1840,
+      "endMs": 2120
+    },
+    {
+      "word": "복리의",
+      "startMs": 2120,
+      "endMs": 2840
+    },
+    {
+      "word": "놀라운",
+      "startMs": 2840,
+      "endMs": 3340
+    },
+    {
+      "word": "힘에",
+      "startMs": 3340,
+      "endMs": 3660
+    },
+    {
+      "word": "대해",
+      "startMs": 3660,
+      "endMs": 3860
+    },
+    {
+      "word": "알아보겠습니다.",
+      "startMs": 3860,
+      "endMs": 5260
+    },
+    {
+      "word": "달리는",
+      "startMs": 5800,
+      "endMs": 6260
+    },
+    {
+      "word": "원금에만",
+      "startMs": 6260,
+      "endMs": 7180
+    },
+    {
+      "word": "이자가",
+      "startMs": 7180,
+      "endMs": 7680
+    },
+    {
+      "word": "붙습니다.",
+      "startMs": 7680,
+      "endMs": 8660
+    },
+    {
+      "word": "하지만",
+      "startMs": 9280,
+      "endMs": 9600
+    },
+    {
+      "word": "복리는",
+      "startMs": 9600,
+      "endMs": 10140
+    },
+    {
+      "word": "원금에",
+      "startMs": 10140,
+      "endMs": 11000
+    },
+    {
+      "word": "이자를",
+      "startMs": 11000,
+      "endMs": 11380
+    },
+    {
+      "word": "더한",
+      "startMs": 11380,
+      "endMs": 11680
+    },
+    {
+      "word": "금액에",
+      "startMs": 11680,
+      "endMs": 12180
+    },
+    {
+      "word": "다시",
+      "startMs": 12180,
+      "endMs": 12820
+    },
+    {
+      "word": "이자가",
+      "startMs": 12820,
+      "endMs": 13360
+    },
+    {
+      "word": "붙습니다.",
+      "startMs": 13360,
+      "endMs": 13860
+    },
+    {
+      "word": "100만",
+      "startMs": 14760,
+      "endMs": 15120
+    },
+    {
+      "word": "원을",
+      "startMs": 15120,
+      "endMs": 15460
+    },
+    {
+      "word": "연",
+      "startMs": 15460,
+      "endMs": 15760
+    },
+    {
+      "word": "7%로",
+      "startMs": 15760,
+      "endMs": 16520
+    },
+    {
+      "word": "30년",
+      "startMs": 16520,
+      "endMs": 17120
+    },
+    {
+      "word": "동안",
+      "startMs": 17120,
+      "endMs": 17360
+    },
+    {
+      "word": "투자하면",
+      "startMs": 17360,
+      "endMs": 17820
+    },
+    {
+      "word": "약",
+      "startMs": 17820,
+      "endMs": 18780
+    },
+    {
+      "word": "761만",
+      "startMs": 18780,
+      "endMs": 19860
+    },
+    {
+      "word": "원이",
+      "startMs": 19860,
+      "endMs": 20100
+    },
+    {
+      "word": "됩니다.",
+      "startMs": 20100,
+      "endMs": 20320
+    },
+    {
+      "word": "복리의",
+      "startMs": 21280,
+      "endMs": 21800
+    },
+    {
+      "word": "힘은",
+      "startMs": 21800,
+      "endMs": 22160
+    },
+    {
+      "word": "눈덩이",
+      "startMs": 22160,
+      "endMs": 22800
+    },
+    {
+      "word": "효과와",
+      "startMs": 22800,
+      "endMs": 23340
+    },
+    {
+      "word": "같습니다.",
+      "startMs": 23340,
+      "endMs": 23640
+    },
+    {
+      "word": "처음에는",
+      "startMs": 24700,
+      "endMs": 25220
+    },
+    {
+      "word": "작지만",
+      "startMs": 25220,
+      "endMs": 25720
+    },
+    {
+      "word": "시간이",
+      "startMs": 25720,
+      "endMs": 26680
+    },
+    {
+      "word": "지날수록",
+      "startMs": 26680,
+      "endMs": 27400
+    },
+    {
+      "word": "기하급수적으로",
+      "startMs": 27400,
+      "endMs": 28460
+    },
+    {
+      "word": "불어납니다.",
+      "startMs": 28460,
+      "endMs": 29100
+    },
+    {
+      "word": "70일을",
+      "startMs": 30100,
+      "endMs": 30800
+    },
+    {
+      "word": "연이율로",
+      "startMs": 30800,
+      "endMs": 31300
+    },
+    {
+      "word": "나누면",
+      "startMs": 31300,
+      "endMs": 31800
+    },
+    {
+      "word": "원금이",
+      "startMs": 31800,
+      "endMs": 33040
+    },
+    {
+      "word": "2배가",
+      "startMs": 33040,
+      "endMs": 33600
+    },
+    {
+      "word": "되는",
+      "startMs": 33600,
+      "endMs": 33740
+    },
+    {
+      "word": "기간을",
+      "startMs": 33740,
+      "endMs": 34240
+    },
+    {
+      "word": "알",
+      "startMs": 34240,
+      "endMs": 34400
+    },
+    {
+      "word": "수",
+      "startMs": 34400,
+      "endMs": 34520
+    },
+    {
+      "word": "있습니다.",
+      "startMs": 34520,
+      "endMs": 35420
+    },
+    {
+      "word": "연",
+      "startMs": 36000,
+      "endMs": 36200
+    },
+    {
+      "word": "7%라면",
+      "startMs": 36200,
+      "endMs": 37020
+    },
+    {
+      "word": "약",
+      "startMs": 37020,
+      "endMs": 37620
+    },
+    {
+      "word": "10년이면",
+      "startMs": 37620,
+      "endMs": 38120
+    },
+    {
+      "word": "원금이",
+      "startMs": 38120,
+      "endMs": 39000
+    },
+    {
+      "word": "2배가",
+      "startMs": 39000,
+      "endMs": 39540
+    },
+    {
+      "word": "됩니다.",
+      "startMs": 39540,
+      "endMs": 39780
+    },
+    {
+      "word": "복리에서",
+      "startMs": 40740,
+      "endMs": 41380
+    },
+    {
+      "word": "가장",
+      "startMs": 41380,
+      "endMs": 41860
+    },
+    {
+      "word": "중요한",
+      "startMs": 41860,
+      "endMs": 42400
+    },
+    {
+      "word": "변수는",
+      "startMs": 42400,
+      "endMs": 42980
+    },
+    {
+      "word": "바로",
+      "startMs": 42980,
+      "endMs": 43460
+    },
+    {
+      "word": "시간입니다.",
+      "startMs": 43460,
+      "endMs": 44100
+    },
+    {
+      "word": "일찍",
+      "startMs": 45180,
+      "endMs": 45580
+    },
+    {
+      "word": "시작할수록",
+      "startMs": 45580,
+      "endMs": 46380
+    },
+    {
+      "word": "복리의",
+      "startMs": 46380,
+      "endMs": 47260
+    },
+    {
+      "word": "혜택을",
+      "startMs": 47260,
+      "endMs": 47800
+    },
+    {
+      "word": "더",
+      "startMs": 47800,
+      "endMs": 48040
+    },
+    {
+      "word": "크게",
+      "startMs": 48040,
+      "endMs": 48340
+    },
+    {
+      "word": "누릴",
+      "startMs": 48340,
+      "endMs": 48740
+    },
+    {
+      "word": "수",
+      "startMs": 48740,
+      "endMs": 48880
+    },
+    {
+      "word": "있습니다.",
+      "startMs": 48880,
+      "endMs": 49240
+    },
+    {
+      "word": "시간은",
+      "startMs": 50280,
+      "endMs": 50740
+    },
+    {
+      "word": "복리의",
+      "startMs": 50740,
+      "endMs": 51480
+    },
+    {
+      "word": "가장",
+      "startMs": 51480,
+      "endMs": 51860
+    },
+    {
+      "word": "강력한",
+      "startMs": 51860,
+      "endMs": 52560
+    },
+    {
+      "word": "무기입니다.",
+      "startMs": 52560,
+      "endMs": 53180
+    },
+    {
+      "word": "오늘부터",
+      "startMs": 54120,
+      "endMs": 54700
+    },
+    {
+      "word": "시작하세요.",
+      "startMs": 54700,
+      "endMs": 55780
+    }
+  ]
 }

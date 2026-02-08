@@ -19,8 +19,8 @@
   "scenes": [
     {
       "id": "scene_01_intro",
-      "startMs": 0,
-      "endMs": 3300,
+      "startMs": 180,
+      "endMs": 5260,
       "background": {
         "type": "image",
         "src": "images/scene_01.png",
@@ -61,8 +61,8 @@
     },
     {
       "id": "scene_02_concept",
-      "startMs": 3500,
-      "endMs": 9000,
+      "startMs": 3860,
+      "endMs": 13860,
       "background": {
         "type": "image",
         "src": "images/scene_02.png",
@@ -109,8 +109,8 @@
     },
     {
       "id": "scene_03_formula",
-      "startMs": 9200,
-      "endMs": 12800,
+      "startMs": 13360,
+      "endMs": 20320,
       "background": {
         "type": "image",
         "src": "images/scene_03.png",
@@ -178,8 +178,8 @@
     },
     {
       "id": "scene_04_snowball",
-      "startMs": 13000,
-      "endMs": 18500,
+      "startMs": 20100,
+      "endMs": 29100,
       "background": {
         "type": "image",
         "src": "images/scene_04.png",
@@ -196,8 +196,8 @@
     },
     {
       "id": "scene_05_rule72",
-      "startMs": 18700,
-      "endMs": 25500,
+      "startMs": 28460,
+      "endMs": 39780,
       "background": {
         "type": "image",
         "src": "images/scene_05.png",
@@ -239,8 +239,8 @@
     },
     {
       "id": "scene_06_warning",
-      "startMs": 25700,
-      "endMs": 31600,
+      "startMs": 39540,
+      "endMs": 49240,
       "background": {
         "type": "image",
         "src": "images/scene_06.png",
@@ -287,8 +287,8 @@
     },
     {
       "id": "scene_07_conclusion",
-      "startMs": 31800,
-      "endMs": 35600,
+      "startMs": 48880,
+      "endMs": 55780,
       "background": {
         "type": "image",
         "src": "images/scene_07.png",

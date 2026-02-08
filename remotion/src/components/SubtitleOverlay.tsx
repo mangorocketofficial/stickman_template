@@ -32,12 +32,13 @@ export const SubtitleOverlay: React.FC<SubtitleOverlayProps> = ({
   const { fps, width, height } = useVideoConfig();
 
   const currentTimeMs = framesToMs(frame, fps);
-  const { segments } = subtitleData;
 
-  // No segments = no subtitles
-  if (!segments || segments.length === 0) {
+  // Safety check: ensure subtitleData and segments exist
+  if (!subtitleData || !subtitleData.segments || subtitleData.segments.length === 0) {
     return null;
   }
+
+  const { segments } = subtitleData;
 
   // Find current segment
   const currentSegment = segments.find(
