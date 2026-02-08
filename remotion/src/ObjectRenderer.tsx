@@ -11,10 +11,12 @@ import {
   SceneObject,
   TextProps,
   CounterProps,
+  LogoProps,
   VisualEffect,
 } from './types/schema';
 import AnimatedText from './components/AnimatedText';
 import Counter from './components/Counter';
+import LogoWatermark from './components/LogoWatermark';
 import { useVideoConfig } from 'remotion';
 import { useTheme } from './contexts/ThemeContext';
 import { getEffectStyles } from './utils/effects';
@@ -109,6 +111,17 @@ export const ObjectRenderer: React.FC<ObjectRendererProps> = ({
             ...counterProps,
             color: counterProps.color || theme.text.accent,
           }}
+        />
+      );
+    }
+
+    case 'logo': {
+      const logoProps = props as unknown as LogoProps;
+      return wrapWithEffects(
+        <LogoWatermark
+          src={logoProps.src}
+          size={logoProps.size}
+          opacity={logoProps.opacity}
         />
       );
     }

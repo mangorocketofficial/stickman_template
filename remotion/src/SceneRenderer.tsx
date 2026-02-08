@@ -1,28 +1,92 @@
 /**
  * SceneRenderer - Renders a single scene with background, transitions, and objects
  *
- * Updated for Track B-1: Now supports gradient and pattern backgrounds
- * Updated for Track B-5: Enhanced transition support (wipe, slide, crossfade)
- * Updated for Track B-3: Visual effects (vignette, spotlight, screen shake)
+ * v2: Supports AI-generated image backgrounds and overlay system.
+ * Backward compatible with v1 scene.json (string backgrounds + objects[]).
  */
 
 import React from 'react';
 import { useCurrentFrame, useVideoConfig } from 'remotion';
-import { Scene, TransitionType } from './types/schema';
+import {
+  Scene,
+  TransitionType,
+  SceneOverlay,
+  TextProps,
+  CounterProps,
+  LogoProps,
+  isImageBackground,
+  isSimpleBackground,
+} from './types/schema';
 import ObjectRenderer from './ObjectRenderer';
 import BackgroundRenderer from './components/BackgroundRenderer';
+import ImageBackground from './components/ImageBackground';
+import LogoWatermark from './components/LogoWatermark';
 import EffectsLayer, { useScreenShake } from './components/EffectsLayer';
+import AnimatedText from './components/AnimatedText';
+import Counter from './components/Counter';
 import { msToFrames } from './utils/timing';
 import {
   getTransitionStyle,
   getTransitionProgress,
 } from './utils/transitions';
 import { getCameraPreset, calculateCameraState } from './direction/camera';
+import { useTheme } from './contexts/ThemeContext';
 
 interface SceneRendererProps {
   scene: Scene;
   globalStartFrame: number;
 }
+
+/**
+ * Render a v2 overlay element (text, counter, logo)
+ */
+const OverlayRenderer: React.FC<{
+  overlay: SceneOverlay;
+  sceneStartFrame: number;
+  sceneDurationFrames: number;
+}> = ({ overlay, sceneStartFrame, sceneDurationFrames }) => {
+  const { type, position, props, animation } = overlay;
+
+  const commonProps = {
+    position,
+    animation,
+    sceneStartFrame,
+    sceneDurationFrames,
+  };
+
+  switch (type) {
+    case 'text':
+      return (
+        <AnimatedText
+          {...commonProps}
+          props={props as TextProps}
+        />
+      );
+
+    case 'counter':
+      return (
+        <Counter
+          {...commonProps}
+          props={props as CounterProps}
+        />
+      );
+
+    case 'logo': {
+      const logoProps = props as LogoProps;
+      return (
+        <LogoWatermark
+          src={logoProps.src}
+          size={logoProps.size}
+          opacity={logoProps.opacity}
+        />
+      );
+    }
+
+    default:
+      console.warn(`Unknown overlay type: ${type}`);
+      return null;
+  }
+};
 
 export const SceneRenderer: React.FC<SceneRendererProps> = ({
   scene,
@@ -30,6 +94,7 @@ export const SceneRenderer: React.FC<SceneRendererProps> = ({
 }) => {
   const frame = useCurrentFrame();
   const { fps, width, height } = useVideoConfig();
+  const { theme } = useTheme();
 
   const {
     id,
@@ -38,6 +103,7 @@ export const SceneRenderer: React.FC<SceneRendererProps> = ({
     background,
     transition,
     objects,
+    overlays,
     effects = [],
     camera,
   } = scene;
@@ -87,7 +153,6 @@ export const SceneRenderer: React.FC<SceneRendererProps> = ({
   );
 
   // Combine transitions: enter applies at start, exit applies at end
-  // During middle of scene, both should be at "complete" state
   const isInEnterPhase = relativeFrame < transitionDurationFrames;
   const isInExitPhase = relativeFrame > sceneDurationFrames - transitionDurationFrames;
 
@@ -105,7 +170,7 @@ export const SceneRenderer: React.FC<SceneRendererProps> = ({
     finalClipPath = exitStyle.clipPath;
   }
 
-  // Sort objects by layer
+  // Sort objects by layer (v1 compat)
   const sortedObjects = [...objects].sort((a, b) => {
     const layerA = a.layer ?? 1;
     const layerB = b.layer ?? 1;
@@ -140,6 +205,9 @@ export const SceneRenderer: React.FC<SceneRendererProps> = ({
       : cameraTransform;
   }
 
+  // Determine background rendering mode
+  const isImage = isImageBackground(background);
+
   return (
     <div
       style={{
@@ -152,19 +220,38 @@ export const SceneRenderer: React.FC<SceneRendererProps> = ({
         overflow: 'hidden',
       }}
     >
-      {/* Background layer (supports gradients, patterns, animations) */}
-      <BackgroundRenderer
-        background={background}
-        width={width}
-        height={height}
-      />
+      {/* Background layer */}
+      {isImage ? (
+        <ImageBackground
+          src={(background as { type: "image"; src: string; animation?: string; animationIntensity?: number }).src}
+          animation={(background as { animation?: string }).animation as any}
+          animationIntensity={(background as { animationIntensity?: number }).animationIntensity}
+          width={width}
+          height={height}
+        />
+      ) : (
+        <BackgroundRenderer
+          background={background}
+          width={width}
+          height={height}
+        />
+      )}
 
-      {/* Render objects sorted by layer */}
-      {/* sceneStartFrame=0 because frame is already relative to Sequence start */}
-      {sortedObjects.map((obj) => (
+      {/* v1: Render objects sorted by layer */}
+      {sortedObjects.length > 0 && sortedObjects.map((obj) => (
         <ObjectRenderer
           key={obj.id}
           object={obj}
+          sceneStartFrame={0}
+          sceneDurationFrames={sceneDurationFrames}
+        />
+      ))}
+
+      {/* v2: Render overlays on top of image background */}
+      {overlays && overlays.length > 0 && overlays.map((overlay) => (
+        <OverlayRenderer
+          key={overlay.id}
+          overlay={overlay}
           sceneStartFrame={0}
           sceneDurationFrames={sceneDurationFrames}
         />
