@@ -1,10 +1,12 @@
 #!/usr/bin/env python3
 """
-Pipeline Orchestrator
+Pipeline Orchestrator (v2: AI Image Pipeline)
 Main CLI entry point that runs the complete video generation pipeline.
 
+v2: Replaces StickMan objects with AI-generated image backgrounds.
+
 Usage:
-    python pipeline.py <script.md> [--output-dir ./output]
+    python pipeline.py <script.md> [--output-dir ./output] [--style dark_infographic]
 """
 
 import argparse
@@ -20,13 +22,15 @@ try:
         load_dotenv(env_path)
         print(f"Loaded environment from {env_path}")
 except ImportError:
-    pass  # python-dotenv not installed, skip
+    pass
 
 from script_parser import parse_script_file, ParsedScript
 from tts_generator import generate_tts
-from alignment import align_audio, map_narration_to_words, split_into_sentences, AlignmentResult
-from scene_builder import build_scene_json, save_scene_json
+from alignment import align_audio, map_narration_to_words, AlignmentResult
+from scene_builder import build_scene_json_v2, save_scene_json
 from subtitle_generator import generate_subtitles
+from prompt_generator import generate_scene_prompts
+from image_generator import generate_scene_images, generate_placeholder_images
 
 
 def setup_output_dirs(output_dir: str) -> dict:
@@ -35,6 +39,7 @@ def setup_output_dirs(output_dir: str) -> dict:
         "root": output_dir,
         "audio": os.path.join(output_dir, "audio"),
         "subtitles": os.path.join(output_dir, "subtitles"),
+        "images": os.path.join(output_dir, "images"),
     }
 
     for dir_path in dirs.values():
@@ -43,37 +48,63 @@ def setup_output_dirs(output_dir: str) -> dict:
     return dirs
 
 
+def estimate_line_timings(sections) -> list[tuple[int, int]]:
+    """Estimate timing for each line based on character count."""
+    all_lines = []
+    for section in sections:
+        lines = section.narration_lines if section.narration_lines else [section.narration]
+        all_lines.extend([line.strip() for line in lines if line.strip()])
+
+    current_ms = 0
+    line_timings = []
+    for line in all_lines:
+        duration = max(1500, len(line) * 100)
+        line_timings.append((current_ms, current_ms + duration))
+        current_ms += duration + 200
+    return line_timings
+
+
 def run_pipeline(
     script_path: str,
     output_dir: str = "./output",
+    style: str = "dark_infographic",
     skip_tts: bool = False,
     skip_alignment: bool = False,
+    skip_images: bool = False,
+    use_placeholder_images: bool = False,
+    use_llm_prompts: bool = True,
 ) -> dict:
     """
-    Run the complete video generation pipeline.
+    Run the complete v2 video generation pipeline.
 
     Args:
         script_path: Path to the markdown script file
         output_dir: Directory for output files
+        style: Prompt template name for image generation
         skip_tts: Skip TTS generation (use existing audio)
         skip_alignment: Skip alignment (use mock timings)
-
-    Returns:
-        Dictionary with paths to all generated files
+        skip_images: Skip image generation (use existing images)
+        use_placeholder_images: Generate placeholder images instead of API
+        use_llm_prompts: Use LLM to enhance image prompts
     """
     print("=" * 60)
-    print("Stickman Video Pipeline")
+    print("Video Pipeline v2 (AI Image)")
     print("=" * 60)
 
-    # Setup directories
     dirs = setup_output_dirs(output_dir)
     print(f"\nOutput directory: {output_dir}")
 
     # === Step 1: Parse Script ===
-    print("\n[1/5] Parsing script...")
+    print("\n[1/6] Parsing script...")
     parsed_script = parse_script_file(script_path)
+
+    # Override style from CLI if provided, else use script frontmatter
+    if style:
+        parsed_script.meta['style'] = style
+
     print(f"  Title: {parsed_script.meta.get('title', 'Untitled')}")
     print(f"  Voice: {parsed_script.meta.get('voice')}")
+    print(f"  Style: {parsed_script.meta.get('style')}")
     print(f"  Sections: {len(parsed_script.sections)}")
     print(f"  Total narration: {len(parsed_script.full_narration)} characters")
 
@@ -81,13 +112,11 @@ def run_pipeline(
     audio_path = os.path.join(dirs["audio"], "tts_output.mp3")
 
     if skip_tts and os.path.exists(audio_path):
-        print(f"\n[2/5] Skipping TTS (using existing: {audio_path})")
+        print(f"\n[2/6] Skipping TTS (using existing: {audio_path})")
     else:
-        print("\n[2/5] Generating TTS audio...")
+        print("\n[2/6] Generating TTS audio...")
         voice = parsed_script.meta.get('voice', 'ko-KR-HyunsuNeural')
         print(f"  Voice: {voice}")
-        print(f"  Text length: {len(parsed_script.full_narration)} chars")
-
         generate_tts(
             text=parsed_script.full_narration,
             output_path=audio_path,
@@ -97,94 +126,52 @@ def run_pipeline(
 
     # === Step 3: Align Audio ===
     alignment: AlignmentResult = None
-    section_timings: list[tuple[int, int]] = []
-    estimated_line_timings: list[tuple[int, int]] = None  # For fallback
-
-    def estimate_line_timings(sections) -> list[tuple[int, int]]:
-        """Estimate timing for each line based on character count."""
-        all_lines = []
-        for section in sections:
-            lines = section.narration_lines if section.narration_lines else [section.narration]
-            all_lines.extend([line.strip() for line in lines if line.strip()])
-
-        current_ms = 0
-        line_timings = []
-        for line in all_lines:
-            # Rough estimate: ~100ms per character for Korean
-            duration = max(1500, len(line) * 100)
-            line_timings.append((current_ms, current_ms + duration))
-            current_ms += duration + 200  # 200ms gap between lines
-        return line_timings
+    fallback_line_timings = None
 
     if skip_alignment:
-        print("\n[3/5] Skipping alignment (using estimated timings)...")
-        estimated_line_timings = estimate_line_timings(parsed_script.sections)
-
-        # Create mock alignment for subtitle generation
-        from alignment import WordTimestamp, SegmentTimestamp
-        alignment = AlignmentResult(
+        print("\n[3/6] Skipping alignment (using estimated timings)...")
+        fallback_line_timings = estimate_line_timings(parsed_script.sections)
+        from alignment import AlignmentResult as AR
+        alignment = AR(
             text=parsed_script.full_narration,
             words=[],
             segments=[],
-            duration_ms=estimated_line_timings[-1][1] if estimated_line_timings else 0,
+            duration_ms=fallback_line_timings[-1][1] if fallback_line_timings else 0,
         )
     else:
-        print("\n[3/5] Aligning audio with Groq Whisper...")
-
-        # Check for API key
+        print("\n[3/6] Aligning audio with Groq Whisper...")
         if not os.environ.get("GROQ_API_KEY"):
-            print("  WARNING: GROQ_API_KEY not set!")
-            print("  Set it with: export GROQ_API_KEY='your-key'")
-            print("  Falling back to estimated timings...")
-            skip_alignment = True
-            estimated_line_timings = estimate_line_timings(parsed_script.sections)
-
-            from alignment import SegmentTimestamp
-            alignment = AlignmentResult(
+            print("  WARNING: GROQ_API_KEY not set! Using estimated timings...")
+            fallback_line_timings = estimate_line_timings(parsed_script.sections)
+            from alignment import AlignmentResult as AR
+            alignment = AR(
                 text=parsed_script.full_narration,
-                words=[],
-                segments=[],
-                duration_ms=estimated_line_timings[-1][1] if estimated_line_timings else 0,
+                words=[], segments=[],
+                duration_ms=fallback_line_timings[-1][1] if fallback_line_timings else 0,
             )
         else:
             alignment = align_audio(audio_path)
-            print(f"  Transcription: {alignment.text[:50]}...")
-            print(f"  Words: {len(alignment.words)}")
-            print(f"  Segments: {len(alignment.segments)}")
-            print(f"  Duration: {alignment.duration_ms}ms")
+            print(f"  Words: {len(alignment.words)}, Duration: {alignment.duration_ms}ms")
 
-            # Map sections to word timings
-            narrations = [s.narration for s in parsed_script.sections]
-            section_timings = map_narration_to_words(narrations, alignment.words)
-
-    # === Step 4: Generate Subtitles (line-level) ===
-    print("\n[4/5] Generating subtitles...")
+    # === Step 4: Generate Subtitles ===
+    print("\n[4/6] Generating subtitles...")
     srt_path = os.path.join(dirs["subtitles"], "captions.srt")
     words_path = os.path.join(dirs["subtitles"], "words.json")
 
-    # Collect all narration lines from all sections (each line = one subtitle)
     all_lines = []
-    section_line_indices = []  # Track which lines belong to which section
-
+    section_line_indices = []
     for section in parsed_script.sections:
         start_idx = len(all_lines)
-        # Use narration_lines if available, otherwise split by newlines
         lines = section.narration_lines if section.narration_lines else [section.narration]
         all_lines.extend([line.strip() for line in lines if line.strip()])
-        end_idx = len(all_lines)
-        section_line_indices.append((start_idx, end_idx))
+        section_line_indices.append((start_idx, len(all_lines)))
 
-    # Calculate timing for each line
-    if estimated_line_timings is not None:
-        # Use pre-calculated estimated timings (fallback mode)
-        line_timings = estimated_line_timings
-        print(f"  Subtitle lines: {len(all_lines)} (estimated timing)")
+    if fallback_line_timings is not None:
+        line_timings = fallback_line_timings
     else:
-        # Use Whisper word-level alignment
         line_timings = map_narration_to_words(all_lines, alignment.words)
-        print(f"  Subtitle lines: {len(all_lines)} (Whisper aligned)")
 
-    # Calculate scene timings from line timings (first line start, last line end)
+    # Calculate scene timings from line timings
     scene_timings = []
     for start_idx, end_idx in section_line_indices:
         if start_idx < end_idx:
@@ -192,7 +179,6 @@ def run_pipeline(
             scene_end = line_timings[end_idx - 1][1]
             scene_timings.append((scene_start, scene_end))
         else:
-            # Empty section - use previous end or 0
             prev_end = scene_timings[-1][1] if scene_timings else 0
             scene_timings.append((prev_end, prev_end))
 
@@ -200,21 +186,59 @@ def run_pipeline(
         alignment=alignment,
         srt_output_path=srt_path,
         words_output_path=words_path,
-        script_narrations=all_lines,  # Pass lines, not sections
-        section_timings=line_timings,  # Pass line timings
+        script_narrations=all_lines,
+        section_timings=line_timings,
     )
     print(f"  SRT: {srt_path}")
-    print(f"  Words JSON: {words_path}")
-    print(f"  Source: Original script (line-level, timing from Whisper)")
+    print(f"  Lines: {len(all_lines)}")
 
-    # === Step 5: Build Scene JSON ===
-    print("\n[5/5] Building scene.json...")
+    # === Step 5: Generate Images ===
+    print(f"\n[5/6] Generating scene images (style: {parsed_script.meta.get('style')})...")
+
+    scene_prompts = generate_scene_prompts(
+        sections=parsed_script.sections,
+        style=parsed_script.meta.get('style', 'dark_infographic'),
+        use_llm=use_llm_prompts,
+    )
+
+    if skip_images:
+        print("  Skipping image generation (using existing images)")
+        from image_generator import GeneratedImage
+        image_results = [
+            GeneratedImage(
+                scene_index=i,
+                image_path=f"images/scene_{i+1:02d}.png",
+                prompt=sp.generated_prompt,
+                model="existing",
+                generation_time_s=0,
+                success=os.path.exists(os.path.join(output_dir, f"images/scene_{i+1:02d}.png")),
+            )
+            for i, sp in enumerate(scene_prompts)
+        ]
+    elif use_placeholder_images:
+        print("  Generating placeholder images (no API)...")
+        image_results = generate_placeholder_images(scene_prompts, output_dir)
+    else:
+        # Validate Replicate API key
+        replicate_key = os.environ.get("REPLICATE_API_TOKEN")
+        if not replicate_key:
+            print("  WARNING: REPLICATE_API_TOKEN not set! Using placeholders...")
+            image_results = generate_placeholder_images(scene_prompts, output_dir)
+        else:
+            model = parsed_script.meta.get('image_model', 'flux-schnell')
+            full_model = f"black-forest-labs/{model}" if "/" not in model else model
+            image_results = generate_scene_images(
+                scene_prompts, output_dir, model=full_model
+            )
+
+    # === Step 6: Build Scene JSON ===
+    print("\n[6/6] Building scene.json (v2)...")
     scene_json_path = os.path.join(output_dir, "scene.json")
 
-    # Use scene_timings calculated from line timings
-    scene_data = build_scene_json(
+    scene_data = build_scene_json_v2(
         parsed_script=parsed_script,
-        section_timings=scene_timings,  # Scene timing from audio
+        section_timings=scene_timings,
+        image_results=image_results,
         audio_path="audio/tts_output.mp3",
         words_path="subtitles/words.json",
     )
@@ -225,11 +249,13 @@ def run_pipeline(
 
     for scene in scene_data['scenes']:
         duration_s = (scene['endMs'] - scene['startMs']) / 1000
-        print(f"    {scene['id']}: {duration_s:.1f}s, {len(scene['objects'])} objects")
+        bg_type = scene['background'].get('type', 'unknown') if isinstance(scene['background'], dict) else 'color'
+        overlays = len(scene.get('overlays', []))
+        print(f"    {scene['id']}: {duration_s:.1f}s, bg={bg_type}, {overlays} overlays")
 
     # === Summary ===
     print("\n" + "=" * 60)
-    print("Pipeline completed successfully!")
+    print("Pipeline v2 completed successfully!")
     print("=" * 60)
 
     results = {
@@ -239,47 +265,38 @@ def run_pipeline(
         "words": words_path,
         "scene_json": scene_json_path,
         "output_dir": output_dir,
+        "images_generated": sum(1 for r in image_results if r.success),
+        "images_total": len(image_results),
     }
 
-    print("\nGenerated files:")
-    for name, path in results.items():
-        if name != "output_dir":
-            print(f"  {name}: {path}")
-
-    print(f"\nNext step: Copy output to Remotion project")
-    print(f"  cp -r {output_dir}/* remotion/public/")
-    print(f"  cd remotion && npx remotion render src/index.ts MainVideo")
+    print(f"\nNext step: Preview in Remotion Studio")
+    print(f"  cd remotion && npm start")
 
     return results
 
 
 def main():
     parser = argparse.ArgumentParser(
-        description="Generate stickman infographic video from markdown script"
+        description="Generate AI image video from markdown script (v2)"
     )
-    parser.add_argument(
-        "script",
-        help="Path to the markdown script file"
-    )
-    parser.add_argument(
-        "--output-dir", "-o",
-        default="./output",
-        help="Output directory (default: ./output)"
-    )
-    parser.add_argument(
-        "--skip-tts",
-        action="store_true",
-        help="Skip TTS generation (use existing audio)"
-    )
-    parser.add_argument(
-        "--skip-alignment",
-        action="store_true",
-        help="Skip audio alignment (use estimated timings)"
-    )
+    parser.add_argument("script", help="Path to the markdown script file")
+    parser.add_argument("--output-dir", "-o", default="./output",
+                        help="Output directory (default: ./output)")
+    parser.add_argument("--style", "-s", default=None,
+                        help="Image style template (default: from script frontmatter)")
+    parser.add_argument("--skip-tts", action="store_true",
+                        help="Skip TTS generation")
+    parser.add_argument("--skip-alignment", action="store_true",
+                        help="Skip audio alignment")
+    parser.add_argument("--skip-images", action="store_true",
+                        help="Skip image generation (use existing)")
+    parser.add_argument("--placeholder-images", action="store_true",
+                        help="Use placeholder images instead of API")
+    parser.add_argument("--no-llm", action="store_true",
+                        help="Don't use LLM for prompt enhancement")
 
     args = parser.parse_args()
 
-    # Validate script file exists
     if not os.path.exists(args.script):
         print(f"Error: Script file not found: {args.script}")
         sys.exit(1)
@@ -288,8 +305,12 @@ def main():
         run_pipeline(
             script_path=args.script,
             output_dir=args.output_dir,
+            style=args.style,
             skip_tts=args.skip_tts,
             skip_alignment=args.skip_alignment,
+            skip_images=args.skip_images,
+            use_placeholder_images=args.placeholder_images,
+            use_llm_prompts=not args.no_llm,
         )
     except Exception as e:
         print(f"\nError: {e}")
