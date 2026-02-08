@@ -1,28 +1,20 @@
 /**
- * ObjectRenderer - Routes object types to their respective components
+ * ObjectRenderer - Routes object types to their respective components (v2)
  *
- * Updated for Track B-2: Theme integration
- * - Uses theme colors as defaults when props don't specify color
- *
- * Updated for Track B-3: Visual effects
- * - Supports per-object effects (glow, shadow)
+ * v2: Removed stickman, shape, icon routing (archived)
+ * Kept: text, counter
+ * Added: logo (future)
  */
 
 import React from 'react';
 import {
   SceneObject,
-  StickmanProps,
   TextProps,
-  IconProps,
-  ShapeProps,
   CounterProps,
   VisualEffect,
 } from './types/schema';
 import AnimatedText from './components/AnimatedText';
 import Counter from './components/Counter';
-import Shape from './components/Shape';
-import IconElement from './components/IconElement';
-import { StickMan } from './components/StickMan';
 import { useVideoConfig } from 'remotion';
 import { useTheme } from './contexts/ThemeContext';
 import { getEffectStyles } from './utils/effects';
@@ -46,17 +38,12 @@ const combineEffectStyles = (effects: VisualEffect[]): React.CSSProperties => {
   effects.forEach((effect) => {
     const styles = getEffectStyles(effect);
 
-    // Collect filters
     if (styles.filter) {
       filters.push(styles.filter);
     }
-
-    // Collect box shadows
     if (styles.boxShadow) {
       boxShadows.push(styles.boxShadow);
     }
-
-    // Add text-specific styles
     if (styles.WebkitTextStroke) {
       combined.WebkitTextStroke = styles.WebkitTextStroke;
     }
@@ -81,10 +68,9 @@ export const ObjectRenderer: React.FC<ObjectRendererProps> = ({
   sceneDurationFrames,
 }) => {
   const { fps } = useVideoConfig();
-  const { theme, getAccentColor } = useTheme();
+  const { theme } = useTheme();
   const { type, position, scale, animation, props, effects = [] } = object;
 
-  // Get combined effect styles for this object
   const effectStyles = combineEffectStyles(effects);
   const hasEffects = effects.length > 0;
 
@@ -96,7 +82,6 @@ export const ObjectRenderer: React.FC<ObjectRendererProps> = ({
     sceneDurationFrames,
   };
 
-  // Wrapper function to apply effects
   const wrapWithEffects = (element: React.ReactNode): React.ReactNode => {
     if (!hasEffects) return element;
     return (
@@ -107,27 +92,6 @@ export const ObjectRenderer: React.FC<ObjectRendererProps> = ({
   };
 
   switch (type) {
-    case 'stickman': {
-      const stickmanProps = props as StickmanProps;
-      // Convert sceneStartFrame to startTimeMs for motion sync
-      const startTimeMs = (sceneStartFrame / fps) * 1000;
-      // Get motion from during animation if specified
-      const motion = animation?.during?.type;
-
-      return wrapWithEffects(
-        <StickMan
-          pose={stickmanProps.pose}
-          expression={stickmanProps.expression}
-          position={position}
-          scale={scale}
-          color={stickmanProps.color || theme.stickman}
-          lineWidth={stickmanProps.lineWidth}
-          motion={motion}
-          startTimeMs={startTimeMs}
-        />
-      );
-    }
-
     case 'text':
       return wrapWithEffects(
         <AnimatedText
@@ -149,35 +113,12 @@ export const ObjectRenderer: React.FC<ObjectRendererProps> = ({
       );
     }
 
-    case 'shape': {
-      const shapeProps = props as ShapeProps;
-      // Use rotating accent colors for shapes based on object index
-      const accentIndex = object.id ? parseInt(object.id.replace(/\D/g, ''), 10) || 0 : 0;
-      return wrapWithEffects(
-        <Shape
-          {...commonProps}
-          props={{
-            ...shapeProps,
-            color: shapeProps.color || getAccentColor(accentIndex),
-          }}
-        />
-      );
-    }
-
-    case 'icon': {
-      const iconProps = props as IconProps;
-      // Use rotating accent colors for icons based on object index
-      const accentIndex = object.id ? parseInt(object.id.replace(/\D/g, ''), 10) || 0 : 0;
-      return wrapWithEffects(
-        <IconElement
-          {...commonProps}
-          props={{
-            ...iconProps,
-            color: iconProps.color || getAccentColor(accentIndex),
-          }}
-        />
-      );
-    }
+    // v1 legacy types — log warning but don't crash
+    case 'stickman':
+    case 'shape':
+    case 'icon':
+      console.warn(`[v2] Object type "${type}" is no longer supported (archived in v1). Skipping.`);
+      return null;
 
     default:
       console.warn(`Unknown object type: ${type}`);

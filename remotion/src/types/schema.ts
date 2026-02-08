@@ -11,6 +11,19 @@ export interface VideoProject {
   meta: VideoMeta;
   subtitles: SubtitleConfig;
   scenes: Scene[];
+
+  // === v2: Global Branding ===
+  branding?: BrandingConfig;
+}
+
+export interface BrandingConfig {
+  logo?: {
+    src: string;                // "branding/logo.png"
+    position: "top-left" | "top-right" | "bottom-left" | "bottom-right";
+    size: number;               // px
+    opacity: number;            // 0-1
+    margin: number;             // px from edge
+  };
 }
 
 export interface VideoMeta {
@@ -19,6 +32,9 @@ export interface VideoMeta {
   width: number;                  // default: 1920
   height: number;                 // default: 1080
   audioSrc: string;               // relative path: "audio/tts_output.wav"
+
+  // === v2: Prompt Template Style ===
+  style?: string;                 // prompt template: "dark_infographic", "whiteboard", etc.
 
   // === Track B-2: Color Theme ===
   theme?: string;                 // theme name: "dark_infographic", "dark_cool", etc.
@@ -54,11 +70,14 @@ export interface Scene {
   startMs: number;                // from Whisper alignment
   endMs: number;
 
-  // === Track B-1: Background (backward compatible) ===
-  background: string | BackgroundDef;  // string = hex color for backward compat
+  // === Background (v1: string | BackgroundDef, v2: adds SceneBackground) ===
+  background: string | BackgroundDef | SceneBackground;
 
   transition?: SceneTransition;
   objects: SceneObject[];
+
+  // === v2: Simplified overlays (text, counter, logo on top of image backgrounds) ===
+  overlays?: SceneOverlay[];
 
   // === Layer 3: Direction Elements ===
   camera?: string;                // camera preset name: "static_full", "zoom_in_slow", etc.
@@ -469,8 +488,8 @@ export interface Pose {
 // UTILITY TYPES
 // =============================================================================
 
-// Helper type for background (backward compatible)
-export type BackgroundValue = string | BackgroundDef;
+// Helper type for background (backward compatible + v2)
+export type BackgroundValue = string | BackgroundDef | SceneBackground;
 
 // Helper to check if background is simple color string
 export const isSimpleBackground = (bg: BackgroundValue): bg is string => {
@@ -482,5 +501,64 @@ export const getBackgroundColor = (bg: BackgroundValue): string => {
   if (isSimpleBackground(bg)) {
     return bg;
   }
-  return bg.colors[0] || "#1a1a2e";
+  if ('type' in bg) {
+    const typed = bg as SceneBackground;
+    if (typed.type === 'color') return typed.value;
+    if (typed.type === 'image') return "#000000";
+    // BackgroundDef types (solid, gradient_linear, etc.)
+    return (bg as BackgroundDef).colors?.[0] || "#1a1a2e";
+  }
+  return (bg as BackgroundDef).colors?.[0] || "#1a1a2e";
+};
+
+// =============================================================================
+// V2: AI IMAGE PIPELINE TYPES
+// =============================================================================
+
+// v2 background: supports color or AI-generated image
+export type SceneBackground =
+  | { type: "color"; value: string }
+  | {
+      type: "image";
+      src: string;                  // "images/scene_01.png"
+      animation?: ImageAnimation;
+      animationIntensity?: number;  // 0.0-1.0, default 0.5
+    };
+
+export type ImageAnimation =
+  | "none"
+  | "kenBurns"
+  | "zoomIn"
+  | "zoomOut"
+  | "panLeft"
+  | "panRight";
+
+// v2 overlay: simplified objects on top of image backgrounds
+export interface SceneOverlay {
+  id: string;
+  type: "text" | "counter" | "logo";
+  position: { x: number; y: number };
+  props: TextProps | CounterProps | LogoProps;
+  animation?: {
+    enter?: AnimationDef;
+    during?: AnimationDef;
+    exit?: AnimationDef;
+  };
+}
+
+export interface LogoProps {
+  src: string;
+  size: number;
+  opacity?: number;
+}
+
+// Helper: check if background is v2 SceneBackground
+export const isSceneBackground = (bg: unknown): bg is SceneBackground => {
+  return typeof bg === 'object' && bg !== null && 'type' in bg
+    && ((bg as SceneBackground).type === 'color' || (bg as SceneBackground).type === 'image');
+};
+
+// Helper: check if background is an image type
+export const isImageBackground = (bg: unknown): bg is { type: "image"; src: string } => {
+  return isSceneBackground(bg) && bg.type === 'image';
 };
