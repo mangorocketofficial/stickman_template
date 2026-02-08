@@ -367,11 +367,11 @@ export interface TTSConfig {
 
 export interface SceneObject {
   id: string;
-  type: "stickman" | "text" | "icon" | "shape" | "counter";
+  type: "stickman" | "text" | "icon" | "shape" | "counter" | "logo";
   position: { x: number; y: number };
   scale?: number;                 // default: 1.0
   layer?: number;                 // default: 1 (higher = on top)
-  props: StickmanProps | TextProps | IconProps | ShapeProps | CounterProps;
+  props: StickmanProps | TextProps | IconProps | ShapeProps | CounterProps | LogoProps;
   animation?: {
     enter?: AnimationDef;
     during?: AnimationDef;
