@@ -60,6 +60,12 @@ export interface Scene {
   transition?: SceneTransition;
   objects: SceneObject[];
 
+  // === Layer 3: Direction Elements ===
+  camera?: string;                // camera preset name: "static_full", "zoom_in_slow", etc.
+  layout?: string;                // layout preset name: "split_left_stickman", etc.
+  timing?: string;                // timing preset name: "stickman_first", etc.
+  sceneTemplate?: string;         // optional scene template reference
+
   // === Track B-3: Visual Effects ===
   effects?: VisualEffect[];
 

@@ -17,6 +17,7 @@ import {
   getTransitionStyle,
   getTransitionProgress,
 } from './utils/transitions';
+import { getCameraPreset, calculateCameraState } from './direction/camera';
 
 interface SceneRendererProps {
   scene: Scene;
@@ -38,6 +39,7 @@ export const SceneRenderer: React.FC<SceneRendererProps> = ({
     transition,
     objects,
     effects = [],
+    camera,
   } = scene;
 
   // Calculate scene timing
@@ -113,13 +115,30 @@ export const SceneRenderer: React.FC<SceneRendererProps> = ({
   // Get screen shake transform if effect is active
   const shakeTransform = useScreenShake(effects, startMs);
 
-  // Combine transition transform with shake transform
-  const combinedTransform =
-    shakeTransform !== 'none' && finalTransform !== 'none'
-      ? `${finalTransform} ${shakeTransform}`
-      : shakeTransform !== 'none'
-        ? shakeTransform
-        : finalTransform;
+  // Calculate camera state based on preset
+  const cameraPreset = camera ? getCameraPreset(camera) : null;
+  const cameraProgress = sceneDurationFrames > 0 ? relativeFrame / sceneDurationFrames : 0;
+  const cameraState = cameraPreset
+    ? calculateCameraState(cameraPreset, cameraProgress)
+    : { zoom: 1, offsetX: 0, offsetY: 0 };
+
+  // Build camera transform string
+  const cameraTransform = cameraState.zoom !== 1 || cameraState.offsetX !== 0 || cameraState.offsetY !== 0
+    ? `scale(${cameraState.zoom}) translate(${cameraState.offsetX}px, ${cameraState.offsetY}px)`
+    : 'none';
+
+  // Combine all transforms: transition + shake + camera
+  let combinedTransform = finalTransform;
+  if (shakeTransform !== 'none') {
+    combinedTransform = combinedTransform !== 'none'
+      ? `${combinedTransform} ${shakeTransform}`
+      : shakeTransform;
+  }
+  if (cameraTransform !== 'none') {
+    combinedTransform = combinedTransform !== 'none'
+      ? `${combinedTransform} ${cameraTransform}`
+      : cameraTransform;
+  }
 
   return (
     <div

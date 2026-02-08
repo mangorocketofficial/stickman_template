@@ -5,9 +5,9 @@
     "width": 1920,
     "height": 1080,
     "audioSrc": "audio/tts_output.mp3",
-    "theme": "light_clean",
+    "theme": "dark_cool",
     "bgm": {
-      "src": "audio/bgm/inspiring.mp3",
+      "src": "audio/bgm/calm_ambient.mp3",
       "volume": 0.3,
       "fadeInMs": 2000,
       "fadeOutMs": 3000,
@@ -27,29 +27,36 @@
   },
   "scenes": [
     {
-      "id": "scene_01_opening",
+      "id": "scene_01_intro",
       "startMs": 0,
       "endMs": 2640,
       "background": "#1a1a2e",
       "sceneTemplate": "intro_greeting",
-      "camera": "static_wide",
+      "camera": "static_full",
       "transition": {
         "type": "fadeFromBlack",
         "durationMs": 300
       },
+      "sfxTriggers": [
+        {
+          "sfx": "whoosh",
+          "triggerMs": 200,
+          "volume": 0.5
+        }
+      ],
       "objects": [
         {
-          "id": "scene_01_opening_stickman_1",
+          "id": "scene_01_intro_stickman_1",
           "type": "stickman",
           "position": {
-            "x": 400,
+            "x": 350,
             "y": 600
           },
           "props": {
             "color": "#FFFFFF",
             "lineWidth": 3,
-            "pose": "standing",
             "expression": "happy",
+            "pose": "standing",
             "motion": "breathing"
           },
           "animation": {
@@ -64,17 +71,17 @@
           }
         },
         {
-          "id": "scene_01_opening_text_1",
+          "id": "scene_01_intro_text_1",
           "type": "text",
           "position": {
             "x": 1100,
-            "y": 300
+            "y": 350
           },
           "props": {
             "content": "복리의 힘",
             "fontSize": 48,
-            "fontWeight": "bold",
-            "color": "#FFD700",
+            "fontWeight": "normal",
+            "color": "#FFFFFF",
             "align": "center",
             "maxWidth": 800,
             "style": "title"
@@ -85,158 +92,45 @@
               "durationMs": 400
             }
           }
-        },
-        {
-          "id": "scene_01_opening_icon_2",
-          "type": "icon",
-          "position": {
-            "x": 1100,
-            "y": 500
-          },
-          "props": {
-            "name": "lightbulb",
-            "size": 80,
-            "color": "#FFFFFF"
-          },
-          "animation": {
-            "enter": {
-              "type": "popIn",
-              "durationMs": 400
-            }
-          }
         }
-      ],
-      "llmSource": "llm"
+      ]
     },
     {
-      "id": "scene_02_explanation",
+      "id": "scene_02_explain",
       "startMs": 3140,
-      "endMs": 7460,
-      "background": "#1a1a2e",
-      "sceneTemplate": "explain_default",
-      "camera": "static_wide",
+      "endMs": 7140,
+      "background": "#181b32",
+      "sceneTemplate": "explain_reverse",
+      "camera": "pan_left_to_right",
       "transition": {
-        "type": "crossfade",
+        "type": "slideLeft",
         "durationMs": 300
       },
-      "objects": [
+      "sfxTriggers": [
         {
-          "id": "scene_02_explanation_stickman_1",
-          "type": "stickman",
-          "position": {
-            "x": 400,
-            "y": 600
-          },
-          "props": {
-            "color": "#FFFFFF",
-            "lineWidth": 3,
-            "pose": "explaining",
-            "expression": "thinking",
-            "motion": "typing"
-          },
-          "animation": {
-            "enter": {
-              "type": "fadeIn",
-              "durationMs": 500
-            },
-            "during": {
-              "type": "typing",
-              "loop": true
-            }
-          }
+          "sfx": "whoosh",
+          "triggerMs": 200,
+          "volume": 0.5
         },
         {
-          "id": "scene_02_explanation_text_1",
-          "type": "text",
-          "position": {
-            "x": 1100,
-            "y": 300
-          },
-          "props": {
-            "content": "원금",
-            "fontSize": 48,
-            "fontWeight": "bold",
-            "color": "#FFD700",
-            "align": "center",
-            "maxWidth": 800,
-            "style": "title"
-          },
-          "animation": {
-            "enter": {
-              "type": "fadeInUp",
-              "durationMs": 400
-            }
-          }
-        },
-        {
-          "id": "scene_02_explanation_text_2",
-          "type": "text",
-          "position": {
-            "x": 1100,
-            "y": 400
-          },
-          "props": {
-            "content": "이자",
-            "fontSize": 48,
-            "fontWeight": "bold",
-            "color": "#FFD700",
-            "align": "center",
-            "maxWidth": 800,
-            "style": "title"
-          },
-          "animation": {
-            "enter": {
-              "type": "fadeInUp",
-              "durationMs": 400
-            }
-          }
-        },
-        {
-          "id": "scene_02_explanation_icon_3",
-          "type": "icon",
-          "position": {
-            "x": 1100,
-            "y": 500
-          },
-          "props": {
-            "name": "calculator",
-            "size": 80,
-            "color": "#FFFFFF"
-          },
-          "animation": {
-            "enter": {
-              "type": "popIn",
-              "durationMs": 400
-            }
-          }
+          "sfx": "pop",
+          "triggerMs": 200,
+          "volume": 0.5
         }
       ],
-      "llmSource": "llm"
-    },
-    {
-      "id": "scene_03_emphasis",
-      "startMs": 7960,
-      "endMs": 10600,
-      "background": "#1a1a2e",
-      "sceneTemplate": "emphasis_number",
-      "camera": "zoom_in_slow",
-      "transition": {
-        "type": "fadeFromBlack",
-        "durationMs": 300
-      },
       "objects": [
         {
-          "id": "scene_03_emphasis_stickman_1",
+          "id": "scene_02_explain_stickman_1",
           "type": "stickman",
           "position": {
-            "x": 400,
+            "x": 300,
             "y": 600
           },
           "props": {
             "color": "#FFFFFF",
             "lineWidth": 3,
-            "pose": "pointing_right",
-            "expression": "excited",
+            "expression": "focused",
+            "pose": "explaining",
             "motion": "nodding"
           },
           "animation": {
@@ -245,23 +139,23 @@
               "durationMs": 500
             },
             "during": {
-              "type": "nodding",
+              "type": "breathing",
               "loop": true
             }
           }
         },
         {
-          "id": "scene_03_emphasis_text_1",
+          "id": "scene_02_explain_text_1",
           "type": "text",
           "position": {
-            "x": 1100,
-            "y": 300
+            "x": 960,
+            "y": 500
           },
           "props": {
-            "content": "761만원",
+            "content": "원금",
             "fontSize": 48,
-            "fontWeight": "bold",
-            "color": "#FFD700",
+            "fontWeight": "normal",
+            "color": "#FFFFFF",
             "align": "center",
             "maxWidth": 800,
             "style": "title"
@@ -274,11 +168,109 @@
           }
         },
         {
-          "id": "scene_03_emphasis_counter_2",
+          "id": "scene_02_explain_icon_1",
+          "type": "icon",
+          "position": {
+            "x": 960,
+            "y": 300
+          },
+          "props": {
+            "name": "money-bag",
+            "size": 80,
+            "color": "#FFFFFF"
+          },
+          "animation": {
+            "enter": {
+              "type": "popIn",
+              "durationMs": 400
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "scene_03_emphasis",
+      "startMs": 7640,
+      "endMs": 11960,
+      "background": "#181b32",
+      "sceneTemplate": "emphasis_number",
+      "camera": "zoom_in_fast",
+      "transition": {
+        "type": "cut",
+        "durationMs": 300
+      },
+      "sfxTriggers": [
+        {
+          "sfx": "whoosh",
+          "triggerMs": 200,
+          "volume": 0.5
+        },
+        {
+          "sfx": "chime",
+          "triggerMs": 150,
+          "volume": 0.5
+        },
+        {
+          "sfx": "pop",
+          "triggerMs": 200,
+          "volume": 0.5
+        }
+      ],
+      "objects": [
+        {
+          "id": "scene_03_emphasis_stickman_1",
+          "type": "stickman",
+          "position": {
+            "x": 300,
+            "y": 600
+          },
+          "props": {
+            "color": "#FFFFFF",
+            "lineWidth": 3,
+            "expression": "excited",
+            "pose": "pointing_right",
+            "motion": "jumping"
+          },
+          "animation": {
+            "enter": {
+              "type": "fadeIn",
+              "durationMs": 500
+            },
+            "during": {
+              "type": "breathing",
+              "loop": true
+            }
+          }
+        },
+        {
+          "id": "scene_03_emphasis_text_1",
+          "type": "text",
+          "position": {
+            "x": 960,
+            "y": 250
+          },
+          "props": {
+            "content": "761만원",
+            "fontSize": 48,
+            "fontWeight": "normal",
+            "color": "#FFFFFF",
+            "align": "center",
+            "maxWidth": 800,
+            "style": "title"
+          },
+          "animation": {
+            "enter": {
+              "type": "fadeInUp",
+              "durationMs": 400
+            }
+          }
+        },
+        {
+          "id": "scene_03_emphasis_counter_1",
           "type": "counter",
           "position": {
             "x": 960,
-            "y": 400
+            "y": 450
           },
           "props": {
             "from": 0,
@@ -295,11 +287,11 @@
           }
         },
         {
-          "id": "scene_03_emphasis_icon_3",
+          "id": "scene_03_emphasis_icon_1",
           "type": "icon",
           "position": {
-            "x": 1100,
-            "y": 500
+            "x": 960,
+            "y": 540
           },
           "props": {
             "name": "chart-up",
@@ -313,34 +305,45 @@
             }
           }
         }
-      ],
-      "llmSource": "llm"
+      ]
     },
     {
-      "id": "scene_04_emphasis",
-      "startMs": 11100,
-      "endMs": 12780,
+      "id": "scene_04_conclusion",
+      "startMs": 12460,
+      "endMs": 15660,
       "background": "#1a1a2e",
-      "sceneTemplate": "emphasis_statement",
+      "sceneTemplate": "closing_summary",
       "camera": "static_full",
       "transition": {
         "type": "crossfade",
         "durationMs": 300
       },
+      "sfxTriggers": [
+        {
+          "sfx": "whoosh",
+          "triggerMs": 200,
+          "volume": 0.5
+        },
+        {
+          "sfx": "pop",
+          "triggerMs": 200,
+          "volume": 0.5
+        }
+      ],
       "objects": [
         {
-          "id": "scene_04_emphasis_stickman_1",
+          "id": "scene_04_conclusion_stickman_1",
           "type": "stickman",
           "position": {
-            "x": 400,
+            "x": 300,
             "y": 600
           },
           "props": {
             "color": "#FFFFFF",
             "lineWidth": 3,
-            "pose": "pointing_up",
-            "expression": "thinking",
-            "motion": "breathing"
+            "expression": "happy",
+            "pose": "celebrating",
+            "motion": "jumping"
           },
           "animation": {
             "enter": {
@@ -354,122 +357,17 @@
           }
         },
         {
-          "id": "scene_04_emphasis_text_1",
+          "id": "scene_04_conclusion_text_1",
           "type": "text",
           "position": {
-            "x": 1100,
-            "y": 300
-          },
-          "props": {
-            "content": "시간",
-            "fontSize": 48,
-            "fontWeight": "bold",
-            "color": "#FFD700",
-            "align": "center",
-            "maxWidth": 800,
-            "style": "title"
-          },
-          "animation": {
-            "enter": {
-              "type": "fadeInUp",
-              "durationMs": 400
-            }
-          }
-        },
-        {
-          "id": "scene_04_emphasis_text_2",
-          "type": "text",
-          "position": {
-            "x": 1100,
-            "y": 400
-          },
-          "props": {
-            "content": "복리",
-            "fontSize": 48,
-            "fontWeight": "bold",
-            "color": "#FFD700",
-            "align": "center",
-            "maxWidth": 800,
-            "style": "title"
-          },
-          "animation": {
-            "enter": {
-              "type": "fadeInUp",
-              "durationMs": 400
-            }
-          }
-        },
-        {
-          "id": "scene_04_emphasis_icon_3",
-          "type": "icon",
-          "position": {
-            "x": 1100,
+            "x": 960,
             "y": 500
-          },
-          "props": {
-            "name": "clock",
-            "size": 80,
-            "color": "#FFFFFF"
-          },
-          "animation": {
-            "enter": {
-              "type": "popIn",
-              "durationMs": 400
-            }
-          }
-        }
-      ],
-      "llmSource": "llm"
-    },
-    {
-      "id": "scene_05_closing",
-      "startMs": 13280,
-      "endMs": 14720,
-      "background": "#1a1a2e",
-      "sceneTemplate": "closing_call_to_action",
-      "camera": "static_full",
-      "transition": {
-        "type": "fadeFromBlack",
-        "durationMs": 300
-      },
-      "objects": [
-        {
-          "id": "scene_05_closing_stickman_1",
-          "type": "stickman",
-          "position": {
-            "x": 400,
-            "y": 600
-          },
-          "props": {
-            "color": "#FFFFFF",
-            "lineWidth": 3,
-            "pose": "celebrating",
-            "expression": "happy",
-            "motion": "clapping"
-          },
-          "animation": {
-            "enter": {
-              "type": "fadeIn",
-              "durationMs": 500
-            },
-            "during": {
-              "type": "clapping",
-              "loop": true
-            }
-          }
-        },
-        {
-          "id": "scene_05_closing_text_1",
-          "type": "text",
-          "position": {
-            "x": 1100,
-            "y": 300
           },
           "props": {
             "content": "복리 투자",
             "fontSize": 48,
-            "fontWeight": "bold",
-            "color": "#FFD700",
+            "fontWeight": "normal",
+            "color": "#FFFFFF",
             "align": "center",
             "maxWidth": 800,
             "style": "title"
@@ -482,14 +380,14 @@
           }
         },
         {
-          "id": "scene_05_closing_icon_2",
+          "id": "scene_04_conclusion_icon_1",
           "type": "icon",
           "position": {
-            "x": 1100,
-            "y": 500
+            "x": 960,
+            "y": 300
           },
           "props": {
-            "name": "chart-up",
+            "name": "thumbs-up",
             "size": 80,
             "color": "#FFFFFF"
           },
@@ -500,8 +398,7 @@
             }
           }
         }
-      ],
-      "llmSource": "llm"
+      ]
     }
   ]
 }

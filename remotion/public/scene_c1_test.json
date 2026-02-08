@@ -1,0 +1,290 @@
+{
+  "meta": {
+    "title": "복리의 마법",
+    "fps": 30,
+    "width": 1920,
+    "height": 1080,
+    "audioSrc": "audio/tts_output.mp3",
+    "theme": "dark_cool"
+  },
+  "subtitles": {
+    "src": "subtitles/words.json",
+    "style": {
+      "fontSize": 48,
+      "color": "#FFFFFF",
+      "position": "bottom",
+      "highlightColor": "#FFD700"
+    }
+  },
+  "scenes": [
+    {
+      "id": "scene_01_intro",
+      "startMs": 0,
+      "endMs": 1650,
+      "background": "#1a1a2e",
+      "sceneTemplate": "intro_greeting",
+      "camera": "static_full",
+      "transition": {
+        "type": "fadeFromBlack",
+        "durationMs": 300
+      },
+      "sfxTriggers": [],
+      "objects": [
+        {
+          "id": "scene_01_intro_stickman_1",
+          "type": "stickman",
+          "position": {
+            "x": 960,
+            "y": 600
+          },
+          "props": {
+            "color": "#FFFFFF",
+            "lineWidth": 3,
+            "expression": "happy",
+            "pose": "standing",
+            "motion": "breathing"
+          },
+          "animation": {
+            "enter": {
+              "type": "fadeIn",
+              "durationMs": 500
+            },
+            "during": {
+              "type": "breathing",
+              "loop": true
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "scene_02_concept",
+      "startMs": 2150,
+      "endMs": 6200,
+      "background": "#181b32",
+      "sceneTemplate": "explain_reverse",
+      "camera": "pan_left_to_right",
+      "transition": {
+        "type": "slideLeft",
+        "durationMs": 300
+      },
+      "sfxTriggers": [
+        {
+          "sfx": "whoosh",
+          "triggerMs": 200,
+          "volume": 0.5
+        }
+      ],
+      "objects": [
+        {
+          "id": "scene_02_concept_stickman_1",
+          "type": "stickman",
+          "position": {
+            "x": 350,
+            "y": 600
+          },
+          "props": {
+            "color": "#FFFFFF",
+            "lineWidth": 3,
+            "expression": "neutral",
+            "pose": "explaining",
+            "motion": "nodding"
+          },
+          "animation": {
+            "enter": {
+              "type": "fadeIn",
+              "durationMs": 500
+            },
+            "during": {
+              "type": "breathing",
+              "loop": true
+            }
+          }
+        },
+        {
+          "id": "scene_02_concept_text_1",
+          "type": "text",
+          "position": {
+            "x": 1100,
+            "y": 350
+          },
+          "props": {
+            "content": "단리 vs 복리",
+            "fontSize": 48,
+            "fontWeight": "bold",
+            "color": "#FFD700",
+            "align": "center",
+            "maxWidth": 800,
+            "style": "title"
+          },
+          "animation": {
+            "enter": {
+              "type": "fadeInUp",
+              "durationMs": 400
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "scene_03_formula",
+      "startMs": 6700,
+      "endMs": 9150,
+      "background": "#181b32",
+      "sceneTemplate": "emphasis_number",
+      "camera": "zoom_in_fast",
+      "transition": {
+        "type": "cut",
+        "durationMs": 300
+      },
+      "sfxTriggers": [
+        {
+          "sfx": "whoosh",
+          "triggerMs": 200,
+          "volume": 0.5
+        },
+        {
+          "sfx": "chime",
+          "triggerMs": 150,
+          "volume": 0.5
+        }
+      ],
+      "objects": [
+        {
+          "id": "scene_03_formula_stickman_1",
+          "type": "stickman",
+          "position": {
+            "x": 300,
+            "y": 600
+          },
+          "props": {
+            "color": "#FFFFFF",
+            "lineWidth": 3,
+            "expression": "neutral",
+            "pose": "pointing_right",
+            "motion": "breathing"
+          },
+          "animation": {
+            "enter": {
+              "type": "fadeIn",
+              "durationMs": 500
+            },
+            "during": {
+              "type": "breathing",
+              "loop": true
+            }
+          }
+        },
+        {
+          "id": "scene_03_formula_text_1",
+          "type": "text",
+          "position": {
+            "x": 960,
+            "y": 250
+          },
+          "props": {
+            "content": "복리 = 원금 × (1+r)ⁿ",
+            "fontSize": 48,
+            "fontWeight": "bold",
+            "color": "#FFD700",
+            "align": "center",
+            "maxWidth": 800,
+            "style": "title"
+          },
+          "animation": {
+            "enter": {
+              "type": "fadeInUp",
+              "durationMs": 400
+            }
+          }
+        },
+        {
+          "id": "scene_03_formula_counter_1",
+          "type": "counter",
+          "position": {
+            "x": 960,
+            "y": 450
+          },
+          "props": {
+            "from": 1000000,
+            "to": 7612255,
+            "format": "currency_krw",
+            "fontSize": 64,
+            "color": "#FFFFFF"
+          },
+          "animation": {
+            "enter": {
+              "type": "fadeIn",
+              "durationMs": 300
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "scene_04_conclusion",
+      "startMs": 9650,
+      "endMs": 12650,
+      "background": "#1a1a2e",
+      "sceneTemplate": "closing_summary",
+      "camera": "static_full",
+      "transition": {
+        "type": "crossfade",
+        "durationMs": 300
+      },
+      "sfxTriggers": [
+        {
+          "sfx": "pop",
+          "triggerMs": 200,
+          "volume": 0.5
+        }
+      ],
+      "objects": [
+        {
+          "id": "scene_04_conclusion_stickman_1",
+          "type": "stickman",
+          "position": {
+            "x": 400,
+            "y": 600
+          },
+          "props": {
+            "color": "#FFFFFF",
+            "lineWidth": 3,
+            "expression": "neutral",
+            "pose": "celebrating",
+            "motion": "jumping"
+          },
+          "animation": {
+            "enter": {
+              "type": "fadeIn",
+              "durationMs": 500
+            },
+            "during": {
+              "type": "breathing",
+              "loop": true
+            }
+          }
+        },
+        {
+          "id": "scene_04_conclusion_icon_1",
+          "type": "icon",
+          "position": {
+            "x": 1100,
+            "y": 400
+          },
+          "props": {
+            "name": "chart-up",
+            "size": 80,
+            "color": "#FFFFFF"
+          },
+          "animation": {
+            "enter": {
+              "type": "popIn",
+              "durationMs": 400
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

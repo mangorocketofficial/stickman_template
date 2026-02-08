@@ -21,9 +21,18 @@ import { EXPRESSION_NAMES } from './components/StickMan/expressions';
 // Load actual scene data from public/scene.json
 import sceneJson from '../public/scene.json';
 import wordsJson from '../public/subtitles/words.json';
+// Load L3 Direction demo scene
+import l3DemoJson from '../public/scene_l3_demo.json';
+// Load L4 Scene Templates demo scene
+import l4DemoJson from '../public/scene_l4_demo.json';
+// Load L4 Improved demo scene (diverse layouts & motions)
+import l4ImprovedDemoJson from '../public/scene_l4_improved_demo.json';
 
 // Use actual scene data from Python pipeline output
 const defaultSceneData: VideoProject = sceneJson as VideoProject;
+const l3DemoSceneData: VideoProject = l3DemoJson as VideoProject;
+const l4DemoSceneData: VideoProject = l4DemoJson as VideoProject;
+const l4ImprovedDemoSceneData: VideoProject = l4ImprovedDemoJson as VideoProject;
 
 // Use actual subtitle data from Python pipeline output
 const defaultSubtitleData: SubtitleData = wordsJson as SubtitleData;
@@ -52,6 +61,48 @@ export const RemotionRoot: React.FC = () => {
         defaultProps={{
           sceneData: defaultSceneData,
           subtitleData: defaultSubtitleData,
+        }}
+      />
+
+      {/* L3 Direction Demo - Camera presets showcase */}
+      <Composition
+        id="L3-Direction-Demo"
+        component={MainVideo as unknown as React.FC<Record<string, unknown>>}
+        durationInFrames={Math.ceil((34000 / 1000) * fps)}
+        fps={fps}
+        width={1920}
+        height={1080}
+        defaultProps={{
+          sceneData: l3DemoSceneData,
+          subtitleData: undefined,
+        }}
+      />
+
+      {/* L4 Scene Templates Demo - Scene template showcase */}
+      <Composition
+        id="L4-Scene-Templates-Demo"
+        component={MainVideo as unknown as React.FC<Record<string, unknown>>}
+        durationInFrames={Math.ceil((31000 / 1000) * fps)}
+        fps={fps}
+        width={1920}
+        height={1080}
+        defaultProps={{
+          sceneData: l4DemoSceneData,
+          subtitleData: undefined,
+        }}
+      />
+
+      {/* L4 Improved Demo - Diverse layouts and motions showcase */}
+      <Composition
+        id="L4-Improved-Demo"
+        component={MainVideo as unknown as React.FC<Record<string, unknown>>}
+        durationInFrames={Math.ceil((34000 / 1000) * fps)}
+        fps={fps}
+        width={1920}
+        height={1080}
+        defaultProps={{
+          sceneData: l4ImprovedDemoSceneData,
+          subtitleData: undefined,
         }}
       />
 
