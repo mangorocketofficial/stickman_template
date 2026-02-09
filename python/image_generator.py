@@ -97,12 +97,22 @@ def generate_single_image(
 
         except Exception as e:
             error_msg = str(e)
+
+            # Check for rate limit error (429 status)
+            is_rate_limit = "429" in error_msg or "rate limit" in error_msg.lower() or "throttled" in error_msg.lower()
+
             if attempt < max_retries - 1:
-                wait_time = 2 ** attempt  # Exponential backoff
-                print(f"    Retry {attempt + 1}/{max_retries} in {wait_time}s: {error_msg}")
+                # For rate limit errors, wait 10 seconds
+                if is_rate_limit:
+                    wait_time = 10
+                    print(f"    Rate limit hit. Waiting {wait_time}s before retry {attempt + 1}/{max_retries}...")
+                else:
+                    wait_time = 2 ** attempt  # Exponential backoff for other errors
+                    print(f"    Retry {attempt + 1}/{max_retries} in {wait_time}s: {error_msg[:100]}")
+
                 time.sleep(wait_time)
             else:
-                return False, f"Failed after {max_retries} attempts: {error_msg}"
+                return False, f"Failed after {max_retries} attempts: {error_msg[:150]}"
 
     return False, "Unknown error"
 
@@ -169,6 +179,10 @@ def generate_scene_images(
 
         if success:
             print(f"    Done in {elapsed:.1f}s → {relative_path}")
+            # Wait 10 seconds between successful generations to avoid rate limits
+            if idx < total - 1:  # Don't wait after last image
+                print(f"    Waiting 10s before next image to avoid rate limit...")
+                time.sleep(10)
         else:
             print(f"    FAILED: {error}")
 

@@ -1,6 +1,6 @@
 {
   "meta": {
-    "title": "복리의 마법 (화이트보드 버전)",
+    "title": "화이트보드 테스트 (5장)",
     "fps": 30,
     "width": 1920,
     "height": 1080,
@@ -20,7 +20,7 @@
     {
       "id": "scene_01_intro",
       "startMs": 0,
-      "endMs": 3300,
+      "endMs": 2900,
       "background": {
         "type": "image",
         "src": "images/scene_01.png",
@@ -61,8 +61,8 @@
     },
     {
       "id": "scene_02_concept",
-      "startMs": 3500,
-      "endMs": 9000,
+      "startMs": 3100,
+      "endMs": 6700,
       "background": {
         "type": "image",
         "src": "images/scene_02.png",
@@ -109,8 +109,8 @@
     },
     {
       "id": "scene_03_formula",
-      "startMs": 9200,
-      "endMs": 12800,
+      "startMs": 6900,
+      "endMs": 10200,
       "background": {
         "type": "image",
         "src": "images/scene_03.png",
@@ -132,7 +132,7 @@
             "y": 350
           },
           "props": {
-            "content": "복리 = 원금 × (1+r)ⁿ",
+            "content": "복리 공식",
             "fontSize": 48,
             "fontWeight": "bold",
             "color": "#0066CC",
@@ -152,9 +152,28 @@
               "durationMs": 500
             }
           }
-        },
+        }
+      ]
+    },
+    {
+      "id": "scene_04_example",
+      "startMs": 10400,
+      "endMs": 13700,
+      "background": {
+        "type": "image",
+        "src": "images/scene_04.png",
+        "animation": "panLeft",
+        "animationIntensity": 0.5
+      },
+      "transition": {
+        "in": "fadeIn",
+        "out": "fadeOut",
+        "durationMs": 300
+      },
+      "objects": [],
+      "overlays": [
         {
-          "id": "scene_03_formula_counter_1",
+          "id": "scene_04_example_counter_1",
           "type": "counter",
           "position": {
             "x": 960,
@@ -177,27 +196,9 @@
       ]
     },
     {
-      "id": "scene_04_snowball",
-      "startMs": 13000,
-      "endMs": 18500,
-      "background": {
-        "type": "image",
-        "src": "images/scene_04.png",
-        "animation": "panLeft",
-        "animationIntensity": 0.5
-      },
-      "transition": {
-        "in": "fadeIn",
-        "out": "fadeOut",
-        "durationMs": 300
-      },
-      "objects": [],
-      "overlays": []
-    },
-    {
-      "id": "scene_05_rule72",
-      "startMs": 18700,
-      "endMs": 24800,
+      "id": "scene_05_conclusion",
+      "startMs": 13900,
+      "endMs": 16500,
       "background": {
         "type": "image",
         "src": "images/scene_05.png",
@@ -212,103 +213,7 @@
       "objects": [],
       "overlays": [
         {
-          "id": "scene_05_rule72_text_1",
-          "type": "text",
-          "position": {
-            "x": 960,
-            "y": 350
-          },
-          "props": {
-            "content": "72의 법칙",
-            "fontSize": 48,
-            "fontWeight": "bold",
-            "color": "#0066CC",
-            "align": "center",
-            "maxWidth": 1200,
-            "role": "highlight_box",
-            "background": {
-              "color": "rgba(255,255,255,0.9)",
-              "padding": 20,
-              "borderRadius": 12,
-              "opacity": 0.7
-            }
-          },
-          "animation": {
-            "enter": {
-              "type": "fadeInUp",
-              "durationMs": 500
-            }
-          }
-        }
-      ]
-    },
-    {
-      "id": "scene_06_warning",
-      "startMs": 25000,
-      "endMs": 29600,
-      "background": {
-        "type": "image",
-        "src": "images/scene_06.png",
-        "animation": "kenBurns",
-        "animationIntensity": 0.5
-      },
-      "transition": {
-        "in": "fadeIn",
-        "out": "fadeOut",
-        "durationMs": 300
-      },
-      "objects": [],
-      "overlays": [
-        {
-          "id": "scene_06_warning_text_1",
-          "type": "text",
-          "position": {
-            "x": 960,
-            "y": 350
-          },
-          "props": {
-            "content": "일찍 시작하세요!",
-            "fontSize": 48,
-            "fontWeight": "bold",
-            "color": "#0066CC",
-            "align": "center",
-            "maxWidth": 1200,
-            "role": "highlight_box",
-            "background": {
-              "color": "rgba(255,255,255,0.9)",
-              "padding": 20,
-              "borderRadius": 12,
-              "opacity": 0.7
-            }
-          },
-          "animation": {
-            "enter": {
-              "type": "fadeInUp",
-              "durationMs": 500
-            }
-          }
-        }
-      ]
-    },
-    {
-      "id": "scene_07_conclusion",
-      "startMs": 29800,
-      "endMs": 34200,
-      "background": {
-        "type": "image",
-        "src": "images/scene_07.png",
-        "animation": "zoomIn",
-        "animationIntensity": 0.5
-      },
-      "transition": {
-        "in": "fadeIn",
-        "out": "fadeOut",
-        "durationMs": 300
-      },
-      "objects": [],
-      "overlays": [
-        {
-          "id": "scene_07_conclusion_text_1",
+          "id": "scene_05_conclusion_text_1",
           "type": "text",
           "position": {
             "x": 960,
