@@ -24,12 +24,20 @@ DEFAULT_SUBTITLE_HIGHLIGHT = "#FFD700"
 IMAGE_ANIMATIONS = ["kenBurns", "zoomIn", "zoomOut", "panLeft", "panRight"]
 
 
-def directive_to_overlay(directive: Directive, overlay_id: str) -> Optional[dict]:
+def directive_to_overlay(directive: Directive, overlay_id: str, style: str = "dark_infographic") -> Optional[dict]:
     """Convert a directive to a v2 scene overlay."""
     if directive.type == "text":
         content = directive.args[0] if directive.args else ""
         is_title = "title" in directive.args
         is_highlight = "highlight" in directive.args
+
+        # Whiteboard style uses black text on white background
+        if style == "whiteboard":
+            text_color = "#0066CC" if is_highlight else "#000000"  # Blue for highlights, black for normal
+            bg_color = "rgba(255,255,255,0.9)" if is_highlight else None  # Light box for highlights only
+        else:
+            text_color = "#FFD700" if is_highlight else "#FFFFFF"  # Gold/white for dark styles
+            bg_color = "rgba(0,0,0,0.5)"  # Dark semi-transparent box
 
         return {
             "id": overlay_id,
@@ -39,12 +47,12 @@ def directive_to_overlay(directive: Directive, overlay_id: str) -> Optional[dict
                 "content": content,
                 "fontSize": 64 if is_title else 48,
                 "fontWeight": "bold",
-                "color": "#FFD700" if is_highlight else "#FFFFFF",
+                "color": text_color,
                 "align": "center",
                 "maxWidth": 1200,
                 "role": "title" if is_title else ("highlight_box" if is_highlight else "body"),
                 "background": {
-                    "color": "rgba(0,0,0,0.5)",
+                    "color": bg_color,
                     "padding": 20,
                     "borderRadius": 12,
                     "opacity": 0.7,
@@ -87,6 +95,7 @@ def build_scene_v2(
     end_ms: int,
     image_result: Optional[GeneratedImage] = None,
     total_scenes: int = 1,
+    style: str = "dark_infographic",
 ) -> dict:
     """Build a single v2 scene with image background and overlays."""
     scene_id = f"scene_{section_index + 1:02d}_{section_name}"
@@ -101,9 +110,11 @@ def build_scene_v2(
             "animationIntensity": 0.5,
         }
     else:
+        # Whiteboard style uses white background fallback
+        fallback_color = "#FFFFFF" if style == "whiteboard" else "#1a1a2e"
         background = {
             "type": "color",
-            "value": "#1a1a2e",
+            "value": fallback_color,
         }
 
     # Build overlays from directives (text, counter only)
@@ -115,7 +126,7 @@ def build_scene_v2(
             type_counters[directive.type] = type_counters.get(directive.type, 0) + 1
             count = type_counters[directive.type]
             overlay_id = f"{scene_id}_{directive.type}_{count}"
-            overlay = directive_to_overlay(directive, overlay_id)
+            overlay = directive_to_overlay(directive, overlay_id, style=style)
             if overlay:
                 overlays.append(overlay)
 
@@ -160,6 +171,7 @@ def build_scene_json_v2(
     """
     total_scenes = len(parsed_script.sections)
     scenes = []
+    style = parsed_script.meta.get("style", "dark_infographic")
 
     for i, section in enumerate(parsed_script.sections):
         if i < len(section_timings):
@@ -179,10 +191,13 @@ def build_scene_json_v2(
             end_ms=end_ms,
             image_result=image_result,
             total_scenes=total_scenes,
+            style=style,
         )
         scenes.append(scene)
 
-    style = parsed_script.meta.get("style", "dark_infographic")
+    # Whiteboard style uses black text for subtitles
+    subtitle_color = "#000000" if style == "whiteboard" else DEFAULT_SUBTITLE_COLOR
+    subtitle_highlight = "#0066CC" if style == "whiteboard" else DEFAULT_SUBTITLE_HIGHLIGHT
 
     return {
         "meta": {
@@ -197,9 +212,9 @@ def build_scene_json_v2(
             "src": words_path,
             "style": {
                 "fontSize": DEFAULT_SUBTITLE_FONT_SIZE,
-                "color": DEFAULT_SUBTITLE_COLOR,
+                "color": subtitle_color,
                 "position": "bottom",
-                "highlightColor": DEFAULT_SUBTITLE_HIGHLIGHT,
+                "highlightColor": subtitle_highlight,
             },
         },
         "scenes": scenes,

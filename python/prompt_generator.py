@@ -209,37 +209,85 @@ def generate_scene_prompts(
     total_scenes = len(sections)
     prompts = []
 
-    for i, section in enumerate(sections):
-        # Classify scene role
-        role = classify_scene_role(section.narration, i, total_scenes)
+    # Whiteboard style uses specialized diagram-focused prompts
+    if style == "whiteboard":
+        from whiteboard_prompt_engine import generate_whiteboard_prompt
+        cumulative_concepts = []
 
-        # Check for image_hint directive
-        image_hint = None
-        for directive in section.directives:
-            if directive.type == "image_hint":
-                image_hint = directive.args[0] if directive.args else None
-                break
+        for i, section in enumerate(sections):
+            role = classify_scene_role(section.narration, i, total_scenes)
 
-        # Generate prompt
-        if image_hint:
-            prompt_text = generate_prompt_from_hint(image_hint, template)
-        else:
-            prompt_text = generate_prompt_from_narration(
-                section.narration, role, template, use_llm=use_llm
+            # Check for image_hint directive
+            image_hint = None
+            for directive in section.directives:
+                if directive.type == "image_hint":
+                    image_hint = directive.args[0] if directive.args else None
+                    break
+
+            # Generate whiteboard-optimized prompt
+            diagram_description = generate_whiteboard_prompt(
+                narration=section.narration,
+                scene_role=role,
+                image_hint=image_hint,
+                previous_concepts=cumulative_concepts,
             )
 
-        scene_prompt = ScenePrompt(
-            scene_index=i,
-            scene_role=role,
-            image_hint=image_hint,
-            generated_prompt=prompt_text,
-            negative_prompt=template.negative_prompt,
-            narration_summary=section.narration[:100],
-        )
-        prompts.append(scene_prompt)
+            # Compose with template base_prompt
+            prompt_text = template.compose_prompt(diagram_description)
 
-        source = "hint" if image_hint else ("LLM" if use_llm else "rule")
-        print(f"  Scene {i+1}/{total_scenes} [{role}] prompt ({source}): "
-              f"{prompt_text[:80]}...")
+            scene_prompt = ScenePrompt(
+                scene_index=i,
+                scene_role=role,
+                image_hint=image_hint,
+                generated_prompt=prompt_text,
+                negative_prompt=template.negative_prompt,
+                narration_summary=section.narration[:100],
+            )
+            prompts.append(scene_prompt)
+
+            # Track concepts for continuity
+            from whiteboard_prompt_engine import extract_key_concepts
+            concepts = extract_key_concepts(section.narration)
+            cumulative_concepts.extend(concepts[:2])
+            cumulative_concepts = cumulative_concepts[-5:]
+
+            source = "whiteboard"
+            print(f"  Scene {i+1}/{total_scenes} [{role}] prompt ({source}): "
+                  f"{prompt_text[:80]}...")
+
+    else:
+        # Standard prompt generation for other styles
+        for i, section in enumerate(sections):
+            # Classify scene role
+            role = classify_scene_role(section.narration, i, total_scenes)
+
+            # Check for image_hint directive
+            image_hint = None
+            for directive in section.directives:
+                if directive.type == "image_hint":
+                    image_hint = directive.args[0] if directive.args else None
+                    break
+
+            # Generate prompt
+            if image_hint:
+                prompt_text = generate_prompt_from_hint(image_hint, template)
+            else:
+                prompt_text = generate_prompt_from_narration(
+                    section.narration, role, template, use_llm=use_llm
+                )
+
+            scene_prompt = ScenePrompt(
+                scene_index=i,
+                scene_role=role,
+                image_hint=image_hint,
+                generated_prompt=prompt_text,
+                negative_prompt=template.negative_prompt,
+                narration_summary=section.narration[:100],
+            )
+            prompts.append(scene_prompt)
+
+            source = "hint" if image_hint else ("LLM" if use_llm else "rule")
+            print(f"  Scene {i+1}/{total_scenes} [{role}] prompt ({source}): "
+                  f"{prompt_text[:80]}...")
 
     return prompts

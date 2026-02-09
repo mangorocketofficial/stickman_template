@@ -1,26 +1,26 @@
 {
   "meta": {
-    "title": "복리의 마법",
+    "title": "복리의 마법 (화이트보드 버전)",
     "fps": 30,
     "width": 1920,
     "height": 1080,
     "audioSrc": "audio/tts_output.mp3",
-    "style": "dark_infographic"
+    "style": "whiteboard"
   },
   "subtitles": {
     "src": "subtitles/words.json",
     "style": {
       "fontSize": 48,
-      "color": "#FFFFFF",
+      "color": "#000000",
       "position": "bottom",
-      "highlightColor": "#FFD700"
+      "highlightColor": "#0066CC"
     }
   },
   "scenes": [
     {
       "id": "scene_01_intro",
-      "startMs": 180,
-      "endMs": 5260,
+      "startMs": 0,
+      "endMs": 3300,
       "background": {
         "type": "image",
         "src": "images/scene_01.png",
@@ -44,7 +44,7 @@
             "content": "복리의 마법",
             "fontSize": 64,
             "fontWeight": "bold",
-            "color": "#FFFFFF",
+            "color": "#000000",
             "align": "center",
             "maxWidth": 1200,
             "role": "title",
@@ -61,8 +61,8 @@
     },
     {
       "id": "scene_02_concept",
-      "startMs": 3860,
-      "endMs": 13860,
+      "startMs": 3500,
+      "endMs": 9000,
       "background": {
         "type": "image",
         "src": "images/scene_02.png",
@@ -87,12 +87,12 @@
             "content": "단리 vs 복리",
             "fontSize": 48,
             "fontWeight": "bold",
-            "color": "#FFD700",
+            "color": "#0066CC",
             "align": "center",
             "maxWidth": 1200,
             "role": "highlight_box",
             "background": {
-              "color": "rgba(0,0,0,0.5)",
+              "color": "rgba(255,255,255,0.9)",
               "padding": 20,
               "borderRadius": 12,
               "opacity": 0.7
@@ -109,8 +109,8 @@
     },
     {
       "id": "scene_03_formula",
-      "startMs": 13360,
-      "endMs": 20320,
+      "startMs": 9200,
+      "endMs": 12800,
       "background": {
         "type": "image",
         "src": "images/scene_03.png",
@@ -135,12 +135,12 @@
             "content": "복리 = 원금 × (1+r)ⁿ",
             "fontSize": 48,
             "fontWeight": "bold",
-            "color": "#FFD700",
+            "color": "#0066CC",
             "align": "center",
             "maxWidth": 1200,
             "role": "highlight_box",
             "background": {
-              "color": "rgba(0,0,0,0.5)",
+              "color": "rgba(255,255,255,0.9)",
               "padding": 20,
               "borderRadius": 12,
               "opacity": 0.7
@@ -178,8 +178,8 @@
     },
     {
       "id": "scene_04_snowball",
-      "startMs": 20100,
-      "endMs": 29100,
+      "startMs": 13000,
+      "endMs": 18500,
       "background": {
         "type": "image",
         "src": "images/scene_04.png",
@@ -196,8 +196,8 @@
     },
     {
       "id": "scene_05_rule72",
-      "startMs": 28460,
-      "endMs": 39780,
+      "startMs": 18700,
+      "endMs": 24800,
       "background": {
         "type": "image",
         "src": "images/scene_05.png",
@@ -216,17 +216,22 @@
           "type": "text",
           "position": {
             "x": 960,
-            "y": 250
+            "y": 350
           },
           "props": {
             "content": "72의 법칙",
-            "fontSize": 64,
+            "fontSize": 48,
             "fontWeight": "bold",
-            "color": "#FFFFFF",
+            "color": "#0066CC",
             "align": "center",
             "maxWidth": 1200,
-            "role": "title",
-            "background": null
+            "role": "highlight_box",
+            "background": {
+              "color": "rgba(255,255,255,0.9)",
+              "padding": 20,
+              "borderRadius": 12,
+              "opacity": 0.7
+            }
           },
           "animation": {
             "enter": {
@@ -239,8 +244,8 @@
     },
     {
       "id": "scene_06_warning",
-      "startMs": 39540,
-      "endMs": 49240,
+      "startMs": 25000,
+      "endMs": 29600,
       "background": {
         "type": "image",
         "src": "images/scene_06.png",
@@ -262,15 +267,15 @@
             "y": 350
           },
           "props": {
-            "content": "시간이 핵심!",
+            "content": "일찍 시작하세요!",
             "fontSize": 48,
             "fontWeight": "bold",
-            "color": "#FFD700",
+            "color": "#0066CC",
             "align": "center",
             "maxWidth": 1200,
             "role": "highlight_box",
             "background": {
-              "color": "rgba(0,0,0,0.5)",
+              "color": "rgba(255,255,255,0.9)",
               "padding": 20,
               "borderRadius": 12,
               "opacity": 0.7
@@ -287,8 +292,8 @@
     },
     {
       "id": "scene_07_conclusion",
-      "startMs": 48880,
-      "endMs": 55780,
+      "startMs": 29800,
+      "endMs": 34200,
       "background": {
         "type": "image",
         "src": "images/scene_07.png",
@@ -310,10 +315,10 @@
             "y": 250
           },
           "props": {
-            "content": "오늘부터 시작하세요!",
+            "content": "지금 시작하세요",
             "fontSize": 64,
             "fontWeight": "bold",
-            "color": "#FFFFFF",
+            "color": "#000000",
             "align": "center",
             "maxWidth": 1200,
             "role": "title",
