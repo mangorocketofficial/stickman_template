@@ -103,6 +103,7 @@ class ScenePrompt:
     generated_prompt: str
     negative_prompt: str
     narration_summary: str
+    diagram_area: str = "center"  # Where the diagram is in the image
 
 
 def generate_prompt_from_hint(
@@ -211,8 +212,12 @@ def generate_scene_prompts(
 
     # Whiteboard style uses specialized diagram-focused prompts
     if style == "whiteboard":
-        from whiteboard_prompt_engine import generate_whiteboard_prompt
-        cumulative_concepts = []
+        from whiteboard_prompt_engine import generate_whiteboard_prompt, llm_batch_generate_prompts
+
+        # Try LLM batch generation first (entire script → distinct prompts)
+        llm_descriptions = None
+        if use_llm:
+            llm_descriptions = llm_batch_generate_prompts(sections)
 
         for i, section in enumerate(sections):
             role = classify_scene_role(section.narration, i, total_scenes)
@@ -224,13 +229,21 @@ def generate_scene_prompts(
                     image_hint = directive.args[0] if directive.args else None
                     break
 
-            # Generate whiteboard-optimized prompt
-            diagram_description = generate_whiteboard_prompt(
-                narration=section.narration,
-                scene_role=role,
-                image_hint=image_hint,
-                previous_concepts=cumulative_concepts,
-            )
+            # Use LLM description if available, otherwise fall back to keyword-based
+            diagram_area = "center"
+            if llm_descriptions and i < len(llm_descriptions):
+                llm_item = llm_descriptions[i]
+                diagram_description = llm_item["image"]
+                diagram_area = llm_item.get("diagram_area", "center")
+                source = "LLM"
+            else:
+                diagram_description = generate_whiteboard_prompt(
+                    narration=section.narration,
+                    scene_role=role,
+                    image_hint=image_hint,
+                    directives=section.directives,
+                )
+                source = "keyword"
 
             # Compose with template base_prompt
             prompt_text = template.compose_prompt(diagram_description)
@@ -242,16 +255,10 @@ def generate_scene_prompts(
                 generated_prompt=prompt_text,
                 negative_prompt=template.negative_prompt,
                 narration_summary=section.narration[:100],
+                diagram_area=diagram_area,
             )
             prompts.append(scene_prompt)
 
-            # Track concepts for continuity
-            from whiteboard_prompt_engine import extract_key_concepts
-            concepts = extract_key_concepts(section.narration)
-            cumulative_concepts.extend(concepts[:2])
-            cumulative_concepts = cumulative_concepts[-5:]
-
-            source = "whiteboard"
             print(f"  Scene {i+1}/{total_scenes} [{role}] prompt ({source}): "
                   f"{prompt_text[:80]}...")
 

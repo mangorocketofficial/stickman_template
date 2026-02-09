@@ -24,8 +24,17 @@ DEFAULT_SUBTITLE_HIGHLIGHT = "#FFD700"
 IMAGE_ANIMATIONS = ["kenBurns", "zoomIn", "zoomOut", "panLeft", "panRight"]
 
 
-def directive_to_overlay(directive: Directive, overlay_id: str, style: str = "dark_infographic") -> Optional[dict]:
-    """Convert a directive to a v2 scene overlay."""
+def directive_to_overlay(
+    directive: Directive,
+    overlay_id: str,
+    style: str = "dark_infographic",
+    position_override: Optional[dict] = None,
+) -> Optional[dict]:
+    """Convert a directive to a v2 scene overlay.
+
+    Args:
+        position_override: {"x": int, "y": int} from Vision LLM adjustment
+    """
     if directive.type == "text":
         content = directive.args[0] if directive.args else ""
         is_title = "title" in directive.args
@@ -33,16 +42,21 @@ def directive_to_overlay(directive: Directive, overlay_id: str, style: str = "da
 
         # Whiteboard style uses black text on white background
         if style == "whiteboard":
-            text_color = "#0066CC" if is_highlight else "#000000"  # Blue for highlights, black for normal
-            bg_color = "rgba(255,255,255,0.9)" if is_highlight else None  # Light box for highlights only
+            text_color = "#0066CC" if is_highlight else "#000000"
+            bg_color = "rgba(255,255,255,0.9)" if is_highlight else None
         else:
-            text_color = "#FFD700" if is_highlight else "#FFFFFF"  # Gold/white for dark styles
-            bg_color = "rgba(0,0,0,0.5)"  # Dark semi-transparent box
+            text_color = "#FFD700" if is_highlight else "#FFFFFF"
+            bg_color = "rgba(0,0,0,0.5)"
+
+        # Use Vision LLM position if available, otherwise defaults
+        default_x, default_y = 960, (250 if is_title else 350)
+        pos_x = position_override.get("x", default_x) if position_override else default_x
+        pos_y = position_override.get("y", default_y) if position_override else default_y
 
         return {
             "id": overlay_id,
             "type": "text",
-            "position": {"x": 960, "y": 250 if is_title else 350},
+            "position": {"x": pos_x, "y": pos_y},
             "props": {
                 "content": content,
                 "fontSize": 64 if is_title else 48,
@@ -68,10 +82,14 @@ def directive_to_overlay(directive: Directive, overlay_id: str, style: str = "da
         to_val = int(directive.args[1]) if len(directive.args) > 1 else 100
         fmt = directive.args[2] if len(directive.args) > 2 else "number"
 
+        default_x, default_y = 960, 500
+        pos_x = position_override.get("x", default_x) if position_override else default_x
+        pos_y = position_override.get("y", default_y) if position_override else default_y
+
         return {
             "id": overlay_id,
             "type": "counter",
-            "position": {"x": 960, "y": 500},
+            "position": {"x": pos_x, "y": pos_y},
             "props": {
                 "from": from_val,
                 "to": to_val,
@@ -96,8 +114,14 @@ def build_scene_v2(
     image_result: Optional[GeneratedImage] = None,
     total_scenes: int = 1,
     style: str = "dark_infographic",
+    vision_positions: Optional[list[dict]] = None,
 ) -> dict:
-    """Build a single v2 scene with image background and overlays."""
+    """Build a single v2 scene with image background and overlays.
+
+    Args:
+        vision_positions: List of {"type": str, "x": int, "y": int} from Vision LLM.
+            One entry per overlay directive, in order.
+    """
     scene_id = f"scene_{section_index + 1:02d}_{section_name}"
 
     # Background: image or fallback color
@@ -118,17 +142,18 @@ def build_scene_v2(
         }
 
     # Build overlays from directives (text, counter only)
+    # Whiteboard style: skip auto-overlays — user edits manually in Remotion
     overlays = []
-    type_counters = {}
-
-    for directive in directives:
-        if directive.type in ('text', 'counter'):
-            type_counters[directive.type] = type_counters.get(directive.type, 0) + 1
-            count = type_counters[directive.type]
-            overlay_id = f"{scene_id}_{directive.type}_{count}"
-            overlay = directive_to_overlay(directive, overlay_id, style=style)
-            if overlay:
-                overlays.append(overlay)
+    if style != "whiteboard":
+        type_counters = {}
+        for directive in directives:
+            if directive.type in ('text', 'counter'):
+                type_counters[directive.type] = type_counters.get(directive.type, 0) + 1
+                count = type_counters[directive.type]
+                overlay_id = f"{scene_id}_{directive.type}_{count}"
+                overlay = directive_to_overlay(directive, overlay_id, style=style)
+                if overlay:
+                    overlays.append(overlay)
 
     # Transition
     if section_index == 0:
@@ -155,6 +180,7 @@ def build_scene_json_v2(
     image_results: list[GeneratedImage],
     audio_path: str,
     words_path: str,
+    all_vision_positions: Optional[list[list[dict]]] = None,
 ) -> dict:
     """
     Build the complete v2 scene.json.
@@ -165,6 +191,7 @@ def build_scene_json_v2(
         image_results: List of GeneratedImage results
         audio_path: Relative path to audio file
         words_path: Relative path to words.json
+        all_vision_positions: Per-scene list of overlay positions from Vision LLM
 
     Returns:
         Complete scene.json as dictionary (v2 schema)
@@ -182,6 +209,7 @@ def build_scene_json_v2(
             end_ms = prev_end + 5000
 
         image_result = image_results[i] if i < len(image_results) else None
+        vision_positions = all_vision_positions[i] if all_vision_positions and i < len(all_vision_positions) else None
 
         scene = build_scene_v2(
             section_name=section.name,
@@ -192,6 +220,7 @@ def build_scene_json_v2(
             image_result=image_result,
             total_scenes=total_scenes,
             style=style,
+            vision_positions=vision_positions,
         )
         scenes.append(scene)
 

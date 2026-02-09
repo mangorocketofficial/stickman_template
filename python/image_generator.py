@@ -26,6 +26,57 @@ class GeneratedImage:
     error: Optional[str] = None
 
 
+def _build_ideogram_params(
+    prompt: str,
+    negative_prompt: str,
+    seed: Optional[int] = None,
+) -> dict:
+    """Build input params for Ideogram v2/v3 models."""
+    params = {
+        "prompt": prompt,
+        "aspect_ratio": "16:9",
+        "style_type": "Design",
+        "magic_prompt_option": "On",
+    }
+    if negative_prompt:
+        params["negative_prompt"] = negative_prompt
+    if seed is not None:
+        params["seed"] = seed
+    return params
+
+
+def _build_flux_params(
+    prompt: str,
+    negative_prompt: str,
+    model: str,
+    width: int,
+    height: int,
+    num_inference_steps: int,
+    guidance_scale: float,
+    seed: Optional[int] = None,
+) -> dict:
+    """Build input params for Flux models."""
+    params = {
+        "prompt": prompt,
+        "width": width,
+        "height": height,
+        "num_inference_steps": num_inference_steps,
+        "go_fast": True,
+        "megapixels": "1",
+        "output_format": "png",
+        "output_quality": 90,
+    }
+    # Flux schnell doesn't support negative_prompt or guidance_scale
+    if "flux-schnell" not in model:
+        if negative_prompt:
+            params["negative_prompt"] = negative_prompt
+        if guidance_scale:
+            params["guidance_scale"] = guidance_scale
+    if seed is not None:
+        params["seed"] = seed
+    return params
+
+
 def generate_single_image(
     prompt: str,
     negative_prompt: str,
@@ -48,27 +99,14 @@ def generate_single_image(
 
     for attempt in range(max_retries):
         try:
-            input_params = {
-                "prompt": prompt,
-                "width": width,
-                "height": height,
-                "num_inference_steps": num_inference_steps,
-                "go_fast": True,
-                "megapixels": "1",
-                "output_format": "png",
-                "output_quality": 90,
-            }
-
-            # Flux schnell doesn't support negative_prompt or guidance_scale
-            # but other models might
-            if "flux-schnell" not in model:
-                if negative_prompt:
-                    input_params["negative_prompt"] = negative_prompt
-                if guidance_scale:
-                    input_params["guidance_scale"] = guidance_scale
-
-            if seed is not None:
-                input_params["seed"] = seed
+            # Build model-specific params
+            if "ideogram" in model:
+                input_params = _build_ideogram_params(prompt, negative_prompt, seed)
+            else:
+                input_params = _build_flux_params(
+                    prompt, negative_prompt, model, width, height,
+                    num_inference_steps, guidance_scale, seed,
+                )
 
             output = replicate.run(model, input=input_params)
 

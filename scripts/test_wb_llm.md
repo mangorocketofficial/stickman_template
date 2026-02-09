@@ -1,0 +1,40 @@
+---
+title: 복리의 마법 - LLM 프롬프트 테스트
+voice: ko-KR-HyunsuNeural
+style: whiteboard
+---
+
+## scene: intro
+[text: "복리의 마법", title]
+
+안녕하세요! 오늘은 복리의 놀라운 힘에 대해 알아보겠습니다.
+
+## scene: concept
+[text: "단리 vs 복리", highlight]
+
+단리는 원금에만 이자가 붙지만, 복리는 원금과 이자를 합친 금액에 다시 이자가 붙습니다.
+
+## scene: formula
+[text: "복리 공식", highlight]
+
+원금에 1 더하기 이율을 거듭제곱하면 최종 금액이 나옵니다. 이것이 바로 복리 공식입니다.
+
+## scene: example
+[counter: 1000000 -> 7612255, currency_krw]
+
+백만원을 연 7%로 30년 투자하면 약 761만원이 됩니다. 원금의 7배가 넘는 놀라운 결과입니다.
+
+## scene: snowball
+[text: "눈덩이 효과", highlight]
+
+복리의 힘은 눈덩이 효과와 같습니다. 처음에는 작지만, 시간이 지날수록 기하급수적으로 불어납니다.
+
+## scene: rule72
+[text: "72의 법칙", highlight]
+
+원금이 2배가 되는 기간은 72를 수익률로 나누면 됩니다. 연 7%라면 약 10년이면 원금이 2배가 됩니다.
+
+## scene: conclusion
+[text: "지금 시작하세요!", title]
+
+복리는 시간의 마법입니다. 하루라도 빨리 시작하는 것이 가장 중요합니다. 오늘부터 시작하세요!

@@ -232,7 +232,8 @@ def run_pipeline(
             )
 
     # === Step 6: Build Scene JSON ===
-    print("\n[6/6] Building scene.json (v2)...")
+    all_vision_positions = None
+    print(f"\n[6/6] Building scene.json (v2)...")
     scene_json_path = os.path.join(output_dir, "scene.json")
 
     scene_data = build_scene_json_v2(
@@ -241,6 +242,7 @@ def run_pipeline(
         image_results=image_results,
         audio_path="audio/tts_output.mp3",
         words_path="subtitles/words.json",
+        all_vision_positions=all_vision_positions,
     )
 
     save_scene_json(scene_data, scene_json_path)
