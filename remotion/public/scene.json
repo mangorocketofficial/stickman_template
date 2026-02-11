@@ -1,6 +1,6 @@
 {
   "meta": {
-    "title": "복리의 마법 - LLM 프롬프트 테스트",
+    "title": "네일미용기술 핵심정리",
     "fps": 30,
     "width": 1920,
     "height": 1080,
@@ -11,16 +11,16 @@
     "src": "subtitles/words.json",
     "style": {
       "fontSize": 48,
-      "color": "#000000",
+      "color": "#FFFFFF",
       "position": "bottom",
       "highlightColor": "#0066CC"
     }
   },
   "scenes": [
     {
-      "id": "scene_01_intro",
+      "id": "scene_01_intro_01",
       "startMs": 0,
-      "endMs": 3300,
+      "endMs": 15900,
       "background": {
         "type": "image",
         "src": "images/scene_01.png",
@@ -32,12 +32,41 @@
         "durationMs": 500
       },
       "objects": [],
-      "overlays": []
+      "overlays": [
+        {
+          "id": "scene_01_intro_01_text_1",
+          "type": "text",
+          "position": {
+            "x": 960,
+            "y": 250
+          },
+          "props": {
+            "content": "네일 자격증 필기 완전정복",
+            "fontSize": 64,
+            "fontWeight": "bold",
+            "color": "#2D3436",
+            "align": "center",
+            "maxWidth": 1200,
+            "role": "title",
+            "background": {
+              "color": "rgba(255, 255, 255, 0.75)",
+              "padding": 20,
+              "borderRadius": 16
+            }
+          },
+          "animation": {
+            "enter": {
+              "type": "fadeInUp",
+              "durationMs": 500
+            }
+          }
+        }
+      ]
     },
     {
-      "id": "scene_02_concept",
-      "startMs": 3500,
-      "endMs": 8400,
+      "id": "scene_02_intro_02",
+      "startMs": 15900,
+      "endMs": 28680,
       "background": {
         "type": "image",
         "src": "images/scene_02.png",
@@ -53,9 +82,9 @@
       "overlays": []
     },
     {
-      "id": "scene_03_formula",
-      "startMs": 8600,
-      "endMs": 13600,
+      "id": "scene_03_intro_03",
+      "startMs": 28680,
+      "endMs": 43080,
       "background": {
         "type": "image",
         "src": "images/scene_03.png",
@@ -71,9 +100,9 @@
       "overlays": []
     },
     {
-      "id": "scene_04_example",
-      "startMs": 13800,
-      "endMs": 19300,
+      "id": "scene_04_intro_04",
+      "startMs": 43080,
+      "endMs": 56720,
       "background": {
         "type": "image",
         "src": "images/scene_04.png",
@@ -89,9 +118,9 @@
       "overlays": []
     },
     {
-      "id": "scene_05_snowball",
-      "startMs": 19500,
-      "endMs": 24900,
+      "id": "scene_05_intro_05",
+      "startMs": 56720,
+      "endMs": 71220,
       "background": {
         "type": "image",
         "src": "images/scene_05.png",
@@ -107,9 +136,9 @@
       "overlays": []
     },
     {
-      "id": "scene_06_rule72",
-      "startMs": 25100,
-      "endMs": 31100,
+      "id": "scene_06_intro_06",
+      "startMs": 71220,
+      "endMs": 82960,
       "background": {
         "type": "image",
         "src": "images/scene_06.png",
@@ -125,13 +154,1195 @@
       "overlays": []
     },
     {
-      "id": "scene_07_conclusion",
-      "startMs": 31300,
-      "endMs": 36500,
+      "id": "scene_07_intro_07",
+      "startMs": 82960,
+      "endMs": 100600,
       "background": {
         "type": "image",
         "src": "images/scene_07.png",
         "animation": "zoomIn",
+        "animationIntensity": 0.5
+      },
+      "transition": {
+        "in": "fadeIn",
+        "out": "fadeOut",
+        "durationMs": 300
+      },
+      "objects": [],
+      "overlays": []
+    },
+    {
+      "id": "scene_08_intro_08",
+      "startMs": 100600,
+      "endMs": 116080,
+      "background": {
+        "type": "image",
+        "src": "images/scene_08.png",
+        "animation": "zoomOut",
+        "animationIntensity": 0.5
+      },
+      "transition": {
+        "in": "fadeIn",
+        "out": "fadeOut",
+        "durationMs": 300
+      },
+      "objects": [],
+      "overlays": []
+    },
+    {
+      "id": "scene_09_intro_09",
+      "startMs": 116080,
+      "endMs": 130900,
+      "background": {
+        "type": "image",
+        "src": "images/scene_09.png",
+        "animation": "panLeft",
+        "animationIntensity": 0.5
+      },
+      "transition": {
+        "in": "fadeIn",
+        "out": "fadeOut",
+        "durationMs": 300
+      },
+      "objects": [],
+      "overlays": []
+    },
+    {
+      "id": "scene_10_intro_10",
+      "startMs": 130900,
+      "endMs": 143980,
+      "background": {
+        "type": "image",
+        "src": "images/scene_10.png",
+        "animation": "panRight",
+        "animationIntensity": 0.5
+      },
+      "transition": {
+        "in": "fadeIn",
+        "out": "fadeOut",
+        "durationMs": 300
+      },
+      "objects": [],
+      "overlays": []
+    },
+    {
+      "id": "scene_11_intro_11",
+      "startMs": 143980,
+      "endMs": 157780,
+      "background": {
+        "type": "image",
+        "src": "images/scene_11.png",
+        "animation": "kenBurns",
+        "animationIntensity": 0.5
+      },
+      "transition": {
+        "in": "fadeIn",
+        "out": "fadeOut",
+        "durationMs": 300
+      },
+      "objects": [],
+      "overlays": []
+    },
+    {
+      "id": "scene_12_intro_12",
+      "startMs": 157780,
+      "endMs": 172180,
+      "background": {
+        "type": "image",
+        "src": "images/scene_12.png",
+        "animation": "zoomIn",
+        "animationIntensity": 0.5
+      },
+      "transition": {
+        "in": "fadeIn",
+        "out": "fadeOut",
+        "durationMs": 300
+      },
+      "objects": [],
+      "overlays": []
+    },
+    {
+      "id": "scene_13_intro_13",
+      "startMs": 172180,
+      "endMs": 188040,
+      "background": {
+        "type": "image",
+        "src": "images/scene_13.png",
+        "animation": "zoomOut",
+        "animationIntensity": 0.5
+      },
+      "transition": {
+        "in": "fadeIn",
+        "out": "fadeOut",
+        "durationMs": 300
+      },
+      "objects": [],
+      "overlays": []
+    },
+    {
+      "id": "scene_14_stress_point_01",
+      "startMs": 187800,
+      "endMs": 200300,
+      "background": {
+        "type": "image",
+        "src": "images/scene_14.png",
+        "animation": "panLeft",
+        "animationIntensity": 0.5
+      },
+      "transition": {
+        "in": "fadeIn",
+        "out": "fadeOut",
+        "durationMs": 300
+      },
+      "objects": [],
+      "overlays": [
+        {
+          "id": "scene_14_stress_point_01_text_1",
+          "type": "text",
+          "position": {
+            "x": 960,
+            "y": 350
+          },
+          "props": {
+            "content": "스트레스 포인트",
+            "fontSize": 48,
+            "fontWeight": "bold",
+            "color": "#2D3436",
+            "align": "center",
+            "maxWidth": 1200,
+            "role": "highlight_box",
+            "background": {
+              "color": "rgba(255, 255, 255, 0.75)",
+              "padding": 20,
+              "borderRadius": 16
+            }
+          },
+          "animation": {
+            "enter": {
+              "type": "fadeInUp",
+              "durationMs": 500
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "scene_15_stress_point_02",
+      "startMs": 200300,
+      "endMs": 213460,
+      "background": {
+        "type": "image",
+        "src": "images/scene_15.png",
+        "animation": "panRight",
+        "animationIntensity": 0.5
+      },
+      "transition": {
+        "in": "fadeIn",
+        "out": "fadeOut",
+        "durationMs": 300
+      },
+      "objects": [],
+      "overlays": []
+    },
+    {
+      "id": "scene_16_stress_point_03",
+      "startMs": 213460,
+      "endMs": 229800,
+      "background": {
+        "type": "image",
+        "src": "images/scene_16.png",
+        "animation": "kenBurns",
+        "animationIntensity": 0.5
+      },
+      "transition": {
+        "in": "fadeIn",
+        "out": "fadeOut",
+        "durationMs": 300
+      },
+      "objects": [],
+      "overlays": []
+    },
+    {
+      "id": "scene_17_stress_point_04",
+      "startMs": 229800,
+      "endMs": 245824,
+      "background": {
+        "type": "image",
+        "src": "images/scene_17.png",
+        "animation": "zoomIn",
+        "animationIntensity": 0.5
+      },
+      "transition": {
+        "in": "fadeIn",
+        "out": "fadeOut",
+        "durationMs": 300
+      },
+      "objects": [],
+      "overlays": []
+    },
+    {
+      "id": "scene_18_stress_point_05",
+      "startMs": 245824,
+      "endMs": 261344,
+      "background": {
+        "type": "image",
+        "src": "images/scene_18.png",
+        "animation": "zoomOut",
+        "animationIntensity": 0.5
+      },
+      "transition": {
+        "in": "fadeIn",
+        "out": "fadeOut",
+        "durationMs": 300
+      },
+      "objects": [],
+      "overlays": []
+    },
+    {
+      "id": "scene_19_stress_point_06",
+      "startMs": 261344,
+      "endMs": 275344,
+      "background": {
+        "type": "image",
+        "src": "images/scene_19.png",
+        "animation": "panLeft",
+        "animationIntensity": 0.5
+      },
+      "transition": {
+        "in": "fadeIn",
+        "out": "fadeOut",
+        "durationMs": 300
+      },
+      "objects": [],
+      "overlays": []
+    },
+    {
+      "id": "scene_20_stress_point_07",
+      "startMs": 275344,
+      "endMs": 290004,
+      "background": {
+        "type": "image",
+        "src": "images/scene_20.png",
+        "animation": "panRight",
+        "animationIntensity": 0.5
+      },
+      "transition": {
+        "in": "fadeIn",
+        "out": "fadeOut",
+        "durationMs": 300
+      },
+      "objects": [],
+      "overlays": []
+    },
+    {
+      "id": "scene_21_stress_point_08",
+      "startMs": 290004,
+      "endMs": 305764,
+      "background": {
+        "type": "image",
+        "src": "images/scene_21.png",
+        "animation": "kenBurns",
+        "animationIntensity": 0.5
+      },
+      "transition": {
+        "in": "fadeIn",
+        "out": "fadeOut",
+        "durationMs": 300
+      },
+      "objects": [],
+      "overlays": []
+    },
+    {
+      "id": "scene_22_oil_removal_01",
+      "startMs": 305444,
+      "endMs": 321284,
+      "background": {
+        "type": "image",
+        "src": "images/scene_22.png",
+        "animation": "zoomIn",
+        "animationIntensity": 0.5
+      },
+      "transition": {
+        "in": "fadeIn",
+        "out": "fadeOut",
+        "durationMs": 300
+      },
+      "objects": [],
+      "overlays": [
+        {
+          "id": "scene_22_oil_removal_01_text_1",
+          "type": "text",
+          "position": {
+            "x": 960,
+            "y": 350
+          },
+          "props": {
+            "content": "유분 제거와 파일링",
+            "fontSize": 48,
+            "fontWeight": "bold",
+            "color": "#2D3436",
+            "align": "center",
+            "maxWidth": 1200,
+            "role": "highlight_box",
+            "background": {
+              "color": "rgba(255, 255, 255, 0.75)",
+              "padding": 20,
+              "borderRadius": 16
+            }
+          },
+          "animation": {
+            "enter": {
+              "type": "fadeInUp",
+              "durationMs": 500
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "scene_23_oil_removal_02",
+      "startMs": 321764,
+      "endMs": 335224,
+      "background": {
+        "type": "image",
+        "src": "images/scene_23.png",
+        "animation": "zoomOut",
+        "animationIntensity": 0.5
+      },
+      "transition": {
+        "in": "fadeIn",
+        "out": "fadeOut",
+        "durationMs": 300
+      },
+      "objects": [],
+      "overlays": []
+    },
+    {
+      "id": "scene_24_oil_removal_03",
+      "startMs": 335224,
+      "endMs": 351804,
+      "background": {
+        "type": "image",
+        "src": "images/scene_24.png",
+        "animation": "panLeft",
+        "animationIntensity": 0.5
+      },
+      "transition": {
+        "in": "fadeIn",
+        "out": "fadeOut",
+        "durationMs": 300
+      },
+      "objects": [],
+      "overlays": []
+    },
+    {
+      "id": "scene_25_oil_removal_04",
+      "startMs": 351804,
+      "endMs": 368064,
+      "background": {
+        "type": "image",
+        "src": "images/scene_25.png",
+        "animation": "panRight",
+        "animationIntensity": 0.5
+      },
+      "transition": {
+        "in": "fadeIn",
+        "out": "fadeOut",
+        "durationMs": 300
+      },
+      "objects": [],
+      "overlays": []
+    },
+    {
+      "id": "scene_26_oil_removal_05",
+      "startMs": 368064,
+      "endMs": 381884,
+      "background": {
+        "type": "image",
+        "src": "images/scene_26.png",
+        "animation": "kenBurns",
+        "animationIntensity": 0.5
+      },
+      "transition": {
+        "in": "fadeIn",
+        "out": "fadeOut",
+        "durationMs": 300
+      },
+      "objects": [],
+      "overlays": []
+    },
+    {
+      "id": "scene_27_oil_removal_06",
+      "startMs": 381884,
+      "endMs": 397284,
+      "background": {
+        "type": "image",
+        "src": "images/scene_27.png",
+        "animation": "zoomIn",
+        "animationIntensity": 0.5
+      },
+      "transition": {
+        "in": "fadeIn",
+        "out": "fadeOut",
+        "durationMs": 300
+      },
+      "objects": [],
+      "overlays": []
+    },
+    {
+      "id": "scene_28_oil_removal_07",
+      "startMs": 397284,
+      "endMs": 412744,
+      "background": {
+        "type": "image",
+        "src": "images/scene_28.png",
+        "animation": "zoomOut",
+        "animationIntensity": 0.5
+      },
+      "transition": {
+        "in": "fadeIn",
+        "out": "fadeOut",
+        "durationMs": 300
+      },
+      "objects": [],
+      "overlays": []
+    },
+    {
+      "id": "scene_29_oil_removal_08",
+      "startMs": 412744,
+      "endMs": 427284,
+      "background": {
+        "type": "image",
+        "src": "images/scene_29.png",
+        "animation": "panLeft",
+        "animationIntensity": 0.5
+      },
+      "transition": {
+        "in": "fadeIn",
+        "out": "fadeOut",
+        "durationMs": 300
+      },
+      "objects": [],
+      "overlays": []
+    },
+    {
+      "id": "scene_30_oil_removal_09",
+      "startMs": 427284,
+      "endMs": 444984,
+      "background": {
+        "type": "image",
+        "src": "images/scene_30.png",
+        "animation": "panRight",
+        "animationIntensity": 0.5
+      },
+      "transition": {
+        "in": "fadeIn",
+        "out": "fadeOut",
+        "durationMs": 300
+      },
+      "objects": [],
+      "overlays": []
+    },
+    {
+      "id": "scene_31_nail_science_01",
+      "startMs": 444444,
+      "endMs": 459424,
+      "background": {
+        "type": "image",
+        "src": "images/scene_31.png",
+        "animation": "kenBurns",
+        "animationIntensity": 0.5
+      },
+      "transition": {
+        "in": "fadeIn",
+        "out": "fadeOut",
+        "durationMs": 300
+      },
+      "objects": [],
+      "overlays": [
+        {
+          "id": "scene_31_nail_science_01_text_1",
+          "type": "text",
+          "position": {
+            "x": 960,
+            "y": 350
+          },
+          "props": {
+            "content": "손톱의 과학",
+            "fontSize": 48,
+            "fontWeight": "bold",
+            "color": "#2D3436",
+            "align": "center",
+            "maxWidth": 1200,
+            "role": "highlight_box",
+            "background": {
+              "color": "rgba(255, 255, 255, 0.75)",
+              "padding": 20,
+              "borderRadius": 16
+            }
+          },
+          "animation": {
+            "enter": {
+              "type": "fadeInUp",
+              "durationMs": 500
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "scene_32_nail_science_02",
+      "startMs": 459424,
+      "endMs": 472704,
+      "background": {
+        "type": "image",
+        "src": "images/scene_32.png",
+        "animation": "zoomIn",
+        "animationIntensity": 0.5
+      },
+      "transition": {
+        "in": "fadeIn",
+        "out": "fadeOut",
+        "durationMs": 300
+      },
+      "objects": [],
+      "overlays": []
+    },
+    {
+      "id": "scene_33_nail_science_03",
+      "startMs": 472704,
+      "endMs": 490708,
+      "background": {
+        "type": "image",
+        "src": "images/scene_33.png",
+        "animation": "zoomOut",
+        "animationIntensity": 0.5
+      },
+      "transition": {
+        "in": "fadeIn",
+        "out": "fadeOut",
+        "durationMs": 300
+      },
+      "objects": [],
+      "overlays": []
+    },
+    {
+      "id": "scene_34_nail_science_04",
+      "startMs": 490708,
+      "endMs": 508768,
+      "background": {
+        "type": "image",
+        "src": "images/scene_34.png",
+        "animation": "panLeft",
+        "animationIntensity": 0.5
+      },
+      "transition": {
+        "in": "fadeIn",
+        "out": "fadeOut",
+        "durationMs": 300
+      },
+      "objects": [],
+      "overlays": []
+    },
+    {
+      "id": "scene_35_nail_science_05",
+      "startMs": 508768,
+      "endMs": 521568,
+      "background": {
+        "type": "image",
+        "src": "images/scene_35.png",
+        "animation": "panRight",
+        "animationIntensity": 0.5
+      },
+      "transition": {
+        "in": "fadeIn",
+        "out": "fadeOut",
+        "durationMs": 300
+      },
+      "objects": [],
+      "overlays": []
+    },
+    {
+      "id": "scene_36_nail_science_06",
+      "startMs": 521568,
+      "endMs": 536029,
+      "background": {
+        "type": "image",
+        "src": "images/scene_36.png",
+        "animation": "kenBurns",
+        "animationIntensity": 0.5
+      },
+      "transition": {
+        "in": "fadeIn",
+        "out": "fadeOut",
+        "durationMs": 300
+      },
+      "objects": [],
+      "overlays": []
+    },
+    {
+      "id": "scene_37_nail_science_07",
+      "startMs": 536029,
+      "endMs": 550389,
+      "background": {
+        "type": "image",
+        "src": "images/scene_37.png",
+        "animation": "zoomIn",
+        "animationIntensity": 0.5
+      },
+      "transition": {
+        "in": "fadeIn",
+        "out": "fadeOut",
+        "durationMs": 300
+      },
+      "objects": [],
+      "overlays": []
+    },
+    {
+      "id": "scene_38_nail_science_08",
+      "startMs": 550949,
+      "endMs": 566248,
+      "background": {
+        "type": "image",
+        "src": "images/scene_38.png",
+        "animation": "zoomOut",
+        "animationIntensity": 0.5
+      },
+      "transition": {
+        "in": "fadeIn",
+        "out": "fadeOut",
+        "durationMs": 300
+      },
+      "objects": [],
+      "overlays": []
+    },
+    {
+      "id": "scene_39_uv_lamp_01",
+      "startMs": 565709,
+      "endMs": 580949,
+      "background": {
+        "type": "image",
+        "src": "images/scene_39.png",
+        "animation": "panLeft",
+        "animationIntensity": 0.5
+      },
+      "transition": {
+        "in": "fadeIn",
+        "out": "fadeOut",
+        "durationMs": 300
+      },
+      "objects": [],
+      "overlays": [
+        {
+          "id": "scene_39_uv_lamp_01_text_1",
+          "type": "text",
+          "position": {
+            "x": 960,
+            "y": 350
+          },
+          "props": {
+            "content": "UV 램프와 자외선",
+            "fontSize": 48,
+            "fontWeight": "bold",
+            "color": "#2D3436",
+            "align": "center",
+            "maxWidth": 1200,
+            "role": "highlight_box",
+            "background": {
+              "color": "rgba(255, 255, 255, 0.75)",
+              "padding": 20,
+              "borderRadius": 16
+            }
+          },
+          "animation": {
+            "enter": {
+              "type": "fadeInUp",
+              "durationMs": 500
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "scene_40_uv_lamp_02",
+      "startMs": 580949,
+      "endMs": 595909,
+      "background": {
+        "type": "image",
+        "src": "images/scene_40.png",
+        "animation": "panRight",
+        "animationIntensity": 0.5
+      },
+      "transition": {
+        "in": "fadeIn",
+        "out": "fadeOut",
+        "durationMs": 300
+      },
+      "objects": [],
+      "overlays": []
+    },
+    {
+      "id": "scene_41_uv_lamp_03",
+      "startMs": 595909,
+      "endMs": 610009,
+      "background": {
+        "type": "image",
+        "src": "images/scene_41.png",
+        "animation": "kenBurns",
+        "animationIntensity": 0.5
+      },
+      "transition": {
+        "in": "fadeIn",
+        "out": "fadeOut",
+        "durationMs": 300
+      },
+      "objects": [],
+      "overlays": []
+    },
+    {
+      "id": "scene_42_uv_lamp_04",
+      "startMs": 610009,
+      "endMs": 625168,
+      "background": {
+        "type": "image",
+        "src": "images/scene_42.png",
+        "animation": "zoomIn",
+        "animationIntensity": 0.5
+      },
+      "transition": {
+        "in": "fadeIn",
+        "out": "fadeOut",
+        "durationMs": 300
+      },
+      "objects": [],
+      "overlays": []
+    },
+    {
+      "id": "scene_43_uv_lamp_05",
+      "startMs": 625168,
+      "endMs": 641428,
+      "background": {
+        "type": "image",
+        "src": "images/scene_43.png",
+        "animation": "zoomOut",
+        "animationIntensity": 0.5
+      },
+      "transition": {
+        "in": "fadeIn",
+        "out": "fadeOut",
+        "durationMs": 300
+      },
+      "objects": [],
+      "overlays": []
+    },
+    {
+      "id": "scene_44_uv_lamp_06",
+      "startMs": 641428,
+      "endMs": 657149,
+      "background": {
+        "type": "image",
+        "src": "images/scene_44.png",
+        "animation": "panLeft",
+        "animationIntensity": 0.5
+      },
+      "transition": {
+        "in": "fadeIn",
+        "out": "fadeOut",
+        "durationMs": 300
+      },
+      "objects": [],
+      "overlays": []
+    },
+    {
+      "id": "scene_45_uv_lamp_07",
+      "startMs": 657149,
+      "endMs": 674288,
+      "background": {
+        "type": "image",
+        "src": "images/scene_45.png",
+        "animation": "panRight",
+        "animationIntensity": 0.5
+      },
+      "transition": {
+        "in": "fadeIn",
+        "out": "fadeOut",
+        "durationMs": 300
+      },
+      "objects": [],
+      "overlays": []
+    },
+    {
+      "id": "scene_46_anatomy_01",
+      "startMs": 673769,
+      "endMs": 688069,
+      "background": {
+        "type": "image",
+        "src": "images/scene_46.png",
+        "animation": "kenBurns",
+        "animationIntensity": 0.5
+      },
+      "transition": {
+        "in": "fadeIn",
+        "out": "fadeOut",
+        "durationMs": 300
+      },
+      "objects": [],
+      "overlays": [
+        {
+          "id": "scene_46_anatomy_01_text_1",
+          "type": "text",
+          "position": {
+            "x": 960,
+            "y": 350
+          },
+          "props": {
+            "content": "손톱 해부학 용어",
+            "fontSize": 48,
+            "fontWeight": "bold",
+            "color": "#2D3436",
+            "align": "center",
+            "maxWidth": 1200,
+            "role": "highlight_box",
+            "background": {
+              "color": "rgba(255, 255, 255, 0.75)",
+              "padding": 20,
+              "borderRadius": 16
+            }
+          },
+          "animation": {
+            "enter": {
+              "type": "fadeInUp",
+              "durationMs": 500
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "scene_47_anatomy_02",
+      "startMs": 688069,
+      "endMs": 704808,
+      "background": {
+        "type": "image",
+        "src": "images/scene_47.png",
+        "animation": "zoomIn",
+        "animationIntensity": 0.5
+      },
+      "transition": {
+        "in": "fadeIn",
+        "out": "fadeOut",
+        "durationMs": 300
+      },
+      "objects": [],
+      "overlays": []
+    },
+    {
+      "id": "scene_48_anatomy_03",
+      "startMs": 704808,
+      "endMs": 719653,
+      "background": {
+        "type": "image",
+        "src": "images/scene_48.png",
+        "animation": "zoomOut",
+        "animationIntensity": 0.5
+      },
+      "transition": {
+        "in": "fadeIn",
+        "out": "fadeOut",
+        "durationMs": 300
+      },
+      "objects": [],
+      "overlays": []
+    },
+    {
+      "id": "scene_49_anatomy_04",
+      "startMs": 719653,
+      "endMs": 732573,
+      "background": {
+        "type": "image",
+        "src": "images/scene_49.png",
+        "animation": "panLeft",
+        "animationIntensity": 0.5
+      },
+      "transition": {
+        "in": "fadeIn",
+        "out": "fadeOut",
+        "durationMs": 300
+      },
+      "objects": [],
+      "overlays": []
+    },
+    {
+      "id": "scene_50_anatomy_05",
+      "startMs": 732573,
+      "endMs": 748893,
+      "background": {
+        "type": "image",
+        "src": "images/scene_50.png",
+        "animation": "panRight",
+        "animationIntensity": 0.5
+      },
+      "transition": {
+        "in": "fadeIn",
+        "out": "fadeOut",
+        "durationMs": 300
+      },
+      "objects": [],
+      "overlays": []
+    },
+    {
+      "id": "scene_51_anatomy_06",
+      "startMs": 748893,
+      "endMs": 762433,
+      "background": {
+        "type": "image",
+        "src": "images/scene_51.png",
+        "animation": "kenBurns",
+        "animationIntensity": 0.5
+      },
+      "transition": {
+        "in": "fadeIn",
+        "out": "fadeOut",
+        "durationMs": 300
+      },
+      "objects": [],
+      "overlays": []
+    },
+    {
+      "id": "scene_52_anatomy_07",
+      "startMs": 762433,
+      "endMs": 779653,
+      "background": {
+        "type": "image",
+        "src": "images/scene_52.png",
+        "animation": "zoomIn",
+        "animationIntensity": 0.5
+      },
+      "transition": {
+        "in": "fadeIn",
+        "out": "fadeOut",
+        "durationMs": 300
+      },
+      "objects": [],
+      "overlays": []
+    },
+    {
+      "id": "scene_53_anatomy_08",
+      "startMs": 779653,
+      "endMs": 796473,
+      "background": {
+        "type": "image",
+        "src": "images/scene_53.png",
+        "animation": "zoomOut",
+        "animationIntensity": 0.5
+      },
+      "transition": {
+        "in": "fadeIn",
+        "out": "fadeOut",
+        "durationMs": 300
+      },
+      "objects": [],
+      "overlays": []
+    },
+    {
+      "id": "scene_54_anatomy_09",
+      "startMs": 796473,
+      "endMs": 815973,
+      "background": {
+        "type": "image",
+        "src": "images/scene_54.png",
+        "animation": "panLeft",
+        "animationIntensity": 0.5
+      },
+      "transition": {
+        "in": "fadeIn",
+        "out": "fadeOut",
+        "durationMs": 300
+      },
+      "objects": [],
+      "overlays": []
+    },
+    {
+      "id": "scene_55_conclusion_01",
+      "startMs": 815313,
+      "endMs": 831633,
+      "background": {
+        "type": "image",
+        "src": "images/scene_55.png",
+        "animation": "panRight",
+        "animationIntensity": 0.5
+      },
+      "transition": {
+        "in": "fadeIn",
+        "out": "fadeOut",
+        "durationMs": 300
+      },
+      "objects": [],
+      "overlays": [
+        {
+          "id": "scene_55_conclusion_01_text_1",
+          "type": "text",
+          "position": {
+            "x": 960,
+            "y": 250
+          },
+          "props": {
+            "content": "합격의 열쇠",
+            "fontSize": 64,
+            "fontWeight": "bold",
+            "color": "#2D3436",
+            "align": "center",
+            "maxWidth": 1200,
+            "role": "title",
+            "background": {
+              "color": "rgba(255, 255, 255, 0.75)",
+              "padding": 20,
+              "borderRadius": 16
+            }
+          },
+          "animation": {
+            "enter": {
+              "type": "fadeInUp",
+              "durationMs": 500
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "scene_56_conclusion_02",
+      "startMs": 831633,
+      "endMs": 844353,
+      "background": {
+        "type": "image",
+        "src": "images/scene_56.png",
+        "animation": "kenBurns",
+        "animationIntensity": 0.5
+      },
+      "transition": {
+        "in": "fadeIn",
+        "out": "fadeOut",
+        "durationMs": 300
+      },
+      "objects": [],
+      "overlays": []
+    },
+    {
+      "id": "scene_57_conclusion_03",
+      "startMs": 844353,
+      "endMs": 860053,
+      "background": {
+        "type": "image",
+        "src": "images/scene_57.png",
+        "animation": "zoomIn",
+        "animationIntensity": 0.5
+      },
+      "transition": {
+        "in": "fadeIn",
+        "out": "fadeOut",
+        "durationMs": 300
+      },
+      "objects": [],
+      "overlays": []
+    },
+    {
+      "id": "scene_58_conclusion_04",
+      "startMs": 860053,
+      "endMs": 875573,
+      "background": {
+        "type": "image",
+        "src": "images/scene_58.png",
+        "animation": "zoomOut",
+        "animationIntensity": 0.5
+      },
+      "transition": {
+        "in": "fadeIn",
+        "out": "fadeOut",
+        "durationMs": 300
+      },
+      "objects": [],
+      "overlays": []
+    },
+    {
+      "id": "scene_59_conclusion_05",
+      "startMs": 875573,
+      "endMs": 890333,
+      "background": {
+        "type": "image",
+        "src": "images/scene_59.png",
+        "animation": "panLeft",
+        "animationIntensity": 0.5
+      },
+      "transition": {
+        "in": "fadeIn",
+        "out": "fadeOut",
+        "durationMs": 300
+      },
+      "objects": [],
+      "overlays": []
+    },
+    {
+      "id": "scene_60_conclusion_06",
+      "startMs": 890333,
+      "endMs": 903093,
+      "background": {
+        "type": "image",
+        "src": "images/scene_60.png",
+        "animation": "panRight",
+        "animationIntensity": 0.5
+      },
+      "transition": {
+        "in": "fadeIn",
+        "out": "fadeOut",
+        "durationMs": 300
+      },
+      "objects": [],
+      "overlays": []
+    },
+    {
+      "id": "scene_61_conclusion_07",
+      "startMs": 903533,
+      "endMs": 917933,
+      "background": {
+        "type": "image",
+        "src": "images/scene_61.png",
+        "animation": "kenBurns",
+        "animationIntensity": 0.5
+      },
+      "transition": {
+        "in": "fadeIn",
+        "out": "fadeOut",
+        "durationMs": 300
+      },
+      "objects": [],
+      "overlays": []
+    },
+    {
+      "id": "scene_62_conclusion_08",
+      "startMs": 917933,
+      "endMs": 933973,
+      "background": {
+        "type": "image",
+        "src": "images/scene_62.png",
+        "animation": "zoomIn",
+        "animationIntensity": 0.5
+      },
+      "transition": {
+        "in": "fadeIn",
+        "out": "fadeOut",
+        "durationMs": 300
+      },
+      "objects": [],
+      "overlays": []
+    },
+    {
+      "id": "scene_63_conclusion_09",
+      "startMs": 933973,
+      "endMs": 946153,
+      "background": {
+        "type": "image",
+        "src": "images/scene_63.png",
+        "animation": "zoomOut",
         "animationIntensity": 0.5
       },
       "transition": {

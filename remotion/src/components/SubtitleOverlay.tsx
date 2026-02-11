@@ -80,7 +80,7 @@ export const SubtitleOverlay: React.FC<SubtitleOverlayProps> = ({
     >
       <div
         style={{
-          backgroundColor: 'rgba(0, 0, 0, 0.7)',
+          backgroundColor: 'rgba(0, 0, 0, 0.4)',
           borderRadius: 8,
           padding: '12px 24px',
           maxWidth: width * 0.8,

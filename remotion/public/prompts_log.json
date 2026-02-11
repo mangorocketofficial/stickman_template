@@ -1,0 +1,443 @@
+[
+  {
+    "scene": 1,
+    "role": "opening",
+    "source": "LLM",
+    "prompt": "Friendly character in flat line art style performing an action, clean educational infographic illustration, soft pastel color background, simple hand-drawn aesthetic, warm and approachable design, NO text NO numbers NO letters NO words NO labels, only visual elements characters and shapes, 16:9 landscape format, high quality, Friendly character standing beside a nail polish bottle, pointing at a nail chart on a soft peach background.",
+    "negative_prompt": "text, letters, numbers, words, labels, titles, captions, annotations, typography, written characters, alphabet, digits, handwriting, watermark, signature, logo, photorealistic, photograph, 3d render, dark background, neon colors, scary, violent, Korean text, Chinese characters, Japanese text"
+  },
+  {
+    "scene": 2,
+    "role": "emphasis",
+    "source": "LLM",
+    "prompt": "Friendly character in flat line art style performing an action, clean educational infographic illustration, soft pastel color background, simple hand-drawn aesthetic, warm and approachable design, NO text NO numbers NO letters NO words NO labels, only visual elements characters and shapes, 16:9 landscape format, high quality, Character holding a magnifying glass, examining a nail with a soft light blue background and subtle sparkle effects.",
+    "negative_prompt": "text, letters, numbers, words, labels, titles, captions, annotations, typography, written characters, alphabet, digits, handwriting, watermark, signature, logo, photorealistic, photograph, 3d render, dark background, neon colors, scary, violent, Korean text, Chinese characters, Japanese text"
+  },
+  {
+    "scene": 3,
+    "role": "comparison",
+    "source": "LLM",
+    "prompt": "Friendly character in flat line art style performing an action, clean educational infographic illustration, soft pastel color background, simple hand-drawn aesthetic, warm and approachable design, NO text NO numbers NO letters NO words NO labels, only visual elements characters and shapes, 16:9 landscape format, high quality, Character watering a growing nail-shaped plant on a warm cream background, symbolizing growth and understanding.",
+    "negative_prompt": "text, letters, numbers, words, labels, titles, captions, annotations, typography, written characters, alphabet, digits, handwriting, watermark, signature, logo, photorealistic, photograph, 3d render, dark background, neon colors, scary, violent, Korean text, Chinese characters, Japanese text"
+  },
+  {
+    "scene": 4,
+    "role": "emphasis",
+    "source": "LLM",
+    "prompt": "Friendly character in flat line art style performing an action, clean educational infographic illustration, soft pastel color background, simple hand-drawn aesthetic, warm and approachable design, NO text NO numbers NO letters NO words NO labels, only visual elements characters and shapes, 16:9 landscape format, high quality, Character standing on a staircase with four steps, each representing a different concept, on a soft mint green background.",
+    "negative_prompt": "text, letters, numbers, words, labels, titles, captions, annotations, typography, written characters, alphabet, digits, handwriting, watermark, signature, logo, photorealistic, photograph, 3d render, dark background, neon colors, scary, violent, Korean text, Chinese characters, Japanese text"
+  },
+  {
+    "scene": 5,
+    "role": "emphasis",
+    "source": "LLM",
+    "prompt": "Friendly character in flat line art style performing an action, clean educational infographic illustration, soft pastel color background, simple hand-drawn aesthetic, warm and approachable design, NO text NO numbers NO letters NO words NO labels, only visual elements characters and shapes, 16:9 landscape format, high quality, Character holding a balance scale with a nail on one side and a polish bottle on the other, on a soft lavender background.",
+    "negative_prompt": "text, letters, numbers, words, labels, titles, captions, annotations, typography, written characters, alphabet, digits, handwriting, watermark, signature, logo, photorealistic, photograph, 3d render, dark background, neon colors, scary, violent, Korean text, Chinese characters, Japanese text"
+  },
+  {
+    "scene": 6,
+    "role": "emphasis",
+    "source": "LLM",
+    "prompt": "Friendly character in flat line art style performing an action, clean educational infographic illustration, soft pastel color background, simple hand-drawn aesthetic, warm and approachable design, NO text NO numbers NO letters NO words NO labels, only visual elements characters and shapes, 16:9 landscape format, high quality, Character looking through a telescope at a nail tip, with a soft focus effect and a light blue background.",
+    "negative_prompt": "text, letters, numbers, words, labels, titles, captions, annotations, typography, written characters, alphabet, digits, handwriting, watermark, signature, logo, photorealistic, photograph, 3d render, dark background, neon colors, scary, violent, Korean text, Chinese characters, Japanese text"
+  },
+  {
+    "scene": 7,
+    "role": "emphasis",
+    "source": "LLM",
+    "prompt": "Friendly character in flat line art style performing an action, clean educational infographic illustration, soft pastel color background, simple hand-drawn aesthetic, warm and approachable design, NO text NO numbers NO letters NO words NO labels, only visual elements characters and shapes, 16:9 landscape format, high quality, Character standing next to a growing bar chart with nail-related terms, on a soft peach background with upward arrows.",
+    "negative_prompt": "text, letters, numbers, words, labels, titles, captions, annotations, typography, written characters, alphabet, digits, handwriting, watermark, signature, logo, photorealistic, photograph, 3d render, dark background, neon colors, scary, violent, Korean text, Chinese characters, Japanese text"
+  },
+  {
+    "scene": 8,
+    "role": "warning",
+    "source": "LLM",
+    "prompt": "Friendly character in flat line art style performing an action, clean educational infographic illustration, soft pastel color background, simple hand-drawn aesthetic, warm and approachable design, NO text NO numbers NO letters NO words NO labels, only visual elements characters and shapes, 16:9 landscape format, high quality, Character holding a small nail and a large nail, comparing sizes, on a soft pastel pink background with a subtle gradient.",
+    "negative_prompt": "text, letters, numbers, words, labels, titles, captions, annotations, typography, written characters, alphabet, digits, handwriting, watermark, signature, logo, photorealistic, photograph, 3d render, dark background, neon colors, scary, violent, Korean text, Chinese characters, Japanese text"
+  },
+  {
+    "scene": 9,
+    "role": "emphasis",
+    "source": "LLM",
+    "prompt": "Friendly character in flat line art style performing an action, clean educational infographic illustration, soft pastel color background, simple hand-drawn aesthetic, warm and approachable design, NO text NO numbers NO letters NO words NO labels, only visual elements characters and shapes, 16:9 landscape format, high quality, Character celebrating with arms up, surrounded by nail polish bottles and confetti, on a warm cream background.",
+    "negative_prompt": "text, letters, numbers, words, labels, titles, captions, annotations, typography, written characters, alphabet, digits, handwriting, watermark, signature, logo, photorealistic, photograph, 3d render, dark background, neon colors, scary, violent, Korean text, Chinese characters, Japanese text"
+  },
+  {
+    "scene": 10,
+    "role": "emphasis",
+    "source": "LLM",
+    "prompt": "Friendly character in flat line art style performing an action, clean educational infographic illustration, soft pastel color background, simple hand-drawn aesthetic, warm and approachable design, NO text NO numbers NO letters NO words NO labels, only visual elements characters and shapes, 16:9 landscape format, high quality, Character climbing a mountain with a nail-shaped flag at the top, on a soft mint green background with motion lines and a sense of achievement.",
+    "negative_prompt": "text, letters, numbers, words, labels, titles, captions, annotations, typography, written characters, alphabet, digits, handwriting, watermark, signature, logo, photorealistic, photograph, 3d render, dark background, neon colors, scary, violent, Korean text, Chinese characters, Japanese text"
+  },
+  {
+    "scene": 11,
+    "role": "explanation",
+    "source": "LLM",
+    "prompt": "Friendly character in flat line art style performing an action, clean educational infographic illustration, soft pastel color background, simple hand-drawn aesthetic, warm and approachable design, NO text NO numbers NO letters NO words NO labels, only visual elements characters and shapes, 16:9 landscape format, high quality, Educational whiteboard diagram showing step-by-step flowchart with numbered boxes and connecting arrows, hand-drawn black marker sketch on pure white background, CRITICAL REQUIREMENT: zero text, zero letters, zero words, zero numbers anywhere in the image, only visual elements like arrows boxes curves and shapes, absolutely no written labels or annotations, pure visual diagram without any typography",
+    "negative_prompt": "text, letters, numbers, words, labels, titles, captions, annotations, typography, written characters, alphabet, digits, handwriting, watermark, signature, logo, photorealistic, photograph, 3d render, dark background, neon colors, scary, violent, Korean text, Chinese characters, Japanese text"
+  },
+  {
+    "scene": 12,
+    "role": "emphasis",
+    "source": "LLM",
+    "prompt": "Friendly character in flat line art style performing an action, clean educational infographic illustration, soft pastel color background, simple hand-drawn aesthetic, warm and approachable design, NO text NO numbers NO letters NO words NO labels, only visual elements characters and shapes, 16:9 landscape format, high quality, Educational whiteboard diagram showing highlighted key concept box with radiating importance indicators, hand-drawn black marker sketch on pure white background, CRITICAL REQUIREMENT: zero text, zero letters, zero words, zero numbers anywhere in the image, only visual elements like arrows boxes curves and shapes, absolutely no written labels or annotations, pure visual diagram without any typography",
+    "negative_prompt": "text, letters, numbers, words, labels, titles, captions, annotations, typography, written characters, alphabet, digits, handwriting, watermark, signature, logo, photorealistic, photograph, 3d render, dark background, neon colors, scary, violent, Korean text, Chinese characters, Japanese text"
+  },
+  {
+    "scene": 13,
+    "role": "emphasis",
+    "source": "LLM",
+    "prompt": "Friendly character in flat line art style performing an action, clean educational infographic illustration, soft pastel color background, simple hand-drawn aesthetic, warm and approachable design, NO text NO numbers NO letters NO words NO labels, only visual elements characters and shapes, 16:9 landscape format, high quality, Educational whiteboard diagram showing highlighted key concept box with radiating importance indicators, hand-drawn black marker sketch on pure white background, CRITICAL REQUIREMENT: zero text, zero letters, zero words, zero numbers anywhere in the image, only visual elements like arrows boxes curves and shapes, absolutely no written labels or annotations, pure visual diagram without any typography",
+    "negative_prompt": "text, letters, numbers, words, labels, titles, captions, annotations, typography, written characters, alphabet, digits, handwriting, watermark, signature, logo, photorealistic, photograph, 3d render, dark background, neon colors, scary, violent, Korean text, Chinese characters, Japanese text"
+  },
+  {
+    "scene": 14,
+    "role": "emphasis",
+    "source": "LLM",
+    "prompt": "Friendly character in flat line art style performing an action, clean educational infographic illustration, soft pastel color background, simple hand-drawn aesthetic, warm and approachable design, NO text NO numbers NO letters NO words NO labels, only visual elements characters and shapes, 16:9 landscape format, high quality, Educational whiteboard diagram showing highlighted key concept box with radiating importance indicators, hand-drawn black marker sketch on pure white background, top 20% of image completely blank white space for title overlay, CRITICAL REQUIREMENT: zero text, zero letters, zero words, zero numbers anywhere in the image, only visual elements like arrows boxes curves and shapes, absolutely no written labels or annotations, pure visual diagram without any typography",
+    "negative_prompt": "text, letters, numbers, words, labels, titles, captions, annotations, typography, written characters, alphabet, digits, handwriting, watermark, signature, logo, photorealistic, photograph, 3d render, dark background, neon colors, scary, violent, Korean text, Chinese characters, Japanese text"
+  },
+  {
+    "scene": 15,
+    "role": "explanation",
+    "source": "LLM",
+    "prompt": "Friendly character in flat line art style performing an action, clean educational infographic illustration, soft pastel color background, simple hand-drawn aesthetic, warm and approachable design, NO text NO numbers NO letters NO words NO labels, only visual elements characters and shapes, 16:9 landscape format, high quality, Educational whiteboard diagram showing step-by-step flowchart with numbered boxes and connecting arrows, hand-drawn black marker sketch on pure white background, CRITICAL REQUIREMENT: zero text, zero letters, zero words, zero numbers anywhere in the image, only visual elements like arrows boxes curves and shapes, absolutely no written labels or annotations, pure visual diagram without any typography",
+    "negative_prompt": "text, letters, numbers, words, labels, titles, captions, annotations, typography, written characters, alphabet, digits, handwriting, watermark, signature, logo, photorealistic, photograph, 3d render, dark background, neon colors, scary, violent, Korean text, Chinese characters, Japanese text"
+  },
+  {
+    "scene": 16,
+    "role": "emphasis",
+    "source": "LLM",
+    "prompt": "Friendly character in flat line art style performing an action, clean educational infographic illustration, soft pastel color background, simple hand-drawn aesthetic, warm and approachable design, NO text NO numbers NO letters NO words NO labels, only visual elements characters and shapes, 16:9 landscape format, high quality, Educational whiteboard diagram showing highlighted key concept box with radiating importance indicators, hand-drawn black marker sketch on pure white background, CRITICAL REQUIREMENT: zero text, zero letters, zero words, zero numbers anywhere in the image, only visual elements like arrows boxes curves and shapes, absolutely no written labels or annotations, pure visual diagram without any typography",
+    "negative_prompt": "text, letters, numbers, words, labels, titles, captions, annotations, typography, written characters, alphabet, digits, handwriting, watermark, signature, logo, photorealistic, photograph, 3d render, dark background, neon colors, scary, violent, Korean text, Chinese characters, Japanese text"
+  },
+  {
+    "scene": 17,
+    "role": "comparison",
+    "source": "LLM",
+    "prompt": "Friendly character in flat line art style performing an action, clean educational infographic illustration, soft pastel color background, simple hand-drawn aesthetic, warm and approachable design, NO text NO numbers NO letters NO words NO labels, only visual elements characters and shapes, 16:9 landscape format, high quality, Educational whiteboard diagram showing side-by-side comparison chart with dividing line and contrasting elements, hand-drawn black marker sketch on pure white background, CRITICAL REQUIREMENT: zero text, zero letters, zero words, zero numbers anywhere in the image, only visual elements like arrows boxes curves and shapes, absolutely no written labels or annotations, pure visual diagram without any typography",
+    "negative_prompt": "text, letters, numbers, words, labels, titles, captions, annotations, typography, written characters, alphabet, digits, handwriting, watermark, signature, logo, photorealistic, photograph, 3d render, dark background, neon colors, scary, violent, Korean text, Chinese characters, Japanese text"
+  },
+  {
+    "scene": 18,
+    "role": "emphasis",
+    "source": "LLM",
+    "prompt": "Friendly character in flat line art style performing an action, clean educational infographic illustration, soft pastel color background, simple hand-drawn aesthetic, warm and approachable design, NO text NO numbers NO letters NO words NO labels, only visual elements characters and shapes, 16:9 landscape format, high quality, Educational whiteboard diagram showing highlighted key concept box with radiating importance indicators, hand-drawn black marker sketch on pure white background, CRITICAL REQUIREMENT: zero text, zero letters, zero words, zero numbers anywhere in the image, only visual elements like arrows boxes curves and shapes, absolutely no written labels or annotations, pure visual diagram without any typography",
+    "negative_prompt": "text, letters, numbers, words, labels, titles, captions, annotations, typography, written characters, alphabet, digits, handwriting, watermark, signature, logo, photorealistic, photograph, 3d render, dark background, neon colors, scary, violent, Korean text, Chinese characters, Japanese text"
+  },
+  {
+    "scene": 19,
+    "role": "comparison",
+    "source": "LLM",
+    "prompt": "Friendly character in flat line art style performing an action, clean educational infographic illustration, soft pastel color background, simple hand-drawn aesthetic, warm and approachable design, NO text NO numbers NO letters NO words NO labels, only visual elements characters and shapes, 16:9 landscape format, high quality, Educational whiteboard diagram showing side-by-side comparison chart with dividing line and contrasting elements, hand-drawn black marker sketch on pure white background, CRITICAL REQUIREMENT: zero text, zero letters, zero words, zero numbers anywhere in the image, only visual elements like arrows boxes curves and shapes, absolutely no written labels or annotations, pure visual diagram without any typography",
+    "negative_prompt": "text, letters, numbers, words, labels, titles, captions, annotations, typography, written characters, alphabet, digits, handwriting, watermark, signature, logo, photorealistic, photograph, 3d render, dark background, neon colors, scary, violent, Korean text, Chinese characters, Japanese text"
+  },
+  {
+    "scene": 20,
+    "role": "emphasis",
+    "source": "LLM",
+    "prompt": "Friendly character in flat line art style performing an action, clean educational infographic illustration, soft pastel color background, simple hand-drawn aesthetic, warm and approachable design, NO text NO numbers NO letters NO words NO labels, only visual elements characters and shapes, 16:9 landscape format, high quality, Educational whiteboard diagram showing highlighted key concept box with radiating importance indicators, hand-drawn black marker sketch on pure white background, CRITICAL REQUIREMENT: zero text, zero letters, zero words, zero numbers anywhere in the image, only visual elements like arrows boxes curves and shapes, absolutely no written labels or annotations, pure visual diagram without any typography",
+    "negative_prompt": "text, letters, numbers, words, labels, titles, captions, annotations, typography, written characters, alphabet, digits, handwriting, watermark, signature, logo, photorealistic, photograph, 3d render, dark background, neon colors, scary, violent, Korean text, Chinese characters, Japanese text"
+  },
+  {
+    "scene": 21,
+    "role": "emphasis",
+    "source": "LLM",
+    "prompt": "Friendly character in flat line art style performing an action, clean educational infographic illustration, soft pastel color background, simple hand-drawn aesthetic, warm and approachable design, NO text NO numbers NO letters NO words NO labels, only visual elements characters and shapes, 16:9 landscape format, high quality, Character holding a nail file, pointing at a nail with a red X marked through it, on a light blue background with a subtle nail texture pattern.",
+    "negative_prompt": "text, letters, numbers, words, labels, titles, captions, annotations, typography, written characters, alphabet, digits, handwriting, watermark, signature, logo, photorealistic, photograph, 3d render, dark background, neon colors, scary, violent, Korean text, Chinese characters, Japanese text"
+  },
+  {
+    "scene": 22,
+    "role": "comparison",
+    "source": "LLM",
+    "prompt": "Friendly character in flat line art style performing an action, clean educational infographic illustration, soft pastel color background, simple hand-drawn aesthetic, warm and approachable design, NO text NO numbers NO letters NO words NO labels, only visual elements characters and shapes, 16:9 landscape format, high quality, Character standing beside a split-screen comparison, left side with a nail covered in oil and right side with a clean nail, on a warm cream background with a slight shine effect.",
+    "negative_prompt": "text, letters, numbers, words, labels, titles, captions, annotations, typography, written characters, alphabet, digits, handwriting, watermark, signature, logo, photorealistic, photograph, 3d render, dark background, neon colors, scary, violent, Korean text, Chinese characters, Japanese text"
+  },
+  {
+    "scene": 23,
+    "role": "explanation",
+    "source": "LLM",
+    "prompt": "Friendly character in flat line art style performing an action, clean educational infographic illustration, soft pastel color background, simple hand-drawn aesthetic, warm and approachable design, NO text NO numbers NO letters NO words NO labels, only visual elements characters and shapes, 16:9 landscape format, high quality, Character looking through a microscope at a nail cell, with a surprised expression, on a soft peach background with gentle, swirly patterns.",
+    "negative_prompt": "text, letters, numbers, words, labels, titles, captions, annotations, typography, written characters, alphabet, digits, handwriting, watermark, signature, logo, photorealistic, photograph, 3d render, dark background, neon colors, scary, violent, Korean text, Chinese characters, Japanese text"
+  },
+  {
+    "scene": 24,
+    "role": "emphasis",
+    "source": "LLM",
+    "prompt": "Friendly character in flat line art style performing an action, clean educational infographic illustration, soft pastel color background, simple hand-drawn aesthetic, warm and approachable design, NO text NO numbers NO letters NO words NO labels, only visual elements characters and shapes, 16:9 landscape format, high quality, Character holding a balance scale with a nail on one side and a water droplet on the other, on a mint green background with tiny, shimmering water effects.",
+    "negative_prompt": "text, letters, numbers, words, labels, titles, captions, annotations, typography, written characters, alphabet, digits, handwriting, watermark, signature, logo, photorealistic, photograph, 3d render, dark background, neon colors, scary, violent, Korean text, Chinese characters, Japanese text"
+  },
+  {
+    "scene": 25,
+    "role": "emphasis",
+    "source": "LLM",
+    "prompt": "Friendly character in flat line art style performing an action, clean educational infographic illustration, soft pastel color background, simple hand-drawn aesthetic, warm and approachable design, NO text NO numbers NO letters NO words NO labels, only visual elements characters and shapes, 16:9 landscape format, high quality, Character watering a growing nail plant, with a gentle smile, on a lavender background with delicate, flowering patterns.",
+    "negative_prompt": "text, letters, numbers, words, labels, titles, captions, annotations, typography, written characters, alphabet, digits, handwriting, watermark, signature, logo, photorealistic, photograph, 3d render, dark background, neon colors, scary, violent, Korean text, Chinese characters, Japanese text"
+  },
+  {
+    "scene": 26,
+    "role": "comparison",
+    "source": "LLM",
+    "prompt": "Friendly character in flat line art style performing an action, clean educational infographic illustration, soft pastel color background, simple hand-drawn aesthetic, warm and approachable design, NO text NO numbers NO letters NO words NO labels, only visual elements characters and shapes, 16:9 landscape format, high quality, Character standing in front of a nail diagram, pointing at the nail bed, on a pale yellow background with a subtle, grid-like texture.",
+    "negative_prompt": "text, letters, numbers, words, labels, titles, captions, annotations, typography, written characters, alphabet, digits, handwriting, watermark, signature, logo, photorealistic, photograph, 3d render, dark background, neon colors, scary, violent, Korean text, Chinese characters, Japanese text"
+  },
+  {
+    "scene": 27,
+    "role": "comparison",
+    "source": "LLM",
+    "prompt": "Friendly character in flat line art style performing an action, clean educational infographic illustration, soft pastel color background, simple hand-drawn aesthetic, warm and approachable design, NO text NO numbers NO letters NO words NO labels, only visual elements characters and shapes, 16:9 landscape format, high quality, Character holding a small, glowing orb near a nail, with a curious expression, on a soft pink background with a subtle, shimmering effect.",
+    "negative_prompt": "text, letters, numbers, words, labels, titles, captions, annotations, typography, written characters, alphabet, digits, handwriting, watermark, signature, logo, photorealistic, photograph, 3d render, dark background, neon colors, scary, violent, Korean text, Chinese characters, Japanese text"
+  },
+  {
+    "scene": 28,
+    "role": "comparison",
+    "source": "LLM",
+    "prompt": "Friendly character in flat line art style performing an action, clean educational infographic illustration, soft pastel color background, simple hand-drawn aesthetic, warm and approachable design, NO text NO numbers NO letters NO words NO labels, only visual elements characters and shapes, 16:9 landscape format, high quality, Character climbing a staircase with nail-related icons on each step, on a light gray background with a subtle, gradient effect.",
+    "negative_prompt": "text, letters, numbers, words, labels, titles, captions, annotations, typography, written characters, alphabet, digits, handwriting, watermark, signature, logo, photorealistic, photograph, 3d render, dark background, neon colors, scary, violent, Korean text, Chinese characters, Japanese text"
+  },
+  {
+    "scene": 29,
+    "role": "explanation",
+    "source": "LLM",
+    "prompt": "Friendly character in flat line art style performing an action, clean educational infographic illustration, soft pastel color background, simple hand-drawn aesthetic, warm and approachable design, NO text NO numbers NO letters NO words NO labels, only visual elements characters and shapes, 16:9 landscape format, high quality, Character celebrating with arms up, surrounded by healthy, growing nails, on a bright, sunny background with a subtle, confetti-like pattern.",
+    "negative_prompt": "text, letters, numbers, words, labels, titles, captions, annotations, typography, written characters, alphabet, digits, handwriting, watermark, signature, logo, photorealistic, photograph, 3d render, dark background, neon colors, scary, violent, Korean text, Chinese characters, Japanese text"
+  },
+  {
+    "scene": 30,
+    "role": "emphasis",
+    "source": "LLM",
+    "prompt": "Friendly character in flat line art style performing an action, clean educational infographic illustration, soft pastel color background, simple hand-drawn aesthetic, warm and approachable design, NO text NO numbers NO letters NO words NO labels, only visual elements characters and shapes, 16:9 landscape format, high quality, Character examining a nail under a magnifying glass, with a thoughtful expression, on a warm, beige background with a subtle, wood-grain texture.",
+    "negative_prompt": "text, letters, numbers, words, labels, titles, captions, annotations, typography, written characters, alphabet, digits, handwriting, watermark, signature, logo, photorealistic, photograph, 3d render, dark background, neon colors, scary, violent, Korean text, Chinese characters, Japanese text"
+  },
+  {
+    "scene": 31,
+    "role": "explanation",
+    "source": "LLM",
+    "prompt": "Friendly character in flat line art style performing an action, clean educational infographic illustration, soft pastel color background, simple hand-drawn aesthetic, warm and approachable design, NO text NO numbers NO letters NO words NO labels, only visual elements characters and shapes, 16:9 landscape format, high quality, Educational whiteboard diagram showing step-by-step flowchart with numbered boxes and connecting arrows, hand-drawn black marker sketch on pure white background, top 20% of image completely blank white space for title overlay, CRITICAL REQUIREMENT: zero text, zero letters, zero words, zero numbers anywhere in the image, only visual elements like arrows boxes curves and shapes, absolutely no written labels or annotations, pure visual diagram without any typography",
+    "negative_prompt": "text, letters, numbers, words, labels, titles, captions, annotations, typography, written characters, alphabet, digits, handwriting, watermark, signature, logo, photorealistic, photograph, 3d render, dark background, neon colors, scary, violent, Korean text, Chinese characters, Japanese text"
+  },
+  {
+    "scene": 32,
+    "role": "explanation",
+    "source": "LLM",
+    "prompt": "Friendly character in flat line art style performing an action, clean educational infographic illustration, soft pastel color background, simple hand-drawn aesthetic, warm and approachable design, NO text NO numbers NO letters NO words NO labels, only visual elements characters and shapes, 16:9 landscape format, high quality, Educational whiteboard diagram showing step-by-step flowchart with numbered boxes and connecting arrows, hand-drawn black marker sketch on pure white background, CRITICAL REQUIREMENT: zero text, zero letters, zero words, zero numbers anywhere in the image, only visual elements like arrows boxes curves and shapes, absolutely no written labels or annotations, pure visual diagram without any typography",
+    "negative_prompt": "text, letters, numbers, words, labels, titles, captions, annotations, typography, written characters, alphabet, digits, handwriting, watermark, signature, logo, photorealistic, photograph, 3d render, dark background, neon colors, scary, violent, Korean text, Chinese characters, Japanese text"
+  },
+  {
+    "scene": 33,
+    "role": "emphasis",
+    "source": "LLM",
+    "prompt": "Friendly character in flat line art style performing an action, clean educational infographic illustration, soft pastel color background, simple hand-drawn aesthetic, warm and approachable design, NO text NO numbers NO letters NO words NO labels, only visual elements characters and shapes, 16:9 landscape format, high quality, Educational whiteboard diagram showing highlighted key concept box with radiating importance indicators, hand-drawn black marker sketch on pure white background, CRITICAL REQUIREMENT: zero text, zero letters, zero words, zero numbers anywhere in the image, only visual elements like arrows boxes curves and shapes, absolutely no written labels or annotations, pure visual diagram without any typography",
+    "negative_prompt": "text, letters, numbers, words, labels, titles, captions, annotations, typography, written characters, alphabet, digits, handwriting, watermark, signature, logo, photorealistic, photograph, 3d render, dark background, neon colors, scary, violent, Korean text, Chinese characters, Japanese text"
+  },
+  {
+    "scene": 34,
+    "role": "comparison",
+    "source": "LLM",
+    "prompt": "Friendly character in flat line art style performing an action, clean educational infographic illustration, soft pastel color background, simple hand-drawn aesthetic, warm and approachable design, NO text NO numbers NO letters NO words NO labels, only visual elements characters and shapes, 16:9 landscape format, high quality, Educational whiteboard diagram showing side-by-side comparison chart with dividing line and contrasting elements, hand-drawn black marker sketch on pure white background, CRITICAL REQUIREMENT: zero text, zero letters, zero words, zero numbers anywhere in the image, only visual elements like arrows boxes curves and shapes, absolutely no written labels or annotations, pure visual diagram without any typography",
+    "negative_prompt": "text, letters, numbers, words, labels, titles, captions, annotations, typography, written characters, alphabet, digits, handwriting, watermark, signature, logo, photorealistic, photograph, 3d render, dark background, neon colors, scary, violent, Korean text, Chinese characters, Japanese text"
+  },
+  {
+    "scene": 35,
+    "role": "emphasis",
+    "source": "LLM",
+    "prompt": "Friendly character in flat line art style performing an action, clean educational infographic illustration, soft pastel color background, simple hand-drawn aesthetic, warm and approachable design, NO text NO numbers NO letters NO words NO labels, only visual elements characters and shapes, 16:9 landscape format, high quality, Educational whiteboard diagram showing highlighted key concept box with radiating importance indicators, hand-drawn black marker sketch on pure white background, CRITICAL REQUIREMENT: zero text, zero letters, zero words, zero numbers anywhere in the image, only visual elements like arrows boxes curves and shapes, absolutely no written labels or annotations, pure visual diagram without any typography",
+    "negative_prompt": "text, letters, numbers, words, labels, titles, captions, annotations, typography, written characters, alphabet, digits, handwriting, watermark, signature, logo, photorealistic, photograph, 3d render, dark background, neon colors, scary, violent, Korean text, Chinese characters, Japanese text"
+  },
+  {
+    "scene": 36,
+    "role": "emphasis",
+    "source": "LLM",
+    "prompt": "Friendly character in flat line art style performing an action, clean educational infographic illustration, soft pastel color background, simple hand-drawn aesthetic, warm and approachable design, NO text NO numbers NO letters NO words NO labels, only visual elements characters and shapes, 16:9 landscape format, high quality, Educational whiteboard diagram showing highlighted key concept box with radiating importance indicators, hand-drawn black marker sketch on pure white background, CRITICAL REQUIREMENT: zero text, zero letters, zero words, zero numbers anywhere in the image, only visual elements like arrows boxes curves and shapes, absolutely no written labels or annotations, pure visual diagram without any typography",
+    "negative_prompt": "text, letters, numbers, words, labels, titles, captions, annotations, typography, written characters, alphabet, digits, handwriting, watermark, signature, logo, photorealistic, photograph, 3d render, dark background, neon colors, scary, violent, Korean text, Chinese characters, Japanese text"
+  },
+  {
+    "scene": 37,
+    "role": "emphasis",
+    "source": "LLM",
+    "prompt": "Friendly character in flat line art style performing an action, clean educational infographic illustration, soft pastel color background, simple hand-drawn aesthetic, warm and approachable design, NO text NO numbers NO letters NO words NO labels, only visual elements characters and shapes, 16:9 landscape format, high quality, Educational whiteboard diagram showing highlighted key concept box with radiating importance indicators, hand-drawn black marker sketch on pure white background, CRITICAL REQUIREMENT: zero text, zero letters, zero words, zero numbers anywhere in the image, only visual elements like arrows boxes curves and shapes, absolutely no written labels or annotations, pure visual diagram without any typography",
+    "negative_prompt": "text, letters, numbers, words, labels, titles, captions, annotations, typography, written characters, alphabet, digits, handwriting, watermark, signature, logo, photorealistic, photograph, 3d render, dark background, neon colors, scary, violent, Korean text, Chinese characters, Japanese text"
+  },
+  {
+    "scene": 38,
+    "role": "emphasis",
+    "source": "LLM",
+    "prompt": "Friendly character in flat line art style performing an action, clean educational infographic illustration, soft pastel color background, simple hand-drawn aesthetic, warm and approachable design, NO text NO numbers NO letters NO words NO labels, only visual elements characters and shapes, 16:9 landscape format, high quality, Educational whiteboard diagram showing highlighted key concept box with radiating importance indicators, hand-drawn black marker sketch on pure white background, CRITICAL REQUIREMENT: zero text, zero letters, zero words, zero numbers anywhere in the image, only visual elements like arrows boxes curves and shapes, absolutely no written labels or annotations, pure visual diagram without any typography",
+    "negative_prompt": "text, letters, numbers, words, labels, titles, captions, annotations, typography, written characters, alphabet, digits, handwriting, watermark, signature, logo, photorealistic, photograph, 3d render, dark background, neon colors, scary, violent, Korean text, Chinese characters, Japanese text"
+  },
+  {
+    "scene": 39,
+    "role": "emphasis",
+    "source": "LLM",
+    "prompt": "Friendly character in flat line art style performing an action, clean educational infographic illustration, soft pastel color background, simple hand-drawn aesthetic, warm and approachable design, NO text NO numbers NO letters NO words NO labels, only visual elements characters and shapes, 16:9 landscape format, high quality, Educational whiteboard diagram showing highlighted key concept box with radiating importance indicators, hand-drawn black marker sketch on pure white background, top 20% of image completely blank white space for title overlay, CRITICAL REQUIREMENT: zero text, zero letters, zero words, zero numbers anywhere in the image, only visual elements like arrows boxes curves and shapes, absolutely no written labels or annotations, pure visual diagram without any typography",
+    "negative_prompt": "text, letters, numbers, words, labels, titles, captions, annotations, typography, written characters, alphabet, digits, handwriting, watermark, signature, logo, photorealistic, photograph, 3d render, dark background, neon colors, scary, violent, Korean text, Chinese characters, Japanese text"
+  },
+  {
+    "scene": 40,
+    "role": "emphasis",
+    "source": "LLM",
+    "prompt": "Friendly character in flat line art style performing an action, clean educational infographic illustration, soft pastel color background, simple hand-drawn aesthetic, warm and approachable design, NO text NO numbers NO letters NO words NO labels, only visual elements characters and shapes, 16:9 landscape format, high quality, Educational whiteboard diagram showing highlighted key concept box with radiating importance indicators, hand-drawn black marker sketch on pure white background, CRITICAL REQUIREMENT: zero text, zero letters, zero words, zero numbers anywhere in the image, only visual elements like arrows boxes curves and shapes, absolutely no written labels or annotations, pure visual diagram without any typography",
+    "negative_prompt": "text, letters, numbers, words, labels, titles, captions, annotations, typography, written characters, alphabet, digits, handwriting, watermark, signature, logo, photorealistic, photograph, 3d render, dark background, neon colors, scary, violent, Korean text, Chinese characters, Japanese text"
+  },
+  {
+    "scene": 41,
+    "role": "emphasis",
+    "source": "LLM",
+    "prompt": "Friendly character in flat line art style performing an action, clean educational infographic illustration, soft pastel color background, simple hand-drawn aesthetic, warm and approachable design, NO text NO numbers NO letters NO words NO labels, only visual elements characters and shapes, 16:9 landscape format, high quality, Character holding a magnifying glass, examining a nail with a spotlight on the eponychium, soft lavender background",
+    "negative_prompt": "text, letters, numbers, words, labels, titles, captions, annotations, typography, written characters, alphabet, digits, handwriting, watermark, signature, logo, photorealistic, photograph, 3d render, dark background, neon colors, scary, violent, Korean text, Chinese characters, Japanese text"
+  },
+  {
+    "scene": 42,
+    "role": "emphasis",
+    "source": "LLM",
+    "prompt": "Friendly character in flat line art style performing an action, clean educational infographic illustration, soft pastel color background, simple hand-drawn aesthetic, warm and approachable design, NO text NO numbers NO letters NO words NO labels, only visual elements characters and shapes, 16:9 landscape format, high quality, Character gently brushing away dead cuticle cells, with a small trash can beside, warm cream background",
+    "negative_prompt": "text, letters, numbers, words, labels, titles, captions, annotations, typography, written characters, alphabet, digits, handwriting, watermark, signature, logo, photorealistic, photograph, 3d render, dark background, neon colors, scary, violent, Korean text, Chinese characters, Japanese text"
+  },
+  {
+    "scene": 43,
+    "role": "warning",
+    "source": "LLM",
+    "prompt": "Friendly character in flat line art style performing an action, clean educational infographic illustration, soft pastel color background, simple hand-drawn aesthetic, warm and approachable design, NO text NO numbers NO letters NO words NO labels, only visual elements characters and shapes, 16:9 landscape format, high quality, Character standing beside a growing plant, with a warning sign nearby, pointing to the dangers of damaging the eponychium, light blue background",
+    "negative_prompt": "text, letters, numbers, words, labels, titles, captions, annotations, typography, written characters, alphabet, digits, handwriting, watermark, signature, logo, photorealistic, photograph, 3d render, dark background, neon colors, scary, violent, Korean text, Chinese characters, Japanese text"
+  },
+  {
+    "scene": 44,
+    "role": "explanation",
+    "source": "LLM",
+    "prompt": "Friendly character in flat line art style performing an action, clean educational infographic illustration, soft pastel color background, simple hand-drawn aesthetic, warm and approachable design, NO text NO numbers NO letters NO words NO labels, only visual elements characters and shapes, 16:9 landscape format, high quality, Character holding a diagram, pointing to the relationship between the nail fold and nail groove, peach background",
+    "negative_prompt": "text, letters, numbers, words, labels, titles, captions, annotations, typography, written characters, alphabet, digits, handwriting, watermark, signature, logo, photorealistic, photograph, 3d render, dark background, neon colors, scary, violent, Korean text, Chinese characters, Japanese text"
+  },
+  {
+    "scene": 45,
+    "role": "emphasis",
+    "source": "LLM",
+    "prompt": "Friendly character in flat line art style performing an action, clean educational infographic illustration, soft pastel color background, simple hand-drawn aesthetic, warm and approachable design, NO text NO numbers NO letters NO words NO labels, only visual elements characters and shapes, 16:9 landscape format, high quality, Character looking through a microscope, studying the nail anatomy, mint green background with tiny nail cells",
+    "negative_prompt": "text, letters, numbers, words, labels, titles, captions, annotations, typography, written characters, alphabet, digits, handwriting, watermark, signature, logo, photorealistic, photograph, 3d render, dark background, neon colors, scary, violent, Korean text, Chinese characters, Japanese text"
+  },
+  {
+    "scene": 46,
+    "role": "emphasis",
+    "source": "LLM",
+    "prompt": "Friendly character in flat line art style performing an action, clean educational infographic illustration, soft pastel color background, simple hand-drawn aesthetic, warm and approachable design, NO text NO numbers NO letters NO words NO labels, only visual elements characters and shapes, 16:9 landscape format, high quality, Character standing in front of a whiteboard, drawing a nail diagram with various terms, soft pastel colors",
+    "negative_prompt": "text, letters, numbers, words, labels, titles, captions, annotations, typography, written characters, alphabet, digits, handwriting, watermark, signature, logo, photorealistic, photograph, 3d render, dark background, neon colors, scary, violent, Korean text, Chinese characters, Japanese text"
+  },
+  {
+    "scene": 47,
+    "role": "explanation",
+    "source": "LLM",
+    "prompt": "Friendly character in flat line art style performing an action, clean educational infographic illustration, soft pastel color background, simple hand-drawn aesthetic, warm and approachable design, NO text NO numbers NO letters NO words NO labels, only visual elements characters and shapes, 16:9 landscape format, high quality, Character holding a UV lamp, with a nail polish bottle nearby, and a caution sign about yellowing, lavender background",
+    "negative_prompt": "text, letters, numbers, words, labels, titles, captions, annotations, typography, written characters, alphabet, digits, handwriting, watermark, signature, logo, photorealistic, photograph, 3d render, dark background, neon colors, scary, violent, Korean text, Chinese characters, Japanese text"
+  },
+  {
+    "scene": 48,
+    "role": "explanation",
+    "source": "LLM",
+    "prompt": "Friendly character in flat line art style performing an action, clean educational infographic illustration, soft pastel color background, simple hand-drawn aesthetic, warm and approachable design, NO text NO numbers NO letters NO words NO labels, only visual elements characters and shapes, 16:9 landscape format, high quality, Character mixing a bowl of acrylic powder and liquid, with a scale and measuring cups, warm cream background",
+    "negative_prompt": "text, letters, numbers, words, labels, titles, captions, annotations, typography, written characters, alphabet, digits, handwriting, watermark, signature, logo, photorealistic, photograph, 3d render, dark background, neon colors, scary, violent, Korean text, Chinese characters, Japanese text"
+  },
+  {
+    "scene": 49,
+    "role": "emphasis",
+    "source": "LLM",
+    "prompt": "Friendly character in flat line art style performing an action, clean educational infographic illustration, soft pastel color background, simple hand-drawn aesthetic, warm and approachable design, NO text NO numbers NO letters NO words NO labels, only visual elements characters and shapes, 16:9 landscape format, high quality, Character shaping a nail tip, with various nail shapes and tools around, light blue background",
+    "negative_prompt": "text, letters, numbers, words, labels, titles, captions, annotations, typography, written characters, alphabet, digits, handwriting, watermark, signature, logo, photorealistic, photograph, 3d render, dark background, neon colors, scary, violent, Korean text, Chinese characters, Japanese text"
+  },
+  {
+    "scene": 50,
+    "role": "emphasis",
+    "source": "LLM",
+    "prompt": "Friendly character in flat line art style performing an action, clean educational infographic illustration, soft pastel color background, simple hand-drawn aesthetic, warm and approachable design, NO text NO numbers NO letters NO words NO labels, only visual elements characters and shapes, 16:9 landscape format, high quality, Character admiring a beautifully shaped nail, with a nail art design, soft peach background with celebratory balloons",
+    "negative_prompt": "text, letters, numbers, words, labels, titles, captions, annotations, typography, written characters, alphabet, digits, handwriting, watermark, signature, logo, photorealistic, photograph, 3d render, dark background, neon colors, scary, violent, Korean text, Chinese characters, Japanese text"
+  },
+  {
+    "scene": 51,
+    "role": "explanation",
+    "source": "LLM",
+    "prompt": "Friendly character in flat line art style performing an action, clean educational infographic illustration, soft pastel color background, simple hand-drawn aesthetic, warm and approachable design, NO text NO numbers NO letters NO words NO labels, only visual elements characters and shapes, 16:9 landscape format, high quality, Friendly character holding a nail tip, carefully applying adhesive to the center, with a soft light blue background and a nail shape outline beside them.",
+    "negative_prompt": "text, letters, numbers, words, labels, titles, captions, annotations, typography, written characters, alphabet, digits, handwriting, watermark, signature, logo, photorealistic, photograph, 3d render, dark background, neon colors, scary, violent, Korean text, Chinese characters, Japanese text"
+  },
+  {
+    "scene": 52,
+    "role": "explanation",
+    "source": "LLM",
+    "prompt": "Friendly character in flat line art style performing an action, clean educational infographic illustration, soft pastel color background, simple hand-drawn aesthetic, warm and approachable design, NO text NO numbers NO letters NO words NO labels, only visual elements characters and shapes, 16:9 landscape format, high quality, Character standing beside a growing nail, with a subtle peach background, looking at the nail line where a new nail growth boundary appears, and a small magnifying glass in their hand.",
+    "negative_prompt": "text, letters, numbers, words, labels, titles, captions, annotations, typography, written characters, alphabet, digits, handwriting, watermark, signature, logo, photorealistic, photograph, 3d render, dark background, neon colors, scary, violent, Korean text, Chinese characters, Japanese text"
+  },
+  {
+    "scene": 53,
+    "role": "emphasis",
+    "source": "LLM",
+    "prompt": "Friendly character in flat line art style performing an action, clean educational infographic illustration, soft pastel color background, simple hand-drawn aesthetic, warm and approachable design, NO text NO numbers NO letters NO words NO labels, only visual elements characters and shapes, 16:9 landscape format, high quality, Cheerful character pouring a small amount of liquid into a nail shape mold, on a soft mint green background, with a few nail tips and a brush nearby, illustrating the concept of filling and shaping.",
+    "negative_prompt": "text, letters, numbers, words, labels, titles, captions, annotations, typography, written characters, alphabet, digits, handwriting, watermark, signature, logo, photorealistic, photograph, 3d render, dark background, neon colors, scary, violent, Korean text, Chinese characters, Japanese text"
+  },
+  {
+    "scene": 54,
+    "role": "explanation",
+    "source": "LLM",
+    "prompt": "Friendly character in flat line art style performing an action, clean educational infographic illustration, soft pastel color background, simple hand-drawn aesthetic, warm and approachable design, NO text NO numbers NO letters NO words NO labels, only visual elements characters and shapes, 16:9 landscape format, high quality, Character holding a nail file, gently smoothing the edge between the natural nail and the artificial nail tip, with a warm cream background and a few nail care tools scattered around.",
+    "negative_prompt": "text, letters, numbers, words, labels, titles, captions, annotations, typography, written characters, alphabet, digits, handwriting, watermark, signature, logo, photorealistic, photograph, 3d render, dark background, neon colors, scary, violent, Korean text, Chinese characters, Japanese text"
+  },
+  {
+    "scene": 55,
+    "role": "emphasis",
+    "source": "LLM",
+    "prompt": "Friendly character in flat line art style performing an action, clean educational infographic illustration, soft pastel color background, simple hand-drawn aesthetic, warm and approachable design, NO text NO numbers NO letters NO words NO labels, only visual elements characters and shapes, 16:9 landscape format, high quality, Friendly character standing in front of a large key, with a soft lavender background, and a few locks and chains scattered around, symbolizing the 'key to success' or 'unlocking knowledge'.",
+    "negative_prompt": "text, letters, numbers, words, labels, titles, captions, annotations, typography, written characters, alphabet, digits, handwriting, watermark, signature, logo, photorealistic, photograph, 3d render, dark background, neon colors, scary, violent, Korean text, Chinese characters, Japanese text"
+  },
+  {
+    "scene": 56,
+    "role": "explanation",
+    "source": "LLM",
+    "prompt": "Friendly character in flat line art style performing an action, clean educational infographic illustration, soft pastel color background, simple hand-drawn aesthetic, warm and approachable design, NO text NO numbers NO letters NO words NO labels, only visual elements characters and shapes, 16:9 landscape format, high quality, Character connecting puzzle pieces, with a soft peach background, representing how different knowledge areas are interconnected, and a few more puzzle pieces waiting to be fitted in.",
+    "negative_prompt": "text, letters, numbers, words, labels, titles, captions, annotations, typography, written characters, alphabet, digits, handwriting, watermark, signature, logo, photorealistic, photograph, 3d render, dark background, neon colors, scary, violent, Korean text, Chinese characters, Japanese text"
+  },
+  {
+    "scene": 57,
+    "role": "comparison",
+    "source": "LLM",
+    "prompt": "Friendly character in flat line art style performing an action, clean educational infographic illustration, soft pastel color background, simple hand-drawn aesthetic, warm and approachable design, NO text NO numbers NO letters NO words NO labels, only visual elements characters and shapes, 16:9 landscape format, high quality, Curious character looking through a microscope, with a soft light blue background, examining the layers of keratin in a nail, and a few slides and a nail sample nearby.",
+    "negative_prompt": "text, letters, numbers, words, labels, titles, captions, annotations, typography, written characters, alphabet, digits, handwriting, watermark, signature, logo, photorealistic, photograph, 3d render, dark background, neon colors, scary, violent, Korean text, Chinese characters, Japanese text"
+  },
+  {
+    "scene": 58,
+    "role": "emphasis",
+    "source": "LLM",
+    "prompt": "Friendly character in flat line art style performing an action, clean educational infographic illustration, soft pastel color background, simple hand-drawn aesthetic, warm and approachable design, NO text NO numbers NO letters NO words NO labels, only visual elements characters and shapes, 16:9 landscape format, high quality, Character balancing on a seesaw, with a soft mint green background, comparing correct and incorrect answers, and a few thought bubbles above their head with question marks.",
+    "negative_prompt": "text, letters, numbers, words, labels, titles, captions, annotations, typography, written characters, alphabet, digits, handwriting, watermark, signature, logo, photorealistic, photograph, 3d render, dark background, neon colors, scary, violent, Korean text, Chinese characters, Japanese text"
+  },
+  {
+    "scene": 59,
+    "role": "emphasis",
+    "source": "LLM",
+    "prompt": "Friendly character in flat line art style performing an action, clean educational infographic illustration, soft pastel color background, simple hand-drawn aesthetic, warm and approachable design, NO text NO numbers NO letters NO words NO labels, only visual elements characters and shapes, 16:9 landscape format, high quality, Friendly character watering a growing plant, with a soft peach background, symbolizing the growth of knowledge and understanding, and a few books and a watering can nearby.",
+    "negative_prompt": "text, letters, numbers, words, labels, titles, captions, annotations, typography, written characters, alphabet, digits, handwriting, watermark, signature, logo, photorealistic, photograph, 3d render, dark background, neon colors, scary, violent, Korean text, Chinese characters, Japanese text"
+  },
+  {
+    "scene": 60,
+    "role": "comparison",
+    "source": "LLM",
+    "prompt": "Friendly character in flat line art style performing an action, clean educational infographic illustration, soft pastel color background, simple hand-drawn aesthetic, warm and approachable design, NO text NO numbers NO letters NO words NO labels, only visual elements characters and shapes, 16:9 landscape format, high quality, Character standing on a mountain peak, with a soft lavender background, celebrating with arms up, and a few flags and a trophy nearby, representing achievement and conclusion.",
+    "negative_prompt": "text, letters, numbers, words, labels, titles, captions, annotations, typography, written characters, alphabet, digits, handwriting, watermark, signature, logo, photorealistic, photograph, 3d render, dark background, neon colors, scary, violent, Korean text, Chinese characters, Japanese text"
+  },
+  {
+    "scene": 61,
+    "role": "explanation",
+    "source": "LLM",
+    "prompt": "Friendly character in flat line art style performing an action, clean educational infographic illustration, soft pastel color background, simple hand-drawn aesthetic, warm and approachable design, NO text NO numbers NO letters NO words NO labels, only visual elements characters and shapes, 16:9 landscape format, high quality, Educational whiteboard diagram showing step-by-step flowchart with numbered boxes and connecting arrows, hand-drawn black marker sketch on pure white background, CRITICAL REQUIREMENT: zero text, zero letters, zero words, zero numbers anywhere in the image, only visual elements like arrows boxes curves and shapes, absolutely no written labels or annotations, pure visual diagram without any typography",
+    "negative_prompt": "text, letters, numbers, words, labels, titles, captions, annotations, typography, written characters, alphabet, digits, handwriting, watermark, signature, logo, photorealistic, photograph, 3d render, dark background, neon colors, scary, violent, Korean text, Chinese characters, Japanese text"
+  },
+  {
+    "scene": 62,
+    "role": "emphasis",
+    "source": "LLM",
+    "prompt": "Friendly character in flat line art style performing an action, clean educational infographic illustration, soft pastel color background, simple hand-drawn aesthetic, warm and approachable design, NO text NO numbers NO letters NO words NO labels, only visual elements characters and shapes, 16:9 landscape format, high quality, Educational whiteboard diagram showing highlighted key concept box with radiating importance indicators, hand-drawn black marker sketch on pure white background, CRITICAL REQUIREMENT: zero text, zero letters, zero words, zero numbers anywhere in the image, only visual elements like arrows boxes curves and shapes, absolutely no written labels or annotations, pure visual diagram without any typography",
+    "negative_prompt": "text, letters, numbers, words, labels, titles, captions, annotations, typography, written characters, alphabet, digits, handwriting, watermark, signature, logo, photorealistic, photograph, 3d render, dark background, neon colors, scary, violent, Korean text, Chinese characters, Japanese text"
+  },
+  {
+    "scene": 63,
+    "role": "closing",
+    "source": "LLM",
+    "prompt": "Friendly character in flat line art style performing an action, clean educational infographic illustration, soft pastel color background, simple hand-drawn aesthetic, warm and approachable design, NO text NO numbers NO letters NO words NO labels, only visual elements characters and shapes, 16:9 landscape format, high quality, Educational whiteboard diagram showing summary mind map connecting all main concepts with lines, hand-drawn black marker sketch on pure white background, CRITICAL REQUIREMENT: zero text, zero letters, zero words, zero numbers anywhere in the image, only visual elements like arrows boxes curves and shapes, absolutely no written labels or annotations, pure visual diagram without any typography",
+    "negative_prompt": "text, letters, numbers, words, labels, titles, captions, annotations, typography, written characters, alphabet, digits, handwriting, watermark, signature, logo, photorealistic, photograph, 3d render, dark background, neon colors, scary, violent, Korean text, Chinese characters, Japanese text"
+  }
+]

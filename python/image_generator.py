@@ -1,6 +1,6 @@
 """
 Image Generator Module (v2)
-Generates scene images using Replicate API (Flux/SDXL).
+Generates scene images using Replicate API or Google Vertex AI Imagen.
 """
 
 import os
@@ -77,6 +77,76 @@ def _build_flux_params(
     return params
 
 
+def _generate_with_google_imagen(
+    prompt: str,
+    negative_prompt: str,
+    output_path: str,
+    model: str = "imagen-4.0-ultra-generate-001",
+    seed: Optional[int] = None,
+    max_retries: int = 3,
+) -> tuple[bool, Optional[str]]:
+    """
+    Generate a single image using Google Vertex AI Imagen.
+
+    Returns:
+        Tuple of (success, error_message)
+    """
+    from google import genai
+    from google.genai.types import GenerateImagesConfig
+
+    project_id = os.environ.get("GOOGLE_CLOUD_PROJECT", "notebooklm-485105")
+    location = os.environ.get("GOOGLE_CLOUD_LOCATION", "us-central1")
+
+    for attempt in range(max_retries):
+        try:
+            client = genai.Client(
+                vertexai=True,
+                project=project_id,
+                location=location,
+            )
+
+            config_kwargs = {
+                "number_of_images": 1,
+                "aspect_ratio": "16:9",
+                "output_mime_type": "image/png",
+                "person_generation": "allow_adult",
+                "safety_filter_level": "block_only_high",
+                "language": "en",
+            }
+
+            if negative_prompt:
+                config_kwargs["negative_prompt"] = negative_prompt
+            if seed is not None:
+                config_kwargs["seed"] = seed
+                config_kwargs["add_watermark"] = False
+
+            config = GenerateImagesConfig(**config_kwargs)
+
+            response = client.models.generate_images(
+                model=model,
+                prompt=prompt,
+                config=config,
+            )
+
+            if response.generated_images:
+                os.makedirs(os.path.dirname(output_path) or '.', exist_ok=True)
+                response.generated_images[0].image.save(output_path)
+                return True, None
+            else:
+                raise ValueError("No image generated (safety filter may have blocked)")
+
+        except Exception as e:
+            error_msg = str(e)
+            if attempt < max_retries - 1:
+                wait_time = 2 ** attempt
+                print(f"    Retry {attempt + 1}/{max_retries} in {wait_time}s: {error_msg[:100]}")
+                time.sleep(wait_time)
+            else:
+                return False, f"Failed after {max_retries} attempts: {error_msg[:150]}"
+
+    return False, "Unknown error"
+
+
 def generate_single_image(
     prompt: str,
     negative_prompt: str,
@@ -90,11 +160,17 @@ def generate_single_image(
     max_retries: int = 3,
 ) -> tuple[bool, Optional[str]]:
     """
-    Generate a single image using Replicate API.
+    Generate a single image using Replicate API or Google Imagen.
 
     Returns:
         Tuple of (success, error_message)
     """
+    # Route to Google Imagen if model starts with "imagen-"
+    if model.startswith("imagen-"):
+        return _generate_with_google_imagen(
+            prompt, negative_prompt, output_path, model, seed, max_retries,
+        )
+
     import replicate
 
     for attempt in range(max_retries):
@@ -268,7 +344,7 @@ def generate_placeholder_images(
 
         # Create a simple SVG placeholder and convert to PNG-like
         colors = role_colors.get(scene_prompt.scene_role, ("#1a1a2e", "#16213e"))
-        _create_placeholder_svg(output_path, width, height, colors, idx + 1, scene_prompt.scene_role)
+        _create_placeholder_png(output_path, width, height, colors, idx + 1, scene_prompt.scene_role)
 
         result = GeneratedImage(
             scene_index=idx,
@@ -284,7 +360,7 @@ def generate_placeholder_images(
     return results
 
 
-def _create_placeholder_svg(
+def _create_placeholder_png(
     output_path: str,
     width: int,
     height: int,
@@ -292,30 +368,52 @@ def _create_placeholder_svg(
     scene_num: int,
     role: str,
 ):
-    """Create a simple SVG placeholder image."""
-    svg = f'''<?xml version="1.0" encoding="UTF-8"?>
-<svg xmlns="http://www.w3.org/2000/svg" width="{width}" height="{height}">
-  <defs>
-    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" style="stop-color:{colors[0]};stop-opacity:1" />
-      <stop offset="100%" style="stop-color:{colors[1]};stop-opacity:1" />
-    </linearGradient>
-  </defs>
-  <rect width="{width}" height="{height}" fill="url(#bg)"/>
-  <text x="{width//2}" y="{height//2 - 40}" font-family="Arial" font-size="72"
-        fill="#FFFFFF" text-anchor="middle" opacity="0.3">Scene {scene_num}</text>
-  <text x="{width//2}" y="{height//2 + 40}" font-family="Arial" font-size="36"
-        fill="#FFD700" text-anchor="middle" opacity="0.3">{role}</text>
-</svg>'''
+    """Create a simple gradient PNG placeholder image using Pillow."""
+    from PIL import Image, ImageDraw, ImageFont
 
-    # Save as SVG (Remotion can handle SVG images)
-    # Change extension to .svg
-    svg_path = output_path.replace('.png', '.svg')
-    with open(svg_path, 'w', encoding='utf-8') as f:
-        f.write(svg)
+    def hex_to_rgb(hex_color: str) -> tuple[int, int, int]:
+        hex_color = hex_color.lstrip('#')
+        return tuple(int(hex_color[i:i+2], 16) for i in (0, 2, 4))
 
-    # Also save the PNG path reference (will be SVG actually)
-    # For real pipeline, Replicate generates actual PNG
-    import shutil
-    if svg_path != output_path:
-        shutil.copy(svg_path, output_path)
+    c1 = hex_to_rgb(colors[0])
+    c2 = hex_to_rgb(colors[1])
+
+    img = Image.new('RGB', (width, height))
+    draw = ImageDraw.Draw(img)
+
+    # Draw gradient
+    for y in range(height):
+        ratio = y / height
+        r = int(c1[0] + (c2[0] - c1[0]) * ratio)
+        g = int(c1[1] + (c2[1] - c1[1]) * ratio)
+        b = int(c1[2] + (c2[2] - c1[2]) * ratio)
+        draw.line([(0, y), (width, y)], fill=(r, g, b))
+
+    # Draw scene number text
+    try:
+        font_large = ImageFont.truetype("arial.ttf", 72)
+        font_small = ImageFont.truetype("arial.ttf", 36)
+    except (IOError, OSError):
+        font_large = ImageFont.load_default()
+        font_small = font_large
+
+    # Scene number (centered, semi-transparent effect via color)
+    text_color = (255, 255, 255, 80)
+    label = f"Scene {scene_num}"
+    bbox = draw.textbbox((0, 0), label, font=font_large)
+    text_w = bbox[2] - bbox[0]
+    draw.text(
+        ((width - text_w) // 2, height // 2 - 60),
+        label, fill=(100, 100, 100), font=font_large,
+    )
+
+    # Role label
+    bbox2 = draw.textbbox((0, 0), role, font=font_small)
+    text_w2 = bbox2[2] - bbox2[0]
+    draw.text(
+        ((width - text_w2) // 2, height // 2 + 20),
+        role, fill=(120, 120, 80), font=font_small,
+    )
+
+    os.makedirs(os.path.dirname(output_path) or '.', exist_ok=True)
+    img.save(output_path, 'PNG')

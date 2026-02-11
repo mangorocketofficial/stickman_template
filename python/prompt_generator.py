@@ -231,7 +231,8 @@ def generate_scene_prompts(
 
             # Use LLM description if available, otherwise fall back to keyword-based
             diagram_area = "center"
-            if llm_descriptions and i < len(llm_descriptions):
+            if (llm_descriptions and i < len(llm_descriptions)
+                    and llm_descriptions[i].get("image")):
                 llm_item = llm_descriptions[i]
                 diagram_description = llm_item["image"]
                 diagram_area = llm_item.get("diagram_area", "center")

@@ -256,6 +256,77 @@ def map_narration_to_words(
     return result
 
 
+def map_segments_sequential(
+    segments: list[str],
+    words: list[WordTimestamp],
+) -> list[tuple[int, int]]:
+    """
+    Map subtitle segments to Whisper words using sequential word assignment.
+
+    Distributes words to segments proportionally by character count,
+    ensuring non-overlapping, sequential timing with no gaps.
+
+    This is more accurate than map_narration_to_words for many small segments
+    because it assigns words sequentially instead of independently.
+
+    Args:
+        segments: List of subtitle text segments
+        words: Word timestamps from Whisper alignment
+
+    Returns:
+        List of (start_ms, end_ms) tuples, guaranteed non-overlapping
+    """
+    if not words or not segments:
+        return [(0, 0) for _ in segments]
+
+    # Calculate normalized character counts for each segment
+    seg_chars = []
+    for seg in segments:
+        nc = len(normalize_korean(seg))
+        seg_chars.append(max(nc, 1))  # at least 1 char
+
+    total_chars = sum(seg_chars)
+    total_words = len(words)
+
+    # Assign words to segments proportionally
+    result = []
+    word_idx = 0
+
+    for i, seg in enumerate(segments):
+        # Calculate how many words this segment should get
+        ratio = seg_chars[i] / total_chars
+        expected_words = ratio * total_words
+
+        # For last segment, take all remaining words
+        if i == len(segments) - 1:
+            end_idx = total_words - 1
+        else:
+            end_idx = min(
+                word_idx + max(0, round(expected_words) - 1),
+                total_words - 1,
+            )
+
+        # Ensure at least 1 word per segment
+        if end_idx < word_idx:
+            end_idx = word_idx
+
+        # Don't exceed total words
+        if end_idx >= total_words:
+            end_idx = total_words - 1
+
+        start_ms = words[word_idx].start_ms
+        end_ms = words[end_idx].end_ms
+
+        result.append((start_ms, end_ms))
+        word_idx = end_idx + 1
+
+        # If we've exhausted all words, remaining segments share the last timestamp
+        if word_idx >= total_words:
+            word_idx = total_words - 1
+
+    return result
+
+
 def map_sentences_to_words(
     sentences: list[str],
     words: list[WordTimestamp],

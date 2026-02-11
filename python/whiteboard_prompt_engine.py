@@ -203,21 +203,52 @@ def _get_groq_client():
     return Groq(api_key=api_key)
 
 
-def llm_batch_generate_prompts(sections: list) -> Optional[list[dict]]:
-    """
-    Send the ENTIRE script to Groq Llama and get distinct visual descriptions
-    + diagram position hints for each scene in one API call.
+LLM_SYSTEM_PROMPT = """You are an expert at designing character-driven educational infographic illustrations.
 
-    Returns:
-        List of dicts: [{"image": str, "diagram_area": str}, ...]
-        Or None if LLM fails.
-    """
-    client = _get_groq_client()
-    if not client:
-        print("  [LLM] GROQ_API_KEY not set, falling back to keyword-based prompts")
-        return None
+Given a video script with multiple scenes, design a UNIQUE illustration for each scene featuring a friendly character.
 
-    # Build the full script context for LLM
+STYLE: Flat line art with friendly human characters, soft pastel colors, clean and warm.
+Think: nanobanana infographics, Kurzgesagt-lite, friendly explainer illustrations.
+
+CRITICAL RULES:
+1. Every scene MUST have a friendly human character or cute figure PERFORMING AN ACTION related to the concept
+2. Each scene MUST be VISUALLY DIFFERENT — different character pose, different props, different composition
+3. ABSOLUTELY NO text, numbers, letters, words, or labels of any kind
+4. Describe the character's ACTION clearly: pointing at, holding, standing beside, looking at, etc.
+5. Include supporting visual elements: charts, objects, icons, props that the character interacts with
+6. Use soft pastel colors: light blue, peach, mint green, lavender, warm cream backgrounds
+7. Keep descriptions to 2-3 sentences with specific visual details
+8. Leave top 15% and bottom 20% relatively clean for text overlays added later
+
+CHARACTER ACTIONS to use:
+- Pointing at / presenting a chart or graph
+- Holding or carrying objects (coins, magnifying glass, calculator)
+- Standing next to a growing bar chart or ascending staircase
+- Looking through a telescope or magnifying glass (discovery)
+- Watering a growing plant or tree (growth metaphor)
+- Balancing on a seesaw or scale (comparison)
+- Climbing stairs or a mountain (progress)
+- Celebrating with arms up (achievement/conclusion)
+
+Keep each description under 60 words. Be concise but specific.
+
+GOOD examples:
+- {"image": "Friendly character standing left, pointing at exponential curve sweeping upward right. Soft mint green background. Sparkle effects near curve top. Character smiles excitedly."}
+- {"image": "Two characters back-to-back center. Left holds small coin stack, right holds tall growing coin tower. Soft peach background with dividing line. Upward arrows on right side."}
+- {"image": "Cheerful character pushing small snowball bottom-left up gentle hill. Snowball path shows 4 circles increasing in size going right. Soft lavender background with motion lines."}
+
+BAD examples (DO NOT):
+- "A chart showing 7% interest rate" (no character! and contains numbers!)
+- "A person standing" (no action! no context! too vague!)
+- "An infographic about compound interest" (no visual detail!)
+
+Output format: Return ONLY a JSON array of objects:
+[{"image": "detailed illustration description with character action"}, ...]
+"""
+
+
+def _build_scene_list_text(sections: list, start_index: int = 0) -> str:
+    """Build formatted scene list text for LLM prompt."""
     scene_list = []
     for i, section in enumerate(sections):
         directives_str = ""
@@ -228,85 +259,58 @@ def llm_batch_generate_prompts(sections: list) -> Optional[list[dict]]:
                 directives_str += f'  [counter overlay: {d.args}]\n'
 
         scene_list.append(
-            f"Scene {i+1} ({section.name}):\n"
-            f"  Narration: {section.narration}\n"
+            f"Scene {start_index + i + 1} ({section.name}):\n"
+            f"  Narration: {section.narration[:200]}\n"
             f"{directives_str}"
         )
 
-    scenes_text = "\n".join(scene_list)
+    return "\n".join(scene_list)
 
-    system_prompt = """You are an expert at designing visual backgrounds for educational YouTube videos.
 
-Given a full video script with multiple scenes, design a UNIQUE visual background image for each scene.
-Text and numbers will be added separately in post-production, so the images must contain ZERO text.
+def _llm_generate_one_batch(
+    client,
+    batch_sections: list,
+    batch_start_index: int,
+) -> Optional[list[dict]]:
+    """Send one batch of scenes to LLM and parse results."""
+    scenes_text = _build_scene_list_text(batch_sections, batch_start_index)
+    batch_size = len(batch_sections)
 
-CRITICAL RULES:
-1. Each image MUST be VISUALLY DIFFERENT — different composition, chart style, color scheme, visual metaphor
-2. ABSOLUTELY NO text, numbers, letters, words, labels, annotations, or typography of any kind
-3. Focus on: charts, graphs, curves, arrows, shapes, icons, visual metaphors, color gradients, patterns
-4. Each image should visually represent the CONCEPT of the scene through shapes and composition alone
-5. Keep 2-3 sentences per description with RICH visual detail (multiple elements, not just one shape)
-6. Think about the narrative flow: intro=simple/inviting, middle=detailed/informative, closing=inspiring/complete
-7. Leave generous whitespace for text overlays — top 15% and bottom 20% should be relatively clean
-8. Use a consistent color palette: white background, blue/green/gold accents, clean modern aesthetic
-
-VISUAL ELEMENT TYPES to use:
-- Line charts: smooth curves, exponential growth lines, trend lines (no axis labels)
-- Bar charts: ascending/descending bars with different heights and colors (no numbers)
-- Comparison layouts: split view with contrasting visual elements left vs right
-- Flowcharts: connected shapes with arrows showing process flow (no text in boxes)
-- Icons/symbols: dollar signs, arrows, lightbulbs, gears, growth symbols
-- Abstract patterns: concentric circles, radiating lines, stacked layers
-- Visual metaphors: snowball getting bigger, staircase going up, tree growing
-
-GOOD examples:
-- {"image": "Clean white background with a single elegant exponential growth curve sweeping from bottom-left to top-right in deep blue. Below it, a faint straight diagonal line in light gray for contrast. Subtle grid pattern in the background. Small golden sparkle accents near the top of the curve."}
-- {"image": "Split composition with vertical dividing line. Left side: three flat horizontal blue bars of equal length. Right side: five green bars increasing dramatically in height from left to right, the tallest reaching near the top. Clean white background with subtle shadow under each bar."}
-- {"image": "Central circular icon of a snowball with motion lines trailing behind it, rolling down a gentle slope from left to right. The snowball gets progressively larger shown as 4 overlapping circles increasing in size. Light blue background gradient at bottom suggesting a hill. Clean and minimal."}
-
-BAD examples (DO NOT):
-- "A chart showing 7% interest rate" (contains numbers!)
-- "A slide with 'Compound Interest' heading" (contains text!)
-- "An educational diagram" (too vague, no visual detail!)
-
-Output format: Return ONLY a JSON array of objects:
-[{"image": "detailed visual description"}, ...]
-"""
-
-    user_prompt = f"""Here is the full video script ({len(sections)} scenes):
+    user_prompt = f"""Here are {batch_size} video scenes (batch starting at scene {batch_start_index + 1}):
 
 {scenes_text}
 
-Design {len(sections)} UNIQUE visual background images.
-- ZERO text, numbers, or letters — only visual elements like charts, curves, shapes, icons
-- Each image is visually distinct (different composition, chart type, color emphasis)
-- Rich detail: multiple visual elements per image, not just a single shape
-- Leave whitespace at top and bottom for text overlays added later
-- Return as JSON array of {len(sections)} objects with "image" key"""
+Design {batch_size} UNIQUE character-driven illustrations.
+- Every scene has a friendly character DOING something related to the concept
+- ZERO text, numbers, or letters anywhere
+- Flat line art style, soft pastel colors, warm and friendly
+- Each illustration is visually distinct (different pose, props, composition)
+- Return as JSON array of exactly {batch_size} objects with "image" key
+- IMPORTANT: Keep each description under 40 words to avoid truncation"""
 
     try:
-        print(f"  [LLM] Sending {len(sections)} scenes to Groq Llama...")
+        # Scale max_tokens with batch size (generous to avoid truncation)
+        max_tokens = min(8000, 500 * batch_size)
 
         response = client.chat.completions.create(
             model="llama-3.3-70b-versatile",
             messages=[
-                {"role": "system", "content": system_prompt},
+                {"role": "system", "content": LLM_SYSTEM_PROMPT},
                 {"role": "user", "content": user_prompt},
             ],
             temperature=0.7,
-            max_tokens=3000,
+            max_tokens=max_tokens,
         )
 
         raw = response.choices[0].message.content.strip()
-        print(f"  [LLM] Response received ({len(raw)} chars)")
-
         results = _parse_llm_json(raw)
 
-        if not isinstance(results, list) or len(results) != len(sections):
-            print(f"  [LLM] Expected {len(sections)} items, got {len(results) if isinstance(results, list) else 'non-list'}")
+        if not isinstance(results, list) or len(results) != batch_size:
+            print(f"  [LLM] Batch: expected {batch_size} items, "
+                  f"got {len(results) if isinstance(results, list) else 'non-list'}")
             return None
 
-        # Normalize: accept both string and dict formats
+        # Normalize
         normalized = []
         for i, item in enumerate(results):
             if isinstance(item, str):
@@ -318,17 +322,161 @@ Design {len(sections)} UNIQUE visual background images.
                 })
             else:
                 normalized.append({"image": str(item), "diagram_area": "center"})
-            print(f"  [LLM] Scene {i+1} [{normalized[-1]['diagram_area']}]: {normalized[-1]['image'][:70]}...")
+
+            global_idx = batch_start_index + i + 1
+            print(f"  [LLM] Scene {global_idx}: {normalized[-1]['image'][:70]}...")
 
         return normalized
 
     except json.JSONDecodeError as e:
-        print(f"  [LLM] Failed to parse JSON response: {e}")
-        print(f"  [LLM] Raw response: {raw[:200]}")
+        print(f"  [LLM] Batch {batch_start_index+1}: JSON parse failed: {e}")
         return None
     except Exception as e:
-        print(f"  [LLM] Groq API error: {e}")
+        print(f"  [LLM] Batch {batch_start_index+1}: API error: {e}")
         return None
+
+
+def _llm_generate_single_scene(
+    client,
+    section,
+    scene_index: int,
+) -> Optional[dict]:
+    """Generate LLM prompt for a single scene (used as fallback when batch fails)."""
+    narration_preview = section.narration[:200]
+    directives_str = ""
+    for d in section.directives:
+        if d.type == "text":
+            directives_str += f'  [text overlay: "{d.args[0]}"]\n'
+
+    user_prompt = f"""Design ONE character-driven illustration for this video scene:
+
+Scene {scene_index + 1} ({section.name}):
+  Narration: {narration_preview}
+{directives_str}
+
+Requirements:
+- Friendly character DOING something related to the narration content
+- ZERO text, numbers, or letters anywhere
+- Flat line art style, soft pastel colors
+- Keep description under 40 words
+- Return ONLY: {{"image": "description here"}}"""
+
+    try:
+        response = client.chat.completions.create(
+            model="llama-3.3-70b-versatile",
+            messages=[
+                {"role": "system", "content": LLM_SYSTEM_PROMPT},
+                {"role": "user", "content": user_prompt},
+            ],
+            temperature=0.7,
+            max_tokens=300,
+        )
+
+        raw = response.choices[0].message.content.strip()
+        result = _parse_llm_json(raw)
+
+        if isinstance(result, dict) and result.get("image"):
+            return {
+                "image": result["image"],
+                "diagram_area": result.get("diagram_area", "center"),
+            }
+        elif isinstance(result, list) and len(result) > 0:
+            item = result[0]
+            if isinstance(item, dict) and item.get("image"):
+                return {
+                    "image": item["image"],
+                    "diagram_area": item.get("diagram_area", "center"),
+                }
+
+        return None
+
+    except Exception as e:
+        print(f"  [LLM] Single scene {scene_index+1} failed: {e}")
+        return None
+
+
+def llm_batch_generate_prompts(sections: list, batch_size: int = 10) -> Optional[list[dict]]:
+    """
+    Send scenes to Groq Llama in batches and get distinct visual descriptions.
+
+    For 60+ scenes, splits into batches of batch_size to avoid token limits.
+    Failed batches are retried once with smaller batch size, then individual scenes.
+
+    Returns:
+        List of dicts: [{"image": str, "diagram_area": str}, ...]
+        Or None if LLM fails.
+    """
+    import time
+
+    client = _get_groq_client()
+    if not client:
+        print("  [LLM] GROQ_API_KEY not set, falling back to keyword-based prompts")
+        return None
+
+    total = len(sections)
+    num_batches = max(1, (total + batch_size - 1) // batch_size)
+    print(f"  [LLM] Generating prompts for {total} scenes in {num_batches} batch(es)...")
+
+    all_results = []
+
+    for batch_idx in range(num_batches):
+        start = batch_idx * batch_size
+        end = min(start + batch_size, total)
+        batch = sections[start:end]
+
+        print(f"  [LLM] Batch {batch_idx+1}/{num_batches} (scenes {start+1}-{end})...")
+
+        # Attempt 1: full batch
+        batch_results = _llm_generate_one_batch(client, batch, start)
+
+        # Attempt 2: retry full batch once
+        if not batch_results:
+            print(f"  [LLM] Batch {batch_idx+1} failed, retrying...")
+            time.sleep(2)
+            batch_results = _llm_generate_one_batch(client, batch, start)
+
+        # Attempt 3: split into half-batches
+        if not batch_results and len(batch) > 3:
+            mid = len(batch) // 2
+            print(f"  [LLM] Retrying as 2 half-batches ({mid} + {len(batch)-mid})...")
+            time.sleep(1)
+            half1 = _llm_generate_one_batch(client, batch[:mid], start)
+            time.sleep(1)
+            half2 = _llm_generate_one_batch(client, batch[mid:], start + mid)
+            if half1 and half2:
+                batch_results = half1 + half2
+
+        # Attempt 4: generate each scene individually
+        if not batch_results:
+            print(f"  [LLM] Half-batches failed, generating scenes individually...")
+            individual_results = []
+            for i, section in enumerate(batch):
+                global_idx = start + i
+                time.sleep(0.5)  # Rate limit
+                result = _llm_generate_single_scene(client, section, global_idx)
+                if result:
+                    print(f"  [LLM] Scene {global_idx+1}: {result['image'][:70]}...")
+                    individual_results.append(result)
+                else:
+                    print(f"  [LLM] Scene {global_idx+1}: individual generation failed")
+                    individual_results.append({"image": None, "diagram_area": "center"})
+            batch_results = individual_results
+
+        all_results.extend(batch_results)
+
+        # Rate limit between batches
+        if batch_idx < num_batches - 1:
+            time.sleep(1)
+
+    # Check if all results have None image (total failure)
+    none_count = sum(1 for r in all_results if r.get("image") is None)
+    if none_count == len(all_results):
+        return None
+
+    if none_count > 0:
+        print(f"  [LLM] Warning: {none_count}/{len(all_results)} scenes failed LLM, will use keyword fallback")
+
+    return all_results
 
 
 def vision_analyze_overlay_positions(

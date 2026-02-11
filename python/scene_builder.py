@@ -142,18 +142,24 @@ def build_scene_v2(
         }
 
     # Build overlays from directives (text, counter only)
-    # Whiteboard style: skip auto-overlays — user edits manually in Remotion
     overlays = []
-    if style != "whiteboard":
-        type_counters = {}
-        for directive in directives:
-            if directive.type in ('text', 'counter'):
-                type_counters[directive.type] = type_counters.get(directive.type, 0) + 1
-                count = type_counters[directive.type]
-                overlay_id = f"{scene_id}_{directive.type}_{count}"
-                overlay = directive_to_overlay(directive, overlay_id, style=style)
-                if overlay:
-                    overlays.append(overlay)
+    type_counters = {}
+    for directive in directives:
+        if directive.type in ('text', 'counter'):
+            type_counters[directive.type] = type_counters.get(directive.type, 0) + 1
+            count = type_counters[directive.type]
+            overlay_id = f"{scene_id}_{directive.type}_{count}"
+            overlay = directive_to_overlay(directive, overlay_id, style=style)
+            if overlay:
+                # Whiteboard style: add semi-transparent background for readability
+                if style == "whiteboard" and overlay.get("props"):
+                    overlay["props"]["background"] = {
+                        "color": "rgba(255, 255, 255, 0.75)",
+                        "padding": 20,
+                        "borderRadius": 16,
+                    }
+                    overlay["props"]["color"] = "#2D3436"
+                overlays.append(overlay)
 
     # Transition
     if section_index == 0:
@@ -224,8 +230,8 @@ def build_scene_json_v2(
         )
         scenes.append(scene)
 
-    # Whiteboard style uses black text for subtitles
-    subtitle_color = "#000000" if style == "whiteboard" else DEFAULT_SUBTITLE_COLOR
+    # Subtitle color: white text on dark semi-transparent background
+    subtitle_color = DEFAULT_SUBTITLE_COLOR  # #FFFFFF for all styles
     subtitle_highlight = "#0066CC" if style == "whiteboard" else DEFAULT_SUBTITLE_HIGHLIGHT
 
     return {
