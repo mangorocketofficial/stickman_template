@@ -3,6 +3,7 @@ title: 네일미용기술 핵심정리
 voice: ko-KR-HyunsuNeural
 style: whiteboard
 audio_file: 네일미용기술_compressed.mp3
+headerText: 원펀 : 미용사(네일) - 네일미용기술 핵심정리
 ---
 
 ## scene: intro

@@ -101,6 +101,43 @@ export const MainVideo: React.FC<MainVideoProps> = ({
           );
         })}
 
+        {/* Global header banner - fixed top-right on all scenes */}
+        {meta.headerText && (
+          <div
+            style={{
+              position: 'absolute',
+              top: 30,
+              right: 40,
+              zIndex: 90,
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'flex-end',
+            }}
+          >
+            <span
+              style={{
+                fontFamily: '"Noto Sans KR", sans-serif',
+                fontSize: 24,
+                fontWeight: 600,
+                color: '#333333',
+                letterSpacing: '0.02em',
+                whiteSpace: 'nowrap',
+              }}
+            >
+              {meta.headerText}
+            </span>
+            <div
+              style={{
+                width: '100%',
+                height: 2,
+                backgroundColor: '#333333',
+                marginTop: 6,
+                borderRadius: 1,
+              }}
+            />
+          </div>
+        )}
+
         {/* Subtitle overlay - always on top (layer 99) */}
         {subtitleData && subtitles && (
           <SubtitleOverlay

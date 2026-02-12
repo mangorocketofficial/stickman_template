@@ -222,7 +222,7 @@ def build_scene_v2(
             "position": keyword_pos,
             "props": {
                 "content": keyword_content,
-                "fontSize": 72,
+                "fontSize": 96,
                 "fontWeight": "bold",
                 "color": KEYWORD_COLOR,
                 "align": "center",
@@ -254,7 +254,7 @@ def build_scene_v2(
                     "layer": 2,
                     "props": {
                         "content": wb.description,
-                        "fontSize": 36,
+                        "fontSize": 48,
                         "fontWeight": "normal",
                         "color": DESCRIPTION_COLOR,
                         "align": "center",
@@ -273,7 +273,7 @@ def build_scene_v2(
                     "layer": 2,
                     "props": {
                         "content": wb.description,
-                        "fontSize": 36,
+                        "fontSize": 48,
                         "fontWeight": "normal",
                         "color": DESCRIPTION_COLOR,
                         "align": "center",
@@ -376,6 +376,7 @@ def build_scene_json_v2(
             "height": DEFAULT_HEIGHT,
             "audioSrc": audio_path,
             "style": style,
+            "headerText": parsed_script.meta.get("headerText", ""),
         },
         "subtitles": {
             "src": words_path,

@@ -44,6 +44,9 @@ export interface VideoMeta {
 
   // === Track B-8: TTS Config ===
   tts?: TTSConfig;
+
+  // === Global Header ===
+  headerText?: string;             // fixed text overlay at top-right
 }
 
 export interface SubtitleConfig {
