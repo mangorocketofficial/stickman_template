@@ -1,13 +1,10 @@
 """
-Image Generator Module (v2)
-Generates scene images using Replicate API or Google Vertex AI Imagen.
+Image Generator Module (v3)
+Generates scene images using Google Vertex AI Imagen.
 """
 
 import os
 import time
-import asyncio
-import urllib.request
-from pathlib import Path
 from dataclasses import dataclass
 from typing import Optional
 
@@ -26,64 +23,14 @@ class GeneratedImage:
     error: Optional[str] = None
 
 
-def _build_ideogram_params(
-    prompt: str,
-    negative_prompt: str,
-    seed: Optional[int] = None,
-) -> dict:
-    """Build input params for Ideogram v2/v3 models."""
-    params = {
-        "prompt": prompt,
-        "aspect_ratio": "16:9",
-        "style_type": "Design",
-        "magic_prompt_option": "On",
-    }
-    if negative_prompt:
-        params["negative_prompt"] = negative_prompt
-    if seed is not None:
-        params["seed"] = seed
-    return params
-
-
-def _build_flux_params(
-    prompt: str,
-    negative_prompt: str,
-    model: str,
-    width: int,
-    height: int,
-    num_inference_steps: int,
-    guidance_scale: float,
-    seed: Optional[int] = None,
-) -> dict:
-    """Build input params for Flux models."""
-    params = {
-        "prompt": prompt,
-        "width": width,
-        "height": height,
-        "num_inference_steps": num_inference_steps,
-        "go_fast": True,
-        "megapixels": "1",
-        "output_format": "png",
-        "output_quality": 90,
-    }
-    # Flux schnell doesn't support negative_prompt or guidance_scale
-    if "flux-schnell" not in model:
-        if negative_prompt:
-            params["negative_prompt"] = negative_prompt
-        if guidance_scale:
-            params["guidance_scale"] = guidance_scale
-    if seed is not None:
-        params["seed"] = seed
-    return params
-
-
-def _generate_with_google_imagen(
+def generate_single_image(
     prompt: str,
     negative_prompt: str,
     output_path: str,
     model: str = "imagen-4.0-ultra-generate-001",
     seed: Optional[int] = None,
     max_retries: int = 3,
+    **kwargs,
 ) -> tuple[bool, Optional[str]]:
     """
     Generate a single image using Google Vertex AI Imagen.
@@ -147,107 +94,20 @@ def _generate_with_google_imagen(
     return False, "Unknown error"
 
 
-def generate_single_image(
-    prompt: str,
-    negative_prompt: str,
-    output_path: str,
-    model: str = "black-forest-labs/flux-schnell",
-    width: int = 1920,
-    height: int = 1080,
-    guidance_scale: float = 3.5,
-    num_inference_steps: int = 4,
-    seed: Optional[int] = None,
-    max_retries: int = 3,
-) -> tuple[bool, Optional[str]]:
-    """
-    Generate a single image using Replicate API or Google Imagen.
-
-    Returns:
-        Tuple of (success, error_message)
-    """
-    # Route to Google Imagen if model starts with "imagen-"
-    if model.startswith("imagen-"):
-        return _generate_with_google_imagen(
-            prompt, negative_prompt, output_path, model, seed, max_retries,
-        )
-
-    import replicate
-
-    for attempt in range(max_retries):
-        try:
-            # Build model-specific params
-            if "ideogram" in model:
-                input_params = _build_ideogram_params(prompt, negative_prompt, seed)
-            else:
-                input_params = _build_flux_params(
-                    prompt, negative_prompt, model, width, height,
-                    num_inference_steps, guidance_scale, seed,
-                )
-
-            output = replicate.run(model, input=input_params)
-
-            # Handle output format (can be URL string or FileOutput)
-            image_url = None
-            if isinstance(output, list) and len(output) > 0:
-                image_url = str(output[0])
-            elif isinstance(output, str):
-                image_url = output
-            elif hasattr(output, 'url'):
-                image_url = output.url
-            else:
-                # Try to iterate
-                for item in output:
-                    image_url = str(item)
-                    break
-
-            if not image_url:
-                raise ValueError("No image URL in Replicate output")
-
-            # Download image
-            os.makedirs(os.path.dirname(output_path) or '.', exist_ok=True)
-            urllib.request.urlretrieve(image_url, output_path)
-
-            return True, None
-
-        except Exception as e:
-            error_msg = str(e)
-
-            # Check for rate limit error (429 status)
-            is_rate_limit = "429" in error_msg or "rate limit" in error_msg.lower() or "throttled" in error_msg.lower()
-
-            if attempt < max_retries - 1:
-                # For rate limit errors, wait 10 seconds
-                if is_rate_limit:
-                    wait_time = 10
-                    print(f"    Rate limit hit. Waiting {wait_time}s before retry {attempt + 1}/{max_retries}...")
-                else:
-                    wait_time = 2 ** attempt  # Exponential backoff for other errors
-                    print(f"    Retry {attempt + 1}/{max_retries} in {wait_time}s: {error_msg[:100]}")
-
-                time.sleep(wait_time)
-            else:
-                return False, f"Failed after {max_retries} attempts: {error_msg[:150]}"
-
-    return False, "Unknown error"
-
-
 def generate_scene_images(
     scene_prompts: list[ScenePrompt],
     output_dir: str,
-    model: str = "black-forest-labs/flux-schnell",
-    width: int = 1920,
-    height: int = 1080,
+    model: str = "imagen-4.0-ultra-generate-001",
     base_seed: Optional[int] = None,
+    **kwargs,
 ) -> list[GeneratedImage]:
     """
-    Generate images for all scenes sequentially.
+    Generate images for all scenes sequentially using Google Imagen.
 
     Args:
         scene_prompts: List of ScenePrompt objects
         output_dir: Directory to save images
-        model: Replicate model ID
-        width: Image width
-        height: Image height
+        model: Google Imagen model ID
         base_seed: Base seed for reproducibility (each scene gets base_seed + index)
 
     Returns:
@@ -257,7 +117,6 @@ def generate_scene_images(
     os.makedirs(images_dir, exist_ok=True)
 
     results = []
-    total = len(scene_prompts)
 
     # Count actual image scenes (non-empty prompts)
     image_count = sum(1 for sp in scene_prompts if sp.generated_prompt)
@@ -291,8 +150,6 @@ def generate_scene_images(
             negative_prompt=scene_prompt.negative_prompt,
             output_path=output_path,
             model=model,
-            width=width,
-            height=height,
             seed=seed,
         )
         elapsed = time.time() - start_time
@@ -321,7 +178,6 @@ def generate_scene_images(
     succeeded = sum(1 for r in results if r.success)
     skipped = sum(1 for r in results if r.model == "none")
     failed = image_count - succeeded
-    total_time = sum(r.generation_time_s for r in results)
     print(f"\n=== Complete: {succeeded}/{image_count} succeeded, {failed} failed, {skipped} skipped (whiteboard) ===")
 
     return results
@@ -335,12 +191,11 @@ def generate_placeholder_images(
 ) -> list[GeneratedImage]:
     """
     Generate placeholder gradient images (no API needed).
-    Useful for testing the pipeline without Replicate API.
+    Useful for testing the pipeline without API.
     """
     images_dir = os.path.join(output_dir, "images")
     os.makedirs(images_dir, exist_ok=True)
 
-    # Color palettes for different roles
     role_colors = {
         "opening": ("#1a1a2e", "#16213e"),
         "explanation": ("#0f3460", "#1a1a2e"),
@@ -359,7 +214,6 @@ def generate_placeholder_images(
         output_path = os.path.join(images_dir, f"scene_{idx + 1:02d}.png")
         relative_path = f"images/scene_{idx + 1:02d}.png"
 
-        # Create a simple SVG placeholder and convert to PNG-like
         colors = role_colors.get(scene_prompt.scene_role, ("#1a1a2e", "#16213e"))
         _create_placeholder_png(output_path, width, height, colors, idx + 1, scene_prompt.scene_role)
 
@@ -398,7 +252,6 @@ def _create_placeholder_png(
     img = Image.new('RGB', (width, height))
     draw = ImageDraw.Draw(img)
 
-    # Draw gradient
     for y in range(height):
         ratio = y / height
         r = int(c1[0] + (c2[0] - c1[0]) * ratio)
@@ -406,7 +259,6 @@ def _create_placeholder_png(
         b = int(c1[2] + (c2[2] - c1[2]) * ratio)
         draw.line([(0, y), (width, y)], fill=(r, g, b))
 
-    # Draw scene number text
     try:
         font_large = ImageFont.truetype("arial.ttf", 72)
         font_small = ImageFont.truetype("arial.ttf", 36)
@@ -414,8 +266,6 @@ def _create_placeholder_png(
         font_large = ImageFont.load_default()
         font_small = font_large
 
-    # Scene number (centered, semi-transparent effect via color)
-    text_color = (255, 255, 255, 80)
     label = f"Scene {scene_num}"
     bbox = draw.textbbox((0, 0), label, font=font_large)
     text_w = bbox[2] - bbox[0]
@@ -424,7 +274,6 @@ def _create_placeholder_png(
         label, fill=(100, 100, 100), font=font_large,
     )
 
-    # Role label
     bbox2 = draw.textbbox((0, 0), role, font=font_small)
     text_w2 = bbox2[2] - bbox2[0]
     draw.text(

@@ -1,17 +1,20 @@
 #!/usr/bin/env python3
 """
-Pipeline Orchestrator (v2: AI Image Pipeline)
+Pipeline Orchestrator (v3: Streamlined Mixed Rendering)
 Main CLI entry point that runs the complete video generation pipeline.
 
-v2: Replaces StickMan objects with AI-generated image backgrounds.
-v2.1: 15-second scene splitting, 9-word subtitle splitting, template model routing.
+v3: External audio input, dynamic scene selection (~30%), Google Imagen only,
+    post-render automation (compress + backup + cleanup).
 
 Usage:
-    python pipeline.py <script.md> [--output-dir ./output] [--style whiteboard]
+    python pipeline.py <script.md> [--output-dir ./output] [--style whiteboard] [--render]
 """
 
 import argparse
 import os
+import re
+import shutil
+import subprocess
 import sys
 from pathlib import Path
 
@@ -26,13 +29,12 @@ except ImportError:
     pass
 
 from script_parser import parse_script_file, ParsedScript, ScriptSection
-from tts_generator import generate_tts
 from alignment import align_audio, map_narration_to_words, map_segments_sequential, AlignmentResult
 from scene_builder import build_scene_json_v2, save_scene_json
 from subtitle_generator import generate_subtitles, split_long_subtitle_lines, split_narration_texts, build_whisper_subtitles
 from prompt_generator import generate_scene_prompts
 from image_generator import generate_scene_images, generate_placeholder_images
-from stickman_assigner import IMAGE_SCENE_INDICES, assign_stickman_for_scenes
+from stickman_assigner import select_image_scenes, assign_stickman_for_scenes
 from whiteboard_text_generator import generate_whiteboard_texts
 
 
@@ -140,6 +142,86 @@ def split_long_scenes(
     return new_sections, new_timings
 
 
+def post_render_process(
+    output_dir: str,
+    audio_path: str,
+    title: str,
+    skip_cleanup: bool = False,
+) -> dict:
+    """Run Remotion render, compress outputs, backup, and cleanup."""
+    remotion_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'remotion')
+    remotion_dir = os.path.normpath(remotion_dir)
+
+    # 1. Render with Remotion
+    print(f"\n[8/8] Rendering video with Remotion...")
+    raw_video = os.path.join(remotion_dir, 'out', 'final.mp4')
+    render_cmd = ['npx.cmd', 'remotion', 'render', 'src/index.tsx', 'MainVideo',
+                  f'--output=./out/final.mp4', '--codec', 'h264']
+    subprocess.run(render_cmd, cwd=remotion_dir, check=True)
+    print(f"  Raw video: {raw_video}")
+
+    # 2. Compress video with ffmpeg
+    print("  Compressing video (CRF 23)...")
+    compressed_video = os.path.join(remotion_dir, 'out', 'final_compressed.mp4')
+    subprocess.run([
+        'ffmpeg', '-y', '-i', raw_video,
+        '-c:v', 'libx264', '-crf', '23',
+        '-c:a', 'aac', '-b:a', '128k',
+        '-movflags', '+faststart',
+        compressed_video,
+    ], check=True, capture_output=True)
+
+    # 3. Compress audio with ffmpeg
+    print("  Compressing audio (128kbps)...")
+    compressed_audio = os.path.join(os.path.dirname(audio_path), "audio_compressed.mp3")
+    subprocess.run([
+        'ffmpeg', '-y', '-i', audio_path,
+        '-b:a', '128k', compressed_audio,
+    ], check=True, capture_output=True)
+
+    # 4. Backup to Desktop folder
+    safe_title = re.sub(r'[<>:"/\\|?*]', '_', title)
+    backup_dir = os.path.join(os.path.expanduser('~'), 'Desktop', safe_title)
+    os.makedirs(backup_dir, exist_ok=True)
+    os.makedirs(os.path.join(backup_dir, 'images'), exist_ok=True)
+
+    print(f"  Backing up to: {backup_dir}")
+    shutil.copy2(compressed_video, os.path.join(backup_dir, 'final.mp4'))
+    shutil.copy2(compressed_audio, os.path.join(backup_dir, 'audio.mp3'))
+
+    # Copy images
+    images_dir = os.path.join(output_dir, "images")
+    if os.path.exists(images_dir):
+        for img in os.listdir(images_dir):
+            if img.endswith('.png'):
+                shutil.copy2(
+                    os.path.join(images_dir, img),
+                    os.path.join(backup_dir, 'images', img),
+                )
+
+    # Copy captions
+    srt_src = os.path.join(output_dir, 'subtitles', 'captions.srt')
+    if os.path.exists(srt_src):
+        shutil.copy2(srt_src, os.path.join(backup_dir, 'captions.srt'))
+
+    # 5. Cleanup intermediate files
+    if not skip_cleanup:
+        print("  Cleaning up intermediate files...")
+        if os.path.exists(raw_video) and os.path.exists(compressed_video):
+            os.remove(raw_video)
+
+    video_size_mb = os.path.getsize(compressed_video) / (1024 * 1024) if os.path.exists(compressed_video) else 0
+    audio_size_mb = os.path.getsize(compressed_audio) / (1024 * 1024) if os.path.exists(compressed_audio) else 0
+    print(f"  Video: {video_size_mb:.1f}MB, Audio: {audio_size_mb:.1f}MB")
+    print(f"  Backup complete: {backup_dir}")
+
+    return {
+        "compressed_video": compressed_video,
+        "compressed_audio": compressed_audio,
+        "backup_dir": backup_dir,
+    }
+
+
 def run_pipeline(
     script_path: str,
     output_dir: str = "./output",
@@ -151,9 +233,11 @@ def run_pipeline(
     use_llm_prompts: bool = True,
     scene_duration_ms: int = 15000,
     max_subtitle_words: int = 9,
+    render: bool = False,
+    skip_cleanup: bool = False,
 ) -> dict:
     """
-    Run the complete v2 video generation pipeline.
+    Run the complete v3 video generation pipeline.
 
     Args:
         script_path: Path to the markdown script file
@@ -166,16 +250,18 @@ def run_pipeline(
         use_llm_prompts: Use LLM to enhance image prompts
         scene_duration_ms: Target duration per scene in ms (default: 15000)
         max_subtitle_words: Max words per subtitle line before splitting (default: 9)
+        render: Run Remotion render + post-processing after pipeline
+        skip_cleanup: Keep intermediate files after rendering
     """
     print("=" * 60)
-    print("Video Pipeline v2.2 (Mixed: AI Image + Whiteboard+StickMan)")
+    print("Video Pipeline v3 (Mixed: AI Image + Whiteboard+StickMan)")
     print("=" * 60)
 
     dirs = setup_output_dirs(output_dir)
     print(f"\nOutput directory: {output_dir}")
 
     # === Step 1: Parse Script ===
-    print("\n[1/7] Parsing script...")
+    print("\n[1/8] Parsing script...")
     parsed_script = parse_script_file(script_path)
 
     # Override style from CLI if provided, else use script frontmatter
@@ -188,13 +274,38 @@ def run_pipeline(
     print(f"  Sections: {len(parsed_script.sections)}")
     print(f"  Total narration: {len(parsed_script.full_narration)} characters")
 
-    # === Step 2: Generate TTS ===
+    # === Step 2: Audio ===
     audio_path = os.path.join(dirs["audio"], "tts_output.mp3")
+    audio_file_meta = parsed_script.meta.get('audio_file')
 
-    if skip_tts and os.path.exists(audio_path):
-        print(f"\n[2/7] Skipping TTS (using existing: {audio_path})")
+    if audio_file_meta:
+        # Use externally provided audio file
+        # Search: 1) absolute path, 2) relative to script dir, 3) relative to project root
+        script_dir = os.path.dirname(os.path.abspath(script_path))
+        project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+        candidates = [
+            audio_file_meta,  # absolute or CWD-relative
+            os.path.join(script_dir, audio_file_meta),
+            os.path.join(project_root, audio_file_meta),
+        ]
+        source_audio = None
+        for candidate in candidates:
+            if os.path.exists(candidate):
+                source_audio = candidate
+                break
+        if not source_audio:
+            print(f"  ERROR: audio_file not found: {audio_file_meta}")
+            print(f"  Searched: {candidates}")
+            sys.exit(1)
+        shutil.copy2(source_audio, audio_path)
+        print(f"\n[2/8] Using external audio: {audio_file_meta}")
+        print(f"  Source: {source_audio}")
+        print(f"  Copied to: {audio_path}")
+    elif skip_tts and os.path.exists(audio_path):
+        print(f"\n[2/8] Skipping TTS (using existing: {audio_path})")
     else:
-        print("\n[2/7] Generating TTS audio...")
+        print("\n[2/8] Generating TTS audio...")
+        from tts_generator import generate_tts
         voice = parsed_script.meta.get('voice', 'ko-KR-HyunsuNeural')
         print(f"  Voice: {voice}")
         generate_tts(
@@ -209,7 +320,7 @@ def run_pipeline(
     fallback_line_timings = None
 
     if skip_alignment:
-        print("\n[3/7] Skipping alignment (using estimated timings)...")
+        print("\n[3/8] Skipping alignment (using estimated timings)...")
         fallback_line_timings = estimate_line_timings(parsed_script.sections)
         from alignment import AlignmentResult as AR
         alignment = AR(
@@ -219,7 +330,7 @@ def run_pipeline(
             duration_ms=fallback_line_timings[-1][1] if fallback_line_timings else 0,
         )
     else:
-        print("\n[3/7] Aligning audio with Groq Whisper...")
+        print("\n[3/8] Aligning audio with Groq Whisper...")
         if not os.environ.get("GROQ_API_KEY"):
             print("  WARNING: GROQ_API_KEY not set! Using estimated timings...")
             fallback_line_timings = estimate_line_timings(parsed_script.sections)
@@ -234,7 +345,7 @@ def run_pipeline(
             print(f"  Words: {len(alignment.words)}, Duration: {alignment.duration_ms}ms")
 
     # === Step 4: Calculate timings & split subtitles ===
-    print(f"\n[4/7] Generating subtitles (max {max_subtitle_words} words/line)...")
+    print(f"\n[4/8] Generating subtitles (max {max_subtitle_words} words/line)...")
     srt_path = os.path.join(dirs["subtitles"], "captions.srt")
     words_path = os.path.join(dirs["subtitles"], "words.json")
 
@@ -286,7 +397,7 @@ def run_pipeline(
     print(f"  Subtitle segments: {len(split_lines)}")
 
     # === Step 5: Split scenes into ~15s sub-scenes ===
-    print(f"\n[5/7] Splitting scenes (target: {scene_duration_ms/1000:.0f}s per scene)...")
+    print(f"\n[5/8] Splitting scenes (target: {scene_duration_ms/1000:.0f}s per scene)...")
     split_sections, split_scene_timings = split_long_scenes(
         parsed_script.sections,
         scene_timings,
@@ -295,11 +406,12 @@ def run_pipeline(
     )
     print(f"  Original scenes: {len(parsed_script.sections)} -> Split scenes: {len(split_sections)}")
 
-    # --- Step 5b: Classify scenes (image vs whiteboard+stickman) ---
-    image_indices = IMAGE_SCENE_INDICES  # 1-based set of 20 image scene indices
-    num_image = sum(1 for i in range(len(split_sections)) if (i + 1) in image_indices)
+    # --- Step 5b: Dynamically select ~30% scenes for AI images ---
+    image_indices = select_image_scenes(split_sections)
+    num_image = len(image_indices)
     num_whiteboard = len(split_sections) - num_image
     print(f"  Scene mix: {num_image} image + {num_whiteboard} whiteboard+stickman")
+    print(f"  Image scenes (1-based): {sorted(image_indices)}")
 
     # --- Step 5c: Assign stickman for whiteboard scenes ---
     stickman_assignments = assign_stickman_for_scenes(split_sections, image_indices)
@@ -321,9 +433,10 @@ def run_pipeline(
         full_narration=parsed_script.full_narration,
     )
 
-    # === Step 6: Generate Images (only for image scenes) ===
+    # === Step 6: Generate Images (Google Imagen, only for image scenes) ===
     active_style = parsed_script.meta.get('style', 'dark_infographic')
-    print(f"\n[6/7] Generating images for {num_image} image scenes (style: {active_style})...")
+    model = "imagen-4.0-ultra-generate-001"
+    print(f"\n[6/8] Generating images for {num_image} image scenes (model: {model})...")
 
     scene_prompts = generate_scene_prompts(
         sections=split_sections,
@@ -353,30 +466,13 @@ def run_pipeline(
         print("  Generating placeholder images (no API)...")
         image_results = generate_placeholder_images(scene_prompts, output_dir)
     else:
-        # Get model from template (respects style-specific model config)
-        from prompt_templates import get_template
-        template = get_template(active_style)
-        model = template.model
-
-        if model.startswith("imagen-"):
-            print(f"  Using Google Imagen: {model}")
-            image_results = generate_scene_images(
-                scene_prompts, output_dir, model=model
-            )
-        else:
-            replicate_key = os.environ.get("REPLICATE_API_TOKEN")
-            if not replicate_key:
-                print("  WARNING: REPLICATE_API_TOKEN not set! Using placeholders...")
-                image_results = generate_placeholder_images(scene_prompts, output_dir)
-            else:
-                full_model = f"black-forest-labs/{model}" if "/" not in model else model
-                print(f"  Using Replicate: {full_model}")
-                image_results = generate_scene_images(
-                    scene_prompts, output_dir, model=full_model
-                )
+        print(f"  Using Google Imagen: {model}")
+        image_results = generate_scene_images(
+            scene_prompts, output_dir, model=model
+        )
 
     # === Step 7: Build Scene JSON (mixed rendering) ===
-    print(f"\n[7/7] Building scene.json ({num_image} image + {num_whiteboard} whiteboard)...")
+    print(f"\n[7/8] Building scene.json ({num_image} image + {num_whiteboard} whiteboard)...")
     scene_json_path = os.path.join(output_dir, "scene.json")
 
     scene_data = build_scene_json_v2(
@@ -403,11 +499,7 @@ def run_pipeline(
     print(f"  Image scenes: {image_scenes}, Whiteboard+Stickman: {stickman_scenes}, Color-only: {wb_scenes - stickman_scenes}")
     print(f"  Avg duration: {avg_duration:.1f}s")
 
-    # === Summary ===
-    print("\n" + "=" * 60)
-    print("Pipeline v2.2 completed successfully!")
-    print("=" * 60)
-
+    # === Step 8: Render + Post-process (optional) ===
     results = {
         "script": script_path,
         "audio": audio_path,
@@ -421,15 +513,29 @@ def run_pipeline(
         "subtitle_segments": len(split_lines),
     }
 
-    print(f"\nNext step: Preview in Remotion Studio")
-    print(f"  cd remotion && npm start")
+    if render:
+        post_results = post_render_process(
+            output_dir=output_dir,
+            audio_path=audio_path,
+            title=parsed_script.meta.get('title', 'Untitled'),
+            skip_cleanup=skip_cleanup,
+        )
+        results.update(post_results)
+    else:
+        print(f"\nNext step: Preview in Remotion Studio")
+        print(f"  cd remotion && npm start")
+
+    # === Summary ===
+    print("\n" + "=" * 60)
+    print("Pipeline v3 completed successfully!")
+    print("=" * 60)
 
     return results
 
 
 def main():
     parser = argparse.ArgumentParser(
-        description="Generate AI image video from markdown script (v2.1)"
+        description="Generate video from markdown script (v3: mixed rendering)"
     )
     parser.add_argument("script", help="Path to the markdown script file")
     parser.add_argument("--output-dir", "-o", default="./output",
@@ -450,6 +556,10 @@ def main():
                         help="Target scene duration in ms (default: 15000)")
     parser.add_argument("--max-subtitle-words", type=int, default=9,
                         help="Max words per subtitle line (default: 9)")
+    parser.add_argument("--render", action="store_true",
+                        help="Render video with Remotion and post-process")
+    parser.add_argument("--skip-cleanup", action="store_true",
+                        help="Keep intermediate files after rendering")
 
     args = parser.parse_args()
 
@@ -469,6 +579,8 @@ def main():
             use_llm_prompts=not args.no_llm,
             scene_duration_ms=args.scene_duration,
             max_subtitle_words=args.max_subtitle_words,
+            render=args.render,
+            skip_cleanup=args.skip_cleanup,
         )
     except Exception as e:
         print(f"\nError: {e}")

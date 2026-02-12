@@ -1,24 +1,12 @@
 """
 Stickman Assigner Module
 Assigns pose, expression, and motion to whiteboard scenes based on narration emotion.
-
-Ported from _archive/stickman-v1/python-track-c/emotion_analysis.py
+Dynamically selects ~30% of scenes for AI image generation.
 """
 
+import re
 from dataclasses import dataclass
 from typing import Optional
-
-
-# 1-based scene indices that should use AI-generated images (20 scenes)
-IMAGE_SCENE_INDICES = {
-    1, 5,                       # intro: opener + 18 concepts overview
-    14, 18, 21,                 # stress_point: opener + definition + thickness
-    22, 26, 30,                 # oil_removal: opener + oil surface + filing
-    31, 33, 36, 38,             # nail_science: opener + moisture + dry/wet + gel removal
-    39, 43, 45,                 # uv_lamp: opener + UV types + UVA wavelength
-    46, 50, 54,                 # anatomy: opener + free edge + cuticle vs eponychium
-    55, 63,                     # conclusion: opener + final closing
-}
 
 
 # ============================================================================
@@ -198,6 +186,84 @@ def suggest_motion(text: str) -> str:
     emotion = detect_emotion(text)
     mapping = EMOTION_MAPPINGS.get(emotion, EMOTION_MAPPINGS["neutral"])
     return mapping.motion
+
+
+def select_image_scenes(sections: list, target_ratio: float = 0.30) -> set[int]:
+    """
+    Dynamically select ~30% of scenes for AI image generation.
+
+    Selection criteria (priority score):
+      100: First/last scene (always included)
+       90: Scenes with [image_hint] directive
+       80: Section openers (original scene, no _NN suffix)
+       70: First sub-scene of a new section group
+       60: Emotion emphasis/surprise/closing
+       40: Emotion positive/negative
+       10: Default baseline
+
+    Args:
+        sections: List of ScriptSection objects (post split_long_scenes)
+        target_ratio: Fraction of scenes to select (default: 0.30)
+
+    Returns:
+        Set of 1-based scene indices for AI image generation
+    """
+    total = len(sections)
+    target = max(3, round(total * target_ratio))
+
+    scored = []  # (priority, scene_1based_index)
+    prev_base_name = None
+
+    for i, section in enumerate(sections):
+        scene_num = i + 1
+        priority = 0
+
+        # First/last scenes always selected
+        if scene_num == 1 or scene_num == total:
+            priority = 100
+
+        # Check for image_hint directive
+        has_image_hint = any(
+            d.type == 'image_hint' for d in (section.directives or [])
+        )
+        if has_image_hint:
+            priority = max(priority, 90)
+
+        # Section openers (names without _NN sub-scene suffix)
+        is_sub_scene = bool(re.search(r'_\d{2}$', section.name))
+        if not is_sub_scene:
+            priority = max(priority, 80)
+
+        # First sub-scene of a new section group
+        base_name = re.sub(r'_\d{2}$', '', section.name)
+        if base_name != prev_base_name:
+            priority = max(priority, 70)
+        prev_base_name = base_name
+
+        # Emotion-based importance
+        narration = section.narration or ""
+        emotion = detect_emotion(narration)
+        if emotion in ("emphasis", "surprise", "closing"):
+            priority = max(priority, 60)
+        elif emotion in ("positive", "negative"):
+            priority = max(priority, 40)
+
+        # Minimum baseline
+        if priority == 0:
+            priority = 10
+
+        scored.append((priority, scene_num))
+
+    # Sort by priority desc, then index asc for stability
+    scored.sort(key=lambda x: (-x[0], x[1]))
+
+    selected = set()
+    for priority, scene_num in scored:
+        if len(selected) >= target:
+            break
+        selected.add(scene_num)
+
+    return selected
 
 
 def assign_stickman_for_scenes(

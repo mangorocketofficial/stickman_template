@@ -1,12 +1,12 @@
 {
   "meta": {
-    "title": "네일미용기술 핵심정리",
+    "title": "네일개론 핵심정리",
     "fps": 30,
     "width": 1920,
     "height": 1080,
     "audioSrc": "audio/tts_output.mp3",
     "style": "whiteboard",
-    "headerText": "원펀 : 미용사(네일) - 네일미용기술 핵심정리"
+    "headerText": "원펀 : 미용사(네일) - 네일개론 핵심정리"
   },
   "subtitles": {
     "src": "subtitles/words.json",
@@ -20,8 +20,8 @@
   "scenes": [
     {
       "id": "scene_01_intro_01",
-      "startMs": 0,
-      "endMs": 15900,
+      "startMs": 20,
+      "endMs": 18640,
       "background": {
         "type": "image",
         "src": "images/scene_01.png",
@@ -42,7 +42,7 @@
             "y": 250
           },
           "props": {
-            "content": "네일 자격증 필기 완전정복",
+            "content": "네일개론 완전정복",
             "fontSize": 64,
             "fontWeight": "bold",
             "color": "#000000",
@@ -62,8 +62,8 @@
     },
     {
       "id": "scene_02_intro_02",
-      "startMs": 15900,
-      "endMs": 28680,
+      "startMs": 18640,
+      "endMs": 31620,
       "background": {
         "type": "color",
         "value": "#FAFAFA"
@@ -82,7 +82,7 @@
             "y": 370
           },
           "props": {
-            "content": "핵심 개념",
+            "content": "손톱의 역사",
             "fontSize": 96,
             "fontWeight": "bold",
             "color": "#1A1A2E",
@@ -105,7 +105,7 @@
           },
           "layer": 2,
           "props": {
-            "content": "자주 나오는 18개 개념",
+            "content": "인조네일이 아닌 손톱 자체의 역사를 말함",
             "fontSize": 48,
             "fontWeight": "normal",
             "color": "#444444",
@@ -116,7 +116,7 @@
             "enter": {
               "type": "typing",
               "durationMs": 1000,
-              "delayMs": 3834
+              "delayMs": 3894
             }
           }
         },
@@ -153,8 +153,8 @@
     },
     {
       "id": "scene_03_intro_03",
-      "startMs": 28680,
-      "endMs": 43080,
+      "startMs": 31620,
+      "endMs": 44480,
       "background": {
         "type": "color",
         "value": "#FAFAFA"
@@ -173,7 +173,7 @@
             "y": 370
           },
           "props": {
-            "content": "원리 이해",
+            "content": "흥미로운 지식",
             "fontSize": 96,
             "fontWeight": "bold",
             "color": "#1A1A2E",
@@ -196,7 +196,7 @@
           },
           "layer": 2,
           "props": {
-            "content": "암기가 쉬워지는 방법",
+            "content": "손톱에 대한 재미있는 사실들",
             "fontSize": 48,
             "fontWeight": "normal",
             "color": "#444444",
@@ -207,7 +207,7 @@
             "enter": {
               "type": "typing",
               "durationMs": 1000,
-              "delayMs": 4320
+              "delayMs": 3858
             }
           }
         },
@@ -243,115 +243,13 @@
       "overlays": []
     },
     {
-      "id": "scene_04_intro_04",
-      "startMs": 43080,
-      "endMs": 56720,
-      "background": {
-        "type": "color",
-        "value": "#FAFAFA"
-      },
-      "transition": {
-        "in": "fadeIn",
-        "out": "fadeOut",
-        "durationMs": 300
-      },
-      "objects": [
-        {
-          "id": "scene_04_intro_04_keyword",
-          "type": "text",
-          "position": {
-            "x": 960,
-            "y": 370
-          },
-          "props": {
-            "content": "미션 설정",
-            "fontSize": 96,
-            "fontWeight": "bold",
-            "color": "#1A1A2E",
-            "align": "center",
-            "maxWidth": 1400
-          },
-          "animation": {
-            "enter": {
-              "type": "fadeIn",
-              "durationMs": 400
-            },
-            "during": {
-              "type": "highlightSweep",
-              "durationMs": 800
-            }
-          }
-        },
-        {
-          "id": "scene_04_intro_04_description",
-          "type": "text",
-          "position": {
-            "x": 960,
-            "y": 550
-          },
-          "layer": 2,
-          "props": {
-            "content": "단단한 지식의 기둥",
-            "fontSize": 48,
-            "fontWeight": "normal",
-            "color": "#444444",
-            "align": "center",
-            "maxWidth": 1200,
-            "background": {
-              "color": "#FFE082"
-            }
-          },
-          "animation": {
-            "enter": {
-              "type": "typing",
-              "durationMs": 1000,
-              "delayMs": 4092
-            },
-            "during": {
-              "type": "highlightSweep",
-              "durationMs": 800
-            }
-          }
-        },
-        {
-          "id": "scene_04_intro_04_stickman",
-          "type": "stickman",
-          "position": {
-            "x": 370,
-            "y": 680
-          },
-          "scale": 1.2,
-          "layer": 3,
-          "props": {
-            "pose": "depressed",
-            "expression": "sad",
-            "color": "#333333",
-            "faceColor": "#FFFFFF",
-            "lineWidth": 3
-          },
-          "animation": {
-            "enter": {
-              "type": "fadeIn",
-              "durationMs": 500,
-              "delayMs": 200
-            },
-            "during": {
-              "type": "headShake",
-              "loop": true
-            }
-          }
-        }
-      ],
-      "overlays": []
-    },
-    {
-      "id": "scene_05_intro_05",
-      "startMs": 56720,
-      "endMs": 71220,
+      "id": "scene_04_nail_history_status_01",
+      "startMs": 43960,
+      "endMs": 58200,
       "background": {
         "type": "image",
-        "src": "images/scene_05.png",
-        "animation": "panRight",
+        "src": "images/scene_04.png",
+        "animation": "panLeft",
         "animationIntensity": 0.5
       },
       "transition": {
@@ -360,103 +258,42 @@
         "durationMs": 300
       },
       "objects": [],
-      "overlays": []
-    },
-    {
-      "id": "scene_06_intro_06",
-      "startMs": 71220,
-      "endMs": 82960,
-      "background": {
-        "type": "color",
-        "value": "#FAFAFA"
-      },
-      "transition": {
-        "in": "fadeIn",
-        "out": "fadeOut",
-        "durationMs": 300
-      },
-      "objects": [
+      "overlays": [
         {
-          "id": "scene_06_intro_06_keyword",
+          "id": "scene_04_nail_history_status_01_text_1",
           "type": "text",
           "position": {
             "x": 960,
-            "y": 370
+            "y": 350
           },
           "props": {
-            "content": "핵심 기술",
-            "fontSize": 96,
-            "fontWeight": "bold",
-            "color": "#1A1A2E",
-            "align": "center",
-            "maxWidth": 1400
-          },
-          "animation": {
-            "enter": {
-              "type": "typing",
-              "durationMs": 1500
-            }
-          }
-        },
-        {
-          "id": "scene_06_intro_06_description",
-          "type": "text",
-          "position": {
-            "x": 960,
-            "y": 550
-          },
-          "layer": 2,
-          "props": {
-            "content": "당락을 좌우하는 기술",
+            "content": "5천 년 역사 - 신분의 상징",
             "fontSize": 48,
-            "fontWeight": "normal",
-            "color": "#444444",
+            "fontWeight": "bold",
+            "color": "#0066CC",
             "align": "center",
-            "maxWidth": 1200
-          },
-          "animation": {
-            "enter": {
-              "type": "typing",
-              "durationMs": 1000,
-              "delayMs": 3522
+            "maxWidth": 1200,
+            "role": "highlight_box",
+            "background": {
+              "color": "rgba(255,255,255,0.9)",
+              "padding": 20,
+              "borderRadius": 12,
+              "opacity": 0.7
             }
-          }
-        },
-        {
-          "id": "scene_06_intro_06_stickman",
-          "type": "stickman",
-          "position": {
-            "x": 370,
-            "y": 680
-          },
-          "scale": 1.2,
-          "layer": 3,
-          "props": {
-            "pose": "pointing_right",
-            "expression": "focused",
-            "color": "#333333",
-            "faceColor": "#FFFFFF",
-            "lineWidth": 3
           },
           "animation": {
             "enter": {
-              "type": "fadeIn",
-              "durationMs": 500,
-              "delayMs": 200
-            },
-            "during": {
-              "type": "nodding",
-              "loop": true
+              "type": "fadeInUp",
+              "durationMs": 500
             }
           }
         }
-      ],
-      "overlays": []
+      ]
     },
     {
-      "id": "scene_07_intro_07",
-      "startMs": 82960,
-      "endMs": 101920,
+      "id": "scene_05_nail_history_status_02",
+      "startMs": 58200,
+      "endMs": 76420,
       "background": {
         "type": "color",
         "value": "#FAFAFA"
@@ -468,287 +305,14 @@
       },
       "objects": [
         {
-          "id": "scene_07_intro_07_keyword",
+          "id": "scene_05_nail_history_status_02_keyword",
           "type": "text",
           "position": {
             "x": 960,
             "y": 370
           },
           "props": {
-            "content": "스트레스 포인트",
-            "fontSize": 96,
-            "fontWeight": "bold",
-            "color": "#1A1A2E",
-            "align": "center",
-            "maxWidth": 1400
-          },
-          "animation": {
-            "enter": {
-              "type": "handwriting",
-              "durationMs": 2000
-            }
-          }
-        },
-        {
-          "id": "scene_07_intro_07_description",
-          "type": "text",
-          "position": {
-            "x": 960,
-            "y": 550
-          },
-          "layer": 2,
-          "props": {
-            "content": "인조네일이 부러지는 지점",
-            "fontSize": 48,
-            "fontWeight": "normal",
-            "color": "#444444",
-            "align": "center",
-            "maxWidth": 1200
-          },
-          "animation": {
-            "enter": {
-              "type": "typing",
-              "durationMs": 1000,
-              "delayMs": 5688
-            }
-          }
-        },
-        {
-          "id": "scene_07_intro_07_stickman",
-          "type": "stickman",
-          "position": {
-            "x": 1550,
-            "y": 680
-          },
-          "scale": 1.2,
-          "layer": 3,
-          "props": {
-            "pose": "pointing_up",
-            "expression": "focused",
-            "color": "#333333",
-            "faceColor": "#FFFFFF",
-            "lineWidth": 3
-          },
-          "animation": {
-            "enter": {
-              "type": "fadeIn",
-              "durationMs": 500,
-              "delayMs": 200
-            },
-            "during": {
-              "type": "nodding",
-              "loop": true
-            }
-          }
-        }
-      ],
-      "overlays": []
-    },
-    {
-      "id": "scene_08_intro_08",
-      "startMs": 101920,
-      "endMs": 116820,
-      "background": {
-        "type": "color",
-        "value": "#FAFAFA"
-      },
-      "transition": {
-        "in": "fadeIn",
-        "out": "fadeOut",
-        "durationMs": 300
-      },
-      "objects": [
-        {
-          "id": "scene_08_intro_08_keyword",
-          "type": "text",
-          "position": {
-            "x": 960,
-            "y": 370
-          },
-          "props": {
-            "content": "힘이 집중되는 곳",
-            "fontSize": 96,
-            "fontWeight": "bold",
-            "color": "#1A1A2E",
-            "align": "center",
-            "maxWidth": 1400
-          },
-          "animation": {
-            "enter": {
-              "type": "typing",
-              "durationMs": 1500
-            }
-          }
-        },
-        {
-          "id": "scene_08_intro_08_description",
-          "type": "text",
-          "position": {
-            "x": 960,
-            "y": 550
-          },
-          "layer": 2,
-          "props": {
-            "content": "손톱이 외부 충격을 받는 곳",
-            "fontSize": 48,
-            "fontWeight": "normal",
-            "color": "#444444",
-            "align": "center",
-            "maxWidth": 1200
-          },
-          "animation": {
-            "enter": {
-              "type": "typing",
-              "durationMs": 1000,
-              "delayMs": 4470
-            }
-          }
-        },
-        {
-          "id": "scene_08_intro_08_stickman",
-          "type": "stickman",
-          "position": {
-            "x": 370,
-            "y": 680
-          },
-          "scale": 1.2,
-          "layer": 3,
-          "props": {
-            "pose": "pointing_right",
-            "expression": "focused",
-            "color": "#333333",
-            "faceColor": "#FFFFFF",
-            "lineWidth": 3
-          },
-          "animation": {
-            "enter": {
-              "type": "fadeIn",
-              "durationMs": 500,
-              "delayMs": 200
-            },
-            "during": {
-              "type": "nodding",
-              "loop": true
-            }
-          }
-        }
-      ],
-      "overlays": []
-    },
-    {
-      "id": "scene_09_intro_09",
-      "startMs": 116820,
-      "endMs": 131900,
-      "background": {
-        "type": "color",
-        "value": "#FAFAFA"
-      },
-      "transition": {
-        "in": "fadeIn",
-        "out": "fadeOut",
-        "durationMs": 300
-      },
-      "objects": [
-        {
-          "id": "scene_09_intro_09_keyword",
-          "type": "text",
-          "position": {
-            "x": 960,
-            "y": 370
-          },
-          "props": {
-            "content": "스트레스 포인트",
-            "fontSize": 96,
-            "fontWeight": "bold",
-            "color": "#1A1A2E",
-            "align": "center",
-            "maxWidth": 1400
-          },
-          "animation": {
-            "enter": {
-              "type": "handwriting",
-              "durationMs": 2000
-            }
-          }
-        },
-        {
-          "id": "scene_09_intro_09_description",
-          "type": "text",
-          "position": {
-            "x": 960,
-            "y": 550
-          },
-          "layer": 2,
-          "props": {
-            "content": "아크릴이나 젤을 얇게 올리면 부러진다",
-            "fontSize": 48,
-            "fontWeight": "normal",
-            "color": "#444444",
-            "align": "center",
-            "maxWidth": 1200
-          },
-          "animation": {
-            "enter": {
-              "type": "typing",
-              "durationMs": 1000,
-              "delayMs": 4524
-            }
-          }
-        },
-        {
-          "id": "scene_09_intro_09_stickman",
-          "type": "stickman",
-          "position": {
-            "x": 1550,
-            "y": 680
-          },
-          "scale": 1.2,
-          "layer": 3,
-          "props": {
-            "pose": "pointing_up",
-            "expression": "focused",
-            "color": "#333333",
-            "faceColor": "#FFFFFF",
-            "lineWidth": 3
-          },
-          "animation": {
-            "enter": {
-              "type": "fadeIn",
-              "durationMs": 500,
-              "delayMs": 200
-            },
-            "during": {
-              "type": "nodding",
-              "loop": true
-            }
-          }
-        }
-      ],
-      "overlays": []
-    },
-    {
-      "id": "scene_10_intro_10",
-      "startMs": 131900,
-      "endMs": 144880,
-      "background": {
-        "type": "color",
-        "value": "#FAFAFA"
-      },
-      "transition": {
-        "in": "fadeIn",
-        "out": "fadeOut",
-        "durationMs": 300
-      },
-      "objects": [
-        {
-          "id": "scene_10_intro_10_keyword",
-          "type": "text",
-          "position": {
-            "x": 960,
-            "y": 370
-          },
-          "props": {
-            "content": "스트레스 포인트",
+            "content": "네일아트의 목적",
             "fontSize": 96,
             "fontWeight": "bold",
             "color": "#1A1A2E",
@@ -767,7 +331,7 @@
           }
         },
         {
-          "id": "scene_10_intro_10_description",
+          "id": "scene_05_nail_history_status_02_description",
           "type": "text",
           "position": {
             "x": 960,
@@ -775,7 +339,7 @@
           },
           "layer": 2,
           "props": {
-            "content": "얇게 처리하면 파손 위험이 커진다",
+            "content": "고대 사회에서의 네일아트의 의미",
             "fontSize": 48,
             "fontWeight": "normal",
             "color": "#444444",
@@ -789,7 +353,7 @@
             "enter": {
               "type": "typing",
               "durationMs": 1000,
-              "delayMs": 3894
+              "delayMs": 5466
             },
             "during": {
               "type": "highlightSweep",
@@ -798,10 +362,10 @@
           }
         },
         {
-          "id": "scene_10_intro_10_stickman",
+          "id": "scene_05_nail_history_status_02_stickman",
           "type": "stickman",
           "position": {
-            "x": 370,
+            "x": 1550,
             "y": 680
           },
           "scale": 1.2,
@@ -829,9 +393,9 @@
       "overlays": []
     },
     {
-      "id": "scene_11_intro_11",
-      "startMs": 144880,
-      "endMs": 159100,
+      "id": "scene_06_nail_history_status_03",
+      "startMs": 76420,
+      "endMs": 89840,
       "background": {
         "type": "color",
         "value": "#FAFAFA"
@@ -843,14 +407,14 @@
       },
       "objects": [
         {
-          "id": "scene_11_intro_11_keyword",
+          "id": "scene_06_nail_history_status_03_keyword",
           "type": "text",
           "position": {
             "x": 960,
             "y": 370
           },
           "props": {
-            "content": "유분 제거",
+            "content": "신분 표시",
             "fontSize": 96,
             "fontWeight": "bold",
             "color": "#1A1A2E",
@@ -865,7 +429,7 @@
           }
         },
         {
-          "id": "scene_11_intro_11_description",
+          "id": "scene_06_nail_history_status_03_description",
           "type": "text",
           "position": {
             "x": 960,
@@ -873,7 +437,7 @@
           },
           "layer": 2,
           "props": {
-            "content": "네일라트의 지속력을 결정하는 핵심",
+            "content": "손톱 색깔로 계급을 알 수 있었음",
             "fontSize": 48,
             "fontWeight": "normal",
             "color": "#444444",
@@ -884,12 +448,242 @@
             "enter": {
               "type": "typing",
               "durationMs": 1000,
-              "delayMs": 4266
+              "delayMs": 4026
             }
           }
         },
         {
-          "id": "scene_11_intro_11_stickman",
+          "id": "scene_06_nail_history_status_03_stickman",
+          "type": "stickman",
+          "position": {
+            "x": 370,
+            "y": 680
+          },
+          "scale": 1.2,
+          "layer": 3,
+          "props": {
+            "pose": "explaining",
+            "expression": "neutral",
+            "color": "#333333",
+            "faceColor": "#FFFFFF",
+            "lineWidth": 3
+          },
+          "animation": {
+            "enter": {
+              "type": "fadeIn",
+              "durationMs": 500,
+              "delayMs": 200
+            },
+            "during": {
+              "type": "nodding",
+              "loop": true
+            }
+          }
+        }
+      ],
+      "overlays": []
+    },
+    {
+      "id": "scene_07_social_symbol_01",
+      "startMs": 89080,
+      "endMs": 103960,
+      "background": {
+        "type": "image",
+        "src": "images/scene_07.png",
+        "animation": "zoomIn",
+        "animationIntensity": 0.5
+      },
+      "transition": {
+        "in": "fadeIn",
+        "out": "fadeOut",
+        "durationMs": 300
+      },
+      "objects": [],
+      "overlays": [
+        {
+          "id": "scene_07_social_symbol_01_text_1",
+          "type": "text",
+          "position": {
+            "x": 960,
+            "y": 350
+          },
+          "props": {
+            "content": "손톱 = 살아있는 명함",
+            "fontSize": 48,
+            "fontWeight": "bold",
+            "color": "#0066CC",
+            "align": "center",
+            "maxWidth": 1200,
+            "role": "highlight_box",
+            "background": {
+              "color": "rgba(255,255,255,0.9)",
+              "padding": 20,
+              "borderRadius": 12,
+              "opacity": 0.7
+            }
+          },
+          "animation": {
+            "enter": {
+              "type": "fadeInUp",
+              "durationMs": 500
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "scene_08_social_symbol_02",
+      "startMs": 103960,
+      "endMs": 119020,
+      "background": {
+        "type": "color",
+        "value": "#FAFAFA"
+      },
+      "transition": {
+        "in": "fadeIn",
+        "out": "fadeOut",
+        "durationMs": 300
+      },
+      "objects": [
+        {
+          "id": "scene_08_social_symbol_02_keyword",
+          "type": "text",
+          "position": {
+            "x": 960,
+            "y": 370
+          },
+          "props": {
+            "content": "노동의 증표",
+            "fontSize": 96,
+            "fontWeight": "bold",
+            "color": "#1A1A2E",
+            "align": "center",
+            "maxWidth": 1400
+          },
+          "animation": {
+            "enter": {
+              "type": "handwriting",
+              "durationMs": 2000
+            }
+          }
+        },
+        {
+          "id": "scene_08_social_symbol_02_description",
+          "type": "text",
+          "position": {
+            "x": 960,
+            "y": 550
+          },
+          "layer": 2,
+          "props": {
+            "content": "손톱의 상태로 노동 여부를 알 수 있었음",
+            "fontSize": 48,
+            "fontWeight": "normal",
+            "color": "#444444",
+            "align": "center",
+            "maxWidth": 1200
+          },
+          "animation": {
+            "enter": {
+              "type": "typing",
+              "durationMs": 1000,
+              "delayMs": 4518
+            }
+          }
+        },
+        {
+          "id": "scene_08_social_symbol_02_stickman",
+          "type": "stickman",
+          "position": {
+            "x": 370,
+            "y": 680
+          },
+          "scale": 1.2,
+          "layer": 3,
+          "props": {
+            "pose": "celebrating",
+            "expression": "happy",
+            "color": "#333333",
+            "faceColor": "#FFFFFF",
+            "lineWidth": 3
+          },
+          "animation": {
+            "enter": {
+              "type": "fadeIn",
+              "durationMs": 500,
+              "delayMs": 200
+            },
+            "during": {
+              "type": "jumping",
+              "loop": true
+            }
+          }
+        }
+      ],
+      "overlays": []
+    },
+    {
+      "id": "scene_09_social_symbol_03",
+      "startMs": 119020,
+      "endMs": 133980,
+      "background": {
+        "type": "color",
+        "value": "#FAFAFA"
+      },
+      "transition": {
+        "in": "fadeIn",
+        "out": "fadeOut",
+        "durationMs": 300
+      },
+      "objects": [
+        {
+          "id": "scene_09_social_symbol_03_keyword",
+          "type": "text",
+          "position": {
+            "x": 960,
+            "y": 370
+          },
+          "props": {
+            "content": "홍화의 의미",
+            "fontSize": 96,
+            "fontWeight": "bold",
+            "color": "#1A1A2E",
+            "align": "center",
+            "maxWidth": 1400
+          },
+          "animation": {
+            "enter": {
+              "type": "typing",
+              "durationMs": 1500
+            }
+          }
+        },
+        {
+          "id": "scene_09_social_symbol_03_description",
+          "type": "text",
+          "position": {
+            "x": 960,
+            "y": 550
+          },
+          "layer": 2,
+          "props": {
+            "content": "특권층만이 사용할 수 있었던 색깔",
+            "fontSize": 48,
+            "fontWeight": "normal",
+            "color": "#444444",
+            "align": "center",
+            "maxWidth": 1200
+          },
+          "animation": {
+            "enter": {
+              "type": "typing",
+              "durationMs": 1000,
+              "delayMs": 4488
+            }
+          }
+        },
+        {
+          "id": "scene_09_social_symbol_03_stickman",
           "type": "stickman",
           "position": {
             "x": 1550,
@@ -920,9 +714,9 @@
       "overlays": []
     },
     {
-      "id": "scene_12_intro_12",
-      "startMs": 159100,
-      "endMs": 172740,
+      "id": "scene_10_social_symbol_04",
+      "startMs": 133980,
+      "endMs": 152320,
       "background": {
         "type": "color",
         "value": "#FAFAFA"
@@ -934,14 +728,14 @@
       },
       "objects": [
         {
-          "id": "scene_12_intro_12_keyword",
+          "id": "scene_10_social_symbol_04_keyword",
           "type": "text",
           "position": {
             "x": 960,
             "y": 370
           },
           "props": {
-            "content": "유분 제거",
+            "content": "손톱의 상징",
             "fontSize": 96,
             "fontWeight": "bold",
             "color": "#1A1A2E",
@@ -956,7 +750,7 @@
           }
         },
         {
-          "id": "scene_12_intro_12_description",
+          "id": "scene_10_social_symbol_04_description",
           "type": "text",
           "position": {
             "x": 960,
@@ -964,7 +758,7 @@
           },
           "layer": 2,
           "props": {
-            "content": "표면의 미세한 유분과 수분",
+            "content": "색깔에 따라 지위와 권력을 나타냄",
             "fontSize": 48,
             "fontWeight": "normal",
             "color": "#444444",
@@ -975,438 +769,15 @@
             "enter": {
               "type": "typing",
               "durationMs": 1000,
-              "delayMs": 4092
+              "delayMs": 5502
             }
           }
         },
         {
-          "id": "scene_12_intro_12_stickman",
+          "id": "scene_10_social_symbol_04_stickman",
           "type": "stickman",
           "position": {
             "x": 370,
-            "y": 680
-          },
-          "scale": 1.2,
-          "layer": 3,
-          "props": {
-            "pose": "celebrating",
-            "expression": "happy",
-            "color": "#333333",
-            "faceColor": "#FFFFFF",
-            "lineWidth": 3
-          },
-          "animation": {
-            "enter": {
-              "type": "fadeIn",
-              "durationMs": 500,
-              "delayMs": 200
-            },
-            "during": {
-              "type": "jumping",
-              "loop": true
-            }
-          }
-        }
-      ],
-      "overlays": []
-    },
-    {
-      "id": "scene_13_intro_13",
-      "startMs": 172740,
-      "endMs": 188780,
-      "background": {
-        "type": "color",
-        "value": "#FAFAFA"
-      },
-      "transition": {
-        "in": "fadeIn",
-        "out": "fadeOut",
-        "durationMs": 300
-      },
-      "objects": [
-        {
-          "id": "scene_13_intro_13_keyword",
-          "type": "text",
-          "position": {
-            "x": 960,
-            "y": 370
-          },
-          "props": {
-            "content": "탈지 과정",
-            "fontSize": 96,
-            "fontWeight": "bold",
-            "color": "#1A1A2E",
-            "align": "center",
-            "maxWidth": 1400
-          },
-          "animation": {
-            "enter": {
-              "type": "typing",
-              "durationMs": 1500
-            }
-          }
-        },
-        {
-          "id": "scene_13_intro_13_description",
-          "type": "text",
-          "position": {
-            "x": 960,
-            "y": 550
-          },
-          "layer": 2,
-          "props": {
-            "content": "폴리시가 제대로 밀착되도록",
-            "fontSize": 48,
-            "fontWeight": "normal",
-            "color": "#444444",
-            "align": "center",
-            "maxWidth": 1200
-          },
-          "animation": {
-            "enter": {
-              "type": "typing",
-              "durationMs": 1000,
-              "delayMs": 4812
-            }
-          }
-        },
-        {
-          "id": "scene_13_intro_13_stickman",
-          "type": "stickman",
-          "position": {
-            "x": 1550,
-            "y": 680
-          },
-          "scale": 1.2,
-          "layer": 3,
-          "props": {
-            "pose": "thinking",
-            "expression": "thinking",
-            "color": "#333333",
-            "faceColor": "#FFFFFF",
-            "lineWidth": 3
-          },
-          "animation": {
-            "enter": {
-              "type": "fadeIn",
-              "durationMs": 500,
-              "delayMs": 200
-            },
-            "during": {
-              "type": "thinking_loop",
-              "loop": true
-            }
-          }
-        }
-      ],
-      "overlays": []
-    },
-    {
-      "id": "scene_14_stress_point_01",
-      "startMs": 188420,
-      "endMs": 201640,
-      "background": {
-        "type": "image",
-        "src": "images/scene_14.png",
-        "animation": "panLeft",
-        "animationIntensity": 0.5
-      },
-      "transition": {
-        "in": "fadeIn",
-        "out": "fadeOut",
-        "durationMs": 300
-      },
-      "objects": [],
-      "overlays": [
-        {
-          "id": "scene_14_stress_point_01_text_1",
-          "type": "text",
-          "position": {
-            "x": 960,
-            "y": 350
-          },
-          "props": {
-            "content": "스트레스 포인트",
-            "fontSize": 48,
-            "fontWeight": "bold",
-            "color": "#0066CC",
-            "align": "center",
-            "maxWidth": 1200,
-            "role": "highlight_box",
-            "background": {
-              "color": "rgba(255,255,255,0.9)",
-              "padding": 20,
-              "borderRadius": 12,
-              "opacity": 0.7
-            }
-          },
-          "animation": {
-            "enter": {
-              "type": "fadeInUp",
-              "durationMs": 500
-            }
-          }
-        }
-      ]
-    },
-    {
-      "id": "scene_15_stress_point_02",
-      "startMs": 201640,
-      "endMs": 214780,
-      "background": {
-        "type": "color",
-        "value": "#FAFAFA"
-      },
-      "transition": {
-        "in": "fadeIn",
-        "out": "fadeOut",
-        "durationMs": 300
-      },
-      "objects": [
-        {
-          "id": "scene_15_stress_point_02_keyword",
-          "type": "text",
-          "position": {
-            "x": 960,
-            "y": 370
-          },
-          "props": {
-            "content": "유분 제거",
-            "fontSize": 96,
-            "fontWeight": "bold",
-            "color": "#1A1A2E",
-            "align": "center",
-            "maxWidth": 1400
-          },
-          "animation": {
-            "enter": {
-              "type": "handwriting",
-              "durationMs": 2000
-            }
-          }
-        },
-        {
-          "id": "scene_15_stress_point_02_description",
-          "type": "text",
-          "position": {
-            "x": 960,
-            "y": 550
-          },
-          "layer": 2,
-          "props": {
-            "content": "베이스코트가 손톱에 착 달라붙는 과정",
-            "fontSize": 48,
-            "fontWeight": "normal",
-            "color": "#444444",
-            "align": "center",
-            "maxWidth": 1200
-          },
-          "animation": {
-            "enter": {
-              "type": "typing",
-              "durationMs": 1000,
-              "delayMs": 3942
-            }
-          }
-        },
-        {
-          "id": "scene_15_stress_point_02_stickman",
-          "type": "stickman",
-          "position": {
-            "x": 1550,
-            "y": 680
-          },
-          "scale": 1.2,
-          "layer": 3,
-          "props": {
-            "pose": "celebrating",
-            "expression": "happy",
-            "color": "#333333",
-            "faceColor": "#FFFFFF",
-            "lineWidth": 3
-          },
-          "animation": {
-            "enter": {
-              "type": "fadeIn",
-              "durationMs": 500,
-              "delayMs": 200
-            },
-            "during": {
-              "type": "jumping",
-              "loop": true
-            }
-          }
-        }
-      ],
-      "overlays": []
-    },
-    {
-      "id": "scene_16_stress_point_03",
-      "startMs": 215060,
-      "endMs": 231060,
-      "background": {
-        "type": "color",
-        "value": "#FAFAFA"
-      },
-      "transition": {
-        "in": "fadeIn",
-        "out": "fadeOut",
-        "durationMs": 300
-      },
-      "objects": [
-        {
-          "id": "scene_16_stress_point_03_keyword",
-          "type": "text",
-          "position": {
-            "x": 960,
-            "y": 370
-          },
-          "props": {
-            "content": "파일링 방법",
-            "fontSize": 96,
-            "fontWeight": "bold",
-            "color": "#1A1A2E",
-            "align": "center",
-            "maxWidth": 1400
-          },
-          "animation": {
-            "enter": {
-              "type": "fadeIn",
-              "durationMs": 400
-            },
-            "during": {
-              "type": "highlightSweep",
-              "durationMs": 800
-            }
-          }
-        },
-        {
-          "id": "scene_16_stress_point_03_description",
-          "type": "text",
-          "position": {
-            "x": 960,
-            "y": 550
-          },
-          "layer": 2,
-          "props": {
-            "content": "양방향으로 파일링하면 손톱이 약해진다",
-            "fontSize": 48,
-            "fontWeight": "normal",
-            "color": "#444444",
-            "align": "center",
-            "maxWidth": 1200,
-            "background": {
-              "color": "#FFE082"
-            }
-          },
-          "animation": {
-            "enter": {
-              "type": "typing",
-              "durationMs": 1000,
-              "delayMs": 4800
-            },
-            "during": {
-              "type": "highlightSweep",
-              "durationMs": 800
-            }
-          }
-        },
-        {
-          "id": "scene_16_stress_point_03_stickman",
-          "type": "stickman",
-          "position": {
-            "x": 370,
-            "y": 680
-          },
-          "scale": 1.2,
-          "layer": 3,
-          "props": {
-            "pose": "thinking",
-            "expression": "thinking",
-            "color": "#333333",
-            "faceColor": "#FFFFFF",
-            "lineWidth": 3
-          },
-          "animation": {
-            "enter": {
-              "type": "fadeIn",
-              "durationMs": 500,
-              "delayMs": 200
-            },
-            "during": {
-              "type": "thinking_loop",
-              "loop": true
-            }
-          }
-        }
-      ],
-      "overlays": []
-    },
-    {
-      "id": "scene_17_stress_point_04",
-      "startMs": 231060,
-      "endMs": 246744,
-      "background": {
-        "type": "color",
-        "value": "#FAFAFA"
-      },
-      "transition": {
-        "in": "fadeIn",
-        "out": "fadeOut",
-        "durationMs": 300
-      },
-      "objects": [
-        {
-          "id": "scene_17_stress_point_04_keyword",
-          "type": "text",
-          "position": {
-            "x": 960,
-            "y": 370
-          },
-          "props": {
-            "content": "손톱 구조",
-            "fontSize": 96,
-            "fontWeight": "bold",
-            "color": "#1A1A2E",
-            "align": "center",
-            "maxWidth": 1400
-          },
-          "animation": {
-            "enter": {
-              "type": "typing",
-              "durationMs": 1500
-            }
-          }
-        },
-        {
-          "id": "scene_17_stress_point_04_description",
-          "type": "text",
-          "position": {
-            "x": 960,
-            "y": 550
-          },
-          "layer": 2,
-          "props": {
-            "content": "수많은 케라틴 단백질층이 겹겹이 쌓여서 만들어진 구조",
-            "fontSize": 48,
-            "fontWeight": "normal",
-            "color": "#444444",
-            "align": "center",
-            "maxWidth": 1200
-          },
-          "animation": {
-            "enter": {
-              "type": "typing",
-              "durationMs": 1000,
-              "delayMs": 4705
-            }
-          }
-        },
-        {
-          "id": "scene_17_stress_point_04_stickman",
-          "type": "stickman",
-          "position": {
-            "x": 1550,
             "y": 680
           },
           "scale": 1.2,
@@ -1434,13 +805,13 @@
       "overlays": []
     },
     {
-      "id": "scene_18_stress_point_05",
-      "startMs": 247164,
-      "endMs": 261764,
+      "id": "scene_11_ritual_meaning_01",
+      "startMs": 151600,
+      "endMs": 168080,
       "background": {
         "type": "image",
-        "src": "images/scene_18.png",
-        "animation": "zoomOut",
+        "src": "images/scene_11.png",
+        "animation": "kenBurns",
         "animationIntensity": 0.5
       },
       "transition": {
@@ -1449,12 +820,42 @@
         "durationMs": 300
       },
       "objects": [],
-      "overlays": []
+      "overlays": [
+        {
+          "id": "scene_11_ritual_meaning_01_text_1",
+          "type": "text",
+          "position": {
+            "x": 960,
+            "y": 350
+          },
+          "props": {
+            "content": "주술적 의미 - 붉은 색의 힘",
+            "fontSize": 48,
+            "fontWeight": "bold",
+            "color": "#0066CC",
+            "align": "center",
+            "maxWidth": 1200,
+            "role": "highlight_box",
+            "background": {
+              "color": "rgba(255,255,255,0.9)",
+              "padding": 20,
+              "borderRadius": 12,
+              "opacity": 0.7
+            }
+          },
+          "animation": {
+            "enter": {
+              "type": "fadeInUp",
+              "durationMs": 500
+            }
+          }
+        }
+      ]
     },
     {
-      "id": "scene_19_stress_point_06",
-      "startMs": 261764,
-      "endMs": 276244,
+      "id": "scene_12_ritual_meaning_02",
+      "startMs": 168080,
+      "endMs": 182220,
       "background": {
         "type": "color",
         "value": "#FAFAFA"
@@ -1466,14 +867,255 @@
       },
       "objects": [
         {
-          "id": "scene_19_stress_point_06_keyword",
+          "id": "scene_12_ritual_meaning_02_keyword",
           "type": "text",
           "position": {
             "x": 960,
             "y": 370
           },
           "props": {
-            "content": "파일링 원리",
+            "content": "부정의 역할",
+            "fontSize": 96,
+            "fontWeight": "bold",
+            "color": "#1A1A2E",
+            "align": "center",
+            "maxWidth": 1400
+          },
+          "animation": {
+            "enter": {
+              "type": "fadeIn",
+              "durationMs": 400
+            },
+            "during": {
+              "type": "highlightSweep",
+              "durationMs": 800
+            }
+          }
+        },
+        {
+          "id": "scene_12_ritual_meaning_02_description",
+          "type": "text",
+          "position": {
+            "x": 960,
+            "y": 550
+          },
+          "layer": 2,
+          "props": {
+            "content": "나쁜 기운을 막는 역할을 함",
+            "fontSize": 48,
+            "fontWeight": "normal",
+            "color": "#444444",
+            "align": "center",
+            "maxWidth": 1200,
+            "background": {
+              "color": "#FFE082"
+            }
+          },
+          "animation": {
+            "enter": {
+              "type": "typing",
+              "durationMs": 1000,
+              "delayMs": 4242
+            },
+            "during": {
+              "type": "highlightSweep",
+              "durationMs": 800
+            }
+          }
+        },
+        {
+          "id": "scene_12_ritual_meaning_02_stickman",
+          "type": "stickman",
+          "position": {
+            "x": 370,
+            "y": 680
+          },
+          "scale": 1.2,
+          "layer": 3,
+          "props": {
+            "pose": "pointing_right",
+            "expression": "focused",
+            "color": "#333333",
+            "faceColor": "#FFFFFF",
+            "lineWidth": 3
+          },
+          "animation": {
+            "enter": {
+              "type": "fadeIn",
+              "durationMs": 500,
+              "delayMs": 200
+            },
+            "during": {
+              "type": "nodding",
+              "loop": true
+            }
+          }
+        }
+      ],
+      "overlays": []
+    },
+    {
+      "id": "scene_13_manicure_etymology_01",
+      "startMs": 181700,
+      "endMs": 196175,
+      "background": {
+        "type": "image",
+        "src": "images/scene_13.png",
+        "animation": "zoomOut",
+        "animationIntensity": 0.5
+      },
+      "transition": {
+        "in": "fadeIn",
+        "out": "fadeOut",
+        "durationMs": 300
+      },
+      "objects": [],
+      "overlays": [
+        {
+          "id": "scene_13_manicure_etymology_01_text_1",
+          "type": "text",
+          "position": {
+            "x": 960,
+            "y": 350
+          },
+          "props": {
+            "content": "매니큐어 어원 - 마누스+큐라",
+            "fontSize": 48,
+            "fontWeight": "bold",
+            "color": "#0066CC",
+            "align": "center",
+            "maxWidth": 1200,
+            "role": "highlight_box",
+            "background": {
+              "color": "rgba(255,255,255,0.9)",
+              "padding": 20,
+              "borderRadius": 12,
+              "opacity": 0.7
+            }
+          },
+          "animation": {
+            "enter": {
+              "type": "fadeInUp",
+              "durationMs": 500
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "scene_14_manicure_etymology_02",
+      "startMs": 195715,
+      "endMs": 208295,
+      "background": {
+        "type": "color",
+        "value": "#FAFAFA"
+      },
+      "transition": {
+        "in": "fadeIn",
+        "out": "fadeOut",
+        "durationMs": 300
+      },
+      "objects": [
+        {
+          "id": "scene_14_manicure_etymology_02_keyword",
+          "type": "text",
+          "position": {
+            "x": 960,
+            "y": 370
+          },
+          "props": {
+            "content": "매니큐어의 어원",
+            "fontSize": 96,
+            "fontWeight": "bold",
+            "color": "#1A1A2E",
+            "align": "center",
+            "maxWidth": 1400
+          },
+          "animation": {
+            "enter": {
+              "type": "typing",
+              "durationMs": 1500
+            }
+          }
+        },
+        {
+          "id": "scene_14_manicure_etymology_02_description",
+          "type": "text",
+          "position": {
+            "x": 960,
+            "y": 550
+          },
+          "layer": 2,
+          "props": {
+            "content": "손톱을 돌보고 건강하게 유지하는 의미",
+            "fontSize": 48,
+            "fontWeight": "normal",
+            "color": "#444444",
+            "align": "center",
+            "maxWidth": 1200
+          },
+          "animation": {
+            "enter": {
+              "type": "typing",
+              "durationMs": 1000,
+              "delayMs": 3774
+            }
+          }
+        },
+        {
+          "id": "scene_14_manicure_etymology_02_stickman",
+          "type": "stickman",
+          "position": {
+            "x": 370,
+            "y": 680
+          },
+          "scale": 1.2,
+          "layer": 3,
+          "props": {
+            "pose": "explaining",
+            "expression": "neutral",
+            "color": "#333333",
+            "faceColor": "#FFFFFF",
+            "lineWidth": 3
+          },
+          "animation": {
+            "enter": {
+              "type": "fadeIn",
+              "durationMs": 500,
+              "delayMs": 200
+            },
+            "during": {
+              "type": "nodding",
+              "loop": true
+            }
+          }
+        }
+      ],
+      "overlays": []
+    },
+    {
+      "id": "scene_15_manicure_etymology_03",
+      "startMs": 208295,
+      "endMs": 219335,
+      "background": {
+        "type": "color",
+        "value": "#FAFAFA"
+      },
+      "transition": {
+        "in": "fadeIn",
+        "out": "fadeOut",
+        "durationMs": 300
+      },
+      "objects": [
+        {
+          "id": "scene_15_manicure_etymology_03_keyword",
+          "type": "text",
+          "position": {
+            "x": 960,
+            "y": 370
+          },
+          "props": {
+            "content": "관리의 의미",
             "fontSize": 96,
             "fontWeight": "bold",
             "color": "#1A1A2E",
@@ -1488,7 +1130,7 @@
           }
         },
         {
-          "id": "scene_19_stress_point_06_description",
+          "id": "scene_15_manicure_etymology_03_description",
           "type": "text",
           "position": {
             "x": 960,
@@ -1496,7 +1138,7 @@
           },
           "layer": 2,
           "props": {
-            "content": "한 방향으로 부드럽게 갈아내야 하는 이유",
+            "content": "매니큐어의 어원이 관리에 근거함",
             "fontSize": 48,
             "fontWeight": "normal",
             "color": "#444444",
@@ -1507,12 +1149,12 @@
             "enter": {
               "type": "typing",
               "durationMs": 1000,
-              "delayMs": 4344
+              "delayMs": 3312
             }
           }
         },
         {
-          "id": "scene_19_stress_point_06_stickman",
+          "id": "scene_15_manicure_etymology_03_stickman",
           "type": "stickman",
           "position": {
             "x": 1550,
@@ -1543,9 +1185,57 @@
       "overlays": []
     },
     {
-      "id": "scene_20_stress_point_07",
-      "startMs": 276244,
-      "endMs": 290764,
+      "id": "scene_16_nail_matrix_01",
+      "startMs": 218855,
+      "endMs": 233515,
+      "background": {
+        "type": "image",
+        "src": "images/scene_16.png",
+        "animation": "kenBurns",
+        "animationIntensity": 0.5
+      },
+      "transition": {
+        "in": "fadeIn",
+        "out": "fadeOut",
+        "durationMs": 300
+      },
+      "objects": [],
+      "overlays": [
+        {
+          "id": "scene_16_nail_matrix_01_text_1",
+          "type": "text",
+          "position": {
+            "x": 960,
+            "y": 350
+          },
+          "props": {
+            "content": "조근(네일 매트릭스) - 손톱 공장",
+            "fontSize": 48,
+            "fontWeight": "bold",
+            "color": "#0066CC",
+            "align": "center",
+            "maxWidth": 1200,
+            "role": "highlight_box",
+            "background": {
+              "color": "rgba(255,255,255,0.9)",
+              "padding": 20,
+              "borderRadius": 12,
+              "opacity": 0.7
+            }
+          },
+          "animation": {
+            "enter": {
+              "type": "fadeInUp",
+              "durationMs": 500
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "scene_17_nail_matrix_02",
+      "startMs": 233515,
+      "endMs": 246035,
       "background": {
         "type": "color",
         "value": "#FAFAFA"
@@ -1557,14 +1247,14 @@
       },
       "objects": [
         {
-          "id": "scene_20_stress_point_07_keyword",
+          "id": "scene_17_nail_matrix_02_keyword",
           "type": "text",
           "position": {
             "x": 960,
             "y": 370
           },
           "props": {
-            "content": "용해성",
+            "content": "루눌라의 의미",
             "fontSize": 96,
             "fontWeight": "bold",
             "color": "#1A1A2E",
@@ -1579,7 +1269,7 @@
           }
         },
         {
-          "id": "scene_20_stress_point_07_description",
+          "id": "scene_17_nail_matrix_02_description",
           "type": "text",
           "position": {
             "x": 960,
@@ -1587,7 +1277,660 @@
           },
           "layer": 2,
           "props": {
-            "content": "아세톤에 녹느냐 안 녹느냐",
+            "content": "손톱의 일부가 아니라 조근의 일부",
+            "fontSize": 48,
+            "fontWeight": "normal",
+            "color": "#444444",
+            "align": "center",
+            "maxWidth": 1200
+          },
+          "animation": {
+            "enter": {
+              "type": "typing",
+              "durationMs": 1000,
+              "delayMs": 3756
+            }
+          }
+        },
+        {
+          "id": "scene_17_nail_matrix_02_stickman",
+          "type": "stickman",
+          "position": {
+            "x": 1550,
+            "y": 680
+          },
+          "scale": 1.2,
+          "layer": 3,
+          "props": {
+            "pose": "pointing_up",
+            "expression": "focused",
+            "color": "#333333",
+            "faceColor": "#FFFFFF",
+            "lineWidth": 3
+          },
+          "animation": {
+            "enter": {
+              "type": "fadeIn",
+              "durationMs": 500,
+              "delayMs": 200
+            },
+            "during": {
+              "type": "nodding",
+              "loop": true
+            }
+          }
+        }
+      ],
+      "overlays": []
+    },
+    {
+      "id": "scene_18_nail_matrix_03",
+      "startMs": 246035,
+      "endMs": 260655,
+      "background": {
+        "type": "color",
+        "value": "#FAFAFA"
+      },
+      "transition": {
+        "in": "fadeIn",
+        "out": "fadeOut",
+        "durationMs": 300
+      },
+      "objects": [
+        {
+          "id": "scene_18_nail_matrix_03_keyword",
+          "type": "text",
+          "position": {
+            "x": 960,
+            "y": 370
+          },
+          "props": {
+            "content": "네일 매트릭스",
+            "fontSize": 96,
+            "fontWeight": "bold",
+            "color": "#1A1A2E",
+            "align": "center",
+            "maxWidth": 1400
+          },
+          "animation": {
+            "enter": {
+              "type": "handwriting",
+              "durationMs": 2000
+            }
+          }
+        },
+        {
+          "id": "scene_18_nail_matrix_03_description",
+          "type": "text",
+          "position": {
+            "x": 960,
+            "y": 550
+          },
+          "layer": 2,
+          "props": {
+            "content": "손톱의 심장, 손톱 공장",
+            "fontSize": 48,
+            "fontWeight": "normal",
+            "color": "#444444",
+            "align": "center",
+            "maxWidth": 1200
+          },
+          "animation": {
+            "enter": {
+              "type": "typing",
+              "durationMs": 1000,
+              "delayMs": 4386
+            }
+          }
+        },
+        {
+          "id": "scene_18_nail_matrix_03_stickman",
+          "type": "stickman",
+          "position": {
+            "x": 370,
+            "y": 680
+          },
+          "scale": 1.2,
+          "layer": 3,
+          "props": {
+            "pose": "explaining",
+            "expression": "neutral",
+            "color": "#333333",
+            "faceColor": "#FFFFFF",
+            "lineWidth": 3
+          },
+          "animation": {
+            "enter": {
+              "type": "fadeIn",
+              "durationMs": 500,
+              "delayMs": 200
+            },
+            "during": {
+              "type": "nodding",
+              "loop": true
+            }
+          }
+        }
+      ],
+      "overlays": []
+    },
+    {
+      "id": "scene_19_nail_factory_01",
+      "startMs": 259875,
+      "endMs": 277715,
+      "background": {
+        "type": "image",
+        "src": "images/scene_19.png",
+        "animation": "panLeft",
+        "animationIntensity": 0.5
+      },
+      "transition": {
+        "in": "fadeIn",
+        "out": "fadeOut",
+        "durationMs": 300
+      },
+      "objects": [],
+      "overlays": [
+        {
+          "id": "scene_19_nail_factory_01_text_1",
+          "type": "text",
+          "position": {
+            "x": 960,
+            "y": 350
+          },
+          "props": {
+            "content": "조근 보호 = 큐티클의 역할",
+            "fontSize": 48,
+            "fontWeight": "bold",
+            "color": "#0066CC",
+            "align": "center",
+            "maxWidth": 1200,
+            "role": "highlight_box",
+            "background": {
+              "color": "rgba(255,255,255,0.9)",
+              "padding": 20,
+              "borderRadius": 12,
+              "opacity": 0.7
+            }
+          },
+          "animation": {
+            "enter": {
+              "type": "fadeInUp",
+              "durationMs": 500
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "scene_20_nail_factory_02",
+      "startMs": 277715,
+      "endMs": 291575,
+      "background": {
+        "type": "color",
+        "value": "#FAFAFA"
+      },
+      "transition": {
+        "in": "fadeIn",
+        "out": "fadeOut",
+        "durationMs": 300
+      },
+      "objects": [
+        {
+          "id": "scene_20_nail_factory_02_keyword",
+          "type": "text",
+          "position": {
+            "x": 960,
+            "y": 370
+          },
+          "props": {
+            "content": "큐티클의 역할",
+            "fontSize": 96,
+            "fontWeight": "bold",
+            "color": "#1A1A2E",
+            "align": "center",
+            "maxWidth": 1400
+          },
+          "animation": {
+            "enter": {
+              "type": "fadeIn",
+              "durationMs": 400
+            },
+            "during": {
+              "type": "highlightSweep",
+              "durationMs": 800
+            }
+          }
+        },
+        {
+          "id": "scene_20_nail_factory_02_description",
+          "type": "text",
+          "position": {
+            "x": 960,
+            "y": 550
+          },
+          "layer": 2,
+          "props": {
+            "content": "조근을 보호하는 방어막의 역할",
+            "fontSize": 48,
+            "fontWeight": "normal",
+            "color": "#444444",
+            "align": "center",
+            "maxWidth": 1200,
+            "background": {
+              "color": "#FFE082"
+            }
+          },
+          "animation": {
+            "enter": {
+              "type": "typing",
+              "durationMs": 1000,
+              "delayMs": 4158
+            },
+            "during": {
+              "type": "highlightSweep",
+              "durationMs": 800
+            }
+          }
+        },
+        {
+          "id": "scene_20_nail_factory_02_stickman",
+          "type": "stickman",
+          "position": {
+            "x": 370,
+            "y": 680
+          },
+          "scale": 1.2,
+          "layer": 3,
+          "props": {
+            "pose": "pointing_right",
+            "expression": "focused",
+            "color": "#333333",
+            "faceColor": "#FFFFFF",
+            "lineWidth": 3
+          },
+          "animation": {
+            "enter": {
+              "type": "fadeIn",
+              "durationMs": 500,
+              "delayMs": 200
+            },
+            "during": {
+              "type": "nodding",
+              "loop": true
+            }
+          }
+        }
+      ],
+      "overlays": []
+    },
+    {
+      "id": "scene_21_nail_factory_03",
+      "startMs": 291835,
+      "endMs": 309375,
+      "background": {
+        "type": "color",
+        "value": "#FAFAFA"
+      },
+      "transition": {
+        "in": "fadeIn",
+        "out": "fadeOut",
+        "durationMs": 300
+      },
+      "objects": [
+        {
+          "id": "scene_21_nail_factory_03_keyword",
+          "type": "text",
+          "position": {
+            "x": 960,
+            "y": 370
+          },
+          "props": {
+            "content": "조근의 길이",
+            "fontSize": 96,
+            "fontWeight": "bold",
+            "color": "#1A1A2E",
+            "align": "center",
+            "maxWidth": 1400
+          },
+          "animation": {
+            "enter": {
+              "type": "typing",
+              "durationMs": 1500
+            }
+          }
+        },
+        {
+          "id": "scene_21_nail_factory_03_description",
+          "type": "text",
+          "position": {
+            "x": 960,
+            "y": 550
+          },
+          "layer": 2,
+          "props": {
+            "content": "손톱의 두께를 결정하는 요인",
+            "fontSize": 48,
+            "fontWeight": "normal",
+            "color": "#444444",
+            "align": "center",
+            "maxWidth": 1200
+          },
+          "animation": {
+            "enter": {
+              "type": "typing",
+              "durationMs": 1000,
+              "delayMs": 5262
+            }
+          }
+        },
+        {
+          "id": "scene_21_nail_factory_03_stickman",
+          "type": "stickman",
+          "position": {
+            "x": 1550,
+            "y": 680
+          },
+          "scale": 1.2,
+          "layer": 3,
+          "props": {
+            "pose": "explaining",
+            "expression": "neutral",
+            "color": "#333333",
+            "faceColor": "#FFFFFF",
+            "lineWidth": 3
+          },
+          "animation": {
+            "enter": {
+              "type": "fadeIn",
+              "durationMs": 500,
+              "delayMs": 200
+            },
+            "during": {
+              "type": "nodding",
+              "loop": true
+            }
+          }
+        }
+      ],
+      "overlays": []
+    },
+    {
+      "id": "scene_22_free_wall_technique_01",
+      "startMs": 308735,
+      "endMs": 323675,
+      "background": {
+        "type": "image",
+        "src": "images/scene_22.png",
+        "animation": "zoomIn",
+        "animationIntensity": 0.5
+      },
+      "transition": {
+        "in": "fadeIn",
+        "out": "fadeOut",
+        "durationMs": 300
+      },
+      "objects": [],
+      "overlays": [
+        {
+          "id": "scene_22_free_wall_technique_01_text_1",
+          "type": "text",
+          "position": {
+            "x": 960,
+            "y": 350
+          },
+          "props": {
+            "content": "프리월 기법 - 착시의 과학",
+            "fontSize": 48,
+            "fontWeight": "bold",
+            "color": "#0066CC",
+            "align": "center",
+            "maxWidth": 1200,
+            "role": "highlight_box",
+            "background": {
+              "color": "rgba(255,255,255,0.9)",
+              "padding": 20,
+              "borderRadius": 12,
+              "opacity": 0.7
+            }
+          },
+          "animation": {
+            "enter": {
+              "type": "fadeInUp",
+              "durationMs": 500
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "scene_23_free_wall_technique_02",
+      "startMs": 323675,
+      "endMs": 336955,
+      "background": {
+        "type": "color",
+        "value": "#FAFAFA"
+      },
+      "transition": {
+        "in": "fadeIn",
+        "out": "fadeOut",
+        "durationMs": 300
+      },
+      "objects": [
+        {
+          "id": "scene_23_free_wall_technique_02_keyword",
+          "type": "text",
+          "position": {
+            "x": 960,
+            "y": 370
+          },
+          "props": {
+            "content": "프리엣지 기법",
+            "fontSize": 96,
+            "fontWeight": "bold",
+            "color": "#1A1A2E",
+            "align": "center",
+            "maxWidth": 1400
+          },
+          "animation": {
+            "enter": {
+              "type": "handwriting",
+              "durationMs": 2000
+            }
+          }
+        },
+        {
+          "id": "scene_23_free_wall_technique_02_description",
+          "type": "text",
+          "position": {
+            "x": 960,
+            "y": 550
+          },
+          "layer": 2,
+          "props": {
+            "content": "손톱을 가늘고 길어 보이게 하는 폴리시 기법",
+            "fontSize": 48,
+            "fontWeight": "normal",
+            "color": "#444444",
+            "align": "center",
+            "maxWidth": 1200
+          },
+          "animation": {
+            "enter": {
+              "type": "typing",
+              "durationMs": 1000,
+              "delayMs": 3984
+            }
+          }
+        },
+        {
+          "id": "scene_23_free_wall_technique_02_stickman",
+          "type": "stickman",
+          "position": {
+            "x": 1550,
+            "y": 680
+          },
+          "scale": 1.2,
+          "layer": 3,
+          "props": {
+            "pose": "depressed",
+            "expression": "sad",
+            "color": "#333333",
+            "faceColor": "#FFFFFF",
+            "lineWidth": 3
+          },
+          "animation": {
+            "enter": {
+              "type": "fadeIn",
+              "durationMs": 500,
+              "delayMs": 200
+            },
+            "during": {
+              "type": "headShake",
+              "loop": true
+            }
+          }
+        }
+      ],
+      "overlays": []
+    },
+    {
+      "id": "scene_24_free_wall_technique_03",
+      "startMs": 336955,
+      "endMs": 352615,
+      "background": {
+        "type": "color",
+        "value": "#FAFAFA"
+      },
+      "transition": {
+        "in": "fadeIn",
+        "out": "fadeOut",
+        "durationMs": 300
+      },
+      "objects": [
+        {
+          "id": "scene_24_free_wall_technique_03_keyword",
+          "type": "text",
+          "position": {
+            "x": 960,
+            "y": 370
+          },
+          "props": {
+            "content": "프리월 기법",
+            "fontSize": 96,
+            "fontWeight": "bold",
+            "color": "#1A1A2E",
+            "align": "center",
+            "maxWidth": 1400
+          },
+          "animation": {
+            "enter": {
+              "type": "typing",
+              "durationMs": 1500
+            }
+          }
+        },
+        {
+          "id": "scene_24_free_wall_technique_03_description",
+          "type": "text",
+          "position": {
+            "x": 960,
+            "y": 550
+          },
+          "layer": 2,
+          "props": {
+            "content": "손톱 양쪽 측면벽을 남겨두는 기술",
+            "fontSize": 48,
+            "fontWeight": "normal",
+            "color": "#444444",
+            "align": "center",
+            "maxWidth": 1200
+          },
+          "animation": {
+            "enter": {
+              "type": "typing",
+              "durationMs": 1000,
+              "delayMs": 4698
+            }
+          }
+        },
+        {
+          "id": "scene_24_free_wall_technique_03_stickman",
+          "type": "stickman",
+          "position": {
+            "x": 370,
+            "y": 680
+          },
+          "scale": 1.2,
+          "layer": 3,
+          "props": {
+            "pose": "explaining",
+            "expression": "neutral",
+            "color": "#333333",
+            "faceColor": "#FFFFFF",
+            "lineWidth": 3
+          },
+          "animation": {
+            "enter": {
+              "type": "fadeIn",
+              "durationMs": 500,
+              "delayMs": 200
+            },
+            "during": {
+              "type": "nodding",
+              "loop": true
+            }
+          }
+        }
+      ],
+      "overlays": []
+    },
+    {
+      "id": "scene_25_free_wall_technique_04",
+      "startMs": 352615,
+      "endMs": 367135,
+      "background": {
+        "type": "color",
+        "value": "#FAFAFA"
+      },
+      "transition": {
+        "in": "fadeIn",
+        "out": "fadeOut",
+        "durationMs": 300
+      },
+      "objects": [
+        {
+          "id": "scene_25_free_wall_technique_04_keyword",
+          "type": "text",
+          "position": {
+            "x": 960,
+            "y": 370
+          },
+          "props": {
+            "content": "착시 효과",
+            "fontSize": 96,
+            "fontWeight": "bold",
+            "color": "#1A1A2E",
+            "align": "center",
+            "maxWidth": 1400
+          },
+          "animation": {
+            "enter": {
+              "type": "handwriting",
+              "durationMs": 2000
+            }
+          }
+        },
+        {
+          "id": "scene_25_free_wall_technique_04_description",
+          "type": "text",
+          "position": {
+            "x": 960,
+            "y": 550
+          },
+          "layer": 2,
+          "props": {
+            "content": "시선을 가운데로 모아 날씬해 보이게 하는 효과",
             "fontSize": 48,
             "fontWeight": "normal",
             "color": "#444444",
@@ -1603,466 +1946,7 @@
           }
         },
         {
-          "id": "scene_20_stress_point_07_stickman",
-          "type": "stickman",
-          "position": {
-            "x": 370,
-            "y": 680
-          },
-          "scale": 1.2,
-          "layer": 3,
-          "props": {
-            "pose": "pointing_up",
-            "expression": "focused",
-            "color": "#333333",
-            "faceColor": "#FFFFFF",
-            "lineWidth": 3
-          },
-          "animation": {
-            "enter": {
-              "type": "fadeIn",
-              "durationMs": 500,
-              "delayMs": 200
-            },
-            "during": {
-              "type": "nodding",
-              "loop": true
-            }
-          }
-        }
-      ],
-      "overlays": []
-    },
-    {
-      "id": "scene_21_stress_point_08",
-      "startMs": 290764,
-      "endMs": 306504,
-      "background": {
-        "type": "image",
-        "src": "images/scene_21.png",
-        "animation": "kenBurns",
-        "animationIntensity": 0.5
-      },
-      "transition": {
-        "in": "fadeIn",
-        "out": "fadeOut",
-        "durationMs": 300
-      },
-      "objects": [],
-      "overlays": []
-    },
-    {
-      "id": "scene_22_oil_removal_01",
-      "startMs": 305764,
-      "endMs": 321924,
-      "background": {
-        "type": "image",
-        "src": "images/scene_22.png",
-        "animation": "zoomIn",
-        "animationIntensity": 0.5
-      },
-      "transition": {
-        "in": "fadeIn",
-        "out": "fadeOut",
-        "durationMs": 300
-      },
-      "objects": [],
-      "overlays": [
-        {
-          "id": "scene_22_oil_removal_01_text_1",
-          "type": "text",
-          "position": {
-            "x": 960,
-            "y": 350
-          },
-          "props": {
-            "content": "유분 제거와 파일링",
-            "fontSize": 48,
-            "fontWeight": "bold",
-            "color": "#0066CC",
-            "align": "center",
-            "maxWidth": 1200,
-            "role": "highlight_box",
-            "background": {
-              "color": "rgba(255,255,255,0.9)",
-              "padding": 20,
-              "borderRadius": 12,
-              "opacity": 0.7
-            }
-          },
-          "animation": {
-            "enter": {
-              "type": "fadeInUp",
-              "durationMs": 500
-            }
-          }
-        }
-      ]
-    },
-    {
-      "id": "scene_23_oil_removal_02",
-      "startMs": 321924,
-      "endMs": 336204,
-      "background": {
-        "type": "color",
-        "value": "#FAFAFA"
-      },
-      "transition": {
-        "in": "fadeIn",
-        "out": "fadeOut",
-        "durationMs": 300
-      },
-      "objects": [
-        {
-          "id": "scene_23_oil_removal_02_keyword",
-          "type": "text",
-          "position": {
-            "x": 960,
-            "y": 370
-          },
-          "props": {
-            "content": "수분 함유",
-            "fontSize": 96,
-            "fontWeight": "bold",
-            "color": "#1A1A2E",
-            "align": "center",
-            "maxWidth": 1400
-          },
-          "animation": {
-            "enter": {
-              "type": "handwriting",
-              "durationMs": 2000
-            }
-          }
-        },
-        {
-          "id": "scene_23_oil_removal_02_description",
-          "type": "text",
-          "position": {
-            "x": 960,
-            "y": 550
-          },
-          "layer": 2,
-          "props": {
-            "content": "손톱이 수분을 머금고 있음",
-            "fontSize": 48,
-            "fontWeight": "normal",
-            "color": "#444444",
-            "align": "center",
-            "maxWidth": 1200
-          },
-          "animation": {
-            "enter": {
-              "type": "typing",
-              "durationMs": 1000,
-              "delayMs": 4284
-            }
-          }
-        },
-        {
-          "id": "scene_23_oil_removal_02_stickman",
-          "type": "stickman",
-          "position": {
-            "x": 1550,
-            "y": 680
-          },
-          "scale": 1.2,
-          "layer": 3,
-          "props": {
-            "pose": "celebrating",
-            "expression": "happy",
-            "color": "#333333",
-            "faceColor": "#FFFFFF",
-            "lineWidth": 3
-          },
-          "animation": {
-            "enter": {
-              "type": "fadeIn",
-              "durationMs": 500,
-              "delayMs": 200
-            },
-            "during": {
-              "type": "jumping",
-              "loop": true
-            }
-          }
-        }
-      ],
-      "overlays": []
-    },
-    {
-      "id": "scene_24_oil_removal_03",
-      "startMs": 336204,
-      "endMs": 352644,
-      "background": {
-        "type": "color",
-        "value": "#FAFAFA"
-      },
-      "transition": {
-        "in": "fadeIn",
-        "out": "fadeOut",
-        "durationMs": 300
-      },
-      "objects": [
-        {
-          "id": "scene_24_oil_removal_03_keyword",
-          "type": "text",
-          "position": {
-            "x": 960,
-            "y": 370
-          },
-          "props": {
-            "content": "수분 함유율",
-            "fontSize": 96,
-            "fontWeight": "bold",
-            "color": "#1A1A2E",
-            "align": "center",
-            "maxWidth": 1400
-          },
-          "animation": {
-            "enter": {
-              "type": "fadeIn",
-              "durationMs": 400
-            },
-            "during": {
-              "type": "highlightSweep",
-              "durationMs": 800
-            }
-          }
-        },
-        {
-          "id": "scene_24_oil_removal_03_description",
-          "type": "text",
-          "position": {
-            "x": 960,
-            "y": 550
-          },
-          "layer": 2,
-          "props": {
-            "content": "8-18%의 수분을 함유",
-            "fontSize": 48,
-            "fontWeight": "normal",
-            "color": "#444444",
-            "align": "center",
-            "maxWidth": 1200,
-            "background": {
-              "color": "#FFE082"
-            }
-          },
-          "animation": {
-            "enter": {
-              "type": "typing",
-              "durationMs": 1000,
-              "delayMs": 4932
-            },
-            "during": {
-              "type": "highlightSweep",
-              "durationMs": 800
-            }
-          }
-        },
-        {
-          "id": "scene_24_oil_removal_03_stickman",
-          "type": "stickman",
-          "position": {
-            "x": 370,
-            "y": 680
-          },
-          "scale": 1.2,
-          "layer": 3,
-          "props": {
-            "pose": "pointing_right",
-            "expression": "focused",
-            "color": "#333333",
-            "faceColor": "#FFFFFF",
-            "lineWidth": 3
-          },
-          "animation": {
-            "enter": {
-              "type": "fadeIn",
-              "durationMs": 500,
-              "delayMs": 200
-            },
-            "during": {
-              "type": "nodding",
-              "loop": true
-            }
-          }
-        }
-      ],
-      "overlays": []
-    },
-    {
-      "id": "scene_25_oil_removal_04",
-      "startMs": 352644,
-      "endMs": 368524,
-      "background": {
-        "type": "color",
-        "value": "#FAFAFA"
-      },
-      "transition": {
-        "in": "fadeIn",
-        "out": "fadeOut",
-        "durationMs": 300
-      },
-      "objects": [
-        {
-          "id": "scene_25_oil_removal_04_keyword",
-          "type": "text",
-          "position": {
-            "x": 960,
-            "y": 370
-          },
-          "props": {
-            "content": "경도와 탄력",
-            "fontSize": 96,
-            "fontWeight": "bold",
-            "color": "#1A1A2E",
-            "align": "center",
-            "maxWidth": 1400
-          },
-          "animation": {
-            "enter": {
-              "type": "typing",
-              "durationMs": 1500
-            }
-          }
-        },
-        {
-          "id": "scene_25_oil_removal_04_description",
-          "type": "text",
-          "position": {
-            "x": 960,
-            "y": 550
-          },
-          "layer": 2,
-          "props": {
-            "content": "수분이 경도와 탄력을 결정",
-            "fontSize": 48,
-            "fontWeight": "normal",
-            "color": "#444444",
-            "align": "center",
-            "maxWidth": 1200
-          },
-          "animation": {
-            "enter": {
-              "type": "typing",
-              "durationMs": 1000,
-              "delayMs": 4764
-            }
-          }
-        },
-        {
-          "id": "scene_25_oil_removal_04_stickman",
-          "type": "stickman",
-          "position": {
-            "x": 1550,
-            "y": 680
-          },
-          "scale": 1.2,
-          "layer": 3,
-          "props": {
-            "pose": "pointing_up",
-            "expression": "focused",
-            "color": "#333333",
-            "faceColor": "#FFFFFF",
-            "lineWidth": 3
-          },
-          "animation": {
-            "enter": {
-              "type": "fadeIn",
-              "durationMs": 500,
-              "delayMs": 200
-            },
-            "during": {
-              "type": "nodding",
-              "loop": true
-            }
-          }
-        }
-      ],
-      "overlays": []
-    },
-    {
-      "id": "scene_26_oil_removal_05",
-      "startMs": 368524,
-      "endMs": 382864,
-      "background": {
-        "type": "image",
-        "src": "images/scene_26.png",
-        "animation": "kenBurns",
-        "animationIntensity": 0.5
-      },
-      "transition": {
-        "in": "fadeIn",
-        "out": "fadeOut",
-        "durationMs": 300
-      },
-      "objects": [],
-      "overlays": []
-    },
-    {
-      "id": "scene_27_oil_removal_06",
-      "startMs": 382864,
-      "endMs": 397724,
-      "background": {
-        "type": "color",
-        "value": "#FAFAFA"
-      },
-      "transition": {
-        "in": "fadeIn",
-        "out": "fadeOut",
-        "durationMs": 300
-      },
-      "objects": [
-        {
-          "id": "scene_27_oil_removal_06_keyword",
-          "type": "text",
-          "position": {
-            "x": 960,
-            "y": 370
-          },
-          "props": {
-            "content": "손톱 호흡",
-            "fontSize": 96,
-            "fontWeight": "bold",
-            "color": "#1A1A2E",
-            "align": "center",
-            "maxWidth": 1400
-          },
-          "animation": {
-            "enter": {
-              "type": "handwriting",
-              "durationMs": 2000
-            }
-          }
-        },
-        {
-          "id": "scene_27_oil_removal_06_description",
-          "type": "text",
-          "position": {
-            "x": 960,
-            "y": 550
-          },
-          "layer": 2,
-          "props": {
-            "content": "손톱 자체는 숨을 쉬지 않음",
-            "fontSize": 48,
-            "fontWeight": "normal",
-            "color": "#444444",
-            "align": "center",
-            "maxWidth": 1200
-          },
-          "animation": {
-            "enter": {
-              "type": "typing",
-              "durationMs": 1000,
-              "delayMs": 4458
-            }
-          }
-        },
-        {
-          "id": "scene_27_oil_removal_06_stickman",
+          "id": "scene_25_free_wall_technique_04_stickman",
           "type": "stickman",
           "position": {
             "x": 1550,
@@ -2072,188 +1956,6 @@
           "layer": 3,
           "props": {
             "pose": "pointing_right",
-            "expression": "focused",
-            "color": "#333333",
-            "faceColor": "#FFFFFF",
-            "lineWidth": 3
-          },
-          "animation": {
-            "enter": {
-              "type": "fadeIn",
-              "durationMs": 500,
-              "delayMs": 200
-            },
-            "during": {
-              "type": "nodding",
-              "loop": true
-            }
-          }
-        }
-      ],
-      "overlays": []
-    },
-    {
-      "id": "scene_28_oil_removal_07",
-      "startMs": 397724,
-      "endMs": 413284,
-      "background": {
-        "type": "color",
-        "value": "#FAFAFA"
-      },
-      "transition": {
-        "in": "fadeIn",
-        "out": "fadeOut",
-        "durationMs": 300
-      },
-      "objects": [
-        {
-          "id": "scene_28_oil_removal_07_keyword",
-          "type": "text",
-          "position": {
-            "x": 960,
-            "y": 370
-          },
-          "props": {
-            "content": "네일 플레이트",
-            "fontSize": 96,
-            "fontWeight": "bold",
-            "color": "#1A1A2E",
-            "align": "center",
-            "maxWidth": 1400
-          },
-          "animation": {
-            "enter": {
-              "type": "typing",
-              "durationMs": 1500
-            }
-          }
-        },
-        {
-          "id": "scene_28_oil_removal_07_description",
-          "type": "text",
-          "position": {
-            "x": 960,
-            "y": 550
-          },
-          "layer": 2,
-          "props": {
-            "content": "단단한 손톱 부분",
-            "fontSize": 48,
-            "fontWeight": "normal",
-            "color": "#444444",
-            "align": "center",
-            "maxWidth": 1200
-          },
-          "animation": {
-            "enter": {
-              "type": "typing",
-              "durationMs": 1000,
-              "delayMs": 4668
-            }
-          }
-        },
-        {
-          "id": "scene_28_oil_removal_07_stickman",
-          "type": "stickman",
-          "position": {
-            "x": 370,
-            "y": 680
-          },
-          "scale": 1.2,
-          "layer": 3,
-          "props": {
-            "pose": "thinking",
-            "expression": "thinking",
-            "color": "#333333",
-            "faceColor": "#FFFFFF",
-            "lineWidth": 3
-          },
-          "animation": {
-            "enter": {
-              "type": "fadeIn",
-              "durationMs": 500,
-              "delayMs": 200
-            },
-            "during": {
-              "type": "thinking_loop",
-              "loop": true
-            }
-          }
-        }
-      ],
-      "overlays": []
-    },
-    {
-      "id": "scene_29_oil_removal_08",
-      "startMs": 413284,
-      "endMs": 427504,
-      "background": {
-        "type": "color",
-        "value": "#FAFAFA"
-      },
-      "transition": {
-        "in": "fadeIn",
-        "out": "fadeOut",
-        "durationMs": 300
-      },
-      "objects": [
-        {
-          "id": "scene_29_oil_removal_08_keyword",
-          "type": "text",
-          "position": {
-            "x": 960,
-            "y": 370
-          },
-          "props": {
-            "content": "네일 배드",
-            "fontSize": 96,
-            "fontWeight": "bold",
-            "color": "#1A1A2E",
-            "align": "center",
-            "maxWidth": 1400
-          },
-          "animation": {
-            "enter": {
-              "type": "handwriting",
-              "durationMs": 2000
-            }
-          }
-        },
-        {
-          "id": "scene_29_oil_removal_08_description",
-          "type": "text",
-          "position": {
-            "x": 960,
-            "y": 550
-          },
-          "layer": 2,
-          "props": {
-            "content": "손톱 아래의 부드러운 살",
-            "fontSize": 48,
-            "fontWeight": "normal",
-            "color": "#444444",
-            "align": "center",
-            "maxWidth": 1200
-          },
-          "animation": {
-            "enter": {
-              "type": "typing",
-              "durationMs": 1000,
-              "delayMs": 4266
-            }
-          }
-        },
-        {
-          "id": "scene_29_oil_removal_08_stickman",
-          "type": "stickman",
-          "position": {
-            "x": 1550,
-            "y": 680
-          },
-          "scale": 1.2,
-          "layer": 3,
-          "props": {
-            "pose": "standing",
             "expression": "neutral",
             "color": "#333333",
             "faceColor": "#FFFFFF",
@@ -2266,7 +1968,7 @@
               "delayMs": 200
             },
             "during": {
-              "type": "breathing",
+              "type": "nodding",
               "loop": true
             }
           }
@@ -2275,30 +1977,12 @@
       "overlays": []
     },
     {
-      "id": "scene_30_oil_removal_09",
-      "startMs": 427504,
-      "endMs": 445344,
+      "id": "scene_26_nail_conditions_01",
+      "startMs": 366575,
+      "endMs": 381775,
       "background": {
         "type": "image",
-        "src": "images/scene_30.png",
-        "animation": "panRight",
-        "animationIntensity": 0.5
-      },
-      "transition": {
-        "in": "fadeIn",
-        "out": "fadeOut",
-        "durationMs": 300
-      },
-      "objects": [],
-      "overlays": []
-    },
-    {
-      "id": "scene_31_nail_science_01",
-      "startMs": 444984,
-      "endMs": 459644,
-      "background": {
-        "type": "image",
-        "src": "images/scene_31.png",
+        "src": "images/scene_26.png",
         "animation": "kenBurns",
         "animationIntensity": 0.5
       },
@@ -2310,14 +1994,14 @@
       "objects": [],
       "overlays": [
         {
-          "id": "scene_31_nail_science_01_text_1",
+          "id": "scene_26_nail_conditions_01_text_1",
           "type": "text",
           "position": {
             "x": 960,
             "y": 350
           },
           "props": {
-            "content": "손톱의 과학",
+            "content": "계란껍질 네일 - 건강의 신호등",
             "fontSize": 48,
             "fontWeight": "bold",
             "color": "#0066CC",
@@ -2341,9 +2025,9 @@
       ]
     },
     {
-      "id": "scene_32_nail_science_02",
-      "startMs": 459644,
-      "endMs": 473924,
+      "id": "scene_27_nail_conditions_02",
+      "startMs": 381775,
+      "endMs": 396810,
       "background": {
         "type": "color",
         "value": "#FAFAFA"
@@ -2355,14 +2039,14 @@
       },
       "objects": [
         {
-          "id": "scene_32_nail_science_02_keyword",
+          "id": "scene_27_nail_conditions_02_keyword",
           "type": "text",
           "position": {
             "x": 960,
             "y": 370
           },
           "props": {
-            "content": "산소 공급",
+            "content": "계란껍질 네일",
             "fontSize": 96,
             "fontWeight": "bold",
             "color": "#1A1A2E",
@@ -2381,7 +2065,7 @@
           }
         },
         {
-          "id": "scene_32_nail_science_02_description",
+          "id": "scene_27_nail_conditions_02_description",
           "type": "text",
           "position": {
             "x": 960,
@@ -2389,7 +2073,7 @@
           },
           "layer": 2,
           "props": {
-            "content": "모세혈관을 통해 공급",
+            "content": "손톱이 얇아지고 부드러워지는 증상",
             "fontSize": 48,
             "fontWeight": "normal",
             "color": "#444444",
@@ -2403,7 +2087,7 @@
             "enter": {
               "type": "typing",
               "durationMs": 1000,
-              "delayMs": 4284
+              "delayMs": 4510
             },
             "during": {
               "type": "highlightSweep",
@@ -2412,7 +2096,98 @@
           }
         },
         {
-          "id": "scene_32_nail_science_02_stickman",
+          "id": "scene_27_nail_conditions_02_stickman",
+          "type": "stickman",
+          "position": {
+            "x": 1550,
+            "y": 680
+          },
+          "scale": 1.2,
+          "layer": 3,
+          "props": {
+            "pose": "pointing_up",
+            "expression": "focused",
+            "color": "#333333",
+            "faceColor": "#FFFFFF",
+            "lineWidth": 3
+          },
+          "animation": {
+            "enter": {
+              "type": "fadeIn",
+              "durationMs": 500,
+              "delayMs": 200
+            },
+            "during": {
+              "type": "nodding",
+              "loop": true
+            }
+          }
+        }
+      ],
+      "overlays": []
+    },
+    {
+      "id": "scene_28_nail_conditions_03",
+      "startMs": 396950,
+      "endMs": 412110,
+      "background": {
+        "type": "color",
+        "value": "#FAFAFA"
+      },
+      "transition": {
+        "in": "fadeIn",
+        "out": "fadeOut",
+        "durationMs": 300
+      },
+      "objects": [
+        {
+          "id": "scene_28_nail_conditions_03_keyword",
+          "type": "text",
+          "position": {
+            "x": 960,
+            "y": 370
+          },
+          "props": {
+            "content": "건강 신호등",
+            "fontSize": 96,
+            "fontWeight": "bold",
+            "color": "#1A1A2E",
+            "align": "center",
+            "maxWidth": 1400
+          },
+          "animation": {
+            "enter": {
+              "type": "typing",
+              "durationMs": 1500
+            }
+          }
+        },
+        {
+          "id": "scene_28_nail_conditions_03_description",
+          "type": "text",
+          "position": {
+            "x": 960,
+            "y": 550
+          },
+          "layer": 2,
+          "props": {
+            "content": "손톱이 건강의 상태를 나타내는 신호",
+            "fontSize": 48,
+            "fontWeight": "normal",
+            "color": "#444444",
+            "align": "center",
+            "maxWidth": 1200
+          },
+          "animation": {
+            "enter": {
+              "type": "typing",
+              "durationMs": 1000,
+              "delayMs": 4548
+            }
+          }
+        },
+        {
+          "id": "scene_28_nail_conditions_03_stickman",
           "type": "stickman",
           "position": {
             "x": 370,
@@ -2434,206 +2209,6 @@
               "delayMs": 200
             },
             "during": {
-              "type": "breathing",
-              "loop": true
-            }
-          }
-        }
-      ],
-      "overlays": []
-    },
-    {
-      "id": "scene_33_nail_science_03",
-      "startMs": 473908,
-      "endMs": 491288,
-      "background": {
-        "type": "image",
-        "src": "images/scene_33.png",
-        "animation": "zoomOut",
-        "animationIntensity": 0.5
-      },
-      "transition": {
-        "in": "fadeIn",
-        "out": "fadeOut",
-        "durationMs": 300
-      },
-      "objects": [],
-      "overlays": []
-    },
-    {
-      "id": "scene_34_nail_science_04",
-      "startMs": 491288,
-      "endMs": 509228,
-      "background": {
-        "type": "color",
-        "value": "#FAFAFA"
-      },
-      "transition": {
-        "in": "fadeIn",
-        "out": "fadeOut",
-        "durationMs": 300
-      },
-      "objects": [
-        {
-          "id": "scene_34_nail_science_04_keyword",
-          "type": "text",
-          "position": {
-            "x": 960,
-            "y": 370
-          },
-          "props": {
-            "content": "UV 램프",
-            "fontSize": 96,
-            "fontWeight": "bold",
-            "color": "#1A1A2E",
-            "align": "center",
-            "maxWidth": 1400
-          },
-          "animation": {
-            "enter": {
-              "type": "typing",
-              "durationMs": 1500
-            }
-          }
-        },
-        {
-          "id": "scene_34_nail_science_04_description",
-          "type": "text",
-          "position": {
-            "x": 960,
-            "y": 550
-          },
-          "layer": 2,
-          "props": {
-            "content": "젤 네일을 굳히는 자외선",
-            "fontSize": 48,
-            "fontWeight": "normal",
-            "color": "#444444",
-            "align": "center",
-            "maxWidth": 1200
-          },
-          "animation": {
-            "enter": {
-              "type": "typing",
-              "durationMs": 1000,
-              "delayMs": 5382
-            }
-          }
-        },
-        {
-          "id": "scene_34_nail_science_04_stickman",
-          "type": "stickman",
-          "position": {
-            "x": 370,
-            "y": 680
-          },
-          "scale": 1.2,
-          "layer": 3,
-          "props": {
-            "pose": "celebrating",
-            "expression": "happy",
-            "color": "#333333",
-            "faceColor": "#FFFFFF",
-            "lineWidth": 3
-          },
-          "animation": {
-            "enter": {
-              "type": "fadeIn",
-              "durationMs": 500,
-              "delayMs": 200
-            },
-            "during": {
-              "type": "jumping",
-              "loop": true
-            }
-          }
-        }
-      ],
-      "overlays": []
-    },
-    {
-      "id": "scene_35_nail_science_05",
-      "startMs": 509228,
-      "endMs": 522128,
-      "background": {
-        "type": "color",
-        "value": "#FAFAFA"
-      },
-      "transition": {
-        "in": "fadeIn",
-        "out": "fadeOut",
-        "durationMs": 300
-      },
-      "objects": [
-        {
-          "id": "scene_35_nail_science_05_keyword",
-          "type": "text",
-          "position": {
-            "x": 960,
-            "y": 370
-          },
-          "props": {
-            "content": "UVA와 파장",
-            "fontSize": 96,
-            "fontWeight": "bold",
-            "color": "#1A1A2E",
-            "align": "center",
-            "maxWidth": 1400
-          },
-          "animation": {
-            "enter": {
-              "type": "handwriting",
-              "durationMs": 2000
-            }
-          }
-        },
-        {
-          "id": "scene_35_nail_science_05_description",
-          "type": "text",
-          "position": {
-            "x": 960,
-            "y": 550
-          },
-          "layer": 2,
-          "props": {
-            "content": "320-400나노미터의 파장대",
-            "fontSize": 48,
-            "fontWeight": "normal",
-            "color": "#444444",
-            "align": "center",
-            "maxWidth": 1200
-          },
-          "animation": {
-            "enter": {
-              "type": "typing",
-              "durationMs": 1000,
-              "delayMs": 3870
-            }
-          }
-        },
-        {
-          "id": "scene_35_nail_science_05_stickman",
-          "type": "stickman",
-          "position": {
-            "x": 1550,
-            "y": 680
-          },
-          "scale": 1.2,
-          "layer": 3,
-          "props": {
-            "pose": "pointing_right",
-            "expression": "focused",
-            "color": "#333333",
-            "faceColor": "#FFFFFF",
-            "lineWidth": 3
-          },
-          "animation": {
-            "enter": {
-              "type": "fadeIn",
-              "durationMs": 500,
-              "delayMs": 200
-            },
-            "during": {
               "type": "nodding",
               "loop": true
             }
@@ -2643,139 +2218,12 @@
       "overlays": []
     },
     {
-      "id": "scene_36_nail_science_06",
-      "startMs": 522128,
-      "endMs": 536428,
+      "id": "scene_29_hangnail_care_01",
+      "startMs": 411630,
+      "endMs": 427930,
       "background": {
         "type": "image",
-        "src": "images/scene_36.png",
-        "animation": "kenBurns",
-        "animationIntensity": 0.5
-      },
-      "transition": {
-        "in": "fadeIn",
-        "out": "fadeOut",
-        "durationMs": 300
-      },
-      "objects": [],
-      "overlays": []
-    },
-    {
-      "id": "scene_37_nail_science_07",
-      "startMs": 536428,
-      "endMs": 551609,
-      "background": {
-        "type": "color",
-        "value": "#FAFAFA"
-      },
-      "transition": {
-        "in": "fadeIn",
-        "out": "fadeOut",
-        "durationMs": 300
-      },
-      "objects": [
-        {
-          "id": "scene_37_nail_science_07_keyword",
-          "type": "text",
-          "position": {
-            "x": 960,
-            "y": 370
-          },
-          "props": {
-            "content": "해부학 용어",
-            "fontSize": 96,
-            "fontWeight": "bold",
-            "color": "#1A1A2E",
-            "align": "center",
-            "maxWidth": 1400
-          },
-          "animation": {
-            "enter": {
-              "type": "typing",
-              "durationMs": 1500
-            }
-          }
-        },
-        {
-          "id": "scene_37_nail_science_07_description",
-          "type": "text",
-          "position": {
-            "x": 960,
-            "y": 550
-          },
-          "layer": 2,
-          "props": {
-            "content": "손톱의 과학적 구조",
-            "fontSize": 48,
-            "fontWeight": "normal",
-            "color": "#444444",
-            "align": "center",
-            "maxWidth": 1200
-          },
-          "animation": {
-            "enter": {
-              "type": "typing",
-              "durationMs": 1000,
-              "delayMs": 4554
-            }
-          }
-        },
-        {
-          "id": "scene_37_nail_science_07_stickman",
-          "type": "stickman",
-          "position": {
-            "x": 1550,
-            "y": 680
-          },
-          "scale": 1.2,
-          "layer": 3,
-          "props": {
-            "pose": "celebrating",
-            "expression": "happy",
-            "color": "#333333",
-            "faceColor": "#FFFFFF",
-            "lineWidth": 3
-          },
-          "animation": {
-            "enter": {
-              "type": "fadeIn",
-              "durationMs": 500,
-              "delayMs": 200
-            },
-            "during": {
-              "type": "clapping",
-              "loop": true
-            }
-          }
-        }
-      ],
-      "overlays": []
-    },
-    {
-      "id": "scene_38_nail_science_08",
-      "startMs": 551609,
-      "endMs": 566548,
-      "background": {
-        "type": "image",
-        "src": "images/scene_38.png",
-        "animation": "zoomOut",
-        "animationIntensity": 0.5
-      },
-      "transition": {
-        "in": "fadeIn",
-        "out": "fadeOut",
-        "durationMs": 300
-      },
-      "objects": [],
-      "overlays": []
-    },
-    {
-      "id": "scene_39_uv_lamp_01",
-      "startMs": 566248,
-      "endMs": 581269,
-      "background": {
-        "type": "image",
-        "src": "images/scene_39.png",
+        "src": "images/scene_29.png",
         "animation": "panLeft",
         "animationIntensity": 0.5
       },
@@ -2787,14 +2235,14 @@
       "objects": [],
       "overlays": [
         {
-          "id": "scene_39_uv_lamp_01_text_1",
+          "id": "scene_29_hangnail_care_01_text_1",
           "type": "text",
           "position": {
             "x": 960,
             "y": 350
           },
           "props": {
-            "content": "UV 램프와 자외선",
+            "content": "거스러미 네일 + 큐티클 오일",
             "fontSize": 48,
             "fontWeight": "bold",
             "color": "#0066CC",
@@ -2818,9 +2266,9 @@
       ]
     },
     {
-      "id": "scene_40_uv_lamp_02",
-      "startMs": 581269,
-      "endMs": 596288,
+      "id": "scene_30_hangnail_care_02",
+      "startMs": 427930,
+      "endMs": 442850,
       "background": {
         "type": "color",
         "value": "#FAFAFA"
@@ -2832,14 +2280,14 @@
       },
       "objects": [
         {
-          "id": "scene_40_uv_lamp_02_keyword",
+          "id": "scene_30_hangnail_care_02_keyword",
           "type": "text",
           "position": {
             "x": 960,
             "y": 370
           },
           "props": {
-            "content": "네일 플레이트",
+            "content": "큐티클 오일",
             "fontSize": 96,
             "fontWeight": "bold",
             "color": "#1A1A2E",
@@ -2854,7 +2302,7 @@
           }
         },
         {
-          "id": "scene_40_uv_lamp_02_description",
+          "id": "scene_30_hangnail_care_02_description",
           "type": "text",
           "position": {
             "x": 960,
@@ -2862,7 +2310,7 @@
           },
           "layer": 2,
           "props": {
-            "content": "손톱 전체를 말함",
+            "content": "네일과 주변 피부에 보습을 주는 오일",
             "fontSize": 48,
             "fontWeight": "normal",
             "color": "#444444",
@@ -2873,12 +2321,12 @@
             "enter": {
               "type": "typing",
               "durationMs": 1000,
-              "delayMs": 4505
+              "delayMs": 4476
             }
           }
         },
         {
-          "id": "scene_40_uv_lamp_02_stickman",
+          "id": "scene_30_hangnail_care_02_stickman",
           "type": "stickman",
           "position": {
             "x": 370,
@@ -2888,7 +2336,7 @@
           "layer": 3,
           "props": {
             "pose": "pointing_right",
-            "expression": "focused",
+            "expression": "neutral",
             "color": "#333333",
             "faceColor": "#FFFFFF",
             "lineWidth": 3
@@ -2909,9 +2357,9 @@
       "overlays": []
     },
     {
-      "id": "scene_41_uv_lamp_03",
-      "startMs": 596288,
-      "endMs": 610489,
+      "id": "scene_31_hangnail_care_03",
+      "startMs": 442850,
+      "endMs": 455950,
       "background": {
         "type": "color",
         "value": "#FAFAFA"
@@ -2923,14 +2371,14 @@
       },
       "objects": [
         {
-          "id": "scene_41_uv_lamp_03_keyword",
+          "id": "scene_31_hangnail_care_03_keyword",
           "type": "text",
           "position": {
             "x": 960,
             "y": 370
           },
           "props": {
-            "content": "에포니큐움",
+            "content": "보습 효과",
             "fontSize": 96,
             "fontWeight": "bold",
             "color": "#1A1A2E",
@@ -2939,17 +2387,13 @@
           },
           "animation": {
             "enter": {
-              "type": "fadeIn",
-              "durationMs": 400
-            },
-            "during": {
-              "type": "highlightSweep",
-              "durationMs": 800
+              "type": "typing",
+              "durationMs": 1500
             }
           }
         },
         {
-          "id": "scene_41_uv_lamp_03_description",
+          "id": "scene_31_hangnail_care_03_description",
           "type": "text",
           "position": {
             "x": 960,
@@ -2957,30 +2401,23 @@
           },
           "layer": 2,
           "props": {
-            "content": "손톱 뿌리를 덮는 피부",
+            "content": "피부에 수분을 공급하여 건강하게 만드는 효과",
             "fontSize": 48,
             "fontWeight": "normal",
             "color": "#444444",
             "align": "center",
-            "maxWidth": 1200,
-            "background": {
-              "color": "#FFE082"
-            }
+            "maxWidth": 1200
           },
           "animation": {
             "enter": {
               "type": "typing",
               "durationMs": 1000,
-              "delayMs": 4260
-            },
-            "during": {
-              "type": "highlightSweep",
-              "durationMs": 800
+              "delayMs": 3930
             }
           }
         },
         {
-          "id": "scene_41_uv_lamp_03_stickman",
+          "id": "scene_31_hangnail_care_03_stickman",
           "type": "stickman",
           "position": {
             "x": 1550,
@@ -3011,9 +2448,57 @@
       "overlays": []
     },
     {
-      "id": "scene_42_uv_lamp_04",
-      "startMs": 610489,
-      "endMs": 625928,
+      "id": "scene_32_cosmetic_requirements_01",
+      "startMs": 455330,
+      "endMs": 467850,
+      "background": {
+        "type": "image",
+        "src": "images/scene_32.png",
+        "animation": "zoomIn",
+        "animationIntensity": 0.5
+      },
+      "transition": {
+        "in": "fadeIn",
+        "out": "fadeOut",
+        "durationMs": 300
+      },
+      "objects": [],
+      "overlays": [
+        {
+          "id": "scene_32_cosmetic_requirements_01_text_1",
+          "type": "text",
+          "position": {
+            "x": 960,
+            "y": 350
+          },
+          "props": {
+            "content": "화장품 4대 요건 (치유성 ≠ 화장품)",
+            "fontSize": 48,
+            "fontWeight": "bold",
+            "color": "#0066CC",
+            "align": "center",
+            "maxWidth": 1200,
+            "role": "highlight_box",
+            "background": {
+              "color": "rgba(255,255,255,0.9)",
+              "padding": 20,
+              "borderRadius": 12,
+              "opacity": 0.7
+            }
+          },
+          "animation": {
+            "enter": {
+              "type": "fadeInUp",
+              "durationMs": 500
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "scene_33_cosmetic_requirements_02",
+      "startMs": 467850,
+      "endMs": 483070,
       "background": {
         "type": "color",
         "value": "#FAFAFA"
@@ -3025,14 +2510,207 @@
       },
       "objects": [
         {
-          "id": "scene_42_uv_lamp_04_keyword",
+          "id": "scene_33_cosmetic_requirements_02_keyword",
           "type": "text",
           "position": {
             "x": 960,
             "y": 370
           },
           "props": {
-            "content": "큐티클과 에포니큐움",
+            "content": "화장품 요건",
+            "fontSize": 96,
+            "fontWeight": "bold",
+            "color": "#1A1A2E",
+            "align": "center",
+            "maxWidth": 1400
+          },
+          "animation": {
+            "enter": {
+              "type": "handwriting",
+              "durationMs": 2000
+            }
+          }
+        },
+        {
+          "id": "scene_33_cosmetic_requirements_02_description",
+          "type": "text",
+          "position": {
+            "x": 960,
+            "y": 550
+          },
+          "layer": 2,
+          "props": {
+            "content": "안전성, 안정성, 유효성, 사용성을 갖춘 제품",
+            "fontSize": 48,
+            "fontWeight": "normal",
+            "color": "#444444",
+            "align": "center",
+            "maxWidth": 1200
+          },
+          "animation": {
+            "enter": {
+              "type": "typing",
+              "durationMs": 1000,
+              "delayMs": 4566
+            }
+          }
+        },
+        {
+          "id": "scene_33_cosmetic_requirements_02_stickman",
+          "type": "stickman",
+          "position": {
+            "x": 1550,
+            "y": 680
+          },
+          "scale": 1.2,
+          "layer": 3,
+          "props": {
+            "pose": "explaining",
+            "expression": "neutral",
+            "color": "#333333",
+            "faceColor": "#FFFFFF",
+            "lineWidth": 3
+          },
+          "animation": {
+            "enter": {
+              "type": "fadeIn",
+              "durationMs": 500,
+              "delayMs": 200
+            },
+            "during": {
+              "type": "nodding",
+              "loop": true
+            }
+          }
+        }
+      ],
+      "overlays": []
+    },
+    {
+      "id": "scene_34_cosmetic_requirements_03",
+      "startMs": 483070,
+      "endMs": 498230,
+      "background": {
+        "type": "color",
+        "value": "#FAFAFA"
+      },
+      "transition": {
+        "in": "fadeIn",
+        "out": "fadeOut",
+        "durationMs": 300
+      },
+      "objects": [
+        {
+          "id": "scene_34_cosmetic_requirements_03_keyword",
+          "type": "text",
+          "position": {
+            "x": 960,
+            "y": 370
+          },
+          "props": {
+            "content": "유효성과 치유성",
+            "fontSize": 96,
+            "fontWeight": "bold",
+            "color": "#1A1A2E",
+            "align": "center",
+            "maxWidth": 1400
+          },
+          "animation": {
+            "enter": {
+              "type": "fadeIn",
+              "durationMs": 400
+            },
+            "during": {
+              "type": "highlightSweep",
+              "durationMs": 800
+            }
+          }
+        },
+        {
+          "id": "scene_34_cosmetic_requirements_03_description",
+          "type": "text",
+          "position": {
+            "x": 960,
+            "y": 550
+          },
+          "layer": 2,
+          "props": {
+            "content": "효과가 있는지와 질병을 치료하는지의 차이",
+            "fontSize": 48,
+            "fontWeight": "normal",
+            "color": "#444444",
+            "align": "center",
+            "maxWidth": 1200,
+            "background": {
+              "color": "#FFE082"
+            }
+          },
+          "animation": {
+            "enter": {
+              "type": "typing",
+              "durationMs": 1000,
+              "delayMs": 4548
+            },
+            "during": {
+              "type": "highlightSweep",
+              "durationMs": 800
+            }
+          }
+        },
+        {
+          "id": "scene_34_cosmetic_requirements_03_stickman",
+          "type": "stickman",
+          "position": {
+            "x": 370,
+            "y": 680
+          },
+          "scale": 1.2,
+          "layer": 3,
+          "props": {
+            "pose": "pointing_right",
+            "expression": "neutral",
+            "color": "#333333",
+            "faceColor": "#FFFFFF",
+            "lineWidth": 3
+          },
+          "animation": {
+            "enter": {
+              "type": "fadeIn",
+              "durationMs": 500,
+              "delayMs": 200
+            },
+            "during": {
+              "type": "nodding",
+              "loop": true
+            }
+          }
+        }
+      ],
+      "overlays": []
+    },
+    {
+      "id": "scene_35_cosmetic_requirements_04",
+      "startMs": 498230,
+      "endMs": 513290,
+      "background": {
+        "type": "color",
+        "value": "#FAFAFA"
+      },
+      "transition": {
+        "in": "fadeIn",
+        "out": "fadeOut",
+        "durationMs": 300
+      },
+      "objects": [
+        {
+          "id": "scene_35_cosmetic_requirements_04_keyword",
+          "type": "text",
+          "position": {
+            "x": 960,
+            "y": 370
+          },
+          "props": {
+            "content": "글리세린",
             "fontSize": 96,
             "fontWeight": "bold",
             "color": "#1A1A2E",
@@ -3047,7 +2725,7 @@
           }
         },
         {
-          "id": "scene_42_uv_lamp_04_description",
+          "id": "scene_35_cosmetic_requirements_04_description",
           "type": "text",
           "position": {
             "x": 960,
@@ -3055,7 +2733,7 @@
           },
           "layer": 2,
           "props": {
-            "content": "생사와 죽은 각질의 차이",
+            "content": "피부에 수분을 공급하여 보습하는 성분",
             "fontSize": 48,
             "fontWeight": "normal",
             "color": "#444444",
@@ -3066,15 +2744,154 @@
             "enter": {
               "type": "typing",
               "durationMs": 1000,
-              "delayMs": 4631
+              "delayMs": 4518
             }
           }
         },
         {
-          "id": "scene_42_uv_lamp_04_stickman",
+          "id": "scene_35_cosmetic_requirements_04_stickman",
           "type": "stickman",
           "position": {
-            "x": 370,
+            "x": 1550,
+            "y": 680
+          },
+          "scale": 1.2,
+          "layer": 3,
+          "props": {
+            "pose": "explaining",
+            "expression": "neutral",
+            "color": "#333333",
+            "faceColor": "#FFFFFF",
+            "lineWidth": 3
+          },
+          "animation": {
+            "enter": {
+              "type": "fadeIn",
+              "durationMs": 500,
+              "delayMs": 200
+            },
+            "during": {
+              "type": "nodding",
+              "loop": true
+            }
+          }
+        }
+      ],
+      "overlays": []
+    },
+    {
+      "id": "scene_36_glycerin_moisturizing_01",
+      "startMs": 512690,
+      "endMs": 526470,
+      "background": {
+        "type": "image",
+        "src": "images/scene_36.png",
+        "animation": "kenBurns",
+        "animationIntensity": 0.5
+      },
+      "transition": {
+        "in": "fadeIn",
+        "out": "fadeOut",
+        "durationMs": 300
+      },
+      "objects": [],
+      "overlays": [
+        {
+          "id": "scene_36_glycerin_moisturizing_01_text_1",
+          "type": "text",
+          "position": {
+            "x": 960,
+            "y": 350
+          },
+          "props": {
+            "content": "글리세린 - 수분 끌어당기는 보습제",
+            "fontSize": 48,
+            "fontWeight": "bold",
+            "color": "#0066CC",
+            "align": "center",
+            "maxWidth": 1200,
+            "role": "highlight_box",
+            "background": {
+              "color": "rgba(255,255,255,0.9)",
+              "padding": 20,
+              "borderRadius": 12,
+              "opacity": 0.7
+            }
+          },
+          "animation": {
+            "enter": {
+              "type": "fadeInUp",
+              "durationMs": 500
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "scene_37_glycerin_moisturizing_02",
+      "startMs": 526470,
+      "endMs": 540930,
+      "background": {
+        "type": "color",
+        "value": "#FAFAFA"
+      },
+      "transition": {
+        "in": "fadeIn",
+        "out": "fadeOut",
+        "durationMs": 300
+      },
+      "objects": [
+        {
+          "id": "scene_37_glycerin_moisturizing_02_keyword",
+          "type": "text",
+          "position": {
+            "x": 960,
+            "y": 370
+          },
+          "props": {
+            "content": "보습 제품",
+            "fontSize": 96,
+            "fontWeight": "bold",
+            "color": "#1A1A2E",
+            "align": "center",
+            "maxWidth": 1400
+          },
+          "animation": {
+            "enter": {
+              "type": "handwriting",
+              "durationMs": 2000
+            }
+          }
+        },
+        {
+          "id": "scene_37_glycerin_moisturizing_02_description",
+          "type": "text",
+          "position": {
+            "x": 960,
+            "y": 550
+          },
+          "layer": 2,
+          "props": {
+            "content": "피부에 수분을 공급하여 건강하게 만드는 제품",
+            "fontSize": 48,
+            "fontWeight": "normal",
+            "color": "#444444",
+            "align": "center",
+            "maxWidth": 1200
+          },
+          "animation": {
+            "enter": {
+              "type": "typing",
+              "durationMs": 1000,
+              "delayMs": 4338
+            }
+          }
+        },
+        {
+          "id": "scene_37_glycerin_moisturizing_02_stickman",
+          "type": "stickman",
+          "position": {
+            "x": 1550,
             "y": 680
           },
           "scale": 1.2,
@@ -3102,27 +2919,9 @@
       "overlays": []
     },
     {
-      "id": "scene_43_uv_lamp_05",
-      "startMs": 625928,
-      "endMs": 641868,
-      "background": {
-        "type": "image",
-        "src": "images/scene_43.png",
-        "animation": "zoomOut",
-        "animationIntensity": 0.5
-      },
-      "transition": {
-        "in": "fadeIn",
-        "out": "fadeOut",
-        "durationMs": 300
-      },
-      "objects": [],
-      "overlays": []
-    },
-    {
-      "id": "scene_44_uv_lamp_06",
-      "startMs": 641868,
-      "endMs": 657589,
+      "id": "scene_38_glycerin_moisturizing_03",
+      "startMs": 540930,
+      "endMs": 553870,
       "background": {
         "type": "color",
         "value": "#FAFAFA"
@@ -3134,14 +2933,105 @@
       },
       "objects": [
         {
-          "id": "scene_44_uv_lamp_06_keyword",
+          "id": "scene_38_glycerin_moisturizing_03_keyword",
           "type": "text",
           "position": {
             "x": 960,
             "y": 370
           },
           "props": {
-            "content": "네일 폴드와 그루브",
+            "content": "미백 기능",
+            "fontSize": 96,
+            "fontWeight": "bold",
+            "color": "#1A1A2E",
+            "align": "center",
+            "maxWidth": 1400
+          },
+          "animation": {
+            "enter": {
+              "type": "typing",
+              "durationMs": 1500
+            }
+          }
+        },
+        {
+          "id": "scene_38_glycerin_moisturizing_03_description",
+          "type": "text",
+          "position": {
+            "x": 960,
+            "y": 550
+          },
+          "layer": 2,
+          "props": {
+            "content": "멜라닌 생성을 억제하여 피부를 밝게 만드는 기능",
+            "fontSize": 48,
+            "fontWeight": "normal",
+            "color": "#444444",
+            "align": "center",
+            "maxWidth": 1200
+          },
+          "animation": {
+            "enter": {
+              "type": "typing",
+              "durationMs": 1000,
+              "delayMs": 3882
+            }
+          }
+        },
+        {
+          "id": "scene_38_glycerin_moisturizing_03_stickman",
+          "type": "stickman",
+          "position": {
+            "x": 370,
+            "y": 680
+          },
+          "scale": 1.2,
+          "layer": 3,
+          "props": {
+            "pose": "thinking",
+            "expression": "thinking",
+            "color": "#333333",
+            "faceColor": "#FFFFFF",
+            "lineWidth": 3
+          },
+          "animation": {
+            "enter": {
+              "type": "fadeIn",
+              "durationMs": 500,
+              "delayMs": 200
+            },
+            "during": {
+              "type": "thinking_loop",
+              "loop": true
+            }
+          }
+        }
+      ],
+      "overlays": []
+    },
+    {
+      "id": "scene_39_glycerin_moisturizing_04",
+      "startMs": 553870,
+      "endMs": 567910,
+      "background": {
+        "type": "color",
+        "value": "#FAFAFA"
+      },
+      "transition": {
+        "in": "fadeIn",
+        "out": "fadeOut",
+        "durationMs": 300
+      },
+      "objects": [
+        {
+          "id": "scene_39_glycerin_moisturizing_04_keyword",
+          "type": "text",
+          "position": {
+            "x": 960,
+            "y": 370
+          },
+          "props": {
+            "content": "자외선 방어",
             "fontSize": 96,
             "fontWeight": "bold",
             "color": "#1A1A2E",
@@ -3156,7 +3046,7 @@
           }
         },
         {
-          "id": "scene_44_uv_lamp_06_description",
+          "id": "scene_39_glycerin_moisturizing_04_description",
           "type": "text",
           "position": {
             "x": 960,
@@ -3164,7 +3054,7 @@
           },
           "layer": 2,
           "props": {
-            "content": "손톱 양옆의 살과 피부",
+            "content": "피부를 자외선의 해로운 영향으로부터 보호하는 효과",
             "fontSize": 48,
             "fontWeight": "normal",
             "color": "#444444",
@@ -3175,21 +3065,21 @@
             "enter": {
               "type": "typing",
               "durationMs": 1000,
-              "delayMs": 4716
+              "delayMs": 4212
             }
           }
         },
         {
-          "id": "scene_44_uv_lamp_06_stickman",
+          "id": "scene_39_glycerin_moisturizing_04_stickman",
           "type": "stickman",
           "position": {
-            "x": 370,
+            "x": 1550,
             "y": 680
           },
           "scale": 1.2,
           "layer": 3,
           "props": {
-            "pose": "standing",
+            "pose": "explaining",
             "expression": "neutral",
             "color": "#333333",
             "faceColor": "#FFFFFF",
@@ -3202,7 +3092,7 @@
               "delayMs": 200
             },
             "during": {
-              "type": "breathing",
+              "type": "nodding",
               "loop": true
             }
           }
@@ -3211,31 +3101,13 @@
       "overlays": []
     },
     {
-      "id": "scene_45_uv_lamp_07",
-      "startMs": 657589,
-      "endMs": 674288,
+      "id": "scene_40_whitening_ingredients_01",
+      "startMs": 567390,
+      "endMs": 584166,
       "background": {
         "type": "image",
-        "src": "images/scene_45.png",
+        "src": "images/scene_40.png",
         "animation": "panRight",
-        "animationIntensity": 0.5
-      },
-      "transition": {
-        "in": "fadeIn",
-        "out": "fadeOut",
-        "durationMs": 300
-      },
-      "objects": [],
-      "overlays": []
-    },
-    {
-      "id": "scene_46_anatomy_01",
-      "startMs": 673769,
-      "endMs": 686569,
-      "background": {
-        "type": "image",
-        "src": "images/scene_46.png",
-        "animation": "kenBurns",
         "animationIntensity": 0.5
       },
       "transition": {
@@ -3246,14 +3118,14 @@
       "objects": [],
       "overlays": [
         {
-          "id": "scene_46_anatomy_01_text_1",
+          "id": "scene_40_whitening_ingredients_01_text_1",
           "type": "text",
           "position": {
             "x": 960,
             "y": 350
           },
           "props": {
-            "content": "손톱 해부학 용어",
+            "content": "미백 성분 - 비타민C vs 캄퍼",
             "fontSize": 48,
             "fontWeight": "bold",
             "color": "#0066CC",
@@ -3277,9 +3149,9 @@
       ]
     },
     {
-      "id": "scene_47_anatomy_02",
-      "startMs": 686569,
-      "endMs": 701548,
+      "id": "scene_41_whitening_ingredients_02",
+      "startMs": 584166,
+      "endMs": 599346,
       "background": {
         "type": "color",
         "value": "#FAFAFA"
@@ -3291,196 +3163,14 @@
       },
       "objects": [
         {
-          "id": "scene_47_anatomy_02_keyword",
+          "id": "scene_41_whitening_ingredients_02_keyword",
           "type": "text",
           "position": {
             "x": 960,
             "y": 370
           },
           "props": {
-            "content": "아크릴 품질",
-            "fontSize": 96,
-            "fontWeight": "bold",
-            "color": "#1A1A2E",
-            "align": "center",
-            "maxWidth": 1400
-          },
-          "animation": {
-            "enter": {
-              "type": "typing",
-              "durationMs": 1500
-            }
-          }
-        },
-        {
-          "id": "scene_47_anatomy_02_description",
-          "type": "text",
-          "position": {
-            "x": 960,
-            "y": 550
-          },
-          "layer": 2,
-          "props": {
-            "content": "인조네일이 부러지는 원인",
-            "fontSize": 48,
-            "fontWeight": "normal",
-            "color": "#444444",
-            "align": "center",
-            "maxWidth": 1200
-          },
-          "animation": {
-            "enter": {
-              "type": "typing",
-              "durationMs": 1000,
-              "delayMs": 4493
-            }
-          }
-        },
-        {
-          "id": "scene_47_anatomy_02_stickman",
-          "type": "stickman",
-          "position": {
-            "x": 1550,
-            "y": 680
-          },
-          "scale": 1.2,
-          "layer": 3,
-          "props": {
-            "pose": "thinking",
-            "expression": "thinking",
-            "color": "#333333",
-            "faceColor": "#FFFFFF",
-            "lineWidth": 3
-          },
-          "animation": {
-            "enter": {
-              "type": "fadeIn",
-              "durationMs": 500,
-              "delayMs": 200
-            },
-            "during": {
-              "type": "thinking_loop",
-              "loop": true
-            }
-          }
-        }
-      ],
-      "overlays": []
-    },
-    {
-      "id": "scene_48_anatomy_03",
-      "startMs": 701709,
-      "endMs": 714833,
-      "background": {
-        "type": "color",
-        "value": "#FAFAFA"
-      },
-      "transition": {
-        "in": "fadeIn",
-        "out": "fadeOut",
-        "durationMs": 300
-      },
-      "objects": [
-        {
-          "id": "scene_48_anatomy_03_keyword",
-          "type": "text",
-          "position": {
-            "x": 960,
-            "y": 370
-          },
-          "props": {
-            "content": "자외선 영향",
-            "fontSize": 96,
-            "fontWeight": "bold",
-            "color": "#1A1A2E",
-            "align": "center",
-            "maxWidth": 1400
-          },
-          "animation": {
-            "enter": {
-              "type": "handwriting",
-              "durationMs": 2000
-            }
-          }
-        },
-        {
-          "id": "scene_48_anatomy_03_description",
-          "type": "text",
-          "position": {
-            "x": 960,
-            "y": 550
-          },
-          "layer": 2,
-          "props": {
-            "content": "아크릴 손상 원인",
-            "fontSize": 48,
-            "fontWeight": "normal",
-            "color": "#444444",
-            "align": "center",
-            "maxWidth": 1200
-          },
-          "animation": {
-            "enter": {
-              "type": "typing",
-              "durationMs": 1000,
-              "delayMs": 3937
-            }
-          }
-        },
-        {
-          "id": "scene_48_anatomy_03_stickman",
-          "type": "stickman",
-          "position": {
-            "x": 370,
-            "y": 680
-          },
-          "scale": 1.2,
-          "layer": 3,
-          "props": {
-            "pose": "standing",
-            "expression": "neutral",
-            "color": "#333333",
-            "faceColor": "#FFFFFF",
-            "lineWidth": 3
-          },
-          "animation": {
-            "enter": {
-              "type": "fadeIn",
-              "durationMs": 500,
-              "delayMs": 200
-            },
-            "during": {
-              "type": "breathing",
-              "loop": true
-            }
-          }
-        }
-      ],
-      "overlays": []
-    },
-    {
-      "id": "scene_49_anatomy_04",
-      "startMs": 714833,
-      "endMs": 727173,
-      "background": {
-        "type": "color",
-        "value": "#FAFAFA"
-      },
-      "transition": {
-        "in": "fadeIn",
-        "out": "fadeOut",
-        "durationMs": 300
-      },
-      "objects": [
-        {
-          "id": "scene_49_anatomy_04_keyword",
-          "type": "text",
-          "position": {
-            "x": 960,
-            "y": 370
-          },
-          "props": {
-            "content": "도구 오염",
+            "content": "SPF와 PA",
             "fontSize": 96,
             "fontWeight": "bold",
             "color": "#1A1A2E",
@@ -3499,7 +3189,7 @@
           }
         },
         {
-          "id": "scene_49_anatomy_04_description",
+          "id": "scene_41_whitening_ingredients_02_description",
           "type": "text",
           "position": {
             "x": 960,
@@ -3507,7 +3197,7 @@
           },
           "layer": 2,
           "props": {
-            "content": "시술 과정에서의 오류",
+            "content": "자외선 방어 지수를 나타내는 지수",
             "fontSize": 48,
             "fontWeight": "normal",
             "color": "#444444",
@@ -3521,7 +3211,7 @@
             "enter": {
               "type": "typing",
               "durationMs": 1000,
-              "delayMs": 3702
+              "delayMs": 4554
             },
             "during": {
               "type": "highlightSweep",
@@ -3530,116 +3220,7 @@
           }
         },
         {
-          "id": "scene_49_anatomy_04_stickman",
-          "type": "stickman",
-          "position": {
-            "x": 1550,
-            "y": 680
-          },
-          "scale": 1.2,
-          "layer": 3,
-          "props": {
-            "pose": "thinking",
-            "expression": "thinking",
-            "color": "#333333",
-            "faceColor": "#FFFFFF",
-            "lineWidth": 3
-          },
-          "animation": {
-            "enter": {
-              "type": "fadeIn",
-              "durationMs": 500,
-              "delayMs": 200
-            },
-            "during": {
-              "type": "thinking_loop",
-              "loop": true
-            }
-          }
-        }
-      ],
-      "overlays": []
-    },
-    {
-      "id": "scene_50_anatomy_05",
-      "startMs": 727333,
-      "endMs": 740113,
-      "background": {
-        "type": "image",
-        "src": "images/scene_50.png",
-        "animation": "panRight",
-        "animationIntensity": 0.5
-      },
-      "transition": {
-        "in": "fadeIn",
-        "out": "fadeOut",
-        "durationMs": 300
-      },
-      "objects": [],
-      "overlays": []
-    },
-    {
-      "id": "scene_51_anatomy_06",
-      "startMs": 740113,
-      "endMs": 754233,
-      "background": {
-        "type": "color",
-        "value": "#FAFAFA"
-      },
-      "transition": {
-        "in": "fadeIn",
-        "out": "fadeOut",
-        "durationMs": 300
-      },
-      "objects": [
-        {
-          "id": "scene_51_anatomy_06_keyword",
-          "type": "text",
-          "position": {
-            "x": 960,
-            "y": 370
-          },
-          "props": {
-            "content": "아크릴 비율",
-            "fontSize": 96,
-            "fontWeight": "bold",
-            "color": "#1A1A2E",
-            "align": "center",
-            "maxWidth": 1400
-          },
-          "animation": {
-            "enter": {
-              "type": "typing",
-              "durationMs": 1500
-            }
-          }
-        },
-        {
-          "id": "scene_51_anatomy_06_description",
-          "type": "text",
-          "position": {
-            "x": 960,
-            "y": 550
-          },
-          "layer": 2,
-          "props": {
-            "content": "아크릴 파우더와 리퀴드의 비율",
-            "fontSize": 48,
-            "fontWeight": "normal",
-            "color": "#444444",
-            "align": "center",
-            "maxWidth": 1200
-          },
-          "animation": {
-            "enter": {
-              "type": "typing",
-              "durationMs": 1000,
-              "delayMs": 4236
-            }
-          }
-        },
-        {
-          "id": "scene_51_anatomy_06_stickman",
+          "id": "scene_41_whitening_ingredients_02_stickman",
           "type": "stickman",
           "position": {
             "x": 1550,
@@ -3670,100 +3251,57 @@
       "overlays": []
     },
     {
-      "id": "scene_52_anatomy_07",
-      "startMs": 754233,
-      "endMs": 765333,
+      "id": "scene_42_sunscreen_spf_pa_01",
+      "startMs": 598726,
+      "endMs": 615086,
       "background": {
-        "type": "color",
-        "value": "#FAFAFA"
+        "type": "image",
+        "src": "images/scene_42.png",
+        "animation": "zoomIn",
+        "animationIntensity": 0.5
       },
       "transition": {
         "in": "fadeIn",
         "out": "fadeOut",
         "durationMs": 300
       },
-      "objects": [
+      "objects": [],
+      "overlays": [
         {
-          "id": "scene_52_anatomy_07_keyword",
+          "id": "scene_42_sunscreen_spf_pa_01_text_1",
           "type": "text",
           "position": {
             "x": 960,
-            "y": 370
+            "y": 350
           },
           "props": {
-            "content": "스포넬 손톱",
-            "fontSize": 96,
-            "fontWeight": "bold",
-            "color": "#1A1A2E",
-            "align": "center",
-            "maxWidth": 1400
-          },
-          "animation": {
-            "enter": {
-              "type": "handwriting",
-              "durationMs": 2000
-            }
-          }
-        },
-        {
-          "id": "scene_52_anatomy_07_description",
-          "type": "text",
-          "position": {
-            "x": 960,
-            "y": 550
-          },
-          "layer": 2,
-          "props": {
-            "content": "특이한 손톱 모양",
+            "content": "SPF = UVB 방어 / PA = UVA 방어",
             "fontSize": 48,
-            "fontWeight": "normal",
-            "color": "#444444",
+            "fontWeight": "bold",
+            "color": "#0066CC",
             "align": "center",
-            "maxWidth": 1200
-          },
-          "animation": {
-            "enter": {
-              "type": "typing",
-              "durationMs": 1000,
-              "delayMs": 3330
+            "maxWidth": 1200,
+            "role": "highlight_box",
+            "background": {
+              "color": "rgba(255,255,255,0.9)",
+              "padding": 20,
+              "borderRadius": 12,
+              "opacity": 0.7
             }
-          }
-        },
-        {
-          "id": "scene_52_anatomy_07_stickman",
-          "type": "stickman",
-          "position": {
-            "x": 370,
-            "y": 680
-          },
-          "scale": 1.2,
-          "layer": 3,
-          "props": {
-            "pose": "standing",
-            "expression": "neutral",
-            "color": "#333333",
-            "faceColor": "#FFFFFF",
-            "lineWidth": 3
           },
           "animation": {
             "enter": {
-              "type": "fadeIn",
-              "durationMs": 500,
-              "delayMs": 200
-            },
-            "during": {
-              "type": "breathing",
-              "loop": true
+              "type": "fadeInUp",
+              "durationMs": 500
             }
           }
         }
-      ],
-      "overlays": []
+      ]
     },
     {
-      "id": "scene_53_anatomy_08",
-      "startMs": 765373,
-      "endMs": 782333,
+      "id": "scene_43_sunscreen_spf_pa_02",
+      "startMs": 615086,
+      "endMs": 631546,
       "background": {
         "type": "color",
         "value": "#FAFAFA"
@@ -3775,14 +3313,14 @@
       },
       "objects": [
         {
-          "id": "scene_53_anatomy_08_keyword",
+          "id": "scene_43_sunscreen_spf_pa_02_keyword",
           "type": "text",
           "position": {
             "x": 960,
             "y": 370
           },
           "props": {
-            "content": "네로우 팁",
+            "content": "UVB와 UVA",
             "fontSize": 96,
             "fontWeight": "bold",
             "color": "#1A1A2E",
@@ -3797,7 +3335,7 @@
           }
         },
         {
-          "id": "scene_53_anatomy_08_description",
+          "id": "scene_43_sunscreen_spf_pa_02_description",
           "type": "text",
           "position": {
             "x": 960,
@@ -3805,7 +3343,7 @@
           },
           "layer": 2,
           "props": {
-            "content": "좁은 손톱에 붙이는 팁",
+            "content": "자외선의 두 가지 종류와 그에 대한 방어 효과",
             "fontSize": 48,
             "fontWeight": "normal",
             "color": "#444444",
@@ -3816,241 +3354,12 @@
             "enter": {
               "type": "typing",
               "durationMs": 1000,
-              "delayMs": 5088
+              "delayMs": 4938
             }
           }
         },
         {
-          "id": "scene_53_anatomy_08_stickman",
-          "type": "stickman",
-          "position": {
-            "x": 1550,
-            "y": 680
-          },
-          "scale": 1.2,
-          "layer": 3,
-          "props": {
-            "pose": "celebrating",
-            "expression": "happy",
-            "color": "#333333",
-            "faceColor": "#FFFFFF",
-            "lineWidth": 3
-          },
-          "animation": {
-            "enter": {
-              "type": "fadeIn",
-              "durationMs": 500,
-              "delayMs": 200
-            },
-            "during": {
-              "type": "clapping",
-              "loop": true
-            }
-          }
-        }
-      ],
-      "overlays": []
-    },
-    {
-      "id": "scene_54_anatomy_09",
-      "startMs": 782333,
-      "endMs": 797033,
-      "background": {
-        "type": "image",
-        "src": "images/scene_54.png",
-        "animation": "panLeft",
-        "animationIntensity": 0.5
-      },
-      "transition": {
-        "in": "fadeIn",
-        "out": "fadeOut",
-        "durationMs": 300
-      },
-      "objects": [],
-      "overlays": []
-    },
-    {
-      "id": "scene_55_anatomy_10",
-      "startMs": 797033,
-      "endMs": 816433,
-      "background": {
-        "type": "image",
-        "src": "images/scene_55.png",
-        "animation": "panRight",
-        "animationIntensity": 0.5
-      },
-      "transition": {
-        "in": "fadeIn",
-        "out": "fadeOut",
-        "durationMs": 300
-      },
-      "objects": [],
-      "overlays": []
-    },
-    {
-      "id": "scene_56_conclusion_01",
-      "startMs": 815973,
-      "endMs": 831933,
-      "background": {
-        "type": "color",
-        "value": "#FAFAFA"
-      },
-      "transition": {
-        "in": "fadeIn",
-        "out": "fadeOut",
-        "durationMs": 300
-      },
-      "objects": [
-        {
-          "id": "scene_56_conclusion_01_keyword",
-          "type": "text",
-          "position": {
-            "x": 960,
-            "y": 370
-          },
-          "props": {
-            "content": "팁 접착",
-            "fontSize": 96,
-            "fontWeight": "bold",
-            "color": "#1A1A2E",
-            "align": "center",
-            "maxWidth": 1400
-          },
-          "animation": {
-            "enter": {
-              "type": "handwriting",
-              "durationMs": 2000
-            }
-          }
-        },
-        {
-          "id": "scene_56_conclusion_01_description",
-          "type": "text",
-          "position": {
-            "x": 960,
-            "y": 550
-          },
-          "layer": 2,
-          "props": {
-            "content": "손톱 모양 교정 기술",
-            "fontSize": 48,
-            "fontWeight": "normal",
-            "color": "#444444",
-            "align": "center",
-            "maxWidth": 1200
-          },
-          "animation": {
-            "enter": {
-              "type": "typing",
-              "durationMs": 1000,
-              "delayMs": 4788
-            }
-          }
-        },
-        {
-          "id": "scene_56_conclusion_01_stickman",
-          "type": "stickman",
-          "position": {
-            "x": 370,
-            "y": 680
-          },
-          "scale": 1.2,
-          "layer": 3,
-          "props": {
-            "pose": "pointing_right",
-            "expression": "focused",
-            "color": "#333333",
-            "faceColor": "#FFFFFF",
-            "lineWidth": 3
-          },
-          "animation": {
-            "enter": {
-              "type": "fadeIn",
-              "durationMs": 500,
-              "delayMs": 200
-            },
-            "during": {
-              "type": "nodding",
-              "loop": true
-            }
-          }
-        }
-      ],
-      "overlays": []
-    },
-    {
-      "id": "scene_57_conclusion_02",
-      "startMs": 831933,
-      "endMs": 844773,
-      "background": {
-        "type": "color",
-        "value": "#FAFAFA"
-      },
-      "transition": {
-        "in": "fadeIn",
-        "out": "fadeOut",
-        "durationMs": 300
-      },
-      "objects": [
-        {
-          "id": "scene_57_conclusion_02_keyword",
-          "type": "text",
-          "position": {
-            "x": 960,
-            "y": 370
-          },
-          "props": {
-            "content": "리필 시술",
-            "fontSize": 96,
-            "fontWeight": "bold",
-            "color": "#1A1A2E",
-            "align": "center",
-            "maxWidth": 1400
-          },
-          "animation": {
-            "enter": {
-              "type": "fadeIn",
-              "durationMs": 400
-            },
-            "during": {
-              "type": "highlightSweep",
-              "durationMs": 800
-            }
-          }
-        },
-        {
-          "id": "scene_57_conclusion_02_description",
-          "type": "text",
-          "position": {
-            "x": 960,
-            "y": 550
-          },
-          "layer": 2,
-          "props": {
-            "content": "인조네일 보수 과정",
-            "fontSize": 48,
-            "fontWeight": "normal",
-            "color": "#444444",
-            "align": "center",
-            "maxWidth": 1200,
-            "background": {
-              "color": "#FFE082"
-            }
-          },
-          "animation": {
-            "enter": {
-              "type": "typing",
-              "durationMs": 1000,
-              "delayMs": 3852
-            },
-            "during": {
-              "type": "highlightSweep",
-              "durationMs": 800
-            }
-          }
-        },
-        {
-          "id": "scene_57_conclusion_02_stickman",
+          "id": "scene_43_sunscreen_spf_pa_02_stickman",
           "type": "stickman",
           "position": {
             "x": 1550,
@@ -4081,9 +3390,9 @@
       "overlays": []
     },
     {
-      "id": "scene_58_conclusion_03",
-      "startMs": 844773,
-      "endMs": 860193,
+      "id": "scene_44_sunscreen_spf_pa_03",
+      "startMs": 631546,
+      "endMs": 649346,
       "background": {
         "type": "color",
         "value": "#FAFAFA"
@@ -4095,14 +3404,14 @@
       },
       "objects": [
         {
-          "id": "scene_58_conclusion_03_keyword",
+          "id": "scene_44_sunscreen_spf_pa_03_keyword",
           "type": "text",
           "position": {
             "x": 960,
             "y": 370
           },
           "props": {
-            "content": "파일링 과정",
+            "content": "피부 노화",
             "fontSize": 96,
             "fontWeight": "bold",
             "color": "#1A1A2E",
@@ -4111,13 +3420,13 @@
           },
           "animation": {
             "enter": {
-              "type": "typing",
-              "durationMs": 1500
+              "type": "handwriting",
+              "durationMs": 2000
             }
           }
         },
         {
-          "id": "scene_58_conclusion_03_description",
+          "id": "scene_44_sunscreen_spf_pa_03_description",
           "type": "text",
           "position": {
             "x": 960,
@@ -4125,7 +3434,7 @@
           },
           "layer": 2,
           "props": {
-            "content": "보수 시 필수적인 단계",
+            "content": "피부가 노화되는 원인과 그에 대한 대책",
             "fontSize": 48,
             "fontWeight": "normal",
             "color": "#444444",
@@ -4136,12 +3445,12 @@
             "enter": {
               "type": "typing",
               "durationMs": 1000,
-              "delayMs": 4626
+              "delayMs": 5340
             }
           }
         },
         {
-          "id": "scene_58_conclusion_03_stickman",
+          "id": "scene_44_sunscreen_spf_pa_03_stickman",
           "type": "stickman",
           "position": {
             "x": 370,
@@ -4172,9 +3481,9 @@
       "overlays": []
     },
     {
-      "id": "scene_59_conclusion_04",
-      "startMs": 860193,
-      "endMs": 875833,
+      "id": "scene_45_sunscreen_spf_pa_04",
+      "startMs": 649346,
+      "endMs": 665886,
       "background": {
         "type": "color",
         "value": "#FAFAFA"
@@ -4186,105 +3495,14 @@
       },
       "objects": [
         {
-          "id": "scene_59_conclusion_04_keyword",
+          "id": "scene_45_sunscreen_spf_pa_04_keyword",
           "type": "text",
           "position": {
             "x": 960,
             "y": 370
           },
           "props": {
-            "content": "케라틴층",
-            "fontSize": 96,
-            "fontWeight": "bold",
-            "color": "#1A1A2E",
-            "align": "center",
-            "maxWidth": 1400
-          },
-          "animation": {
-            "enter": {
-              "type": "handwriting",
-              "durationMs": 2000
-            }
-          }
-        },
-        {
-          "id": "scene_59_conclusion_04_description",
-          "type": "text",
-          "position": {
-            "x": 960,
-            "y": 550
-          },
-          "layer": 2,
-          "props": {
-            "content": "손톱의 과학적 구성",
-            "fontSize": 48,
-            "fontWeight": "normal",
-            "color": "#444444",
-            "align": "center",
-            "maxWidth": 1200
-          },
-          "animation": {
-            "enter": {
-              "type": "typing",
-              "durationMs": 1000,
-              "delayMs": 4692
-            }
-          }
-        },
-        {
-          "id": "scene_59_conclusion_04_stickman",
-          "type": "stickman",
-          "position": {
-            "x": 1550,
-            "y": 680
-          },
-          "scale": 1.2,
-          "layer": 3,
-          "props": {
-            "pose": "depressed",
-            "expression": "sad",
-            "color": "#333333",
-            "faceColor": "#FFFFFF",
-            "lineWidth": 3
-          },
-          "animation": {
-            "enter": {
-              "type": "fadeIn",
-              "durationMs": 500,
-              "delayMs": 200
-            },
-            "during": {
-              "type": "headShake",
-              "loop": true
-            }
-          }
-        }
-      ],
-      "overlays": []
-    },
-    {
-      "id": "scene_60_conclusion_05",
-      "startMs": 875833,
-      "endMs": 890693,
-      "background": {
-        "type": "color",
-        "value": "#FAFAFA"
-      },
-      "transition": {
-        "in": "fadeIn",
-        "out": "fadeOut",
-        "durationMs": 300
-      },
-      "objects": [
-        {
-          "id": "scene_60_conclusion_05_keyword",
-          "type": "text",
-          "position": {
-            "x": 960,
-            "y": 370
-          },
-          "props": {
-            "content": "큐티클 케어",
+            "content": "SPF와 PA",
             "fontSize": 96,
             "fontWeight": "bold",
             "color": "#1A1A2E",
@@ -4299,7 +3517,7 @@
           }
         },
         {
-          "id": "scene_60_conclusion_05_description",
+          "id": "scene_45_sunscreen_spf_pa_04_description",
           "type": "text",
           "position": {
             "x": 960,
@@ -4307,7 +3525,7 @@
           },
           "layer": 2,
           "props": {
-            "content": "손톱 건강을 위한 케어",
+            "content": "자외선 차단제의 지수",
             "fontSize": 48,
             "fontWeight": "normal",
             "color": "#444444",
@@ -4318,22 +3536,22 @@
             "enter": {
               "type": "typing",
               "durationMs": 1000,
-              "delayMs": 4458
+              "delayMs": 4962
             }
           }
         },
         {
-          "id": "scene_60_conclusion_05_stickman",
+          "id": "scene_45_sunscreen_spf_pa_04_stickman",
           "type": "stickman",
           "position": {
-            "x": 370,
+            "x": 1550,
             "y": 680
           },
           "scale": 1.2,
           "layer": 3,
           "props": {
-            "pose": "pointing_right",
-            "expression": "focused",
+            "pose": "explaining",
+            "expression": "neutral",
             "color": "#333333",
             "faceColor": "#FFFFFF",
             "lineWidth": 3
@@ -4354,9 +3572,9 @@
       "overlays": []
     },
     {
-      "id": "scene_61_conclusion_06",
-      "startMs": 890693,
-      "endMs": 903833,
+      "id": "scene_46_sunscreen_spf_pa_05",
+      "startMs": 665886,
+      "endMs": 679826,
       "background": {
         "type": "color",
         "value": "#FAFAFA"
@@ -4368,14 +3586,14 @@
       },
       "objects": [
         {
-          "id": "scene_61_conclusion_06_keyword",
+          "id": "scene_46_sunscreen_spf_pa_05_keyword",
           "type": "text",
           "position": {
             "x": 960,
             "y": 370
           },
           "props": {
-            "content": "스트레스 포인트",
+            "content": "덧발라야 함",
             "fontSize": 96,
             "fontWeight": "bold",
             "color": "#1A1A2E",
@@ -4390,7 +3608,7 @@
           }
         },
         {
-          "id": "scene_61_conclusion_06_description",
+          "id": "scene_46_sunscreen_spf_pa_05_description",
           "type": "text",
           "position": {
             "x": 960,
@@ -4398,7 +3616,7 @@
           },
           "layer": 2,
           "props": {
-            "content": "인조네일이 부러지는 지점",
+            "content": "지속적인 자외선 차단을 위해",
             "fontSize": 48,
             "fontWeight": "normal",
             "color": "#444444",
@@ -4409,22 +3627,22 @@
             "enter": {
               "type": "typing",
               "durationMs": 1000,
-              "delayMs": 3942
+              "delayMs": 4182
             }
           }
         },
         {
-          "id": "scene_61_conclusion_06_stickman",
+          "id": "scene_46_sunscreen_spf_pa_05_stickman",
           "type": "stickman",
           "position": {
-            "x": 1550,
+            "x": 370,
             "y": 680
           },
           "scale": 1.2,
           "layer": 3,
           "props": {
-            "pose": "celebrating",
-            "expression": "happy",
+            "pose": "pointing_right",
+            "expression": "neutral",
             "color": "#333333",
             "faceColor": "#FFFFFF",
             "lineWidth": 3
@@ -4436,7 +3654,7 @@
               "delayMs": 200
             },
             "during": {
-              "type": "clapping",
+              "type": "nodding",
               "loop": true
             }
           }
@@ -4445,9 +3663,52 @@
       "overlays": []
     },
     {
-      "id": "scene_62_conclusion_07",
-      "startMs": 904013,
-      "endMs": 918553,
+      "id": "scene_47_conclusion_01",
+      "startMs": 679026,
+      "endMs": 695306,
+      "background": {
+        "type": "image",
+        "src": "images/scene_47.png",
+        "animation": "zoomIn",
+        "animationIntensity": 0.5
+      },
+      "transition": {
+        "in": "fadeIn",
+        "out": "fadeOut",
+        "durationMs": 300
+      },
+      "objects": [],
+      "overlays": [
+        {
+          "id": "scene_47_conclusion_01_text_1",
+          "type": "text",
+          "position": {
+            "x": 960,
+            "y": 250
+          },
+          "props": {
+            "content": "손톱이 전하는 이야기",
+            "fontSize": 64,
+            "fontWeight": "bold",
+            "color": "#000000",
+            "align": "center",
+            "maxWidth": 1200,
+            "role": "title",
+            "background": null
+          },
+          "animation": {
+            "enter": {
+              "type": "fadeInUp",
+              "durationMs": 500
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "scene_48_conclusion_02",
+      "startMs": 695306,
+      "endMs": 708306,
       "background": {
         "type": "color",
         "value": "#FAFAFA"
@@ -4459,14 +3720,14 @@
       },
       "objects": [
         {
-          "id": "scene_62_conclusion_07_keyword",
+          "id": "scene_48_conclusion_02_keyword",
           "type": "text",
           "position": {
             "x": 960,
             "y": 370
           },
           "props": {
-            "content": "네일리스트 역할",
+            "content": "화장품의 역사",
             "fontSize": 96,
             "fontWeight": "bold",
             "color": "#1A1A2E",
@@ -4485,7 +3746,7 @@
           }
         },
         {
-          "id": "scene_62_conclusion_07_description",
+          "id": "scene_48_conclusion_02_description",
           "type": "text",
           "position": {
             "x": 960,
@@ -4493,7 +3754,7 @@
           },
           "layer": 2,
           "props": {
-            "content": "고객의 건강 지킴이",
+            "content": "성분과 기능의 과학",
             "fontSize": 48,
             "fontWeight": "normal",
             "color": "#444444",
@@ -4507,7 +3768,7 @@
             "enter": {
               "type": "typing",
               "durationMs": 1000,
-              "delayMs": 4362
+              "delayMs": 3900
             },
             "during": {
               "type": "highlightSweep",
@@ -4516,116 +3777,7 @@
           }
         },
         {
-          "id": "scene_62_conclusion_07_stickman",
-          "type": "stickman",
-          "position": {
-            "x": 370,
-            "y": 680
-          },
-          "scale": 1.2,
-          "layer": 3,
-          "props": {
-            "pose": "standing",
-            "expression": "neutral",
-            "color": "#333333",
-            "faceColor": "#FFFFFF",
-            "lineWidth": 3
-          },
-          "animation": {
-            "enter": {
-              "type": "fadeIn",
-              "durationMs": 500,
-              "delayMs": 200
-            },
-            "during": {
-              "type": "breathing",
-              "loop": true
-            }
-          }
-        }
-      ],
-      "overlays": []
-    },
-    {
-      "id": "scene_63_conclusion_08",
-      "startMs": 918553,
-      "endMs": 934333,
-      "background": {
-        "type": "image",
-        "src": "images/scene_63.png",
-        "animation": "zoomOut",
-        "animationIntensity": 0.5
-      },
-      "transition": {
-        "in": "fadeIn",
-        "out": "fadeOut",
-        "durationMs": 300
-      },
-      "objects": [],
-      "overlays": []
-    },
-    {
-      "id": "scene_64_conclusion_09",
-      "startMs": 934333,
-      "endMs": 946153,
-      "background": {
-        "type": "color",
-        "value": "#FAFAFA"
-      },
-      "transition": {
-        "in": "fadeIn",
-        "out": "fadeOut",
-        "durationMs": 300
-      },
-      "objects": [
-        {
-          "id": "scene_64_conclusion_09_keyword",
-          "type": "text",
-          "position": {
-            "x": 960,
-            "y": 370
-          },
-          "props": {
-            "content": "손톱 변색",
-            "fontSize": 96,
-            "fontWeight": "bold",
-            "color": "#1A1A2E",
-            "align": "center",
-            "maxWidth": 1400
-          },
-          "animation": {
-            "enter": {
-              "type": "typing",
-              "durationMs": 1500
-            }
-          }
-        },
-        {
-          "id": "scene_64_conclusion_09_description",
-          "type": "text",
-          "position": {
-            "x": 960,
-            "y": 550
-          },
-          "layer": 2,
-          "props": {
-            "content": "혈액순환 또는 건강상태로 인한 원인",
-            "fontSize": 48,
-            "fontWeight": "normal",
-            "color": "#444444",
-            "align": "center",
-            "maxWidth": 1200
-          },
-          "animation": {
-            "enter": {
-              "type": "typing",
-              "durationMs": 1000,
-              "delayMs": 3546
-            }
-          }
-        },
-        {
-          "id": "scene_64_conclusion_09_stickman",
+          "id": "scene_48_conclusion_02_stickman",
           "type": "stickman",
           "position": {
             "x": 370,
@@ -4653,6 +3805,297 @@
           }
         }
       ],
+      "overlays": []
+    },
+    {
+      "id": "scene_49_conclusion_03",
+      "startMs": 708426,
+      "endMs": 723206,
+      "background": {
+        "type": "color",
+        "value": "#FAFAFA"
+      },
+      "transition": {
+        "in": "fadeIn",
+        "out": "fadeOut",
+        "durationMs": 300
+      },
+      "objects": [
+        {
+          "id": "scene_49_conclusion_03_keyword",
+          "type": "text",
+          "position": {
+            "x": 960,
+            "y": 370
+          },
+          "props": {
+            "content": "성분표 읽기",
+            "fontSize": 96,
+            "fontWeight": "bold",
+            "color": "#1A1A2E",
+            "align": "center",
+            "maxWidth": 1400
+          },
+          "animation": {
+            "enter": {
+              "type": "typing",
+              "durationMs": 1500
+            }
+          }
+        },
+        {
+          "id": "scene_49_conclusion_03_description",
+          "type": "text",
+          "position": {
+            "x": 960,
+            "y": 550
+          },
+          "layer": 2,
+          "props": {
+            "content": "화장품을 현명하게 선택",
+            "fontSize": 48,
+            "fontWeight": "normal",
+            "color": "#444444",
+            "align": "center",
+            "maxWidth": 1200
+          },
+          "animation": {
+            "enter": {
+              "type": "typing",
+              "durationMs": 1000,
+              "delayMs": 4434
+            }
+          }
+        },
+        {
+          "id": "scene_49_conclusion_03_stickman",
+          "type": "stickman",
+          "position": {
+            "x": 1550,
+            "y": 680
+          },
+          "scale": 1.2,
+          "layer": 3,
+          "props": {
+            "pose": "standing",
+            "expression": "neutral",
+            "color": "#333333",
+            "faceColor": "#FFFFFF",
+            "lineWidth": 3
+          },
+          "animation": {
+            "enter": {
+              "type": "fadeIn",
+              "durationMs": 500,
+              "delayMs": 200
+            },
+            "during": {
+              "type": "breathing",
+              "loop": true
+            }
+          }
+        }
+      ],
+      "overlays": []
+    },
+    {
+      "id": "scene_50_conclusion_04",
+      "startMs": 723206,
+      "endMs": 737286,
+      "background": {
+        "type": "color",
+        "value": "#FAFAFA"
+      },
+      "transition": {
+        "in": "fadeIn",
+        "out": "fadeOut",
+        "durationMs": 300
+      },
+      "objects": [
+        {
+          "id": "scene_50_conclusion_04_keyword",
+          "type": "text",
+          "position": {
+            "x": 960,
+            "y": 370
+          },
+          "props": {
+            "content": "일상의 아하",
+            "fontSize": 96,
+            "fontWeight": "bold",
+            "color": "#1A1A2E",
+            "align": "center",
+            "maxWidth": 1400
+          },
+          "animation": {
+            "enter": {
+              "type": "handwriting",
+              "durationMs": 2000
+            }
+          }
+        },
+        {
+          "id": "scene_50_conclusion_04_description",
+          "type": "text",
+          "position": {
+            "x": 960,
+            "y": 550
+          },
+          "layer": 2,
+          "props": {
+            "content": "화장품에 대한 새로운 이해",
+            "fontSize": 48,
+            "fontWeight": "normal",
+            "color": "#444444",
+            "align": "center",
+            "maxWidth": 1200
+          },
+          "animation": {
+            "enter": {
+              "type": "typing",
+              "durationMs": 1000,
+              "delayMs": 4224
+            }
+          }
+        },
+        {
+          "id": "scene_50_conclusion_04_stickman",
+          "type": "stickman",
+          "position": {
+            "x": 370,
+            "y": 680
+          },
+          "scale": 1.2,
+          "layer": 3,
+          "props": {
+            "pose": "celebrating",
+            "expression": "happy",
+            "color": "#333333",
+            "faceColor": "#FFFFFF",
+            "lineWidth": 3
+          },
+          "animation": {
+            "enter": {
+              "type": "fadeIn",
+              "durationMs": 500,
+              "delayMs": 200
+            },
+            "during": {
+              "type": "clapping",
+              "loop": true
+            }
+          }
+        }
+      ],
+      "overlays": []
+    },
+    {
+      "id": "scene_51_conclusion_05",
+      "startMs": 737286,
+      "endMs": 753466,
+      "background": {
+        "type": "color",
+        "value": "#FAFAFA"
+      },
+      "transition": {
+        "in": "fadeIn",
+        "out": "fadeOut",
+        "durationMs": 300
+      },
+      "objects": [
+        {
+          "id": "scene_51_conclusion_05_keyword",
+          "type": "text",
+          "position": {
+            "x": 960,
+            "y": 370
+          },
+          "props": {
+            "content": "손톱 관리",
+            "fontSize": 96,
+            "fontWeight": "bold",
+            "color": "#1A1A2E",
+            "align": "center",
+            "maxWidth": 1400
+          },
+          "animation": {
+            "enter": {
+              "type": "typing",
+              "durationMs": 1500
+            }
+          }
+        },
+        {
+          "id": "scene_51_conclusion_05_description",
+          "type": "text",
+          "position": {
+            "x": 960,
+            "y": 550
+          },
+          "layer": 2,
+          "props": {
+            "content": "미용과 건강의 경계",
+            "fontSize": 48,
+            "fontWeight": "normal",
+            "color": "#444444",
+            "align": "center",
+            "maxWidth": 1200
+          },
+          "animation": {
+            "enter": {
+              "type": "typing",
+              "durationMs": 1000,
+              "delayMs": 4854
+            }
+          }
+        },
+        {
+          "id": "scene_51_conclusion_05_stickman",
+          "type": "stickman",
+          "position": {
+            "x": 1550,
+            "y": 680
+          },
+          "scale": 1.2,
+          "layer": 3,
+          "props": {
+            "pose": "thinking",
+            "expression": "thinking",
+            "color": "#333333",
+            "faceColor": "#FFFFFF",
+            "lineWidth": 3
+          },
+          "animation": {
+            "enter": {
+              "type": "fadeIn",
+              "durationMs": 500,
+              "delayMs": 200
+            },
+            "during": {
+              "type": "thinking_loop",
+              "loop": true
+            }
+          }
+        }
+      ],
+      "overlays": []
+    },
+    {
+      "id": "scene_52_conclusion_06",
+      "startMs": 753466,
+      "endMs": 770166,
+      "background": {
+        "type": "image",
+        "src": "images/scene_52.png",
+        "animation": "zoomIn",
+        "animationIntensity": 0.5
+      },
+      "transition": {
+        "in": "fadeIn",
+        "out": "fadeOut",
+        "durationMs": 300
+      },
+      "objects": [],
       "overlays": []
     }
   ]

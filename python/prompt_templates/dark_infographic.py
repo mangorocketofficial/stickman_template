@@ -17,7 +17,7 @@ template = PromptTemplate(
         "ugly, noisy, grainy"
     ),
     color_palette=["#1a1a2e", "#16213e", "#0f3460", "#FFD700", "#FFFFFF", "#4ECDC4"],
-    model="black-forest-labs/flux-schnell",
+    model="imagen-4.0-ultra-generate-001",
     width=1920,
     height=1080,
 )

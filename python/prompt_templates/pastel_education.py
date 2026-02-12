@@ -17,7 +17,7 @@ template = PromptTemplate(
         "blurry, low quality, sharp edges"
     ),
     color_palette=["#FFF5E4", "#FFE5B4", "#FFDAB9", "#98D8C8", "#F7DC6F", "#BB8FCE"],
-    model="black-forest-labs/flux-schnell",
+    model="imagen-4.0-ultra-generate-001",
     width=1920,
     height=1080,
 )
