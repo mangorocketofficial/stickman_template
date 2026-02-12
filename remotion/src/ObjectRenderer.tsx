@@ -12,11 +12,14 @@ import {
   TextProps,
   CounterProps,
   LogoProps,
+  StickmanProps,
   VisualEffect,
 } from './types/schema';
 import AnimatedText from './components/AnimatedText';
+import WhiteboardText from './components/WhiteboardText';
 import Counter from './components/Counter';
 import LogoWatermark from './components/LogoWatermark';
+import { StickMan } from './components/StickMan';
 import { useVideoConfig } from 'remotion';
 import { useTheme } from './contexts/ThemeContext';
 import { getEffectStyles } from './utils/effects';
@@ -94,13 +97,26 @@ export const ObjectRenderer: React.FC<ObjectRendererProps> = ({
   };
 
   switch (type) {
-    case 'text':
+    case 'text': {
+      const textProps = props as TextProps;
+      const enterType = animation?.enter?.type;
+      const duringType = animation?.during?.type;
+      // Route to WhiteboardText for typing/handwriting/highlightSweep animations
+      if (enterType === 'typing' || enterType === 'handwriting' || duringType === 'highlightSweep') {
+        return wrapWithEffects(
+          <WhiteboardText
+            {...commonProps}
+            props={textProps}
+          />
+        );
+      }
       return wrapWithEffects(
         <AnimatedText
           {...commonProps}
-          props={props as TextProps}
+          props={textProps}
         />
       );
+    }
 
     case 'counter': {
       const counterProps = props as CounterProps;
@@ -126,8 +142,27 @@ export const ObjectRenderer: React.FC<ObjectRendererProps> = ({
       );
     }
 
+    case 'stickman': {
+      const stickmanProps = props as StickmanProps;
+      const motionName = (animation?.during as { type?: string })?.type || 'breathing';
+      const startTimeMs = (sceneStartFrame / fps) * 1000;
+      return wrapWithEffects(
+        <StickMan
+          pose={stickmanProps.pose || 'standing'}
+          expression={stickmanProps.expression || 'neutral'}
+          position={position || { x: 300, y: 580 }}
+          scale={scale || 1.5}
+          color={stickmanProps.color || '#333333'}
+          faceColor={stickmanProps.faceColor}
+          lineWidth={stickmanProps.lineWidth || 3}
+          motion={motionName}
+          startTimeMs={startTimeMs}
+          sceneDurationMs={(sceneDurationFrames / fps) * 1000}
+        />
+      );
+    }
+
     // v1 legacy types — log warning but don't crash
-    case 'stickman':
     case 'shape':
     case 'icon':
       console.warn(`[v2] Object type "${type}" is no longer supported (archived in v1). Skipping.`);

@@ -44,15 +44,11 @@
             "content": "네일 자격증 필기 완전정복",
             "fontSize": 64,
             "fontWeight": "bold",
-            "color": "#2D3436",
+            "color": "#000000",
             "align": "center",
             "maxWidth": 1200,
             "role": "title",
-            "background": {
-              "color": "rgba(255, 255, 255, 0.75)",
-              "padding": 20,
-              "borderRadius": 16
-            }
+            "background": null
           },
           "animation": {
             "enter": {
@@ -68,17 +64,90 @@
       "startMs": 15900,
       "endMs": 28680,
       "background": {
-        "type": "image",
-        "src": "images/scene_02.png",
-        "animation": "zoomIn",
-        "animationIntensity": 0.5
+        "type": "color",
+        "value": "#FAFAFA"
       },
       "transition": {
         "in": "fadeIn",
         "out": "fadeOut",
         "durationMs": 300
       },
-      "objects": [],
+      "objects": [
+        {
+          "id": "scene_02_intro_02_keyword",
+          "type": "text",
+          "position": {
+            "x": 960,
+            "y": 370
+          },
+          "props": {
+            "content": "핵심 개념",
+            "fontSize": 72,
+            "fontWeight": "bold",
+            "color": "#1A1A2E",
+            "align": "center",
+            "maxWidth": 1400
+          },
+          "animation": {
+            "enter": {
+              "type": "typing",
+              "durationMs": 1500
+            }
+          }
+        },
+        {
+          "id": "scene_02_intro_02_description",
+          "type": "text",
+          "position": {
+            "x": 960,
+            "y": 550
+          },
+          "layer": 2,
+          "props": {
+            "content": "자주 나오는 18개 개념",
+            "fontSize": 36,
+            "fontWeight": "normal",
+            "color": "#444444",
+            "align": "center",
+            "maxWidth": 1200
+          },
+          "animation": {
+            "enter": {
+              "type": "typing",
+              "durationMs": 1000,
+              "delayMs": 3834
+            }
+          }
+        },
+        {
+          "id": "scene_02_intro_02_stickman",
+          "type": "stickman",
+          "position": {
+            "x": 370,
+            "y": 680
+          },
+          "scale": 1.2,
+          "layer": 3,
+          "props": {
+            "pose": "pointing_right",
+            "expression": "focused",
+            "color": "#333333",
+            "faceColor": "#FFFFFF",
+            "lineWidth": 3
+          },
+          "animation": {
+            "enter": {
+              "type": "fadeIn",
+              "durationMs": 500,
+              "delayMs": 200
+            },
+            "during": {
+              "type": "nodding",
+              "loop": true
+            }
+          }
+        }
+      ],
       "overlays": []
     },
     {
@@ -86,17 +155,90 @@
       "startMs": 28680,
       "endMs": 43080,
       "background": {
-        "type": "image",
-        "src": "images/scene_03.png",
-        "animation": "zoomOut",
-        "animationIntensity": 0.5
+        "type": "color",
+        "value": "#FAFAFA"
       },
       "transition": {
         "in": "fadeIn",
         "out": "fadeOut",
         "durationMs": 300
       },
-      "objects": [],
+      "objects": [
+        {
+          "id": "scene_03_intro_03_keyword",
+          "type": "text",
+          "position": {
+            "x": 960,
+            "y": 370
+          },
+          "props": {
+            "content": "원리 이해",
+            "fontSize": 72,
+            "fontWeight": "bold",
+            "color": "#1A1A2E",
+            "align": "center",
+            "maxWidth": 1400
+          },
+          "animation": {
+            "enter": {
+              "type": "handwriting",
+              "durationMs": 2000
+            }
+          }
+        },
+        {
+          "id": "scene_03_intro_03_description",
+          "type": "text",
+          "position": {
+            "x": 960,
+            "y": 550
+          },
+          "layer": 2,
+          "props": {
+            "content": "암기가 쉬워지는 이유",
+            "fontSize": 36,
+            "fontWeight": "normal",
+            "color": "#444444",
+            "align": "center",
+            "maxWidth": 1200
+          },
+          "animation": {
+            "enter": {
+              "type": "typing",
+              "durationMs": 1000,
+              "delayMs": 4320
+            }
+          }
+        },
+        {
+          "id": "scene_03_intro_03_stickman",
+          "type": "stickman",
+          "position": {
+            "x": 1550,
+            "y": 680
+          },
+          "scale": 1.2,
+          "layer": 3,
+          "props": {
+            "pose": "celebrating",
+            "expression": "happy",
+            "color": "#333333",
+            "faceColor": "#FFFFFF",
+            "lineWidth": 3
+          },
+          "animation": {
+            "enter": {
+              "type": "fadeIn",
+              "durationMs": 500,
+              "delayMs": 200
+            },
+            "during": {
+              "type": "jumping",
+              "loop": true
+            }
+          }
+        }
+      ],
       "overlays": []
     },
     {
@@ -104,17 +246,101 @@
       "startMs": 43080,
       "endMs": 56720,
       "background": {
-        "type": "image",
-        "src": "images/scene_04.png",
-        "animation": "panLeft",
-        "animationIntensity": 0.5
+        "type": "color",
+        "value": "#FAFAFA"
       },
       "transition": {
         "in": "fadeIn",
         "out": "fadeOut",
         "durationMs": 300
       },
-      "objects": [],
+      "objects": [
+        {
+          "id": "scene_04_intro_04_keyword",
+          "type": "text",
+          "position": {
+            "x": 960,
+            "y": 370
+          },
+          "props": {
+            "content": "단단한 기둥",
+            "fontSize": 72,
+            "fontWeight": "bold",
+            "color": "#1A1A2E",
+            "align": "center",
+            "maxWidth": 1400
+          },
+          "animation": {
+            "enter": {
+              "type": "fadeIn",
+              "durationMs": 400
+            },
+            "during": {
+              "type": "highlightSweep",
+              "durationMs": 800
+            }
+          }
+        },
+        {
+          "id": "scene_04_intro_04_description",
+          "type": "text",
+          "position": {
+            "x": 960,
+            "y": 550
+          },
+          "layer": 2,
+          "props": {
+            "content": "흔들리지 않는 지식",
+            "fontSize": 36,
+            "fontWeight": "normal",
+            "color": "#444444",
+            "align": "center",
+            "maxWidth": 1200,
+            "background": {
+              "color": "#FFE082"
+            }
+          },
+          "animation": {
+            "enter": {
+              "type": "typing",
+              "durationMs": 1000,
+              "delayMs": 4092
+            },
+            "during": {
+              "type": "highlightSweep",
+              "durationMs": 800
+            }
+          }
+        },
+        {
+          "id": "scene_04_intro_04_stickman",
+          "type": "stickman",
+          "position": {
+            "x": 370,
+            "y": 680
+          },
+          "scale": 1.2,
+          "layer": 3,
+          "props": {
+            "pose": "depressed",
+            "expression": "sad",
+            "color": "#333333",
+            "faceColor": "#FFFFFF",
+            "lineWidth": 3
+          },
+          "animation": {
+            "enter": {
+              "type": "fadeIn",
+              "durationMs": 500,
+              "delayMs": 200
+            },
+            "during": {
+              "type": "headShake",
+              "loop": true
+            }
+          }
+        }
+      ],
       "overlays": []
     },
     {
@@ -140,17 +366,90 @@
       "startMs": 71220,
       "endMs": 82960,
       "background": {
-        "type": "image",
-        "src": "images/scene_06.png",
-        "animation": "kenBurns",
-        "animationIntensity": 0.5
+        "type": "color",
+        "value": "#FAFAFA"
       },
       "transition": {
         "in": "fadeIn",
         "out": "fadeOut",
         "durationMs": 300
       },
-      "objects": [],
+      "objects": [
+        {
+          "id": "scene_06_intro_06_keyword",
+          "type": "text",
+          "position": {
+            "x": 960,
+            "y": 370
+          },
+          "props": {
+            "content": "핵심 기술",
+            "fontSize": 72,
+            "fontWeight": "bold",
+            "color": "#1A1A2E",
+            "align": "center",
+            "maxWidth": 1400
+          },
+          "animation": {
+            "enter": {
+              "type": "typing",
+              "durationMs": 1500
+            }
+          }
+        },
+        {
+          "id": "scene_06_intro_06_description",
+          "type": "text",
+          "position": {
+            "x": 960,
+            "y": 550
+          },
+          "layer": 2,
+          "props": {
+            "content": "시험의 핵심",
+            "fontSize": 36,
+            "fontWeight": "normal",
+            "color": "#444444",
+            "align": "center",
+            "maxWidth": 1200
+          },
+          "animation": {
+            "enter": {
+              "type": "typing",
+              "durationMs": 1000,
+              "delayMs": 3522
+            }
+          }
+        },
+        {
+          "id": "scene_06_intro_06_stickman",
+          "type": "stickman",
+          "position": {
+            "x": 370,
+            "y": 680
+          },
+          "scale": 1.2,
+          "layer": 3,
+          "props": {
+            "pose": "pointing_right",
+            "expression": "focused",
+            "color": "#333333",
+            "faceColor": "#FFFFFF",
+            "lineWidth": 3
+          },
+          "animation": {
+            "enter": {
+              "type": "fadeIn",
+              "durationMs": 500,
+              "delayMs": 200
+            },
+            "during": {
+              "type": "nodding",
+              "loop": true
+            }
+          }
+        }
+      ],
       "overlays": []
     },
     {
@@ -158,17 +457,90 @@
       "startMs": 82960,
       "endMs": 100600,
       "background": {
-        "type": "image",
-        "src": "images/scene_07.png",
-        "animation": "zoomIn",
-        "animationIntensity": 0.5
+        "type": "color",
+        "value": "#FAFAFA"
       },
       "transition": {
         "in": "fadeIn",
         "out": "fadeOut",
         "durationMs": 300
       },
-      "objects": [],
+      "objects": [
+        {
+          "id": "scene_07_intro_07_keyword",
+          "type": "text",
+          "position": {
+            "x": 960,
+            "y": 370
+          },
+          "props": {
+            "content": "스트레스 포인트",
+            "fontSize": 72,
+            "fontWeight": "bold",
+            "color": "#1A1A2E",
+            "align": "center",
+            "maxWidth": 1400
+          },
+          "animation": {
+            "enter": {
+              "type": "handwriting",
+              "durationMs": 2000
+            }
+          }
+        },
+        {
+          "id": "scene_07_intro_07_description",
+          "type": "text",
+          "position": {
+            "x": 960,
+            "y": 550
+          },
+          "layer": 2,
+          "props": {
+            "content": "인조네일이 부러지는 지점",
+            "fontSize": 36,
+            "fontWeight": "normal",
+            "color": "#444444",
+            "align": "center",
+            "maxWidth": 1200
+          },
+          "animation": {
+            "enter": {
+              "type": "typing",
+              "durationMs": 1000,
+              "delayMs": 5292
+            }
+          }
+        },
+        {
+          "id": "scene_07_intro_07_stickman",
+          "type": "stickman",
+          "position": {
+            "x": 1550,
+            "y": 680
+          },
+          "scale": 1.2,
+          "layer": 3,
+          "props": {
+            "pose": "pointing_up",
+            "expression": "focused",
+            "color": "#333333",
+            "faceColor": "#FFFFFF",
+            "lineWidth": 3
+          },
+          "animation": {
+            "enter": {
+              "type": "fadeIn",
+              "durationMs": 500,
+              "delayMs": 200
+            },
+            "during": {
+              "type": "nodding",
+              "loop": true
+            }
+          }
+        }
+      ],
       "overlays": []
     },
     {
@@ -176,17 +548,90 @@
       "startMs": 100600,
       "endMs": 116080,
       "background": {
-        "type": "image",
-        "src": "images/scene_08.png",
-        "animation": "zoomOut",
-        "animationIntensity": 0.5
+        "type": "color",
+        "value": "#FAFAFA"
       },
       "transition": {
         "in": "fadeIn",
         "out": "fadeOut",
         "durationMs": 300
       },
-      "objects": [],
+      "objects": [
+        {
+          "id": "scene_08_intro_08_keyword",
+          "type": "text",
+          "position": {
+            "x": 960,
+            "y": 370
+          },
+          "props": {
+            "content": "힘이 집중되는 곳",
+            "fontSize": 72,
+            "fontWeight": "bold",
+            "color": "#1A1A2E",
+            "align": "center",
+            "maxWidth": 1400
+          },
+          "animation": {
+            "enter": {
+              "type": "typing",
+              "durationMs": 1500
+            }
+          }
+        },
+        {
+          "id": "scene_08_intro_08_description",
+          "type": "text",
+          "position": {
+            "x": 960,
+            "y": 550
+          },
+          "layer": 2,
+          "props": {
+            "content": "손톱이 외부 충격을 받는 곳",
+            "fontSize": 36,
+            "fontWeight": "normal",
+            "color": "#444444",
+            "align": "center",
+            "maxWidth": 1200
+          },
+          "animation": {
+            "enter": {
+              "type": "typing",
+              "durationMs": 1000,
+              "delayMs": 4644
+            }
+          }
+        },
+        {
+          "id": "scene_08_intro_08_stickman",
+          "type": "stickman",
+          "position": {
+            "x": 370,
+            "y": 680
+          },
+          "scale": 1.2,
+          "layer": 3,
+          "props": {
+            "pose": "pointing_right",
+            "expression": "focused",
+            "color": "#333333",
+            "faceColor": "#FFFFFF",
+            "lineWidth": 3
+          },
+          "animation": {
+            "enter": {
+              "type": "fadeIn",
+              "durationMs": 500,
+              "delayMs": 200
+            },
+            "during": {
+              "type": "nodding",
+              "loop": true
+            }
+          }
+        }
+      ],
       "overlays": []
     },
     {
@@ -194,17 +639,90 @@
       "startMs": 116080,
       "endMs": 130900,
       "background": {
-        "type": "image",
-        "src": "images/scene_09.png",
-        "animation": "panLeft",
-        "animationIntensity": 0.5
+        "type": "color",
+        "value": "#FAFAFA"
       },
       "transition": {
         "in": "fadeIn",
         "out": "fadeOut",
         "durationMs": 300
       },
-      "objects": [],
+      "objects": [
+        {
+          "id": "scene_09_intro_09_keyword",
+          "type": "text",
+          "position": {
+            "x": 960,
+            "y": 370
+          },
+          "props": {
+            "content": "스트레스 포인트",
+            "fontSize": 72,
+            "fontWeight": "bold",
+            "color": "#1A1A2E",
+            "align": "center",
+            "maxWidth": 1400
+          },
+          "animation": {
+            "enter": {
+              "type": "handwriting",
+              "durationMs": 2000
+            }
+          }
+        },
+        {
+          "id": "scene_09_intro_09_description",
+          "type": "text",
+          "position": {
+            "x": 960,
+            "y": 550
+          },
+          "layer": 2,
+          "props": {
+            "content": "아크릴이나 젤을 얇게 올리면",
+            "fontSize": 36,
+            "fontWeight": "normal",
+            "color": "#444444",
+            "align": "center",
+            "maxWidth": 1200
+          },
+          "animation": {
+            "enter": {
+              "type": "typing",
+              "durationMs": 1000,
+              "delayMs": 4446
+            }
+          }
+        },
+        {
+          "id": "scene_09_intro_09_stickman",
+          "type": "stickman",
+          "position": {
+            "x": 1550,
+            "y": 680
+          },
+          "scale": 1.2,
+          "layer": 3,
+          "props": {
+            "pose": "pointing_up",
+            "expression": "focused",
+            "color": "#333333",
+            "faceColor": "#FFFFFF",
+            "lineWidth": 3
+          },
+          "animation": {
+            "enter": {
+              "type": "fadeIn",
+              "durationMs": 500,
+              "delayMs": 200
+            },
+            "during": {
+              "type": "nodding",
+              "loop": true
+            }
+          }
+        }
+      ],
       "overlays": []
     },
     {
@@ -212,17 +730,101 @@
       "startMs": 130900,
       "endMs": 143980,
       "background": {
-        "type": "image",
-        "src": "images/scene_10.png",
-        "animation": "panRight",
-        "animationIntensity": 0.5
+        "type": "color",
+        "value": "#FAFAFA"
       },
       "transition": {
         "in": "fadeIn",
         "out": "fadeOut",
         "durationMs": 300
       },
-      "objects": [],
+      "objects": [
+        {
+          "id": "scene_10_intro_10_keyword",
+          "type": "text",
+          "position": {
+            "x": 960,
+            "y": 370
+          },
+          "props": {
+            "content": "기술의 핵심",
+            "fontSize": 72,
+            "fontWeight": "bold",
+            "color": "#1A1A2E",
+            "align": "center",
+            "maxWidth": 1400
+          },
+          "animation": {
+            "enter": {
+              "type": "fadeIn",
+              "durationMs": 400
+            },
+            "during": {
+              "type": "highlightSweep",
+              "durationMs": 800
+            }
+          }
+        },
+        {
+          "id": "scene_10_intro_10_description",
+          "type": "text",
+          "position": {
+            "x": 960,
+            "y": 550
+          },
+          "layer": 2,
+          "props": {
+            "content": "원칙을 일부러 반대로 설명",
+            "fontSize": 36,
+            "fontWeight": "normal",
+            "color": "#444444",
+            "align": "center",
+            "maxWidth": 1200,
+            "background": {
+              "color": "#FFE082"
+            }
+          },
+          "animation": {
+            "enter": {
+              "type": "typing",
+              "durationMs": 1000,
+              "delayMs": 3924
+            },
+            "during": {
+              "type": "highlightSweep",
+              "durationMs": 800
+            }
+          }
+        },
+        {
+          "id": "scene_10_intro_10_stickman",
+          "type": "stickman",
+          "position": {
+            "x": 370,
+            "y": 680
+          },
+          "scale": 1.2,
+          "layer": 3,
+          "props": {
+            "pose": "pointing_right",
+            "expression": "focused",
+            "color": "#333333",
+            "faceColor": "#FFFFFF",
+            "lineWidth": 3
+          },
+          "animation": {
+            "enter": {
+              "type": "fadeIn",
+              "durationMs": 500,
+              "delayMs": 200
+            },
+            "during": {
+              "type": "nodding",
+              "loop": true
+            }
+          }
+        }
+      ],
       "overlays": []
     },
     {
@@ -230,17 +832,90 @@
       "startMs": 143980,
       "endMs": 157780,
       "background": {
-        "type": "image",
-        "src": "images/scene_11.png",
-        "animation": "kenBurns",
-        "animationIntensity": 0.5
+        "type": "color",
+        "value": "#FAFAFA"
       },
       "transition": {
         "in": "fadeIn",
         "out": "fadeOut",
         "durationMs": 300
       },
-      "objects": [],
+      "objects": [
+        {
+          "id": "scene_11_intro_11_keyword",
+          "type": "text",
+          "position": {
+            "x": 960,
+            "y": 370
+          },
+          "props": {
+            "content": "유분 제거",
+            "fontSize": 72,
+            "fontWeight": "bold",
+            "color": "#1A1A2E",
+            "align": "center",
+            "maxWidth": 1400
+          },
+          "animation": {
+            "enter": {
+              "type": "typing",
+              "durationMs": 1500
+            }
+          }
+        },
+        {
+          "id": "scene_11_intro_11_description",
+          "type": "text",
+          "position": {
+            "x": 960,
+            "y": 550
+          },
+          "layer": 2,
+          "props": {
+            "content": "네일라트의 지속력을 결정",
+            "fontSize": 36,
+            "fontWeight": "normal",
+            "color": "#444444",
+            "align": "center",
+            "maxWidth": 1200
+          },
+          "animation": {
+            "enter": {
+              "type": "typing",
+              "durationMs": 1000,
+              "delayMs": 4140
+            }
+          }
+        },
+        {
+          "id": "scene_11_intro_11_stickman",
+          "type": "stickman",
+          "position": {
+            "x": 1550,
+            "y": 680
+          },
+          "scale": 1.2,
+          "layer": 3,
+          "props": {
+            "pose": "standing",
+            "expression": "neutral",
+            "color": "#333333",
+            "faceColor": "#FFFFFF",
+            "lineWidth": 3
+          },
+          "animation": {
+            "enter": {
+              "type": "fadeIn",
+              "durationMs": 500,
+              "delayMs": 200
+            },
+            "during": {
+              "type": "breathing",
+              "loop": true
+            }
+          }
+        }
+      ],
       "overlays": []
     },
     {
@@ -248,17 +923,90 @@
       "startMs": 157780,
       "endMs": 172180,
       "background": {
-        "type": "image",
-        "src": "images/scene_12.png",
-        "animation": "zoomIn",
-        "animationIntensity": 0.5
+        "type": "color",
+        "value": "#FAFAFA"
       },
       "transition": {
         "in": "fadeIn",
         "out": "fadeOut",
         "durationMs": 300
       },
-      "objects": [],
+      "objects": [
+        {
+          "id": "scene_12_intro_12_keyword",
+          "type": "text",
+          "position": {
+            "x": 960,
+            "y": 370
+          },
+          "props": {
+            "content": "탈지 과정",
+            "fontSize": 72,
+            "fontWeight": "bold",
+            "color": "#1A1A2E",
+            "align": "center",
+            "maxWidth": 1400
+          },
+          "animation": {
+            "enter": {
+              "type": "handwriting",
+              "durationMs": 2000
+            }
+          }
+        },
+        {
+          "id": "scene_12_intro_12_description",
+          "type": "text",
+          "position": {
+            "x": 960,
+            "y": 550
+          },
+          "layer": 2,
+          "props": {
+            "content": "표면의 미세한 유분과 수분",
+            "fontSize": 36,
+            "fontWeight": "normal",
+            "color": "#444444",
+            "align": "center",
+            "maxWidth": 1200
+          },
+          "animation": {
+            "enter": {
+              "type": "typing",
+              "durationMs": 1000,
+              "delayMs": 4320
+            }
+          }
+        },
+        {
+          "id": "scene_12_intro_12_stickman",
+          "type": "stickman",
+          "position": {
+            "x": 370,
+            "y": 680
+          },
+          "scale": 1.2,
+          "layer": 3,
+          "props": {
+            "pose": "celebrating",
+            "expression": "happy",
+            "color": "#333333",
+            "faceColor": "#FFFFFF",
+            "lineWidth": 3
+          },
+          "animation": {
+            "enter": {
+              "type": "fadeIn",
+              "durationMs": 500,
+              "delayMs": 200
+            },
+            "during": {
+              "type": "jumping",
+              "loop": true
+            }
+          }
+        }
+      ],
       "overlays": []
     },
     {
@@ -266,17 +1014,90 @@
       "startMs": 172180,
       "endMs": 188040,
       "background": {
-        "type": "image",
-        "src": "images/scene_13.png",
-        "animation": "zoomOut",
-        "animationIntensity": 0.5
+        "type": "color",
+        "value": "#FAFAFA"
       },
       "transition": {
         "in": "fadeIn",
         "out": "fadeOut",
         "durationMs": 300
       },
-      "objects": [],
+      "objects": [
+        {
+          "id": "scene_13_intro_13_keyword",
+          "type": "text",
+          "position": {
+            "x": 960,
+            "y": 370
+          },
+          "props": {
+            "content": "베이스코트",
+            "fontSize": 72,
+            "fontWeight": "bold",
+            "color": "#1A1A2E",
+            "align": "center",
+            "maxWidth": 1400
+          },
+          "animation": {
+            "enter": {
+              "type": "typing",
+              "durationMs": 1500
+            }
+          }
+        },
+        {
+          "id": "scene_13_intro_13_description",
+          "type": "text",
+          "position": {
+            "x": 960,
+            "y": 550
+          },
+          "layer": 2,
+          "props": {
+            "content": "손톱에 착 달라붙어서 유지",
+            "fontSize": 36,
+            "fontWeight": "normal",
+            "color": "#444444",
+            "align": "center",
+            "maxWidth": 1200
+          },
+          "animation": {
+            "enter": {
+              "type": "typing",
+              "durationMs": 1000,
+              "delayMs": 4758
+            }
+          }
+        },
+        {
+          "id": "scene_13_intro_13_stickman",
+          "type": "stickman",
+          "position": {
+            "x": 1550,
+            "y": 680
+          },
+          "scale": 1.2,
+          "layer": 3,
+          "props": {
+            "pose": "thinking",
+            "expression": "thinking",
+            "color": "#333333",
+            "faceColor": "#FFFFFF",
+            "lineWidth": 3
+          },
+          "animation": {
+            "enter": {
+              "type": "fadeIn",
+              "durationMs": 500,
+              "delayMs": 200
+            },
+            "during": {
+              "type": "thinking_loop",
+              "loop": true
+            }
+          }
+        }
+      ],
       "overlays": []
     },
     {
@@ -307,14 +1128,15 @@
             "content": "스트레스 포인트",
             "fontSize": 48,
             "fontWeight": "bold",
-            "color": "#2D3436",
+            "color": "#0066CC",
             "align": "center",
             "maxWidth": 1200,
             "role": "highlight_box",
             "background": {
-              "color": "rgba(255, 255, 255, 0.75)",
+              "color": "rgba(255,255,255,0.9)",
               "padding": 20,
-              "borderRadius": 16
+              "borderRadius": 12,
+              "opacity": 0.7
             }
           },
           "animation": {
@@ -331,17 +1153,90 @@
       "startMs": 200300,
       "endMs": 213460,
       "background": {
-        "type": "image",
-        "src": "images/scene_15.png",
-        "animation": "panRight",
-        "animationIntensity": 0.5
+        "type": "color",
+        "value": "#FAFAFA"
       },
       "transition": {
         "in": "fadeIn",
         "out": "fadeOut",
         "durationMs": 300
       },
-      "objects": [],
+      "objects": [
+        {
+          "id": "scene_15_stress_point_02_keyword",
+          "type": "text",
+          "position": {
+            "x": 960,
+            "y": 370
+          },
+          "props": {
+            "content": "유분 제거",
+            "fontSize": 72,
+            "fontWeight": "bold",
+            "color": "#1A1A2E",
+            "align": "center",
+            "maxWidth": 1400
+          },
+          "animation": {
+            "enter": {
+              "type": "handwriting",
+              "durationMs": 2000
+            }
+          }
+        },
+        {
+          "id": "scene_15_stress_point_02_description",
+          "type": "text",
+          "position": {
+            "x": 960,
+            "y": 550
+          },
+          "layer": 2,
+          "props": {
+            "content": "네일 폴리시를 바르기 전에",
+            "fontSize": 36,
+            "fontWeight": "normal",
+            "color": "#444444",
+            "align": "center",
+            "maxWidth": 1200
+          },
+          "animation": {
+            "enter": {
+              "type": "typing",
+              "durationMs": 1000,
+              "delayMs": 3948
+            }
+          }
+        },
+        {
+          "id": "scene_15_stress_point_02_stickman",
+          "type": "stickman",
+          "position": {
+            "x": 1550,
+            "y": 680
+          },
+          "scale": 1.2,
+          "layer": 3,
+          "props": {
+            "pose": "celebrating",
+            "expression": "happy",
+            "color": "#333333",
+            "faceColor": "#FFFFFF",
+            "lineWidth": 3
+          },
+          "animation": {
+            "enter": {
+              "type": "fadeIn",
+              "durationMs": 500,
+              "delayMs": 200
+            },
+            "during": {
+              "type": "jumping",
+              "loop": true
+            }
+          }
+        }
+      ],
       "overlays": []
     },
     {
@@ -349,17 +1244,101 @@
       "startMs": 213460,
       "endMs": 229800,
       "background": {
-        "type": "image",
-        "src": "images/scene_16.png",
-        "animation": "kenBurns",
-        "animationIntensity": 0.5
+        "type": "color",
+        "value": "#FAFAFA"
       },
       "transition": {
         "in": "fadeIn",
         "out": "fadeOut",
         "durationMs": 300
       },
-      "objects": [],
+      "objects": [
+        {
+          "id": "scene_16_stress_point_03_keyword",
+          "type": "text",
+          "position": {
+            "x": 960,
+            "y": 370
+          },
+          "props": {
+            "content": "파일링 방법",
+            "fontSize": 72,
+            "fontWeight": "bold",
+            "color": "#1A1A2E",
+            "align": "center",
+            "maxWidth": 1400
+          },
+          "animation": {
+            "enter": {
+              "type": "fadeIn",
+              "durationMs": 400
+            },
+            "during": {
+              "type": "highlightSweep",
+              "durationMs": 800
+            }
+          }
+        },
+        {
+          "id": "scene_16_stress_point_03_description",
+          "type": "text",
+          "position": {
+            "x": 960,
+            "y": 550
+          },
+          "layer": 2,
+          "props": {
+            "content": "손톱 모양 다듬을 때 파일",
+            "fontSize": 36,
+            "fontWeight": "normal",
+            "color": "#444444",
+            "align": "center",
+            "maxWidth": 1200,
+            "background": {
+              "color": "#FFE082"
+            }
+          },
+          "animation": {
+            "enter": {
+              "type": "typing",
+              "durationMs": 1000,
+              "delayMs": 4902
+            },
+            "during": {
+              "type": "highlightSweep",
+              "durationMs": 800
+            }
+          }
+        },
+        {
+          "id": "scene_16_stress_point_03_stickman",
+          "type": "stickman",
+          "position": {
+            "x": 370,
+            "y": 680
+          },
+          "scale": 1.2,
+          "layer": 3,
+          "props": {
+            "pose": "thinking",
+            "expression": "thinking",
+            "color": "#333333",
+            "faceColor": "#FFFFFF",
+            "lineWidth": 3
+          },
+          "animation": {
+            "enter": {
+              "type": "fadeIn",
+              "durationMs": 500,
+              "delayMs": 200
+            },
+            "during": {
+              "type": "thinking_loop",
+              "loop": true
+            }
+          }
+        }
+      ],
       "overlays": []
     },
     {
@@ -367,17 +1346,90 @@
       "startMs": 229800,
       "endMs": 245824,
       "background": {
-        "type": "image",
-        "src": "images/scene_17.png",
-        "animation": "zoomIn",
-        "animationIntensity": 0.5
+        "type": "color",
+        "value": "#FAFAFA"
       },
       "transition": {
         "in": "fadeIn",
         "out": "fadeOut",
         "durationMs": 300
       },
-      "objects": [],
+      "objects": [
+        {
+          "id": "scene_17_stress_point_04_keyword",
+          "type": "text",
+          "position": {
+            "x": 960,
+            "y": 370
+          },
+          "props": {
+            "content": "손톱 구조",
+            "fontSize": 72,
+            "fontWeight": "bold",
+            "color": "#1A1A2E",
+            "align": "center",
+            "maxWidth": 1400
+          },
+          "animation": {
+            "enter": {
+              "type": "typing",
+              "durationMs": 1500
+            }
+          }
+        },
+        {
+          "id": "scene_17_stress_point_04_description",
+          "type": "text",
+          "position": {
+            "x": 960,
+            "y": 550
+          },
+          "layer": 2,
+          "props": {
+            "content": "수많은 케라틴 단백질층",
+            "fontSize": 36,
+            "fontWeight": "normal",
+            "color": "#444444",
+            "align": "center",
+            "maxWidth": 1200
+          },
+          "animation": {
+            "enter": {
+              "type": "typing",
+              "durationMs": 1000,
+              "delayMs": 4807
+            }
+          }
+        },
+        {
+          "id": "scene_17_stress_point_04_stickman",
+          "type": "stickman",
+          "position": {
+            "x": 1550,
+            "y": 680
+          },
+          "scale": 1.2,
+          "layer": 3,
+          "props": {
+            "pose": "explaining",
+            "expression": "neutral",
+            "color": "#333333",
+            "faceColor": "#FFFFFF",
+            "lineWidth": 3
+          },
+          "animation": {
+            "enter": {
+              "type": "fadeIn",
+              "durationMs": 500,
+              "delayMs": 200
+            },
+            "during": {
+              "type": "nodding",
+              "loop": true
+            }
+          }
+        }
+      ],
       "overlays": []
     },
     {
@@ -403,17 +1455,90 @@
       "startMs": 261344,
       "endMs": 275344,
       "background": {
-        "type": "image",
-        "src": "images/scene_19.png",
-        "animation": "panLeft",
-        "animationIntensity": 0.5
+        "type": "color",
+        "value": "#FAFAFA"
       },
       "transition": {
         "in": "fadeIn",
         "out": "fadeOut",
         "durationMs": 300
       },
-      "objects": [],
+      "objects": [
+        {
+          "id": "scene_19_stress_point_06_keyword",
+          "type": "text",
+          "position": {
+            "x": 960,
+            "y": 370
+          },
+          "props": {
+            "content": "파일링 원리",
+            "fontSize": 72,
+            "fontWeight": "bold",
+            "color": "#1A1A2E",
+            "align": "center",
+            "maxWidth": 1400
+          },
+          "animation": {
+            "enter": {
+              "type": "handwriting",
+              "durationMs": 2000
+            }
+          }
+        },
+        {
+          "id": "scene_19_stress_point_06_description",
+          "type": "text",
+          "position": {
+            "x": 960,
+            "y": 550
+          },
+          "layer": 2,
+          "props": {
+            "content": "한 방향으로 부드럽게 갈아내야",
+            "fontSize": 36,
+            "fontWeight": "normal",
+            "color": "#444444",
+            "align": "center",
+            "maxWidth": 1200
+          },
+          "animation": {
+            "enter": {
+              "type": "typing",
+              "durationMs": 1000,
+              "delayMs": 4200
+            }
+          }
+        },
+        {
+          "id": "scene_19_stress_point_06_stickman",
+          "type": "stickman",
+          "position": {
+            "x": 1550,
+            "y": 680
+          },
+          "scale": 1.2,
+          "layer": 3,
+          "props": {
+            "pose": "standing",
+            "expression": "neutral",
+            "color": "#333333",
+            "faceColor": "#FFFFFF",
+            "lineWidth": 3
+          },
+          "animation": {
+            "enter": {
+              "type": "fadeIn",
+              "durationMs": 500,
+              "delayMs": 200
+            },
+            "during": {
+              "type": "breathing",
+              "loop": true
+            }
+          }
+        }
+      ],
       "overlays": []
     },
     {
@@ -421,17 +1546,90 @@
       "startMs": 275344,
       "endMs": 290004,
       "background": {
-        "type": "image",
-        "src": "images/scene_20.png",
-        "animation": "panRight",
-        "animationIntensity": 0.5
+        "type": "color",
+        "value": "#FAFAFA"
       },
       "transition": {
         "in": "fadeIn",
         "out": "fadeOut",
         "durationMs": 300
       },
-      "objects": [],
+      "objects": [
+        {
+          "id": "scene_20_stress_point_07_keyword",
+          "type": "text",
+          "position": {
+            "x": 960,
+            "y": 370
+          },
+          "props": {
+            "content": "용해성",
+            "fontSize": 72,
+            "fontWeight": "bold",
+            "color": "#1A1A2E",
+            "align": "center",
+            "maxWidth": 1400
+          },
+          "animation": {
+            "enter": {
+              "type": "typing",
+              "durationMs": 1500
+            }
+          }
+        },
+        {
+          "id": "scene_20_stress_point_07_description",
+          "type": "text",
+          "position": {
+            "x": 960,
+            "y": 550
+          },
+          "layer": 2,
+          "props": {
+            "content": "아세톤에 녹느냐 안 녹느냐",
+            "fontSize": 36,
+            "fontWeight": "normal",
+            "color": "#444444",
+            "align": "center",
+            "maxWidth": 1200
+          },
+          "animation": {
+            "enter": {
+              "type": "typing",
+              "durationMs": 1000,
+              "delayMs": 4398
+            }
+          }
+        },
+        {
+          "id": "scene_20_stress_point_07_stickman",
+          "type": "stickman",
+          "position": {
+            "x": 370,
+            "y": 680
+          },
+          "scale": 1.2,
+          "layer": 3,
+          "props": {
+            "pose": "pointing_right",
+            "expression": "focused",
+            "color": "#333333",
+            "faceColor": "#FFFFFF",
+            "lineWidth": 3
+          },
+          "animation": {
+            "enter": {
+              "type": "fadeIn",
+              "durationMs": 500,
+              "delayMs": 200
+            },
+            "during": {
+              "type": "nodding",
+              "loop": true
+            }
+          }
+        }
+      ],
       "overlays": []
     },
     {
@@ -480,14 +1678,15 @@
             "content": "유분 제거와 파일링",
             "fontSize": 48,
             "fontWeight": "bold",
-            "color": "#2D3436",
+            "color": "#0066CC",
             "align": "center",
             "maxWidth": 1200,
             "role": "highlight_box",
             "background": {
-              "color": "rgba(255, 255, 255, 0.75)",
+              "color": "rgba(255,255,255,0.9)",
               "padding": 20,
-              "borderRadius": 16
+              "borderRadius": 12,
+              "opacity": 0.7
             }
           },
           "animation": {
@@ -504,17 +1703,90 @@
       "startMs": 321764,
       "endMs": 335224,
       "background": {
-        "type": "image",
-        "src": "images/scene_23.png",
-        "animation": "zoomOut",
-        "animationIntensity": 0.5
+        "type": "color",
+        "value": "#FAFAFA"
       },
       "transition": {
         "in": "fadeIn",
         "out": "fadeOut",
         "durationMs": 300
       },
-      "objects": [],
+      "objects": [
+        {
+          "id": "scene_23_oil_removal_02_keyword",
+          "type": "text",
+          "position": {
+            "x": 960,
+            "y": 370
+          },
+          "props": {
+            "content": "수분 함유",
+            "fontSize": 72,
+            "fontWeight": "bold",
+            "color": "#1A1A2E",
+            "align": "center",
+            "maxWidth": 1400
+          },
+          "animation": {
+            "enter": {
+              "type": "handwriting",
+              "durationMs": 2000
+            }
+          }
+        },
+        {
+          "id": "scene_23_oil_removal_02_description",
+          "type": "text",
+          "position": {
+            "x": 960,
+            "y": 550
+          },
+          "layer": 2,
+          "props": {
+            "content": "손톱이 수분을 머금고 있다",
+            "fontSize": 36,
+            "fontWeight": "normal",
+            "color": "#444444",
+            "align": "center",
+            "maxWidth": 1200
+          },
+          "animation": {
+            "enter": {
+              "type": "typing",
+              "durationMs": 1000,
+              "delayMs": 4038
+            }
+          }
+        },
+        {
+          "id": "scene_23_oil_removal_02_stickman",
+          "type": "stickman",
+          "position": {
+            "x": 1550,
+            "y": 680
+          },
+          "scale": 1.2,
+          "layer": 3,
+          "props": {
+            "pose": "celebrating",
+            "expression": "happy",
+            "color": "#333333",
+            "faceColor": "#FFFFFF",
+            "lineWidth": 3
+          },
+          "animation": {
+            "enter": {
+              "type": "fadeIn",
+              "durationMs": 500,
+              "delayMs": 200
+            },
+            "during": {
+              "type": "jumping",
+              "loop": true
+            }
+          }
+        }
+      ],
       "overlays": []
     },
     {
@@ -522,17 +1794,101 @@
       "startMs": 335224,
       "endMs": 351804,
       "background": {
-        "type": "image",
-        "src": "images/scene_24.png",
-        "animation": "panLeft",
-        "animationIntensity": 0.5
+        "type": "color",
+        "value": "#FAFAFA"
       },
       "transition": {
         "in": "fadeIn",
         "out": "fadeOut",
         "durationMs": 300
       },
-      "objects": [],
+      "objects": [
+        {
+          "id": "scene_24_oil_removal_03_keyword",
+          "type": "text",
+          "position": {
+            "x": 960,
+            "y": 370
+          },
+          "props": {
+            "content": "수분 함유율",
+            "fontSize": 72,
+            "fontWeight": "bold",
+            "color": "#1A1A2E",
+            "align": "center",
+            "maxWidth": 1400
+          },
+          "animation": {
+            "enter": {
+              "type": "fadeIn",
+              "durationMs": 400
+            },
+            "during": {
+              "type": "highlightSweep",
+              "durationMs": 800
+            }
+          }
+        },
+        {
+          "id": "scene_24_oil_removal_03_description",
+          "type": "text",
+          "position": {
+            "x": 960,
+            "y": 550
+          },
+          "layer": 2,
+          "props": {
+            "content": "8~18%의 수분을 함유",
+            "fontSize": 36,
+            "fontWeight": "normal",
+            "color": "#444444",
+            "align": "center",
+            "maxWidth": 1200,
+            "background": {
+              "color": "#FFE082"
+            }
+          },
+          "animation": {
+            "enter": {
+              "type": "typing",
+              "durationMs": 1000,
+              "delayMs": 4974
+            },
+            "during": {
+              "type": "highlightSweep",
+              "durationMs": 800
+            }
+          }
+        },
+        {
+          "id": "scene_24_oil_removal_03_stickman",
+          "type": "stickman",
+          "position": {
+            "x": 370,
+            "y": 680
+          },
+          "scale": 1.2,
+          "layer": 3,
+          "props": {
+            "pose": "pointing_right",
+            "expression": "focused",
+            "color": "#333333",
+            "faceColor": "#FFFFFF",
+            "lineWidth": 3
+          },
+          "animation": {
+            "enter": {
+              "type": "fadeIn",
+              "durationMs": 500,
+              "delayMs": 200
+            },
+            "during": {
+              "type": "nodding",
+              "loop": true
+            }
+          }
+        }
+      ],
       "overlays": []
     },
     {
@@ -540,17 +1896,90 @@
       "startMs": 351804,
       "endMs": 368064,
       "background": {
-        "type": "image",
-        "src": "images/scene_25.png",
-        "animation": "panRight",
-        "animationIntensity": 0.5
+        "type": "color",
+        "value": "#FAFAFA"
       },
       "transition": {
         "in": "fadeIn",
         "out": "fadeOut",
         "durationMs": 300
       },
-      "objects": [],
+      "objects": [
+        {
+          "id": "scene_25_oil_removal_04_keyword",
+          "type": "text",
+          "position": {
+            "x": 960,
+            "y": 370
+          },
+          "props": {
+            "content": "경도와 탄력",
+            "fontSize": 72,
+            "fontWeight": "bold",
+            "color": "#1A1A2E",
+            "align": "center",
+            "maxWidth": 1400
+          },
+          "animation": {
+            "enter": {
+              "type": "typing",
+              "durationMs": 1500
+            }
+          }
+        },
+        {
+          "id": "scene_25_oil_removal_04_description",
+          "type": "text",
+          "position": {
+            "x": 960,
+            "y": 550
+          },
+          "layer": 2,
+          "props": {
+            "content": "수분이 경도와 탄력을 결정",
+            "fontSize": 36,
+            "fontWeight": "normal",
+            "color": "#444444",
+            "align": "center",
+            "maxWidth": 1200
+          },
+          "animation": {
+            "enter": {
+              "type": "typing",
+              "durationMs": 1000,
+              "delayMs": 4878
+            }
+          }
+        },
+        {
+          "id": "scene_25_oil_removal_04_stickman",
+          "type": "stickman",
+          "position": {
+            "x": 1550,
+            "y": 680
+          },
+          "scale": 1.2,
+          "layer": 3,
+          "props": {
+            "pose": "pointing_up",
+            "expression": "focused",
+            "color": "#333333",
+            "faceColor": "#FFFFFF",
+            "lineWidth": 3
+          },
+          "animation": {
+            "enter": {
+              "type": "fadeIn",
+              "durationMs": 500,
+              "delayMs": 200
+            },
+            "during": {
+              "type": "nodding",
+              "loop": true
+            }
+          }
+        }
+      ],
       "overlays": []
     },
     {
@@ -576,17 +2005,90 @@
       "startMs": 381884,
       "endMs": 397284,
       "background": {
-        "type": "image",
-        "src": "images/scene_27.png",
-        "animation": "zoomIn",
-        "animationIntensity": 0.5
+        "type": "color",
+        "value": "#FAFAFA"
       },
       "transition": {
         "in": "fadeIn",
         "out": "fadeOut",
         "durationMs": 300
       },
-      "objects": [],
+      "objects": [
+        {
+          "id": "scene_27_oil_removal_06_keyword",
+          "type": "text",
+          "position": {
+            "x": 960,
+            "y": 370
+          },
+          "props": {
+            "content": "손톱 호흡",
+            "fontSize": 72,
+            "fontWeight": "bold",
+            "color": "#1A1A2E",
+            "align": "center",
+            "maxWidth": 1400
+          },
+          "animation": {
+            "enter": {
+              "type": "handwriting",
+              "durationMs": 2000
+            }
+          }
+        },
+        {
+          "id": "scene_27_oil_removal_06_description",
+          "type": "text",
+          "position": {
+            "x": 960,
+            "y": 550
+          },
+          "layer": 2,
+          "props": {
+            "content": "손톱 자체는 숨을 쉬지 않다",
+            "fontSize": 36,
+            "fontWeight": "normal",
+            "color": "#444444",
+            "align": "center",
+            "maxWidth": 1200
+          },
+          "animation": {
+            "enter": {
+              "type": "typing",
+              "durationMs": 1000,
+              "delayMs": 4620
+            }
+          }
+        },
+        {
+          "id": "scene_27_oil_removal_06_stickman",
+          "type": "stickman",
+          "position": {
+            "x": 1550,
+            "y": 680
+          },
+          "scale": 1.2,
+          "layer": 3,
+          "props": {
+            "pose": "explaining",
+            "expression": "neutral",
+            "color": "#333333",
+            "faceColor": "#FFFFFF",
+            "lineWidth": 3
+          },
+          "animation": {
+            "enter": {
+              "type": "fadeIn",
+              "durationMs": 500,
+              "delayMs": 200
+            },
+            "during": {
+              "type": "nodding",
+              "loop": true
+            }
+          }
+        }
+      ],
       "overlays": []
     },
     {
@@ -594,17 +2096,90 @@
       "startMs": 397284,
       "endMs": 412744,
       "background": {
-        "type": "image",
-        "src": "images/scene_28.png",
-        "animation": "zoomOut",
-        "animationIntensity": 0.5
+        "type": "color",
+        "value": "#FAFAFA"
       },
       "transition": {
         "in": "fadeIn",
         "out": "fadeOut",
         "durationMs": 300
       },
-      "objects": [],
+      "objects": [
+        {
+          "id": "scene_28_oil_removal_07_keyword",
+          "type": "text",
+          "position": {
+            "x": 960,
+            "y": 370
+          },
+          "props": {
+            "content": "네일 플레이트",
+            "fontSize": 72,
+            "fontWeight": "bold",
+            "color": "#1A1A2E",
+            "align": "center",
+            "maxWidth": 1400
+          },
+          "animation": {
+            "enter": {
+              "type": "typing",
+              "durationMs": 1500
+            }
+          }
+        },
+        {
+          "id": "scene_28_oil_removal_07_description",
+          "type": "text",
+          "position": {
+            "x": 960,
+            "y": 550
+          },
+          "layer": 2,
+          "props": {
+            "content": "단단한 손톱 부분",
+            "fontSize": 36,
+            "fontWeight": "normal",
+            "color": "#444444",
+            "align": "center",
+            "maxWidth": 1200
+          },
+          "animation": {
+            "enter": {
+              "type": "typing",
+              "durationMs": 1000,
+              "delayMs": 4638
+            }
+          }
+        },
+        {
+          "id": "scene_28_oil_removal_07_stickman",
+          "type": "stickman",
+          "position": {
+            "x": 370,
+            "y": 680
+          },
+          "scale": 1.2,
+          "layer": 3,
+          "props": {
+            "pose": "thinking",
+            "expression": "thinking",
+            "color": "#333333",
+            "faceColor": "#FFFFFF",
+            "lineWidth": 3
+          },
+          "animation": {
+            "enter": {
+              "type": "fadeIn",
+              "durationMs": 500,
+              "delayMs": 200
+            },
+            "during": {
+              "type": "thinking_loop",
+              "loop": true
+            }
+          }
+        }
+      ],
       "overlays": []
     },
     {
@@ -612,17 +2187,90 @@
       "startMs": 412744,
       "endMs": 427284,
       "background": {
-        "type": "image",
-        "src": "images/scene_29.png",
-        "animation": "panLeft",
-        "animationIntensity": 0.5
+        "type": "color",
+        "value": "#FAFAFA"
       },
       "transition": {
         "in": "fadeIn",
         "out": "fadeOut",
         "durationMs": 300
       },
-      "objects": [],
+      "objects": [
+        {
+          "id": "scene_29_oil_removal_08_keyword",
+          "type": "text",
+          "position": {
+            "x": 960,
+            "y": 370
+          },
+          "props": {
+            "content": "네일 배드",
+            "fontSize": 72,
+            "fontWeight": "bold",
+            "color": "#1A1A2E",
+            "align": "center",
+            "maxWidth": 1400
+          },
+          "animation": {
+            "enter": {
+              "type": "handwriting",
+              "durationMs": 2000
+            }
+          }
+        },
+        {
+          "id": "scene_29_oil_removal_08_description",
+          "type": "text",
+          "position": {
+            "x": 960,
+            "y": 550
+          },
+          "layer": 2,
+          "props": {
+            "content": "손톱 아래의 부드러운 살",
+            "fontSize": 36,
+            "fontWeight": "normal",
+            "color": "#444444",
+            "align": "center",
+            "maxWidth": 1200
+          },
+          "animation": {
+            "enter": {
+              "type": "typing",
+              "durationMs": 1000,
+              "delayMs": 4362
+            }
+          }
+        },
+        {
+          "id": "scene_29_oil_removal_08_stickman",
+          "type": "stickman",
+          "position": {
+            "x": 1550,
+            "y": 680
+          },
+          "scale": 1.2,
+          "layer": 3,
+          "props": {
+            "pose": "standing",
+            "expression": "neutral",
+            "color": "#333333",
+            "faceColor": "#FFFFFF",
+            "lineWidth": 3
+          },
+          "animation": {
+            "enter": {
+              "type": "fadeIn",
+              "durationMs": 500,
+              "delayMs": 200
+            },
+            "during": {
+              "type": "breathing",
+              "loop": true
+            }
+          }
+        }
+      ],
       "overlays": []
     },
     {
@@ -671,14 +2319,15 @@
             "content": "손톱의 과학",
             "fontSize": 48,
             "fontWeight": "bold",
-            "color": "#2D3436",
+            "color": "#0066CC",
             "align": "center",
             "maxWidth": 1200,
             "role": "highlight_box",
             "background": {
-              "color": "rgba(255, 255, 255, 0.75)",
+              "color": "rgba(255,255,255,0.9)",
               "padding": 20,
-              "borderRadius": 16
+              "borderRadius": 12,
+              "opacity": 0.7
             }
           },
           "animation": {
@@ -695,17 +2344,101 @@
       "startMs": 459424,
       "endMs": 472704,
       "background": {
-        "type": "image",
-        "src": "images/scene_32.png",
-        "animation": "zoomIn",
-        "animationIntensity": 0.5
+        "type": "color",
+        "value": "#FAFAFA"
       },
       "transition": {
         "in": "fadeIn",
         "out": "fadeOut",
         "durationMs": 300
       },
-      "objects": [],
+      "objects": [
+        {
+          "id": "scene_32_nail_science_02_keyword",
+          "type": "text",
+          "position": {
+            "x": 960,
+            "y": 370
+          },
+          "props": {
+            "content": "UV 램프",
+            "fontSize": 72,
+            "fontWeight": "bold",
+            "color": "#1A1A2E",
+            "align": "center",
+            "maxWidth": 1400
+          },
+          "animation": {
+            "enter": {
+              "type": "fadeIn",
+              "durationMs": 400
+            },
+            "during": {
+              "type": "highlightSweep",
+              "durationMs": 800
+            }
+          }
+        },
+        {
+          "id": "scene_32_nail_science_02_description",
+          "type": "text",
+          "position": {
+            "x": 960,
+            "y": 550
+          },
+          "layer": 2,
+          "props": {
+            "content": "젤 네일을 굳힐 때 쓰는 파란 불빛",
+            "fontSize": 36,
+            "fontWeight": "normal",
+            "color": "#444444",
+            "align": "center",
+            "maxWidth": 1200,
+            "background": {
+              "color": "#FFE082"
+            }
+          },
+          "animation": {
+            "enter": {
+              "type": "typing",
+              "durationMs": 1000,
+              "delayMs": 3984
+            },
+            "during": {
+              "type": "highlightSweep",
+              "durationMs": 800
+            }
+          }
+        },
+        {
+          "id": "scene_32_nail_science_02_stickman",
+          "type": "stickman",
+          "position": {
+            "x": 370,
+            "y": 680
+          },
+          "scale": 1.2,
+          "layer": 3,
+          "props": {
+            "pose": "explaining",
+            "expression": "neutral",
+            "color": "#333333",
+            "faceColor": "#FFFFFF",
+            "lineWidth": 3
+          },
+          "animation": {
+            "enter": {
+              "type": "fadeIn",
+              "durationMs": 500,
+              "delayMs": 200
+            },
+            "during": {
+              "type": "breathing",
+              "loop": true
+            }
+          }
+        }
+      ],
       "overlays": []
     },
     {
@@ -731,17 +2464,90 @@
       "startMs": 490708,
       "endMs": 508768,
       "background": {
-        "type": "image",
-        "src": "images/scene_34.png",
-        "animation": "panLeft",
-        "animationIntensity": 0.5
+        "type": "color",
+        "value": "#FAFAFA"
       },
       "transition": {
         "in": "fadeIn",
         "out": "fadeOut",
         "durationMs": 300
       },
-      "objects": [],
+      "objects": [
+        {
+          "id": "scene_34_nail_science_04_keyword",
+          "type": "text",
+          "position": {
+            "x": 960,
+            "y": 370
+          },
+          "props": {
+            "content": "자외선 종류",
+            "fontSize": 72,
+            "fontWeight": "bold",
+            "color": "#1A1A2E",
+            "align": "center",
+            "maxWidth": 1400
+          },
+          "animation": {
+            "enter": {
+              "type": "typing",
+              "durationMs": 1500
+            }
+          }
+        },
+        {
+          "id": "scene_34_nail_science_04_description",
+          "type": "text",
+          "position": {
+            "x": 960,
+            "y": 550
+          },
+          "layer": 2,
+          "props": {
+            "content": "A, B, C로 분류",
+            "fontSize": 36,
+            "fontWeight": "normal",
+            "color": "#444444",
+            "align": "center",
+            "maxWidth": 1200
+          },
+          "animation": {
+            "enter": {
+              "type": "typing",
+              "durationMs": 1000,
+              "delayMs": 5418
+            }
+          }
+        },
+        {
+          "id": "scene_34_nail_science_04_stickman",
+          "type": "stickman",
+          "position": {
+            "x": 370,
+            "y": 680
+          },
+          "scale": 1.2,
+          "layer": 3,
+          "props": {
+            "pose": "celebrating",
+            "expression": "happy",
+            "color": "#333333",
+            "faceColor": "#FFFFFF",
+            "lineWidth": 3
+          },
+          "animation": {
+            "enter": {
+              "type": "fadeIn",
+              "durationMs": 500,
+              "delayMs": 200
+            },
+            "during": {
+              "type": "jumping",
+              "loop": true
+            }
+          }
+        }
+      ],
       "overlays": []
     },
     {
@@ -749,17 +2555,90 @@
       "startMs": 508768,
       "endMs": 521568,
       "background": {
-        "type": "image",
-        "src": "images/scene_35.png",
-        "animation": "panRight",
-        "animationIntensity": 0.5
+        "type": "color",
+        "value": "#FAFAFA"
       },
       "transition": {
         "in": "fadeIn",
         "out": "fadeOut",
         "durationMs": 300
       },
-      "objects": [],
+      "objects": [
+        {
+          "id": "scene_35_nail_science_05_keyword",
+          "type": "text",
+          "position": {
+            "x": 960,
+            "y": 370
+          },
+          "props": {
+            "content": "네일 구조",
+            "fontSize": 72,
+            "fontWeight": "bold",
+            "color": "#1A1A2E",
+            "align": "center",
+            "maxWidth": 1400
+          },
+          "animation": {
+            "enter": {
+              "type": "handwriting",
+              "durationMs": 2000
+            }
+          }
+        },
+        {
+          "id": "scene_35_nail_science_05_description",
+          "type": "text",
+          "position": {
+            "x": 960,
+            "y": 550
+          },
+          "layer": 2,
+          "props": {
+            "content": "손톱의 과학적 구조",
+            "fontSize": 36,
+            "fontWeight": "normal",
+            "color": "#444444",
+            "align": "center",
+            "maxWidth": 1200
+          },
+          "animation": {
+            "enter": {
+              "type": "typing",
+              "durationMs": 1000,
+              "delayMs": 3840
+            }
+          }
+        },
+        {
+          "id": "scene_35_nail_science_05_stickman",
+          "type": "stickman",
+          "position": {
+            "x": 1550,
+            "y": 680
+          },
+          "scale": 1.2,
+          "layer": 3,
+          "props": {
+            "pose": "pointing_right",
+            "expression": "focused",
+            "color": "#333333",
+            "faceColor": "#FFFFFF",
+            "lineWidth": 3
+          },
+          "animation": {
+            "enter": {
+              "type": "fadeIn",
+              "durationMs": 500,
+              "delayMs": 200
+            },
+            "during": {
+              "type": "nodding",
+              "loop": true
+            }
+          }
+        }
+      ],
       "overlays": []
     },
     {
@@ -785,17 +2664,90 @@
       "startMs": 536029,
       "endMs": 550389,
       "background": {
-        "type": "image",
-        "src": "images/scene_37.png",
-        "animation": "zoomIn",
-        "animationIntensity": 0.5
+        "type": "color",
+        "value": "#FAFAFA"
       },
       "transition": {
         "in": "fadeIn",
         "out": "fadeOut",
         "durationMs": 300
       },
-      "objects": [],
+      "objects": [
+        {
+          "id": "scene_37_nail_science_07_keyword",
+          "type": "text",
+          "position": {
+            "x": 960,
+            "y": 370
+          },
+          "props": {
+            "content": "네일 플레이트",
+            "fontSize": 72,
+            "fontWeight": "bold",
+            "color": "#1A1A2E",
+            "align": "center",
+            "maxWidth": 1400
+          },
+          "animation": {
+            "enter": {
+              "type": "typing",
+              "durationMs": 1500
+            }
+          }
+        },
+        {
+          "id": "scene_37_nail_science_07_description",
+          "type": "text",
+          "position": {
+            "x": 960,
+            "y": 550
+          },
+          "layer": 2,
+          "props": {
+            "content": "단단하고 반투명한 판",
+            "fontSize": 36,
+            "fontWeight": "normal",
+            "color": "#444444",
+            "align": "center",
+            "maxWidth": 1200
+          },
+          "animation": {
+            "enter": {
+              "type": "typing",
+              "durationMs": 1000,
+              "delayMs": 4308
+            }
+          }
+        },
+        {
+          "id": "scene_37_nail_science_07_stickman",
+          "type": "stickman",
+          "position": {
+            "x": 1550,
+            "y": 680
+          },
+          "scale": 1.2,
+          "layer": 3,
+          "props": {
+            "pose": "pointing_up",
+            "expression": "focused",
+            "color": "#333333",
+            "faceColor": "#FFFFFF",
+            "lineWidth": 3
+          },
+          "animation": {
+            "enter": {
+              "type": "fadeIn",
+              "durationMs": 500,
+              "delayMs": 200
+            },
+            "during": {
+              "type": "nodding",
+              "loop": true
+            }
+          }
+        }
+      ],
       "overlays": []
     },
     {
@@ -844,14 +2796,15 @@
             "content": "UV 램프와 자외선",
             "fontSize": 48,
             "fontWeight": "bold",
-            "color": "#2D3436",
+            "color": "#0066CC",
             "align": "center",
             "maxWidth": 1200,
             "role": "highlight_box",
             "background": {
-              "color": "rgba(255, 255, 255, 0.75)",
+              "color": "rgba(255,255,255,0.9)",
               "padding": 20,
-              "borderRadius": 16
+              "borderRadius": 12,
+              "opacity": 0.7
             }
           },
           "animation": {
@@ -868,17 +2821,90 @@
       "startMs": 580949,
       "endMs": 595909,
       "background": {
-        "type": "image",
-        "src": "images/scene_40.png",
-        "animation": "panRight",
-        "animationIntensity": 0.5
+        "type": "color",
+        "value": "#FAFAFA"
       },
       "transition": {
         "in": "fadeIn",
         "out": "fadeOut",
         "durationMs": 300
       },
-      "objects": [],
+      "objects": [
+        {
+          "id": "scene_40_uv_lamp_02_keyword",
+          "type": "text",
+          "position": {
+            "x": 960,
+            "y": 370
+          },
+          "props": {
+            "content": "에포니큐움",
+            "fontSize": 72,
+            "fontWeight": "bold",
+            "color": "#1A1A2E",
+            "align": "center",
+            "maxWidth": 1400
+          },
+          "animation": {
+            "enter": {
+              "type": "handwriting",
+              "durationMs": 2000
+            }
+          }
+        },
+        {
+          "id": "scene_40_uv_lamp_02_description",
+          "type": "text",
+          "position": {
+            "x": 960,
+            "y": 550
+          },
+          "layer": 2,
+          "props": {
+            "content": "손톱 뿌리를 덮는 살아 있는 피부",
+            "fontSize": 36,
+            "fontWeight": "normal",
+            "color": "#444444",
+            "align": "center",
+            "maxWidth": 1200
+          },
+          "animation": {
+            "enter": {
+              "type": "typing",
+              "durationMs": 1000,
+              "delayMs": 4488
+            }
+          }
+        },
+        {
+          "id": "scene_40_uv_lamp_02_stickman",
+          "type": "stickman",
+          "position": {
+            "x": 370,
+            "y": 680
+          },
+          "scale": 1.2,
+          "layer": 3,
+          "props": {
+            "pose": "pointing_right",
+            "expression": "focused",
+            "color": "#333333",
+            "faceColor": "#FFFFFF",
+            "lineWidth": 3
+          },
+          "animation": {
+            "enter": {
+              "type": "fadeIn",
+              "durationMs": 500,
+              "delayMs": 200
+            },
+            "during": {
+              "type": "nodding",
+              "loop": true
+            }
+          }
+        }
+      ],
       "overlays": []
     },
     {
@@ -886,17 +2912,101 @@
       "startMs": 595909,
       "endMs": 610009,
       "background": {
-        "type": "image",
-        "src": "images/scene_41.png",
-        "animation": "kenBurns",
-        "animationIntensity": 0.5
+        "type": "color",
+        "value": "#FAFAFA"
       },
       "transition": {
         "in": "fadeIn",
         "out": "fadeOut",
         "durationMs": 300
       },
-      "objects": [],
+      "objects": [
+        {
+          "id": "scene_41_uv_lamp_03_keyword",
+          "type": "text",
+          "position": {
+            "x": 960,
+            "y": 370
+          },
+          "props": {
+            "content": "큐티클",
+            "fontSize": 72,
+            "fontWeight": "bold",
+            "color": "#1A1A2E",
+            "align": "center",
+            "maxWidth": 1400
+          },
+          "animation": {
+            "enter": {
+              "type": "fadeIn",
+              "durationMs": 400
+            },
+            "during": {
+              "type": "highlightSweep",
+              "durationMs": 800
+            }
+          }
+        },
+        {
+          "id": "scene_41_uv_lamp_03_description",
+          "type": "text",
+          "position": {
+            "x": 960,
+            "y": 550
+          },
+          "layer": 2,
+          "props": {
+            "content": "손톱 표면에 달라붙은 죽은 각질",
+            "fontSize": 36,
+            "fontWeight": "normal",
+            "color": "#444444",
+            "align": "center",
+            "maxWidth": 1200,
+            "background": {
+              "color": "#FFE082"
+            }
+          },
+          "animation": {
+            "enter": {
+              "type": "typing",
+              "durationMs": 1000,
+              "delayMs": 4230
+            },
+            "during": {
+              "type": "highlightSweep",
+              "durationMs": 800
+            }
+          }
+        },
+        {
+          "id": "scene_41_uv_lamp_03_stickman",
+          "type": "stickman",
+          "position": {
+            "x": 1550,
+            "y": 680
+          },
+          "scale": 1.2,
+          "layer": 3,
+          "props": {
+            "pose": "pointing_up",
+            "expression": "focused",
+            "color": "#333333",
+            "faceColor": "#FFFFFF",
+            "lineWidth": 3
+          },
+          "animation": {
+            "enter": {
+              "type": "fadeIn",
+              "durationMs": 500,
+              "delayMs": 200
+            },
+            "during": {
+              "type": "nodding",
+              "loop": true
+            }
+          }
+        }
+      ],
       "overlays": []
     },
     {
@@ -904,17 +3014,90 @@
       "startMs": 610009,
       "endMs": 625168,
       "background": {
-        "type": "image",
-        "src": "images/scene_42.png",
-        "animation": "zoomIn",
-        "animationIntensity": 0.5
+        "type": "color",
+        "value": "#FAFAFA"
       },
       "transition": {
         "in": "fadeIn",
         "out": "fadeOut",
         "durationMs": 300
       },
-      "objects": [],
+      "objects": [
+        {
+          "id": "scene_42_uv_lamp_04_keyword",
+          "type": "text",
+          "position": {
+            "x": 960,
+            "y": 370
+          },
+          "props": {
+            "content": "네일 폴드",
+            "fontSize": 72,
+            "fontWeight": "bold",
+            "color": "#1A1A2E",
+            "align": "center",
+            "maxWidth": 1400
+          },
+          "animation": {
+            "enter": {
+              "type": "typing",
+              "durationMs": 1500
+            }
+          }
+        },
+        {
+          "id": "scene_42_uv_lamp_04_description",
+          "type": "text",
+          "position": {
+            "x": 960,
+            "y": 550
+          },
+          "layer": 2,
+          "props": {
+            "content": "손톱의 양옆을 감싸는 살",
+            "fontSize": 36,
+            "fontWeight": "normal",
+            "color": "#444444",
+            "align": "center",
+            "maxWidth": 1200
+          },
+          "animation": {
+            "enter": {
+              "type": "typing",
+              "durationMs": 1000,
+              "delayMs": 4547
+            }
+          }
+        },
+        {
+          "id": "scene_42_uv_lamp_04_stickman",
+          "type": "stickman",
+          "position": {
+            "x": 370,
+            "y": 680
+          },
+          "scale": 1.2,
+          "layer": 3,
+          "props": {
+            "pose": "pointing_right",
+            "expression": "focused",
+            "color": "#333333",
+            "faceColor": "#FFFFFF",
+            "lineWidth": 3
+          },
+          "animation": {
+            "enter": {
+              "type": "fadeIn",
+              "durationMs": 500,
+              "delayMs": 200
+            },
+            "during": {
+              "type": "nodding",
+              "loop": true
+            }
+          }
+        }
+      ],
       "overlays": []
     },
     {
@@ -940,17 +3123,90 @@
       "startMs": 641428,
       "endMs": 657149,
       "background": {
-        "type": "image",
-        "src": "images/scene_44.png",
-        "animation": "panLeft",
-        "animationIntensity": 0.5
+        "type": "color",
+        "value": "#FAFAFA"
       },
       "transition": {
         "in": "fadeIn",
         "out": "fadeOut",
         "durationMs": 300
       },
-      "objects": [],
+      "objects": [
+        {
+          "id": "scene_44_uv_lamp_06_keyword",
+          "type": "text",
+          "position": {
+            "x": 960,
+            "y": 370
+          },
+          "props": {
+            "content": "네일 그루브",
+            "fontSize": 72,
+            "fontWeight": "bold",
+            "color": "#1A1A2E",
+            "align": "center",
+            "maxWidth": 1400
+          },
+          "animation": {
+            "enter": {
+              "type": "handwriting",
+              "durationMs": 2000
+            }
+          }
+        },
+        {
+          "id": "scene_44_uv_lamp_06_description",
+          "type": "text",
+          "position": {
+            "x": 960,
+            "y": 550
+          },
+          "layer": 2,
+          "props": {
+            "content": "손톱과 피부의 접합부",
+            "fontSize": 36,
+            "fontWeight": "normal",
+            "color": "#444444",
+            "align": "center",
+            "maxWidth": 1200
+          },
+          "animation": {
+            "enter": {
+              "type": "typing",
+              "durationMs": 1000,
+              "delayMs": 4716
+            }
+          }
+        },
+        {
+          "id": "scene_44_uv_lamp_06_stickman",
+          "type": "stickman",
+          "position": {
+            "x": 370,
+            "y": 680
+          },
+          "scale": 1.2,
+          "layer": 3,
+          "props": {
+            "pose": "standing",
+            "expression": "neutral",
+            "color": "#333333",
+            "faceColor": "#FFFFFF",
+            "lineWidth": 3
+          },
+          "animation": {
+            "enter": {
+              "type": "fadeIn",
+              "durationMs": 500,
+              "delayMs": 200
+            },
+            "during": {
+              "type": "breathing",
+              "loop": true
+            }
+          }
+        }
+      ],
       "overlays": []
     },
     {
@@ -999,14 +3255,15 @@
             "content": "손톱 해부학 용어",
             "fontSize": 48,
             "fontWeight": "bold",
-            "color": "#2D3436",
+            "color": "#0066CC",
             "align": "center",
             "maxWidth": 1200,
             "role": "highlight_box",
             "background": {
-              "color": "rgba(255, 255, 255, 0.75)",
+              "color": "rgba(255,255,255,0.9)",
               "padding": 20,
-              "borderRadius": 16
+              "borderRadius": 12,
+              "opacity": 0.7
             }
           },
           "animation": {
@@ -1023,17 +3280,90 @@
       "startMs": 688069,
       "endMs": 704808,
       "background": {
-        "type": "image",
-        "src": "images/scene_47.png",
-        "animation": "zoomIn",
-        "animationIntensity": 0.5
+        "type": "color",
+        "value": "#FAFAFA"
       },
       "transition": {
         "in": "fadeIn",
         "out": "fadeOut",
         "durationMs": 300
       },
-      "objects": [],
+      "objects": [
+        {
+          "id": "scene_47_anatomy_02_keyword",
+          "type": "text",
+          "position": {
+            "x": 960,
+            "y": 370
+          },
+          "props": {
+            "content": "아크릴 품질",
+            "fontSize": 72,
+            "fontWeight": "bold",
+            "color": "#1A1A2E",
+            "align": "center",
+            "maxWidth": 1400
+          },
+          "animation": {
+            "enter": {
+              "type": "typing",
+              "durationMs": 1500
+            }
+          }
+        },
+        {
+          "id": "scene_47_anatomy_02_description",
+          "type": "text",
+          "position": {
+            "x": 960,
+            "y": 550
+          },
+          "layer": 2,
+          "props": {
+            "content": "인조네일이 부러지는 그 지점",
+            "fontSize": 36,
+            "fontWeight": "normal",
+            "color": "#444444",
+            "align": "center",
+            "maxWidth": 1200
+          },
+          "animation": {
+            "enter": {
+              "type": "typing",
+              "durationMs": 1000,
+              "delayMs": 5021
+            }
+          }
+        },
+        {
+          "id": "scene_47_anatomy_02_stickman",
+          "type": "stickman",
+          "position": {
+            "x": 1550,
+            "y": 680
+          },
+          "scale": 1.2,
+          "layer": 3,
+          "props": {
+            "pose": "thinking",
+            "expression": "thinking",
+            "color": "#333333",
+            "faceColor": "#FFFFFF",
+            "lineWidth": 3
+          },
+          "animation": {
+            "enter": {
+              "type": "fadeIn",
+              "durationMs": 500,
+              "delayMs": 200
+            },
+            "during": {
+              "type": "thinking_loop",
+              "loop": true
+            }
+          }
+        }
+      ],
       "overlays": []
     },
     {
@@ -1041,17 +3371,90 @@
       "startMs": 704808,
       "endMs": 719653,
       "background": {
-        "type": "image",
-        "src": "images/scene_48.png",
-        "animation": "zoomOut",
-        "animationIntensity": 0.5
+        "type": "color",
+        "value": "#FAFAFA"
       },
       "transition": {
         "in": "fadeIn",
         "out": "fadeOut",
         "durationMs": 300
       },
-      "objects": [],
+      "objects": [
+        {
+          "id": "scene_48_anatomy_03_keyword",
+          "type": "text",
+          "position": {
+            "x": 960,
+            "y": 370
+          },
+          "props": {
+            "content": "도구 오염",
+            "fontSize": 72,
+            "fontWeight": "bold",
+            "color": "#1A1A2E",
+            "align": "center",
+            "maxWidth": 1400
+          },
+          "animation": {
+            "enter": {
+              "type": "handwriting",
+              "durationMs": 2000
+            }
+          }
+        },
+        {
+          "id": "scene_48_anatomy_03_description",
+          "type": "text",
+          "position": {
+            "x": 960,
+            "y": 550
+          },
+          "layer": 2,
+          "props": {
+            "content": "시술 과정에서 사용한 도구의 상태",
+            "fontSize": 36,
+            "fontWeight": "normal",
+            "color": "#444444",
+            "align": "center",
+            "maxWidth": 1200
+          },
+          "animation": {
+            "enter": {
+              "type": "typing",
+              "durationMs": 1000,
+              "delayMs": 4453
+            }
+          }
+        },
+        {
+          "id": "scene_48_anatomy_03_stickman",
+          "type": "stickman",
+          "position": {
+            "x": 370,
+            "y": 680
+          },
+          "scale": 1.2,
+          "layer": 3,
+          "props": {
+            "pose": "standing",
+            "expression": "neutral",
+            "color": "#333333",
+            "faceColor": "#FFFFFF",
+            "lineWidth": 3
+          },
+          "animation": {
+            "enter": {
+              "type": "fadeIn",
+              "durationMs": 500,
+              "delayMs": 200
+            },
+            "during": {
+              "type": "breathing",
+              "loop": true
+            }
+          }
+        }
+      ],
       "overlays": []
     },
     {
@@ -1059,17 +3462,101 @@
       "startMs": 719653,
       "endMs": 732573,
       "background": {
-        "type": "image",
-        "src": "images/scene_49.png",
-        "animation": "panLeft",
-        "animationIntensity": 0.5
+        "type": "color",
+        "value": "#FAFAFA"
       },
       "transition": {
         "in": "fadeIn",
         "out": "fadeOut",
         "durationMs": 300
       },
-      "objects": [],
+      "objects": [
+        {
+          "id": "scene_49_anatomy_04_keyword",
+          "type": "text",
+          "position": {
+            "x": 960,
+            "y": 370
+          },
+          "props": {
+            "content": "손톱 모양",
+            "fontSize": 72,
+            "fontWeight": "bold",
+            "color": "#1A1A2E",
+            "align": "center",
+            "maxWidth": 1400
+          },
+          "animation": {
+            "enter": {
+              "type": "fadeIn",
+              "durationMs": 400
+            },
+            "during": {
+              "type": "highlightSweep",
+              "durationMs": 800
+            }
+          }
+        },
+        {
+          "id": "scene_49_anatomy_04_description",
+          "type": "text",
+          "position": {
+            "x": 960,
+            "y": 550
+          },
+          "layer": 2,
+          "props": {
+            "content": "각자 다른 손톱의 특징",
+            "fontSize": 36,
+            "fontWeight": "normal",
+            "color": "#444444",
+            "align": "center",
+            "maxWidth": 1200,
+            "background": {
+              "color": "#FFE082"
+            }
+          },
+          "animation": {
+            "enter": {
+              "type": "typing",
+              "durationMs": 1000,
+              "delayMs": 3876
+            },
+            "during": {
+              "type": "highlightSweep",
+              "durationMs": 800
+            }
+          }
+        },
+        {
+          "id": "scene_49_anatomy_04_stickman",
+          "type": "stickman",
+          "position": {
+            "x": 1550,
+            "y": 680
+          },
+          "scale": 1.2,
+          "layer": 3,
+          "props": {
+            "pose": "pointing_right",
+            "expression": "focused",
+            "color": "#333333",
+            "faceColor": "#FFFFFF",
+            "lineWidth": 3
+          },
+          "animation": {
+            "enter": {
+              "type": "fadeIn",
+              "durationMs": 500,
+              "delayMs": 200
+            },
+            "during": {
+              "type": "nodding",
+              "loop": true
+            }
+          }
+        }
+      ],
       "overlays": []
     },
     {
@@ -1095,17 +3582,90 @@
       "startMs": 748893,
       "endMs": 762433,
       "background": {
-        "type": "image",
-        "src": "images/scene_51.png",
-        "animation": "kenBurns",
-        "animationIntensity": 0.5
+        "type": "color",
+        "value": "#FAFAFA"
       },
       "transition": {
         "in": "fadeIn",
         "out": "fadeOut",
         "durationMs": 300
       },
-      "objects": [],
+      "objects": [
+        {
+          "id": "scene_51_anatomy_06_keyword",
+          "type": "text",
+          "position": {
+            "x": 960,
+            "y": 370
+          },
+          "props": {
+            "content": "스포네일 교정",
+            "fontSize": 72,
+            "fontWeight": "bold",
+            "color": "#1A1A2E",
+            "align": "center",
+            "maxWidth": 1400
+          },
+          "animation": {
+            "enter": {
+              "type": "typing",
+              "durationMs": 1500
+            }
+          }
+        },
+        {
+          "id": "scene_51_anatomy_06_description",
+          "type": "text",
+          "position": {
+            "x": 960,
+            "y": 550
+          },
+          "layer": 2,
+          "props": {
+            "content": "팁을 붙일 때 가운데 부분이 뜨지 않도록",
+            "fontSize": 36,
+            "fontWeight": "normal",
+            "color": "#444444",
+            "align": "center",
+            "maxWidth": 1200
+          },
+          "animation": {
+            "enter": {
+              "type": "typing",
+              "durationMs": 1000,
+              "delayMs": 4062
+            }
+          }
+        },
+        {
+          "id": "scene_51_anatomy_06_stickman",
+          "type": "stickman",
+          "position": {
+            "x": 1550,
+            "y": 680
+          },
+          "scale": 1.2,
+          "layer": 3,
+          "props": {
+            "pose": "standing",
+            "expression": "neutral",
+            "color": "#333333",
+            "faceColor": "#FFFFFF",
+            "lineWidth": 3
+          },
+          "animation": {
+            "enter": {
+              "type": "fadeIn",
+              "durationMs": 500,
+              "delayMs": 200
+            },
+            "during": {
+              "type": "breathing",
+              "loop": true
+            }
+          }
+        }
+      ],
       "overlays": []
     },
     {
@@ -1113,17 +3673,90 @@
       "startMs": 762433,
       "endMs": 779653,
       "background": {
-        "type": "image",
-        "src": "images/scene_52.png",
-        "animation": "zoomIn",
-        "animationIntensity": 0.5
+        "type": "color",
+        "value": "#FAFAFA"
       },
       "transition": {
         "in": "fadeIn",
         "out": "fadeOut",
         "durationMs": 300
       },
-      "objects": [],
+      "objects": [
+        {
+          "id": "scene_52_anatomy_07_keyword",
+          "type": "text",
+          "position": {
+            "x": 960,
+            "y": 370
+          },
+          "props": {
+            "content": "손톱 성형",
+            "fontSize": 72,
+            "fontWeight": "bold",
+            "color": "#1A1A2E",
+            "align": "center",
+            "maxWidth": 1400
+          },
+          "animation": {
+            "enter": {
+              "type": "handwriting",
+              "durationMs": 2000
+            }
+          }
+        },
+        {
+          "id": "scene_52_anatomy_07_description",
+          "type": "text",
+          "position": {
+            "x": 960,
+            "y": 550
+          },
+          "layer": 2,
+          "props": {
+            "content": "손톱 모양을 교정하는 기술",
+            "fontSize": 36,
+            "fontWeight": "normal",
+            "color": "#444444",
+            "align": "center",
+            "maxWidth": 1200
+          },
+          "animation": {
+            "enter": {
+              "type": "typing",
+              "durationMs": 1000,
+              "delayMs": 5166
+            }
+          }
+        },
+        {
+          "id": "scene_52_anatomy_07_stickman",
+          "type": "stickman",
+          "position": {
+            "x": 370,
+            "y": 680
+          },
+          "scale": 1.2,
+          "layer": 3,
+          "props": {
+            "pose": "celebrating",
+            "expression": "happy",
+            "color": "#333333",
+            "faceColor": "#FFFFFF",
+            "lineWidth": 3
+          },
+          "animation": {
+            "enter": {
+              "type": "fadeIn",
+              "durationMs": 500,
+              "delayMs": 200
+            },
+            "during": {
+              "type": "clapping",
+              "loop": true
+            }
+          }
+        }
+      ],
       "overlays": []
     },
     {
@@ -1131,17 +3764,90 @@
       "startMs": 779653,
       "endMs": 796473,
       "background": {
-        "type": "image",
-        "src": "images/scene_53.png",
-        "animation": "zoomOut",
-        "animationIntensity": 0.5
+        "type": "color",
+        "value": "#FAFAFA"
       },
       "transition": {
         "in": "fadeIn",
         "out": "fadeOut",
         "durationMs": 300
       },
-      "objects": [],
+      "objects": [
+        {
+          "id": "scene_53_anatomy_08_keyword",
+          "type": "text",
+          "position": {
+            "x": 960,
+            "y": 370
+          },
+          "props": {
+            "content": "보수 시술",
+            "fontSize": 72,
+            "fontWeight": "bold",
+            "color": "#1A1A2E",
+            "align": "center",
+            "maxWidth": 1400
+          },
+          "animation": {
+            "enter": {
+              "type": "typing",
+              "durationMs": 1500
+            }
+          }
+        },
+        {
+          "id": "scene_53_anatomy_08_description",
+          "type": "text",
+          "position": {
+            "x": 960,
+            "y": 550
+          },
+          "layer": 2,
+          "props": {
+            "content": "새로 자란 부분을 채워주는 기술",
+            "fontSize": 36,
+            "fontWeight": "normal",
+            "color": "#444444",
+            "align": "center",
+            "maxWidth": 1200
+          },
+          "animation": {
+            "enter": {
+              "type": "typing",
+              "durationMs": 1000,
+              "delayMs": 5046
+            }
+          }
+        },
+        {
+          "id": "scene_53_anatomy_08_stickman",
+          "type": "stickman",
+          "position": {
+            "x": 1550,
+            "y": 680
+          },
+          "scale": 1.2,
+          "layer": 3,
+          "props": {
+            "pose": "thinking",
+            "expression": "thinking",
+            "color": "#333333",
+            "faceColor": "#FFFFFF",
+            "lineWidth": 3
+          },
+          "animation": {
+            "enter": {
+              "type": "fadeIn",
+              "durationMs": 500,
+              "delayMs": 200
+            },
+            "during": {
+              "type": "thinking_loop",
+              "loop": true
+            }
+          }
+        }
+      ],
       "overlays": []
     },
     {
@@ -1190,15 +3896,11 @@
             "content": "합격의 열쇠",
             "fontSize": 64,
             "fontWeight": "bold",
-            "color": "#2D3436",
+            "color": "#000000",
             "align": "center",
             "maxWidth": 1200,
             "role": "title",
-            "background": {
-              "color": "rgba(255, 255, 255, 0.75)",
-              "padding": 20,
-              "borderRadius": 16
-            }
+            "background": null
           },
           "animation": {
             "enter": {
@@ -1214,17 +3916,90 @@
       "startMs": 831633,
       "endMs": 844353,
       "background": {
-        "type": "image",
-        "src": "images/scene_56.png",
-        "animation": "kenBurns",
-        "animationIntensity": 0.5
+        "type": "color",
+        "value": "#FAFAFA"
       },
       "transition": {
         "in": "fadeIn",
         "out": "fadeOut",
         "durationMs": 300
       },
-      "objects": [],
+      "objects": [
+        {
+          "id": "scene_56_conclusion_02_keyword",
+          "type": "text",
+          "position": {
+            "x": 960,
+            "y": 370
+          },
+          "props": {
+            "content": "리필 핵심",
+            "fontSize": 72,
+            "fontWeight": "bold",
+            "color": "#1A1A2E",
+            "align": "center",
+            "maxWidth": 1400
+          },
+          "animation": {
+            "enter": {
+              "type": "handwriting",
+              "durationMs": 2000
+            }
+          }
+        },
+        {
+          "id": "scene_56_conclusion_02_description",
+          "type": "text",
+          "position": {
+            "x": 960,
+            "y": 550
+          },
+          "layer": 2,
+          "props": {
+            "content": "새로 자라난 자연 손톱과 기존의 인조 네일 사이의 연결",
+            "fontSize": 36,
+            "fontWeight": "normal",
+            "color": "#444444",
+            "align": "center",
+            "maxWidth": 1200
+          },
+          "animation": {
+            "enter": {
+              "type": "typing",
+              "durationMs": 1000,
+              "delayMs": 3816
+            }
+          }
+        },
+        {
+          "id": "scene_56_conclusion_02_stickman",
+          "type": "stickman",
+          "position": {
+            "x": 370,
+            "y": 680
+          },
+          "scale": 1.2,
+          "layer": 3,
+          "props": {
+            "pose": "hand_on_chin",
+            "expression": "thinking",
+            "color": "#333333",
+            "faceColor": "#FFFFFF",
+            "lineWidth": 3
+          },
+          "animation": {
+            "enter": {
+              "type": "fadeIn",
+              "durationMs": 500,
+              "delayMs": 200
+            },
+            "during": {
+              "type": "thinking_loop",
+              "loop": true
+            }
+          }
+        }
+      ],
       "overlays": []
     },
     {
@@ -1232,17 +4007,101 @@
       "startMs": 844353,
       "endMs": 860053,
       "background": {
-        "type": "image",
-        "src": "images/scene_57.png",
-        "animation": "zoomIn",
-        "animationIntensity": 0.5
+        "type": "color",
+        "value": "#FAFAFA"
       },
       "transition": {
         "in": "fadeIn",
         "out": "fadeOut",
         "durationMs": 300
       },
-      "objects": [],
+      "objects": [
+        {
+          "id": "scene_57_conclusion_03_keyword",
+          "type": "text",
+          "position": {
+            "x": 960,
+            "y": 370
+          },
+          "props": {
+            "content": "파일링 기술",
+            "fontSize": 72,
+            "fontWeight": "bold",
+            "color": "#1A1A2E",
+            "align": "center",
+            "maxWidth": 1400
+          },
+          "animation": {
+            "enter": {
+              "type": "fadeIn",
+              "durationMs": 400
+            },
+            "during": {
+              "type": "highlightSweep",
+              "durationMs": 800
+            }
+          }
+        },
+        {
+          "id": "scene_57_conclusion_03_description",
+          "type": "text",
+          "position": {
+            "x": 960,
+            "y": 550
+          },
+          "layer": 2,
+          "props": {
+            "content": "한 박양으로 하는 기술",
+            "fontSize": 36,
+            "fontWeight": "normal",
+            "color": "#444444",
+            "align": "center",
+            "maxWidth": 1200,
+            "background": {
+              "color": "#FFE082"
+            }
+          },
+          "animation": {
+            "enter": {
+              "type": "typing",
+              "durationMs": 1000,
+              "delayMs": 4710
+            },
+            "during": {
+              "type": "highlightSweep",
+              "durationMs": 800
+            }
+          }
+        },
+        {
+          "id": "scene_57_conclusion_03_stickman",
+          "type": "stickman",
+          "position": {
+            "x": 1550,
+            "y": 680
+          },
+          "scale": 1.2,
+          "layer": 3,
+          "props": {
+            "pose": "thinking",
+            "expression": "thinking",
+            "color": "#333333",
+            "faceColor": "#FFFFFF",
+            "lineWidth": 3
+          },
+          "animation": {
+            "enter": {
+              "type": "fadeIn",
+              "durationMs": 500,
+              "delayMs": 200
+            },
+            "during": {
+              "type": "thinking_loop",
+              "loop": true
+            }
+          }
+        }
+      ],
       "overlays": []
     },
     {
@@ -1250,17 +4109,90 @@
       "startMs": 860053,
       "endMs": 875573,
       "background": {
-        "type": "image",
-        "src": "images/scene_58.png",
-        "animation": "zoomOut",
-        "animationIntensity": 0.5
+        "type": "color",
+        "value": "#FAFAFA"
       },
       "transition": {
         "in": "fadeIn",
         "out": "fadeOut",
         "durationMs": 300
       },
-      "objects": [],
+      "objects": [
+        {
+          "id": "scene_58_conclusion_04_keyword",
+          "type": "text",
+          "position": {
+            "x": 960,
+            "y": 370
+          },
+          "props": {
+            "content": "케라틴층",
+            "fontSize": 72,
+            "fontWeight": "bold",
+            "color": "#1A1A2E",
+            "align": "center",
+            "maxWidth": 1400
+          },
+          "animation": {
+            "enter": {
+              "type": "typing",
+              "durationMs": 1500
+            }
+          }
+        },
+        {
+          "id": "scene_58_conclusion_04_description",
+          "type": "text",
+          "position": {
+            "x": 960,
+            "y": 550
+          },
+          "layer": 2,
+          "props": {
+            "content": "손톱의 여러 겹의 케라틴층",
+            "fontSize": 36,
+            "fontWeight": "normal",
+            "color": "#444444",
+            "align": "center",
+            "maxWidth": 1200
+          },
+          "animation": {
+            "enter": {
+              "type": "typing",
+              "durationMs": 1000,
+              "delayMs": 4656
+            }
+          }
+        },
+        {
+          "id": "scene_58_conclusion_04_stickman",
+          "type": "stickman",
+          "position": {
+            "x": 370,
+            "y": 680
+          },
+          "scale": 1.2,
+          "layer": 3,
+          "props": {
+            "pose": "depressed",
+            "expression": "sad",
+            "color": "#333333",
+            "faceColor": "#FFFFFF",
+            "lineWidth": 3
+          },
+          "animation": {
+            "enter": {
+              "type": "fadeIn",
+              "durationMs": 500,
+              "delayMs": 200
+            },
+            "during": {
+              "type": "headShake",
+              "loop": true
+            }
+          }
+        }
+      ],
       "overlays": []
     },
     {
@@ -1268,17 +4200,90 @@
       "startMs": 875573,
       "endMs": 890333,
       "background": {
-        "type": "image",
-        "src": "images/scene_59.png",
-        "animation": "panLeft",
-        "animationIntensity": 0.5
+        "type": "color",
+        "value": "#FAFAFA"
       },
       "transition": {
         "in": "fadeIn",
         "out": "fadeOut",
         "durationMs": 300
       },
-      "objects": [],
+      "objects": [
+        {
+          "id": "scene_59_conclusion_05_keyword",
+          "type": "text",
+          "position": {
+            "x": 960,
+            "y": 370
+          },
+          "props": {
+            "content": "유독 틀린 것",
+            "fontSize": 72,
+            "fontWeight": "bold",
+            "color": "#1A1A2E",
+            "align": "center",
+            "maxWidth": 1400
+          },
+          "animation": {
+            "enter": {
+              "type": "handwriting",
+              "durationMs": 2000
+            }
+          }
+        },
+        {
+          "id": "scene_59_conclusion_05_description",
+          "type": "text",
+          "position": {
+            "x": 960,
+            "y": 550
+          },
+          "layer": 2,
+          "props": {
+            "content": "출제자가 수험생에게 어설픈 이해가 아닌 명확한 지식을 요구",
+            "fontSize": 36,
+            "fontWeight": "normal",
+            "color": "#444444",
+            "align": "center",
+            "maxWidth": 1200
+          },
+          "animation": {
+            "enter": {
+              "type": "typing",
+              "durationMs": 1000,
+              "delayMs": 4428
+            }
+          }
+        },
+        {
+          "id": "scene_59_conclusion_05_stickman",
+          "type": "stickman",
+          "position": {
+            "x": 1550,
+            "y": 680
+          },
+          "scale": 1.2,
+          "layer": 3,
+          "props": {
+            "pose": "pointing_right",
+            "expression": "focused",
+            "color": "#333333",
+            "faceColor": "#FFFFFF",
+            "lineWidth": 3
+          },
+          "animation": {
+            "enter": {
+              "type": "fadeIn",
+              "durationMs": 500,
+              "delayMs": 200
+            },
+            "during": {
+              "type": "nodding",
+              "loop": true
+            }
+          }
+        }
+      ],
       "overlays": []
     },
     {
@@ -1286,17 +4291,90 @@
       "startMs": 890333,
       "endMs": 903093,
       "background": {
-        "type": "image",
-        "src": "images/scene_60.png",
-        "animation": "panRight",
-        "animationIntensity": 0.5
+        "type": "color",
+        "value": "#FAFAFA"
       },
       "transition": {
         "in": "fadeIn",
         "out": "fadeOut",
         "durationMs": 300
       },
-      "objects": [],
+      "objects": [
+        {
+          "id": "scene_60_conclusion_06_keyword",
+          "type": "text",
+          "position": {
+            "x": 960,
+            "y": 370
+          },
+          "props": {
+            "content": "스트레스 포인트",
+            "fontSize": 72,
+            "fontWeight": "bold",
+            "color": "#1A1A2E",
+            "align": "center",
+            "maxWidth": 1400
+          },
+          "animation": {
+            "enter": {
+              "type": "typing",
+              "durationMs": 1500
+            }
+          }
+        },
+        {
+          "id": "scene_60_conclusion_06_description",
+          "type": "text",
+          "position": {
+            "x": 960,
+            "y": 550
+          },
+          "layer": 2,
+          "props": {
+            "content": "힘이 집중되는 곳",
+            "fontSize": 36,
+            "fontWeight": "normal",
+            "color": "#444444",
+            "align": "center",
+            "maxWidth": 1200
+          },
+          "animation": {
+            "enter": {
+              "type": "typing",
+              "durationMs": 1000,
+              "delayMs": 3828
+            }
+          }
+        },
+        {
+          "id": "scene_60_conclusion_06_stickman",
+          "type": "stickman",
+          "position": {
+            "x": 370,
+            "y": 680
+          },
+          "scale": 1.2,
+          "layer": 3,
+          "props": {
+            "pose": "celebrating",
+            "expression": "happy",
+            "color": "#333333",
+            "faceColor": "#FFFFFF",
+            "lineWidth": 3
+          },
+          "animation": {
+            "enter": {
+              "type": "fadeIn",
+              "durationMs": 500,
+              "delayMs": 200
+            },
+            "during": {
+              "type": "clapping",
+              "loop": true
+            }
+          }
+        }
+      ],
       "overlays": []
     },
     {
@@ -1304,17 +4382,90 @@
       "startMs": 903533,
       "endMs": 917933,
       "background": {
-        "type": "image",
-        "src": "images/scene_61.png",
-        "animation": "kenBurns",
-        "animationIntensity": 0.5
+        "type": "color",
+        "value": "#FAFAFA"
       },
       "transition": {
         "in": "fadeIn",
         "out": "fadeOut",
         "durationMs": 300
       },
-      "objects": [],
+      "objects": [
+        {
+          "id": "scene_61_conclusion_07_keyword",
+          "type": "text",
+          "position": {
+            "x": 960,
+            "y": 370
+          },
+          "props": {
+            "content": "손톱 변색",
+            "fontSize": 72,
+            "fontWeight": "bold",
+            "color": "#1A1A2E",
+            "align": "center",
+            "maxWidth": 1400
+          },
+          "animation": {
+            "enter": {
+              "type": "handwriting",
+              "durationMs": 2000
+            }
+          }
+        },
+        {
+          "id": "scene_61_conclusion_07_description",
+          "type": "text",
+          "position": {
+            "x": 960,
+            "y": 550
+          },
+          "layer": 2,
+          "props": {
+            "content": "혈액순환이나 건강상태로 인한 변색",
+            "fontSize": 36,
+            "fontWeight": "normal",
+            "color": "#444444",
+            "align": "center",
+            "maxWidth": 1200
+          },
+          "animation": {
+            "enter": {
+              "type": "typing",
+              "durationMs": 1000,
+              "delayMs": 4320
+            }
+          }
+        },
+        {
+          "id": "scene_61_conclusion_07_stickman",
+          "type": "stickman",
+          "position": {
+            "x": 1550,
+            "y": 680
+          },
+          "scale": 1.2,
+          "layer": 3,
+          "props": {
+            "pose": "standing",
+            "expression": "neutral",
+            "color": "#333333",
+            "faceColor": "#FFFFFF",
+            "lineWidth": 3
+          },
+          "animation": {
+            "enter": {
+              "type": "fadeIn",
+              "durationMs": 500,
+              "delayMs": 200
+            },
+            "during": {
+              "type": "breathing",
+              "loop": true
+            }
+          }
+        }
+      ],
       "overlays": []
     },
     {
@@ -1322,23 +4473,107 @@
       "startMs": 917933,
       "endMs": 933973,
       "background": {
-        "type": "image",
-        "src": "images/scene_62.png",
-        "animation": "zoomIn",
-        "animationIntensity": 0.5
+        "type": "color",
+        "value": "#FAFAFA"
       },
       "transition": {
         "in": "fadeIn",
         "out": "fadeOut",
         "durationMs": 300
       },
-      "objects": [],
+      "objects": [
+        {
+          "id": "scene_62_conclusion_08_keyword",
+          "type": "text",
+          "position": {
+            "x": 960,
+            "y": 370
+          },
+          "props": {
+            "content": "기술자의 역할",
+            "fontSize": 72,
+            "fontWeight": "bold",
+            "color": "#1A1A2E",
+            "align": "center",
+            "maxWidth": 1400
+          },
+          "animation": {
+            "enter": {
+              "type": "fadeIn",
+              "durationMs": 400
+            },
+            "during": {
+              "type": "highlightSweep",
+              "durationMs": 800
+            }
+          }
+        },
+        {
+          "id": "scene_62_conclusion_08_description",
+          "type": "text",
+          "position": {
+            "x": 960,
+            "y": 550
+          },
+          "layer": 2,
+          "props": {
+            "content": "고객의 건강상태를 관찰하고 알려주는 역할",
+            "fontSize": 36,
+            "fontWeight": "normal",
+            "color": "#444444",
+            "align": "center",
+            "maxWidth": 1200,
+            "background": {
+              "color": "#FFE082"
+            }
+          },
+          "animation": {
+            "enter": {
+              "type": "typing",
+              "durationMs": 1000,
+              "delayMs": 4812
+            },
+            "during": {
+              "type": "highlightSweep",
+              "durationMs": 800
+            }
+          }
+        },
+        {
+          "id": "scene_62_conclusion_08_stickman",
+          "type": "stickman",
+          "position": {
+            "x": 370,
+            "y": 680
+          },
+          "scale": 1.2,
+          "layer": 3,
+          "props": {
+            "pose": "pointing_right",
+            "expression": "focused",
+            "color": "#333333",
+            "faceColor": "#FFFFFF",
+            "lineWidth": 3
+          },
+          "animation": {
+            "enter": {
+              "type": "fadeIn",
+              "durationMs": 500,
+              "delayMs": 200
+            },
+            "during": {
+              "type": "nodding",
+              "loop": true
+            }
+          }
+        }
+      ],
       "overlays": []
     },
     {
       "id": "scene_63_conclusion_09",
       "startMs": 933973,
-      "endMs": 946153,
+      "endMs": 945933,
       "background": {
         "type": "image",
         "src": "images/scene_63.png",

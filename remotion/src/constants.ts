@@ -213,6 +213,22 @@ export const VIDEO = {
 } as const;
 
 // =============================================================================
+// WHITEBOARD DEFAULTS
+// =============================================================================
+
+export const WHITEBOARD = {
+  BACKGROUND_COLOR: '#FAFAFA',
+  KEYWORD_FONT_SIZE: 72,
+  DESCRIPTION_FONT_SIZE: 36,
+  TEXT_COLOR: '#1A1A2E',
+  SECONDARY_TEXT_COLOR: '#444444',
+  HIGHLIGHT_COLOR: '#FFE082',
+  CURSOR_COLOR: '#1A1A2E',
+  FONT_FAMILY_HANDWRITING: '"Nanum Pen Script", cursive',
+  FONT_FAMILY_TYPING: '"Noto Sans KR", sans-serif',
+} as const;
+
+// =============================================================================
 // TYPE EXPORTS (for type safety)
 // =============================================================================
 

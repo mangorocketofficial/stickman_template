@@ -15,6 +15,7 @@ import {
   BackgroundDef,
   BackgroundValue,
   isSimpleBackground,
+  isSceneBackground,
   getBackgroundColor,
 } from '../types/schema';
 import { CANVAS } from '../constants';
@@ -158,7 +159,21 @@ export const BackgroundRenderer: React.FC<BackgroundRendererProps> = ({
     );
   }
 
-  // Complex background definition
+  // v2 SceneBackground color type: {"type": "color", "value": "#FFFFFF"}
+  if (isSceneBackground(background) && background.type === 'color') {
+    return (
+      <div
+        style={{
+          position: 'absolute',
+          width,
+          height,
+          backgroundColor: background.value,
+        }}
+      />
+    );
+  }
+
+  // Complex background definition (BackgroundDef with colors array)
   const bg = background as BackgroundDef;
 
   // Handle animated backgrounds

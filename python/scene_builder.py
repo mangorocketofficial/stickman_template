@@ -1,8 +1,10 @@
 """
-Scene Builder Module (v2)
-Converts parsed script, alignment data, and generated images into scene.json v2.
+Scene Builder Module (v3)
+Converts parsed script, alignment data, and generated images into scene.json.
 
-v2: Replaces StickMan objects with AI-generated image backgrounds.
+v2.1: Mixed rendering — AI images for key scenes, whiteboard+stickman for the rest.
+v3: Whiteboard scenes use centered keyword + description layout with
+    typing/handwriting/highlight effects (matching previous whiteboard pipeline).
 """
 
 import json
@@ -11,6 +13,8 @@ from typing import Optional
 
 from script_parser import ParsedScript, Directive
 from image_generator import GeneratedImage
+from stickman_assigner import StickmanAssignment
+from whiteboard_text_generator import WhiteboardText
 
 # Default values
 DEFAULT_FPS = 30
@@ -23,6 +27,42 @@ DEFAULT_SUBTITLE_HIGHLIGHT = "#FFD700"
 # Ken Burns animation rotation for variety
 IMAGE_ANIMATIONS = ["kenBurns", "zoomIn", "zoomOut", "panLeft", "panRight"]
 
+# =============================================================================
+# WHITEBOARD LAYOUT CONSTANTS
+# =============================================================================
+
+# Centered layout positions (matching previous whiteboard pipeline)
+KEYWORD_ONLY_POS = {"keyword": {"x": 960, "y": 450}}
+KEYWORD_DESC_POS = {
+    "keyword": {"x": 960, "y": 370},
+    "description": {"x": 960, "y": 550},
+}
+
+# Stickman alternates left/right for variety
+STICKMAN_POSITIONS = [
+    {"x": 1550, "y": 680},   # right
+    {"x": 370, "y": 680},    # left
+]
+
+# Animation presets for keyword_style
+ANIMATION_PRESETS = {
+    "typing": {
+        "enter": {"type": "typing", "durationMs": 1500},
+    },
+    "handwriting": {
+        "enter": {"type": "handwriting", "durationMs": 2000},
+    },
+    "highlight": {
+        "enter": {"type": "fadeIn", "durationMs": 400},
+        "during": {"type": "highlightSweep", "durationMs": 800},
+    },
+}
+
+# Text colors
+KEYWORD_COLOR = "#1A1A2E"
+DESCRIPTION_COLOR = "#444444"
+HIGHLIGHT_BG_COLOR = "#FFE082"
+
 
 def directive_to_overlay(
     directive: Directive,
@@ -30,17 +70,12 @@ def directive_to_overlay(
     style: str = "dark_infographic",
     position_override: Optional[dict] = None,
 ) -> Optional[dict]:
-    """Convert a directive to a v2 scene overlay.
-
-    Args:
-        position_override: {"x": int, "y": int} from Vision LLM adjustment
-    """
+    """Convert a directive to a v2 scene overlay."""
     if directive.type == "text":
         content = directive.args[0] if directive.args else ""
         is_title = "title" in directive.args
         is_highlight = "highlight" in directive.args
 
-        # Whiteboard style uses black text on white background
         if style == "whiteboard":
             text_color = "#0066CC" if is_highlight else "#000000"
             bg_color = "rgba(255,255,255,0.9)" if is_highlight else None
@@ -48,7 +83,6 @@ def directive_to_overlay(
             text_color = "#FFD700" if is_highlight else "#FFFFFF"
             bg_color = "rgba(0,0,0,0.5)"
 
-        # Use Vision LLM position if available, otherwise defaults
         default_x, default_y = 960, (250 if is_title else 350)
         pos_x = position_override.get("x", default_x) if position_override else default_x
         pos_y = position_override.get("y", default_y) if position_override else default_y
@@ -115,17 +149,20 @@ def build_scene_v2(
     total_scenes: int = 1,
     style: str = "dark_infographic",
     vision_positions: Optional[list[dict]] = None,
+    stickman_assignment: Optional[StickmanAssignment] = None,
+    whiteboard_text: Optional[WhiteboardText] = None,
 ) -> dict:
-    """Build a single v2 scene with image background and overlays.
+    """Build a single scene — image background OR whiteboard+stickman.
 
-    Args:
-        vision_positions: List of {"type": str, "x": int, "y": int} from Vision LLM.
-            One entry per overlay directive, in order.
+    Whiteboard scenes use centered keyword + description layout with
+    typing/handwriting/highlight effects. Stickman alternates left/right.
     """
     scene_id = f"scene_{section_index + 1:02d}_{section_name}"
+    is_whiteboard = stickman_assignment is not None
+    scene_duration_ms = end_ms - start_ms
 
-    # Background: image or fallback color
-    if image_result and image_result.success:
+    # Background: image or whiteboard color
+    if image_result and image_result.success and not is_whiteboard:
         animation = IMAGE_ANIMATIONS[section_index % len(IMAGE_ANIMATIONS)]
         background = {
             "type": "image",
@@ -134,32 +171,137 @@ def build_scene_v2(
             "animationIntensity": 0.5,
         }
     else:
-        # Whiteboard style uses white background fallback
-        fallback_color = "#FFFFFF" if style == "whiteboard" else "#1a1a2e"
+        fallback_color = "#FAFAFA" if style == "whiteboard" else "#1a1a2e"
         background = {
             "type": "color",
             "value": fallback_color,
         }
 
-    # Build overlays from directives (text, counter only)
+    # Build overlays from directives (for image scenes only)
     overlays = []
-    type_counters = {}
-    for directive in directives:
-        if directive.type in ('text', 'counter'):
-            type_counters[directive.type] = type_counters.get(directive.type, 0) + 1
-            count = type_counters[directive.type]
-            overlay_id = f"{scene_id}_{directive.type}_{count}"
-            overlay = directive_to_overlay(directive, overlay_id, style=style)
-            if overlay:
-                # Whiteboard style: add semi-transparent background for readability
-                if style == "whiteboard" and overlay.get("props"):
-                    overlay["props"]["background"] = {
-                        "color": "rgba(255, 255, 255, 0.75)",
-                        "padding": 20,
-                        "borderRadius": 16,
-                    }
-                    overlay["props"]["color"] = "#2D3436"
-                overlays.append(overlay)
+    if not is_whiteboard:
+        type_counters = {}
+        for directive in directives:
+            if directive.type in ('text', 'counter'):
+                type_counters[directive.type] = type_counters.get(directive.type, 0) + 1
+                count = type_counters[directive.type]
+                overlay_id = f"{scene_id}_{directive.type}_{count}"
+                overlay = directive_to_overlay(directive, overlay_id, style=style)
+                if overlay:
+                    overlays.append(overlay)
+
+    # Objects: whiteboard scenes get keyword + description text + stickman
+    objects = []
+    if is_whiteboard:
+        sm = stickman_assignment
+        wb = whiteboard_text
+
+        # Keyword style and animation
+        keyword_style = wb.keyword_style if wb else "typing"
+        anim_preset = ANIMATION_PRESETS.get(keyword_style, ANIMATION_PRESETS["typing"])
+
+        # Scale animation duration to scene length
+        keyword_anim = {}
+        if "enter" in anim_preset:
+            enter = dict(anim_preset["enter"])
+            if enter.get("durationMs", 0) > scene_duration_ms * 0.6:
+                enter["durationMs"] = int(scene_duration_ms * 0.5)
+            keyword_anim["enter"] = enter
+        if "during" in anim_preset:
+            keyword_anim["during"] = dict(anim_preset["during"])
+
+        has_description = wb and bool(wb.description.strip()) if wb else False
+        layout = KEYWORD_DESC_POS if has_description else KEYWORD_ONLY_POS
+        keyword_pos = layout["keyword"]
+
+        # Keyword text object (large, centered)
+        keyword_content = wb.keyword if wb else section_name
+        objects.append({
+            "id": f"{scene_id}_keyword",
+            "type": "text",
+            "position": keyword_pos,
+            "props": {
+                "content": keyword_content,
+                "fontSize": 72,
+                "fontWeight": "bold",
+                "color": KEYWORD_COLOR,
+                "align": "center",
+                "maxWidth": 1400,
+            },
+            "animation": keyword_anim,
+        })
+
+        # Description text object (smaller, below keyword, delayed)
+        if has_description:
+            desc_pos = layout["description"]
+            # Delay description until ~30% into scene (synced to speech)
+            desc_delay_ms = int(scene_duration_ms * 0.3)
+
+            desc_anim = {
+                "enter": {"type": "typing", "durationMs": 1000, "delayMs": desc_delay_ms},
+            }
+            # For highlight style: description also gets highlightSweep
+            if keyword_style == "highlight":
+                desc_anim["during"] = {
+                    "type": "highlightSweep",
+                    "durationMs": 800,
+                }
+                # Add highlight background color
+                objects.append({
+                    "id": f"{scene_id}_description",
+                    "type": "text",
+                    "position": desc_pos,
+                    "layer": 2,
+                    "props": {
+                        "content": wb.description,
+                        "fontSize": 36,
+                        "fontWeight": "normal",
+                        "color": DESCRIPTION_COLOR,
+                        "align": "center",
+                        "maxWidth": 1200,
+                        "background": {
+                            "color": HIGHLIGHT_BG_COLOR,
+                        },
+                    },
+                    "animation": desc_anim,
+                })
+            else:
+                objects.append({
+                    "id": f"{scene_id}_description",
+                    "type": "text",
+                    "position": desc_pos,
+                    "layer": 2,
+                    "props": {
+                        "content": wb.description,
+                        "fontSize": 36,
+                        "fontWeight": "normal",
+                        "color": DESCRIPTION_COLOR,
+                        "align": "center",
+                        "maxWidth": 1200,
+                    },
+                    "animation": desc_anim,
+                })
+
+        # Stickman object (alternates left/right)
+        stickman_pos = STICKMAN_POSITIONS[section_index % len(STICKMAN_POSITIONS)]
+        objects.append({
+            "id": f"{scene_id}_stickman",
+            "type": "stickman",
+            "position": stickman_pos,
+            "scale": 1.2,
+            "layer": 3,
+            "props": {
+                "pose": sm.pose,
+                "expression": sm.expression,
+                "color": sm.color,
+                "faceColor": "#FFFFFF",
+                "lineWidth": 3,
+            },
+            "animation": {
+                "enter": {"type": "fadeIn", "durationMs": 500, "delayMs": 200},
+                "during": {"type": sm.motion, "loop": True},
+            },
+        })
 
     # Transition
     if section_index == 0:
@@ -173,7 +315,7 @@ def build_scene_v2(
         "endMs": end_ms,
         "background": background,
         "transition": transition,
-        "objects": [],  # v1 compat: empty objects array
+        "objects": objects,
         "overlays": overlays,
     }
 
@@ -187,21 +329,10 @@ def build_scene_json_v2(
     audio_path: str,
     words_path: str,
     all_vision_positions: Optional[list[list[dict]]] = None,
+    stickman_assignments: Optional[dict[int, StickmanAssignment]] = None,
+    whiteboard_texts: Optional[dict[int, WhiteboardText]] = None,
 ) -> dict:
-    """
-    Build the complete v2 scene.json.
-
-    Args:
-        parsed_script: Parsed markdown script
-        section_timings: List of (start_ms, end_ms) for each section
-        image_results: List of GeneratedImage results
-        audio_path: Relative path to audio file
-        words_path: Relative path to words.json
-        all_vision_positions: Per-scene list of overlay positions from Vision LLM
-
-    Returns:
-        Complete scene.json as dictionary (v2 schema)
-    """
+    """Build the complete scene.json with mixed rendering."""
     total_scenes = len(parsed_script.sections)
     scenes = []
     style = parsed_script.meta.get("style", "dark_infographic")
@@ -216,6 +347,8 @@ def build_scene_json_v2(
 
         image_result = image_results[i] if i < len(image_results) else None
         vision_positions = all_vision_positions[i] if all_vision_positions and i < len(all_vision_positions) else None
+        stickman = stickman_assignments.get(i) if stickman_assignments else None
+        wb_text = whiteboard_texts.get(i) if whiteboard_texts else None
 
         scene = build_scene_v2(
             section_name=section.name,
@@ -227,11 +360,12 @@ def build_scene_json_v2(
             total_scenes=total_scenes,
             style=style,
             vision_positions=vision_positions,
+            stickman_assignment=stickman,
+            whiteboard_text=wb_text,
         )
         scenes.append(scene)
 
-    # Subtitle color: white text on dark semi-transparent background
-    subtitle_color = DEFAULT_SUBTITLE_COLOR  # #FFFFFF for all styles
+    subtitle_color = DEFAULT_SUBTITLE_COLOR
     subtitle_highlight = "#0066CC" if style == "whiteboard" else DEFAULT_SUBTITLE_HIGHLIGHT
 
     return {

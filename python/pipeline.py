@@ -32,6 +32,8 @@ from scene_builder import build_scene_json_v2, save_scene_json
 from subtitle_generator import generate_subtitles, split_long_subtitle_lines, split_narration_texts, build_whisper_subtitles
 from prompt_generator import generate_scene_prompts
 from image_generator import generate_scene_images, generate_placeholder_images
+from stickman_assigner import IMAGE_SCENE_INDICES, assign_stickman_for_scenes
+from whiteboard_text_generator import generate_whiteboard_texts
 
 
 def setup_output_dirs(output_dir: str) -> dict:
@@ -166,7 +168,7 @@ def run_pipeline(
         max_subtitle_words: Max words per subtitle line before splitting (default: 9)
     """
     print("=" * 60)
-    print("Video Pipeline v2.1 (AI Image + 15s Scene Split)")
+    print("Video Pipeline v2.2 (Mixed: AI Image + Whiteboard+StickMan)")
     print("=" * 60)
 
     dirs = setup_output_dirs(output_dir)
@@ -293,6 +295,25 @@ def run_pipeline(
     )
     print(f"  Original scenes: {len(parsed_script.sections)} -> Split scenes: {len(split_sections)}")
 
+    # --- Step 5b: Classify scenes (image vs whiteboard+stickman) ---
+    image_indices = IMAGE_SCENE_INDICES  # 1-based set of 20 image scene indices
+    num_image = sum(1 for i in range(len(split_sections)) if (i + 1) in image_indices)
+    num_whiteboard = len(split_sections) - num_image
+    print(f"  Scene mix: {num_image} image + {num_whiteboard} whiteboard+stickman")
+
+    # --- Step 5c: Assign stickman for whiteboard scenes ---
+    stickman_assignments = assign_stickman_for_scenes(split_sections, image_indices)
+    print(f"  Stickman assignments: {len(stickman_assignments)} scenes")
+
+    # --- Step 5d: Generate whiteboard text overlays ---
+    whiteboard_texts = generate_whiteboard_texts(
+        sections=split_sections,
+        image_indices=image_indices,
+        use_llm=use_llm_prompts,
+    )
+    wb_with_text = sum(1 for t in whiteboard_texts.values() if t.keyword)
+    print(f"  Whiteboard texts: {wb_with_text}/{num_whiteboard} scenes with text overlays")
+
     # Build a new ParsedScript with split sections for prompt generation
     split_parsed = ParsedScript(
         meta=parsed_script.meta,
@@ -300,14 +321,15 @@ def run_pipeline(
         full_narration=parsed_script.full_narration,
     )
 
-    # === Step 6: Generate Images ===
+    # === Step 6: Generate Images (only for image scenes) ===
     active_style = parsed_script.meta.get('style', 'dark_infographic')
-    print(f"\n[6/7] Generating scene images (style: {active_style}, {len(split_sections)} scenes)...")
+    print(f"\n[6/7] Generating images for {num_image} image scenes (style: {active_style})...")
 
     scene_prompts = generate_scene_prompts(
         sections=split_sections,
         style=active_style,
         use_llm=use_llm_prompts,
+        image_scene_indices=image_indices,
     )
 
     if skip_images:
@@ -320,7 +342,10 @@ def run_pipeline(
                 prompt=sp.generated_prompt,
                 model="existing",
                 generation_time_s=0,
-                success=os.path.exists(os.path.join(output_dir, f"images/scene_{i+1:02d}.png")),
+                success=(
+                    (i + 1) in image_indices and
+                    os.path.exists(os.path.join(output_dir, f"images/scene_{i+1:02d}.png"))
+                ),
             )
             for i, sp in enumerate(scene_prompts)
         ]
@@ -334,13 +359,11 @@ def run_pipeline(
         model = template.model
 
         if model.startswith("imagen-"):
-            # Google Imagen - no Replicate key needed
             print(f"  Using Google Imagen: {model}")
             image_results = generate_scene_images(
                 scene_prompts, output_dir, model=model
             )
         else:
-            # Replicate-based model
             replicate_key = os.environ.get("REPLICATE_API_TOKEN")
             if not replicate_key:
                 print("  WARNING: REPLICATE_API_TOKEN not set! Using placeholders...")
@@ -352,8 +375,8 @@ def run_pipeline(
                     scene_prompts, output_dir, model=full_model
                 )
 
-    # === Step 7: Build Scene JSON ===
-    print(f"\n[7/7] Building scene.json (v2, {len(split_sections)} scenes)...")
+    # === Step 7: Build Scene JSON (mixed rendering) ===
+    print(f"\n[7/7] Building scene.json ({num_image} image + {num_whiteboard} whiteboard)...")
     scene_json_path = os.path.join(output_dir, "scene.json")
 
     scene_data = build_scene_json_v2(
@@ -362,32 +385,27 @@ def run_pipeline(
         image_results=image_results,
         audio_path="audio/tts_output.mp3",
         words_path="subtitles/words.json",
+        stickman_assignments=stickman_assignments,
+        whiteboard_texts=whiteboard_texts,
     )
 
     save_scene_json(scene_data, scene_json_path)
     print(f"  Scene JSON: {scene_json_path}")
     print(f"  Total scenes: {len(scene_data['scenes'])}")
 
-    # Print scene summary (compact for many scenes)
-    scenes_with_overlays = sum(1 for s in scene_data['scenes'] if s.get('overlays'))
+    # Print scene summary
+    image_scenes = sum(1 for s in scene_data['scenes'] if s['background'].get('type') == 'image')
+    wb_scenes = sum(1 for s in scene_data['scenes'] if s['background'].get('type') == 'color')
+    stickman_scenes = sum(1 for s in scene_data['scenes'] if any(o.get('type') == 'stickman' for o in s.get('objects', [])))
     durations = [(s['endMs'] - s['startMs']) / 1000 for s in scene_data['scenes']]
     avg_duration = sum(durations) / len(durations) if durations else 0
-    min_duration = min(durations) if durations else 0
-    max_duration = max(durations) if durations else 0
 
-    print(f"  Duration: avg={avg_duration:.1f}s, min={min_duration:.1f}s, max={max_duration:.1f}s")
-    print(f"  Scenes with overlays: {scenes_with_overlays}")
-
-    if len(scene_data['scenes']) <= 15:
-        for scene in scene_data['scenes']:
-            duration_s = (scene['endMs'] - scene['startMs']) / 1000
-            bg_type = scene['background'].get('type', 'unknown') if isinstance(scene['background'], dict) else 'color'
-            overlays = len(scene.get('overlays', []))
-            print(f"    {scene['id']}: {duration_s:.1f}s, bg={bg_type}, {overlays} overlays")
+    print(f"  Image scenes: {image_scenes}, Whiteboard+Stickman: {stickman_scenes}, Color-only: {wb_scenes - stickman_scenes}")
+    print(f"  Avg duration: {avg_duration:.1f}s")
 
     # === Summary ===
     print("\n" + "=" * 60)
-    print("Pipeline v2.1 completed successfully!")
+    print("Pipeline v2.2 completed successfully!")
     print("=" * 60)
 
     results = {

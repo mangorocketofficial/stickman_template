@@ -389,6 +389,7 @@ export interface StickmanProps {
   pose: string;                   // preset name: "standing", "pointing_right", etc.
   expression?: string;            // "neutral", "happy", "thinking", etc.
   color?: string;                 // default: "#FFFFFF"
+  faceColor?: string;             // face background color (default: auto-contrast)
   lineWidth?: number;             // default: 3
 }
 

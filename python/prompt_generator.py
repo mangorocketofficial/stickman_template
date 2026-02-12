@@ -194,14 +194,17 @@ def generate_scene_prompts(
     sections: list,
     style: str = "dark_infographic",
     use_llm: bool = True,
+    image_scene_indices: set[int] = None,
 ) -> list[ScenePrompt]:
     """
-    Generate image prompts for all scenes.
+    Generate image prompts for scenes.
 
     Args:
         sections: List of ScriptSection objects from parser
         style: Prompt template name
         use_llm: Whether to use LLM for better descriptions
+        image_scene_indices: Set of 1-based scene indices that need images.
+            If provided, whiteboard scenes get empty prompts (skipped).
 
     Returns:
         List of ScenePrompt objects
@@ -214,26 +217,46 @@ def generate_scene_prompts(
     if style == "whiteboard":
         from whiteboard_prompt_engine import generate_whiteboard_prompt, llm_batch_generate_prompts
 
-        # Try LLM batch generation first (entire script → distinct prompts)
-        llm_descriptions = None
-        if use_llm:
-            llm_descriptions = llm_batch_generate_prompts(sections)
+        # Only generate LLM prompts for image scenes
+        image_sections = []
+        image_indices_list = []
+        if image_scene_indices:
+            for i, section in enumerate(sections):
+                if (i + 1) in image_scene_indices:
+                    image_sections.append(section)
+                    image_indices_list.append(i)
 
+        llm_descriptions = None
+        if use_llm and image_sections:
+            llm_descriptions = llm_batch_generate_prompts(image_sections)
+
+        llm_idx = 0  # Track position in llm_descriptions
         for i, section in enumerate(sections):
+            # Skip whiteboard scenes (no image needed)
+            if image_scene_indices and (i + 1) not in image_scene_indices:
+                prompts.append(ScenePrompt(
+                    scene_index=i,
+                    scene_role="whiteboard",
+                    image_hint=None,
+                    generated_prompt="",  # Empty = skip image generation
+                    negative_prompt="",
+                    narration_summary=section.narration[:100],
+                ))
+                print(f"  Scene {i+1}/{total_scenes} [whiteboard] → stickman (skip image)")
+                continue
+
             role = classify_scene_role(section.narration, i, total_scenes)
 
-            # Check for image_hint directive
             image_hint = None
             for directive in section.directives:
                 if directive.type == "image_hint":
                     image_hint = directive.args[0] if directive.args else None
                     break
 
-            # Use LLM description if available, otherwise fall back to keyword-based
             diagram_area = "center"
-            if (llm_descriptions and i < len(llm_descriptions)
-                    and llm_descriptions[i].get("image")):
-                llm_item = llm_descriptions[i]
+            if (llm_descriptions and llm_idx < len(llm_descriptions)
+                    and llm_descriptions[llm_idx].get("image")):
+                llm_item = llm_descriptions[llm_idx]
                 diagram_description = llm_item["image"]
                 diagram_area = llm_item.get("diagram_area", "center")
                 source = "LLM"
@@ -246,7 +269,7 @@ def generate_scene_prompts(
                 )
                 source = "keyword"
 
-            # Compose with template base_prompt
+            llm_idx += 1
             prompt_text = template.compose_prompt(diagram_description)
 
             scene_prompt = ScenePrompt(
@@ -266,17 +289,26 @@ def generate_scene_prompts(
     else:
         # Standard prompt generation for other styles
         for i, section in enumerate(sections):
-            # Classify scene role
+            # Skip whiteboard scenes if indices provided
+            if image_scene_indices and (i + 1) not in image_scene_indices:
+                prompts.append(ScenePrompt(
+                    scene_index=i,
+                    scene_role="whiteboard",
+                    image_hint=None,
+                    generated_prompt="",
+                    negative_prompt="",
+                    narration_summary=section.narration[:100],
+                ))
+                continue
+
             role = classify_scene_role(section.narration, i, total_scenes)
 
-            # Check for image_hint directive
             image_hint = None
             for directive in section.directives:
                 if directive.type == "image_hint":
                     image_hint = directive.args[0] if directive.args else None
                     break
 
-            # Generate prompt
             if image_hint:
                 prompt_text = generate_prompt_from_hint(image_hint, template)
             else:

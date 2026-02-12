@@ -259,12 +259,29 @@ def generate_scene_images(
     results = []
     total = len(scene_prompts)
 
+    # Count actual image scenes (non-empty prompts)
+    image_count = sum(1 for sp in scene_prompts if sp.generated_prompt)
+    generated = 0
+
     for scene_prompt in scene_prompts:
         idx = scene_prompt.scene_index
         output_path = os.path.join(images_dir, f"scene_{idx + 1:02d}.png")
         relative_path = f"images/scene_{idx + 1:02d}.png"
 
-        print(f"  Generating image {idx + 1}/{total}...")
+        # Skip whiteboard scenes (empty prompt = no image needed)
+        if not scene_prompt.generated_prompt:
+            results.append(GeneratedImage(
+                scene_index=idx,
+                image_path="",
+                prompt="",
+                model="none",
+                generation_time_s=0,
+                success=False,
+            ))
+            continue
+
+        generated += 1
+        print(f"  Image {generated}/{image_count} (scene {idx + 1})...")
 
         seed = (base_seed + idx) if base_seed is not None else None
 
@@ -292,9 +309,9 @@ def generate_scene_images(
         results.append(result)
 
         if success:
-            print(f"    Done in {elapsed:.1f}s → {relative_path}")
+            print(f"    Done in {elapsed:.1f}s")
             # Wait 10 seconds between successful generations to avoid rate limits
-            if idx < total - 1:  # Don't wait after last image
+            if generated < image_count:
                 print(f"    Waiting 10s before next image to avoid rate limit...")
                 time.sleep(10)
         else:
@@ -302,10 +319,10 @@ def generate_scene_images(
 
     # Summary
     succeeded = sum(1 for r in results if r.success)
-    failed = total - succeeded
+    skipped = sum(1 for r in results if r.model == "none")
+    failed = image_count - succeeded
     total_time = sum(r.generation_time_s for r in results)
-    print(f"\n  Image generation complete: {succeeded}/{total} succeeded "
-          f"({failed} failed) in {total_time:.1f}s total")
+    print(f"\n=== Complete: {succeeded}/{image_count} succeeded, {failed} failed, {skipped} skipped (whiteboard) ===")
 
     return results
 
