@@ -548,6 +548,7 @@ export interface SceneOverlay {
     during?: AnimationDef;
     exit?: AnimationDef;
   };
+  showDurationMs?: number;          // If set, overlay fades out after this many ms
 }
 
 export interface LogoProps {

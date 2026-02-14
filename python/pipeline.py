@@ -235,6 +235,9 @@ def run_pipeline(
     max_subtitle_words: int = 9,
     render: bool = False,
     skip_cleanup: bool = False,
+    stock_upload: bool = False,
+    stock_platforms: str = None,
+    stock_dry_run: bool = False,
 ) -> dict:
     """
     Run the complete v3 video generation pipeline.
@@ -525,6 +528,32 @@ def run_pipeline(
         print(f"\nNext step: Preview in Remotion Studio")
         print(f"  cd remotion && npm start")
 
+    # === Optional: Stock Upload ===
+    if stock_upload:
+        print(f"\n[Stock] Uploading AI images to stock platforms...")
+        try:
+            from stock_uploader import StockUploadOrchestrator, load_config
+            stock_config = load_config()
+            if stock_platforms:
+                stock_config.enabled_platforms = [
+                    p.strip() for p in stock_platforms.split(",")
+                ]
+            stock_config.dry_run = stock_dry_run
+
+            orchestrator = StockUploadOrchestrator(stock_config)
+            images_dir = os.path.join(output_dir, "images")
+            prompts_log = os.path.join(output_dir, "prompts_log.json")
+
+            stock_results = orchestrator.run(
+                images_dir=images_dir,
+                prompts_log_path=prompts_log if os.path.exists(prompts_log) else None,
+            )
+            results["stock_upload"] = stock_results
+        except ImportError:
+            print("  WARNING: stock_uploader module not found. Skipping.")
+        except Exception as e:
+            print(f"  ERROR: Stock upload failed: {e}")
+
     # === Summary ===
     print("\n" + "=" * 60)
     print("Pipeline v3 completed successfully!")
@@ -560,6 +589,12 @@ def main():
                         help="Render video with Remotion and post-process")
     parser.add_argument("--skip-cleanup", action="store_true",
                         help="Keep intermediate files after rendering")
+    parser.add_argument("--stock-upload", action="store_true",
+                        help="Upload AI-generated images to stock platforms")
+    parser.add_argument("--stock-platforms",
+                        help="Comma-separated stock platforms (default: all configured)")
+    parser.add_argument("--stock-dry-run", action="store_true",
+                        help="Show stock upload plan without uploading")
 
     args = parser.parse_args()
 
@@ -581,6 +616,9 @@ def main():
             max_subtitle_words=args.max_subtitle_words,
             render=args.render,
             skip_cleanup=args.skip_cleanup,
+            stock_upload=args.stock_upload,
+            stock_platforms=args.stock_platforms,
+            stock_dry_run=args.stock_dry_run,
         )
     except Exception as e:
         print(f"\nError: {e}")

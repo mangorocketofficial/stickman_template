@@ -191,3 +191,23 @@ Remotion Studio에서 프리뷰 가능합니다.
 - 이미지 생성은 씬당 약 10~15초 + 10초 rate limit 대기
 - 전사 품질이 낮으면 스크립트 수동 수정 필요할 수 있음
 - 파이프라인 중 에러 발생 시 자동으로 원인 분석 및 해결 시도
+
+## ⚠️ backup/ 폴더 절대 규칙 (삭제 금지)
+
+**backup/ 폴더 안의 기존 폴더/파일을 절대로 삭제하지 않는다.**
+
+- `backup/` 폴더에는 이전 프로젝트들의 결과물이 누적 보관된다
+- 새 프로젝트 완료 시 `backup/{주제명}/` 폴더를 **추가**만 한다
+- 기존에 있는 다른 주제 폴더(예: 네일미용기술, 피부학, 화장품학 등)는 **절대 건드리지 않는다**
+- `rm -rf backup/` 같은 명령은 **절대 금지**
+- 삭제 대상은 오직 `remotion/out/final.mp4` (비압축 원본)뿐이다
+
+### 백업 절차
+```
+1. mkdir -p backup/{주제명}/
+2. cp remotion/out/{주제명}.mp4 backup/{주제명}/
+3. cp remotion/public/images/thumbnail.png backup/{주제명}/
+4. cp remotion/public/subtitles/captions.srt backup/{주제명}/
+5. cp remotion/public/images/thumbnail.png remotion/out/thumbnail.png   ← 썸네일 원본도 out/에 복사
+6. rm remotion/out/final.mp4   ← 이것만 삭제
+```

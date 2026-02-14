@@ -44,7 +44,8 @@ python/                 # Python Pipeline
 ├── tts_generator.py    # Edge TTS
 ├── alignment.py        # Groq Whisper
 ├── scene_builder.py    # scene.json generator
-└── subtitle_generator.py
+├── subtitle_generator.py
+└── thumbnail.py        # YouTube thumbnail generator
 
 remotion/               # Remotion Project
 ├── src/
@@ -87,6 +88,25 @@ python python/pipeline.py scripts/sample_compound_interest.md --output-dir remot
 cd remotion && npm install && npm run build
 # → out/final.mp4
 ```
+
+## Thumbnail Generation
+```bash
+python python/thumbnail.py <배경이미지> "줄1" "줄2" "줄3" [-o 출력경로]
+# 예: python python/thumbnail.py remotion/public/images/scene_39.png "화장품학" "핵심개념" "총정리"
+```
+
+| 항목 | 값 |
+|------|-----|
+| 캔버스 | 1280×720 (YouTube 표준) |
+| 폰트 | 맑은고딕 Bold (`malgunbd.ttf`) 80px |
+| 텍스트 색상 | `#FFFFFF` |
+| 배경 박스 | 하나의 통합 박스에 모든 텍스트 포함 |
+| 박스 색상 | `#1A1A2E`, opacity 220/255, border-radius 10px |
+| 박스 패딩 | 좌우 24px, 상하 24px |
+| 줄 간격 | 6px |
+| 텍스트 정렬 | 박스 내 우측 정렬 |
+| 배치 | 우측 상단 (margin-right 50, margin-top 50) |
+| 텍스트 줄 수 | 1~4줄 |
 
 ## Test Output
 - 해상도: 1920 × 1080

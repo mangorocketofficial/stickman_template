@@ -45,13 +45,34 @@ const OverlayRenderer: React.FC<{
   sceneStartFrame: number;
   sceneDurationFrames: number;
 }> = ({ overlay, sceneStartFrame, sceneDurationFrames }) => {
-  const { type, position, props, animation } = overlay;
+  const frame = useCurrentFrame();
+  const { fps } = useVideoConfig();
+  const { type, position, props, animation, showDurationMs } = overlay;
+
+  // If showDurationMs is set, hide overlay after that duration (with fadeOut)
+  let effectiveDurationFrames = sceneDurationFrames;
+  let effectiveAnimation = animation;
+  if (showDurationMs != null) {
+    const showFrames = msToFrames(showDurationMs, fps);
+    const fadeOutMs = 500;
+    const fadeOutFrames = msToFrames(fadeOutMs, fps);
+    effectiveDurationFrames = showFrames + fadeOutFrames;
+    // Auto-add fadeOut exit if not already set
+    effectiveAnimation = {
+      ...animation,
+      exit: animation?.exit || { type: 'fadeOut', durationMs: fadeOutMs },
+    };
+    // After show + fadeOut, fully hide
+    if (frame > showFrames + fadeOutFrames) {
+      return null;
+    }
+  }
 
   const commonProps = {
     position,
-    animation,
+    animation: effectiveAnimation,
     sceneStartFrame,
-    sceneDurationFrames,
+    sceneDurationFrames: effectiveDurationFrames,
   };
 
   switch (type) {

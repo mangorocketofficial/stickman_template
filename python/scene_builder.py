@@ -83,9 +83,35 @@ def directive_to_overlay(
             text_color = "#FFD700" if is_highlight else "#FFFFFF"
             bg_color = "rgba(0,0,0,0.5)"
 
-        default_x, default_y = 960, (250 if is_title else 350)
+        default_x, default_y = 960, (400 if is_title else 350)
         pos_x = position_override.get("x", default_x) if position_override else default_x
         pos_y = position_override.get("y", default_y) if position_override else default_y
+
+        if is_title:
+            return {
+                "id": overlay_id,
+                "type": "text",
+                "position": {"x": pos_x, "y": pos_y},
+                "props": {
+                    "content": content,
+                    "fontSize": 108,
+                    "fontWeight": "bold",
+                    "color": "#FFFFFF",
+                    "align": "center",
+                    "maxWidth": 1400,
+                    "role": "title",
+                    "background": {
+                        "color": "#1A1A2E",
+                        "padding": 40,
+                        "borderRadius": 20,
+                        "opacity": 0.85,
+                    },
+                },
+                "animation": {
+                    "enter": {"type": "fadeInUp", "durationMs": 500},
+                },
+                "showDurationMs": 5000,
+            }
 
         return {
             "id": overlay_id,
@@ -93,18 +119,18 @@ def directive_to_overlay(
             "position": {"x": pos_x, "y": pos_y},
             "props": {
                 "content": content,
-                "fontSize": 64 if is_title else 48,
+                "fontSize": 48,
                 "fontWeight": "bold",
                 "color": text_color,
                 "align": "center",
                 "maxWidth": 1200,
-                "role": "title" if is_title else ("highlight_box" if is_highlight else "body"),
+                "role": "highlight_box" if is_highlight else "body",
                 "background": {
                     "color": bg_color,
                     "padding": 20,
                     "borderRadius": 12,
                     "opacity": 0.7,
-                } if not is_title else None,
+                },
             },
             "animation": {
                 "enter": {"type": "fadeInUp", "durationMs": 500},
