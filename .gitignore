@@ -21,6 +21,9 @@ build/output/
 .env
 .env.local
 
+# Claude local settings (may contain API keys)
+.claude/settings.local.json
+
 # IDE
 .vscode/
 .idea/
